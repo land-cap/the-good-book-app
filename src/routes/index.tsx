@@ -1,4 +1,4 @@
-import {Pressable} from "~/components/base/Pressable";
+import {Pressable} from "~/components/pressable/Pressable";
 
 export default function Home() {
     return (
