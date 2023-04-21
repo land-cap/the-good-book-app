@@ -1,20 +1,21 @@
-export const ChapterPicker = () => (
+export const ChapterPicker = ({ value }: { value: string }) => (
   <div>
-    <div class="relative mt-2">
+    <div class="relative">
       <input
+        value={value}
         id="combobox"
         type="text"
-        class="w-full rounded-md border-0 bg-white py-1.5 pl-3 pr-12 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+        class="w-full border-0 bg-white py-1.5 pl-3 pr-12 text-gray-900 shadow-sm ring-2 ring-inset ring-black focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm sm:leading-6"
         role="combobox"
         aria-controls="options"
         aria-expanded="false"
       />
       <button
         type="button"
-        class="absolute inset-y-0 right-0 flex items-center rounded-r-md px-2 focus:outline-none"
+        class="absolute inset-y-0 right-0 flex items-center px-2 focus:outline-none"
       >
         <svg
-          class="h-5 w-5 text-gray-400"
+          class="h-5 w-5 text-black"
           viewBox="0 0 20 20"
           fill="currentColor"
           aria-hidden="true"
@@ -28,7 +29,7 @@ export const ChapterPicker = () => (
       </button>
 
       <ul
-        class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+        class="hidden absolute z-10 mt-1 max-h-60 w-full overflow-auto bg-white py-1 text-base shadow-lg ring-1 ring-black focus:outline-none sm:text-sm"
         id="options"
         role="listbox"
       >
@@ -39,7 +40,7 @@ export const ChapterPicker = () => (
           tabIndex="-1"
         >
           <span class="block truncate">Leslie Alexander</span>
-          <span class="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600">
+          <span class="absolute inset-y-0 right-0 flex items-center pr-4 text-primary-600">
             <svg
               class="h-5 w-5"
               viewBox="0 0 20 20"
