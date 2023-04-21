@@ -5,7 +5,7 @@ export const ChapterPicker = ({ value }: { value: string }) => (
         value={value}
         id="combobox"
         type="text"
-        class="w-full border-0 bg-white py-1.5 pl-3 pr-12 text-gray-900 shadow-sm ring-2 ring-inset ring-black focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm sm:leading-6"
+        class="w-full border-0 bg-offWhite py-1.5 pl-3 pr-12 text-gray-900 shadow-sm ring-2 ring-inset ring-black focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm sm:leading-6"
         role="combobox"
         aria-controls="options"
         aria-expanded="false"

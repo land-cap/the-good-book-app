@@ -8,9 +8,10 @@ module.exports = {
     theme: {
         extend: {
             colors: {
-                primary: colors.emerald,
-                gray: colors.stone,
-                black: colors.stone[900]
+                primary: colors.lime,
+                gray: colors.lime,
+                black: colors.lime[900],
+                offWhite: colors.purple[50],
             },
             fontFamily: {
                 sans: ["MonoLisa", "Plus Jakarta Sans", "sans-serif"]
