@@ -60,6 +60,9 @@ devDependencies:
   vite:
     specifier: ^4.1.4
     version: 4.1.4
+  vite-plugin-solid:
+    specifier: ^2.7.0
+    version: 2.7.0(solid-js@1.7.2)(vite@4.1.4)
 
 packages:
 

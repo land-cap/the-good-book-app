@@ -13,7 +13,7 @@ module.exports = {
                 black: colors.stone[900]
             },
             fontFamily: {
-                sans: ["Plus Jakarta Sans", "sans-serif"]
+                sans: ["MonoLisa", "Plus Jakarta Sans", "sans-serif"]
             },
             ringWidth: {
                 ...defaultTheme.ringWidth,
