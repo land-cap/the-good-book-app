@@ -1,3 +1,5 @@
+import { ChapterPicker } from "~/components/ChapterPicker";
+
 export const NavBar = () => (
   <nav class={"mx-auto max-w-2xl bg-white px-6 lg:px-8"}>
     <div class="border-b border-black">
@@ -7,6 +9,7 @@ export const NavBar = () => (
             <p class="text-md font-black">The Good Book</p>
           </div>
         </div>
+        <ChapterPicker />
       </div>
     </div>
   </nav>

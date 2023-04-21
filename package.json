@@ -22,6 +22,7 @@
     "@polymorphic-factory/solid": "^0.3.1",
     "@solidjs/meta": "^0.28.2",
     "@solidjs/router": "^0.8.2",
+    "@tailwindcss/forms": "^0.5.3",
     "@zag-js/pressable": "^0.6.0",
     "@zag-js/solid": "^0.5.0",
     "prettier": "^2.8.7",
