@@ -1,8 +1,12 @@
-import { usePressable } from "~/components/pressable/usePressable";
+import {
+  PressableProps,
+  usePressable,
+} from "~/components/pressable/usePressable";
+import { Pressable } from "~/components/pressable/Pressable";
 
 export default function Home() {
-  const button = usePressable(
-    {
+  const buttonProps: PressableProps = {
+    context: {
       onPress() {
         console.log("press");
       },
@@ -11,15 +15,21 @@ export default function Home() {
       },
       preventFocusOnPress: true,
     },
-    "soft",
-    "xs"
-  );
+    variant: "primary",
+    size: "xl",
+  };
+
+  const button = usePressable(buttonProps);
 
   return (
     <main class="text-center mx-auto">
       <button class={button.classList}>
         {button.api().isPressed ? "Pressed!" : "Press Me"}
       </button>
+
+      <Pressable {...buttonProps} as={"a"} href={4}>
+        Click me please...
+      </Pressable>
     </main>
   );
 }

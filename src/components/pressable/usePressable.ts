@@ -4,15 +4,21 @@ import { createMemo, createUniqueId } from "solid-js";
 import { twMerge } from "tailwind-merge";
 import { pressableClass } from "~/components/pressable/pressableClass";
 
-export const usePressable = (
-  props?: Omit<Parameters<typeof pressable.machine>[0], "id">,
-  variant?: keyof typeof pressableClass.variant,
-  size?: keyof typeof pressableClass.size
-) => {
+export type PressableProps = {
+  context?: Omit<Parameters<typeof pressable.machine>[0], "id">;
+  variant?: keyof typeof pressableClass.variant;
+  size?: keyof typeof pressableClass.size;
+};
+
+export const usePressable = ({
+  context,
+  variant,
+  size,
+}: PressableProps = {}) => {
   const [state, send] = useMachine(
     pressable.machine({
       id: createUniqueId(),
-      ...props,
+      ...context,
     })
   );
 

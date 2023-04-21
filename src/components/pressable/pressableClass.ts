@@ -1,5 +1,5 @@
 export const pressableClass = {
-  base: "font-semibold shadow-sm",
+  base: "inline-flex font-semibold shadow-sm",
   size: {
     xs: "px-2 py-1 text-xs",
     sm: "px-2 py-1 text-sm",
