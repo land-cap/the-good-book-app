@@ -14,11 +14,5 @@ export default () => {
     size: "xl",
   });
 
-  return (
-    <main class="flex h-[100vh] items-center justify-center gap-4">
-      <a {...button.api().pressableProps} class={button.classList}>
-        {button.api().isPressed ? "Pressed!" : "Press Me"}
-      </a>
-    </main>
-  );
-}
+  return <p>This is the first chapter of the Bible.</p>;
+};

@@ -12,6 +12,7 @@ import {
   Title,
 } from "solid-start";
 import "./root.css";
+import {AppShell} from "~/components/AppShell/AppShell";
 
 export default function Root() {
   return (
@@ -30,9 +31,11 @@ export default function Root() {
       <Body>
         <Suspense>
           <ErrorBoundary>
+            <AppShell>
             <Routes>
               <FileRoutes />
             </Routes>
+            </AppShell>
           </ErrorBoundary>
         </Suspense>
         <Scripts />
