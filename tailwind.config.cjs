@@ -8,13 +8,13 @@ module.exports = {
     theme: {
         extend: {
             colors: {
-                primary: colors.lime,
-                gray: colors.lime,
-                black: colors.lime[900],
-                offWhite: colors.purple[50],
+                primary: colors.indigo,
+                gray: colors.indigo,
+                black: colors.indigo[900],
+                offWhite: colors.yellow[50],
             },
             fontFamily: {
-                sans: ["MonoLisa", "Plus Jakarta Sans", "sans-serif"]
+                sans: ["Be Vietnam Pro", "Inter", "MonoLisa", "Plus Jakarta Sans", "sans-serif"]
             },
             ringWidth: {
                 ...defaultTheme.ringWidth,

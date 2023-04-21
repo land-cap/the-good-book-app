@@ -1,5 +1,5 @@
 export const ChapterPicker = ({ value }: { value: string }) => (
-  <div>
+  <div class={"w-full sm:w-48"}>
     <div class="relative">
       <input
         value={value}
