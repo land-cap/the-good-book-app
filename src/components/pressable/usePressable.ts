@@ -5,7 +5,7 @@ import { twMerge } from "tailwind-merge";
 import { pressableClass } from "~/components/pressable/pressableClass";
 
 export type PressableProps = {
-  context?: Omit<Parameters<typeof pressable.machine>[0], "id">;
+  context?: Partial<Parameters<typeof pressable.machine>[0]>;
   variant?: keyof typeof pressableClass.variant;
   size?: keyof typeof pressableClass.size;
 };
@@ -18,6 +18,7 @@ export const usePressable = ({
   const [state, send] = useMachine(
     pressable.machine({
       id: createUniqueId(),
+      preventFocusOnPress: true,
       ...context,
     })
   );
