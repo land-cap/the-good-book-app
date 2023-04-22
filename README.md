@@ -1,4 +1,4 @@
-# SolidStart
+# The Good Book App
 
 Everything you need to build a Solid project, powered by [`solid-start`](https://start.solidjs.com);
 
