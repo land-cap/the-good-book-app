@@ -50,7 +50,19 @@ export default () => {
         după soiul ei și pomi care fac rod și care își au sămânța în ei, după
         soiul lor. Dumnezeu a văzut că lucrul acesta era bun.{" "}
         <VerseNumber number={13} /> Astfel, a fost o seară și apoi a fost o
-        dimineață: aceasta a fost ziua a treia.
+        dimineață: aceasta a fost ziua a treia. <VerseNumber number={14} />{" "}
+        Dumnezeu a zis: „Să fie niște luminători în întinderea cerului, ca să
+        despartă ziua de noapte; ei să fie niște semne care să arate vremurile,
+        zilele și anii <VerseNumber number={15} /> și să slujească de luminători
+        în întinderea cerului, ca să lumineze pământul.” Și așa a fost.{" "}
+        <VerseNumber number={16} /> Dumnezeu a făcut cei doi mari luminători, și
+        anume: luminătorul cel mai mare, ca să stăpânească ziua, și luminătorul
+        cel mai mic, ca să stăpânească noaptea; a făcut și stelele.{" "}
+        <VerseNumber number={17} /> Dumnezeu i-a așezat în întinderea cerului,
+        ca să lumineze pământul, <VerseNumber number={18} /> să stăpânească ziua
+        și noaptea și să despartă lumina de întuneric. Dumnezeu a văzut că
+        lucrul acesta era bun. <VerseNumber number={19} /> Astfel, a fost o
+        seară și apoi a fost o dimineață: aceasta a fost ziua a patra.
       </p>
     </div>
   );
