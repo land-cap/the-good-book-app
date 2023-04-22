@@ -4,7 +4,7 @@ import { twMerge } from 'tailwind-merge'
 
 const [isScrolled, setIsScrolled] = createSignal(false)
 
-const transitionClass = 'transition-all duration-200'
+const transitionClass = 'transition-all ease-out duration-500'
 
 const InteractiveNavbar = () => {
     const [height, setHeight] = createSignal(0)
@@ -15,7 +15,7 @@ const InteractiveNavbar = () => {
         <div
             ref={(el) => setHeight(el.clientHeight)}
             style={{ 'max-height': isScrolled() ? '0px' : defaultMaxHeight() }}
-            class={twMerge('overflow-hidden', transitionClass)}
+            class={twMerge(transitionClass, isScrolled() && 'opacity-0')}
         >
             <div
                 class={twMerge(
@@ -32,17 +32,23 @@ const InteractiveNavbar = () => {
 }
 
 const ScrolledNavbar = () => {
+    const [ref, setRef] = createSignal(null as unknown as HTMLDivElement)
+
     const [height, setHeight] = createSignal(0)
 
-    createEffect(() => height)
+    createEffect(() => {
+        if (isScrolled() && !height()) {
+            setHeight(ref().clientHeight)
+        }
+    })
 
     const defaultMaxHeight = createMemo(() => (height() ? `${height()}px` : 'unset'))
 
     return (
         <div
-            ref={(el) => setHeight(el.clientHeight)}
+            ref={(el) => setRef(el)}
             style={{ 'max-height': !isScrolled() ? '0px' : defaultMaxHeight() }}
-            class={twMerge('overflow-hidden', transitionClass)}
+            class={twMerge(transitionClass, !isScrolled() && 'opacity-0')}
         >
             <div class={twMerge('flex place-content-center py-2')}>
                 <p class="font-black">Geneza 1</p>
@@ -62,10 +68,15 @@ export const NavBar = () => {
     })
 
     return (
-        <nav class={twMerge('z-20 sticky top-0 bg-offWhite mx-auto w-full max-w-2xl px-6 lg:px-8', transitionClass)}>
+        <nav
+            class={twMerge(
+                'z-20 sticky top-0 bg-offWhite mx-auto w-full max-w-2xl px-6 lg:px-8 overflow-hidden',
+                transitionClass
+            )}
+        >
             <div class={twMerge('border-b border-black', transitionClass)}>
-                <ScrolledNavbar />
                 <InteractiveNavbar />
+                <ScrolledNavbar />
             </div>
         </nav>
     )
