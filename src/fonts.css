@@ -16,7 +16,7 @@
     src: url('../public/fonts/MonoLisa/woff/MonoLisa-Regular.woff') format('woff'),
     url('../public/fonts/MonoLisa/woff2/MonoLisa-Regular.woff2') format('woff2');
 }
-
+ 
 @font-face {
     font-family: MonoLisa;
     font-weight: 500;

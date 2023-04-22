@@ -3,26 +3,28 @@
 const colors = require('tailwindcss/colors')
 const defaultTheme = require('tailwindcss/defaultTheme')
 
+const monoColor = colors.amber
+
 module.exports = {
-    content: ["./src/**/*.{html,js,jsx,ts,tsx}"],
+    content: ['./src/**/*.{html,js,jsx,ts,tsx}'],
     theme: {
         extend: {
             colors: {
-                primary: colors.amber,
-                gray: colors.amber,
-                black: colors.amber[900],
-                offWhite: colors.amber[50],
+                primary: monoColor,
+                gray: monoColor,
+                black: monoColor[900],
+                offWhite: monoColor[50],
             },
             fontFamily: {
-                sans: ["Be Vietnam Pro", "IBM Plex Sans", "Work Sans", "Schibsted Grotesk", "Inter", "MonoLisa", "Plus Jakarta Sans", "sans-serif"]
+                sans: ['Be Vietnam Pro', 'IBM Plex Sans', 'Work Sans', 'Schibsted Grotesk', 'Inter', 'MonoLisa', 'Plus Jakarta Sans', 'sans-serif'],
             },
             ringWidth: {
                 ...defaultTheme.ringWidth,
                 3: '3px',
-            }
-        }
+            },
+        },
     },
     plugins: [
         require('@tailwindcss/forms'),
     ],
-};
+}
