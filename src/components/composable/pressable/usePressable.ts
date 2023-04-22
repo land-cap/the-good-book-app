@@ -2,7 +2,7 @@ import { normalizeProps, useMachine } from '@zag-js/solid'
 import * as pressable from '@zag-js/pressable'
 import { createMemo, createUniqueId } from 'solid-js'
 import { twMerge } from 'tailwind-merge'
-import { pressableClass } from '~/components/pressable/pressableClass'
+import { pressableClass } from '~/components/composable/pressable/pressableClass'
 
 export type PressableProps = {
     context?: Partial<Parameters<typeof pressable.machine>[0]>
@@ -10,11 +10,7 @@ export type PressableProps = {
     size?: keyof typeof pressableClass.size
 }
 
-export const usePressable = ({
-    context,
-    variant,
-    size,
-}: PressableProps = {}) => {
+export const usePressable = ({ context, variant, size }: PressableProps = {}) => {
     const [state, send] = useMachine(
         pressable.machine({
             id: createUniqueId(),
@@ -25,9 +21,7 @@ export const usePressable = ({
 
     const classList = twMerge(
         pressableClass.base,
-        variant
-            ? pressableClass.variant[variant]
-            : pressableClass.variant.primary,
+        variant ? pressableClass.variant[variant] : pressableClass.variant.primary,
         size ? pressableClass.size[size] : pressableClass.size.md
     )
 

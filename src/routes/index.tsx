@@ -1,4 +1,4 @@
-import { usePressable } from '~/components/pressable/usePressable'
+import { usePressable } from '~/components'
 
 export default () => {
     const button = usePressable({
