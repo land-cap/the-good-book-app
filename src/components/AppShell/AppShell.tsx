@@ -2,10 +2,12 @@ import { JSX } from 'solid-js'
 import { NavBar } from '~/components/AppShell/NavBar'
 
 export const AppShell = ({ children }: { children: JSX.Element }) => (
-    <div class={'min-h-full text-black bg-offWhite'}>
+    <div
+        class={'h-[100vh] flex flex-col h-fit min-h-fit text-black bg-offWhite'}
+    >
         <NavBar />
-        <main>
-            <div class="mx-auto max-w-2xl px-6 lg:px-8">{children}</div>
-        </main>
+        <div class="flex-grow mx-auto w-full max-w-2xl px-6 lg:px-8">
+            {children}
+        </div>
     </div>
 )

@@ -9,7 +9,7 @@
     "plugin:solid/typescript"
   ],
   "rules": {
-    "arrow-body-style": "error",
-    "prefer-arrow-callback": "error"
+    "prefer-arrow-callback": "error",
+    "arrow-body-style": "error"
   }
 }
