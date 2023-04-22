@@ -10,6 +10,12 @@ const InteractiveNavbar = () => (
     </div>
 )
 
+const ScrolledNavbar = () => (
+    <div class="flex place-content-center py-2">
+        <p class="font-black">Geneza 1</p>
+    </div>
+)
+
 const [scrollPos, setScrollPos] = createSignal(false)
 
 export const NavBar = () => {
@@ -25,10 +31,7 @@ export const NavBar = () => {
 
     return (
         <nav class={'z-20 sticky top-0 bg-offWhite mx-auto w-full max-w-2xl px-6 lg:px-8'}>
-            <div class="border-b border-black">
-                <InteractiveNavbar />
-                {scrollPos() ? 'scrolled' : 'not scrolled'}
-            </div>
+            <div class="border-b border-black">{scrollPos() ? <ScrolledNavbar /> : <InteractiveNavbar />}</div>
         </nav>
     )
 }
