@@ -7,6 +7,7 @@ const monoColor = colors.neutral
 
 module.exports = {
     content: ['./src/**/*.{html,js,jsx,ts,tsx}'],
+    darkMode: 'class',
     theme: {
         extend: {
             colors: {
@@ -14,6 +15,7 @@ module.exports = {
                 gray: monoColor,
                 black: monoColor[900],
                 offWhite: monoColor[50],
+                whiteOnDark: monoColor[300],
             },
             fontFamily: {
                 sans: ['Be Vietnam Pro', 'Schibsted Grotesk', 'Bellefair', 'Cormorant infant', 'Inknut Antiqua', 'DM Mono', 'Urbanist', 'Archivo Narrow', 'DM Sans', 'Karla', 'IBM Plex Sans', 'Work Sans', 'Inter', 'MonoLisa', 'Plus Jakarta Sans', 'sans-serif'],

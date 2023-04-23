@@ -6,7 +6,7 @@ import {AppShell} from '~/components/AppShell/AppShell'
 
 export default function Root() {
     return (
-        <Html lang="en">
+        <Html lang="en" class='dark'>
             <Head>
                 <Title>SolidStart - With TailwindCSS</Title>
                 <Meta charset="utf-8"/>
