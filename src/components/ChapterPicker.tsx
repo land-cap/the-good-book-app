@@ -1,12 +1,16 @@
 import { Portal } from 'solid-js/web'
 import { createEffect, createSignal, Setter } from 'solid-js'
+import { twMerge } from 'tailwind-merge'
 
-const ChapterMenu = (props: { setRef?: Setter<HTMLUListElement | undefined> }) => (
+const ChapterMenu = (props: { setRef: Setter<HTMLUListElement>; class?: string }) => (
     <ul
         ref={(el) => {
             props.setRef && props.setRef(el)
         }}
-        class="absolute z-10 mt-1 max-h-60 w-full overflow-auto bg-white py-1 text-base ring-inset ring-1 ring-black dark:ring-whiteOnDark focus:outline-none sm:text-sm"
+        class={twMerge(
+            'absolute z-10 mt-1 max-h-60 w-full overflow-auto bg-white py-1 text-base ring-inset ring-1 ring-black dark:ring-whiteOnDark focus:outline-none sm:text-sm',
+            props.class
+        )}
         id="options"
         role="listbox"
     >
@@ -30,20 +34,44 @@ const ChapterMenu = (props: { setRef?: Setter<HTMLUListElement | undefined> }) =
     </ul>
 )
 
+const ShadowChapterMenu = (props: { setRect: Setter<DOMRect> }) => {
+    const [menu, setMenu] = createSignal(null as unknown as HTMLDivElement)
+
+    createEffect(() => {
+        if (menu()) {
+            props.setRect(menu().getBoundingClientRect())
+        }
+    })
+
+    return <ChapterMenu setRef={setMenu} class="invisible" />
+}
+
+const VisibleChapterMenu = (props: { setStyle: Setter<CSSStyleDeclaration> }) => {
+    const [menu, setMenu] = createSignal(null as unknown as HTMLDivElement)
+
+    createEffect(() => {
+        if (menu()) {
+            props.setStyle(menu().style)
+        }
+    })
+
+    return <ChapterMenu setRef={setMenu} />
+}
+
 export const ChapterPicker = ({ value }: { value: string }) => {
-    const [menuRef, setMenuRef] = createSignal(null as unknown as HTMLUListElement)
-    const [portalMenuRef, setPortalMenuRef] = createSignal(null as unknown as HTMLUListElement)
+    const [menuRect, setMenuRect] = createSignal(null as unknown as DOMRect)
+    const [style, setStyle] = createSignal(null as unknown as CSSStyleDeclaration)
 
     // const [menuPosition, setMenuPosition] = createSignal({ top: 0, left: 0 })
 
     createEffect(() => {
-        if (menuRef() && portalMenuRef()) {
-            console.log(menuRef()?.getBoundingClientRect())
-            portalMenuRef().style.position = 'fixed'
-            portalMenuRef().style.marginTop = '0px'
-            portalMenuRef().style.top = `${menuRef().getBoundingClientRect().top}px`
-            portalMenuRef().style.left = `${menuRef().getBoundingClientRect().left}px`
-            portalMenuRef().style.width = `${menuRef().getBoundingClientRect().width}px`
+        if (menuRect() && style()) {
+            console.log(menuRect())
+            style().position = 'fixed'
+            style().marginTop = '0px'
+            style().top = `${menuRect().top}px`
+            style().left = `${menuRect().left}px`
+            style().width = `${menuRect().width}px`
         }
     })
 
@@ -73,11 +101,9 @@ export const ChapterPicker = ({ value }: { value: string }) => {
                         />
                     </svg>
                 </button>
-                <ChapterMenu setRef={setMenuRef} />
+                <ShadowChapterMenu setRect={setMenuRect} />
                 <Portal>
-                    {/*<div class="fixed z-20">*/}
-                    <ChapterMenu setRef={setPortalMenuRef} />
-                    {/*</div>*/}
+                    <VisibleChapterMenu setStyle={setStyle} />
                 </Portal>
             </div>
         </div>
