@@ -32,6 +32,7 @@ const InteractiveNavbar = () => {
                         { label: 'Leviticul', disabled: false },
                         { label: 'Judecători', disabled: false },
                     ]}
+                    defaultValue={'Geneza'}
                 />
             </div>
         </div>

@@ -1,6 +1,6 @@
 import * as combobox from '@zag-js/combobox'
 import { normalizeProps, useMachine } from '@zag-js/solid'
-import { createMemo, createSignal, createUniqueId, For, Show } from 'solid-js'
+import { createMemo, createSignal, createUniqueId, For, onMount, Show } from 'solid-js'
 import { twMerge } from 'tailwind-merge'
 
 type ComboboxOption = {
@@ -11,6 +11,8 @@ type ComboboxOption = {
 export type ComboboxProps = {
     context?: Partial<Parameters<typeof combobox.machine>[0]>
     options: ComboboxOption[]
+    defaultValue?: string
+    placeholder?: string
 }
 
 export const Combobox = (props: ComboboxProps) => {
@@ -32,13 +34,20 @@ export const Combobox = (props: ComboboxProps) => {
 
     const api = createMemo(() => combobox.connect(state, send, normalizeProps))
 
+    onMount(() => {
+        if (props.defaultValue) {
+            api().setValue(props.defaultValue)
+        }
+    })
+
     return (
         <div class={'w-full sm:w-48'}>
             <div {...api().rootProps}>
                 <div {...api().controlProps} class="relative">
                     <input
                         {...api().inputProps}
-                        class="w-full border-0 bg-offWhite dark:bg-gray-800 py-1.5 pl-3 pr-12 shadow-sm ring-2 ring-inset ring-black dark:ring-whiteOnDark focus:ring-2 focus:ring-inset focus:ring-primary-500 sm:text-sm sm:leading-6"
+                        class="w-full border-0 bg-offWhite dark:bg-gray-800 py-1.5 pl-3 pr-12 shadow-sm ring-2 ring-inset ring-black dark:ring-whiteOnDark focus:ring-2 focus:ring-inset focus:ring-primary-500 dark:focus:ring-primary-500 sm:text-sm sm:leading-6"
+                        placeholder={props.placeholder}
                     />
                     <button
                         {...api().triggerProps}
@@ -55,7 +64,7 @@ export const Combobox = (props: ComboboxProps) => {
             </div>
             <div
                 {...api().positionerProps}
-                class="z-10 max-h-60 w-full overflow-auto bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 dark:ring-whiteOnDark focus:outline-none sm:text-sm"
+                class="z-10 -mt-1 max-h-60 w-full overflow-auto bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
             >
                 <Show when={options().length > 0}>
                     <ul {...api().contentProps}>
@@ -80,7 +89,8 @@ export const Combobox = (props: ComboboxProps) => {
                                         })}
                                         class={twMerge(
                                             'relative cursor-default select-none py-2 pl-3 pr-9 text-gray-900',
-                                            optionState()?.focused && 'bg-primary-500 text-white'
+                                            optionState()?.focused && 'bg-primary-500 text-white',
+                                            optionState().checked && 'font-black'
                                         )}
                                     >
                                         <span class="block truncate">{item.label}</span>
