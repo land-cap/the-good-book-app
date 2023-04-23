@@ -25,7 +25,14 @@ const InteractiveNavbar = () => {
                 <div class="flex flex-shrink-0 items-center">
                     <p class="text-md font-black">The Good Book</p>
                 </div>
-                <Combobox />
+                <Combobox
+                    options={[
+                        { label: 'Geneza', disabled: false },
+                        { label: 'Exod', disabled: false },
+                        { label: 'Leviticul', disabled: false },
+                        { label: 'Judecători', disabled: false },
+                    ]}
+                />
             </div>
         </div>
     )

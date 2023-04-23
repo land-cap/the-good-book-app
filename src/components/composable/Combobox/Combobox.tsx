@@ -3,26 +3,30 @@ import { normalizeProps, useMachine } from '@zag-js/solid'
 import { createMemo, createSignal, createUniqueId, For, Show } from 'solid-js'
 import { twMerge } from 'tailwind-merge'
 
-const comboboxData = [
-    { label: 'Geneza', disabled: false },
-    { label: 'Exod', disabled: false },
-    { label: 'Leviticul', disabled: false },
-    { label: 'Judecători', disabled: false },
-]
+type ComboboxOption = {
+    label: string
+    disabled: boolean
+}
 
-export const Combobox = () => {
-    const [options, setOptions] = createSignal(comboboxData)
+export type ComboboxProps = {
+    context?: Partial<Parameters<typeof combobox.machine>[0]>
+    options: ComboboxOption[]
+}
+
+export const Combobox = (props: ComboboxProps) => {
+    const [options, setOptions] = createSignal(props.options)
 
     const [state, send] = useMachine(
         combobox.machine({
             id: createUniqueId(),
             onOpen() {
-                setOptions(comboboxData)
+                setOptions(props.options)
             },
             onInputChange({ value }) {
-                const filtered = comboboxData.filter((item) => item.label.toLowerCase().includes(value.toLowerCase()))
-                setOptions(filtered.length > 0 ? filtered : comboboxData)
+                const filtered = props.options.filter((item) => item.label.toLowerCase().includes(value.toLowerCase()))
+                setOptions(filtered.length > 0 ? filtered : props.options)
             },
+            ...props.context,
         })
     )
 
