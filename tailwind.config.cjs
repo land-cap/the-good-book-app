@@ -3,7 +3,7 @@
 const colors = require('tailwindcss/colors')
 const defaultTheme = require('tailwindcss/defaultTheme')
 
-const monoColor = colors.neutral
+const monoColor = colors.amber
 
 module.exports = {
     content: ['./src/**/*.{html,js,jsx,ts,tsx}'],
@@ -18,7 +18,7 @@ module.exports = {
                 whiteOnDark: monoColor[300],
             },
             fontFamily: {
-                sans: ['Be Vietnam Pro', 'Schibsted Grotesk', 'Bellefair', 'Cormorant infant', 'Inknut Antiqua', 'DM Mono', 'Urbanist', 'Archivo Narrow', 'DM Sans', 'Karla', 'IBM Plex Sans', 'Work Sans', 'Inter', 'MonoLisa', 'Plus Jakarta Sans', 'sans-serif'],
+                sans: ['MonoLisa', 'DM Mono', 'Be Vietnam Pro', 'Schibsted Grotesk', 'Bellefair', 'Cormorant infant', 'Inknut Antiqua', 'Urbanist', 'Archivo Narrow', 'DM Sans', 'Karla', 'IBM Plex Sans', 'Work Sans', 'Inter', 'Plus Jakarta Sans', 'sans-serif'],
             },
             ringWidth: {
                 ...defaultTheme.ringWidth,

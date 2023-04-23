@@ -21,7 +21,7 @@ const ChapterMenu = (props: { setRef: Setter<HTMLUListElement>; class?: string }
             tabIndex="-1"
         >
             <span class="block truncate">Leslie Alexander</span>
-            <span class="absolute inset-y-0 right-0 flex items-center pr-4 text-primary-600">
+            <span class="absolute inset-y-0 right-0 flex items-center pr-2 text-primary-600">
                 <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                     <path
                         fill-rule="evenodd"
