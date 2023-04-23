@@ -16,7 +16,7 @@ module.exports = {
                 offWhite: monoColor[50],
             },
             fontFamily: {
-                sans: ['Be Vietnam Pro', 'IBM Plex Sans', 'Work Sans', 'Schibsted Grotesk', 'Inter', 'MonoLisa', 'Plus Jakarta Sans', 'sans-serif'],
+                sans: ['Be Vietnam Pro', 'Schibsted Grotesk', 'Bellefair', 'Cormorant infant', 'Inknut Antiqua', 'DM Mono', 'Urbanist', 'Archivo Narrow', 'DM Sans', 'Karla', 'IBM Plex Sans', 'Work Sans', 'Inter', 'MonoLisa', 'Plus Jakarta Sans', 'sans-serif'],
             },
             ringWidth: {
                 ...defaultTheme.ringWidth,
