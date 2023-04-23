@@ -1,6 +1,5 @@
 {
   "buildCommand": "pnpm build",
-  "framework": "vite",
   "outputDirectory": "dist",
   "installCommand": "pnpm install",
   "rewrites": [
