@@ -1,5 +1,5 @@
 import { Portal } from 'solid-js/web'
-import { createEffect, createSignal, Setter } from 'solid-js'
+import { createEffect, createSignal, onMount, Setter } from 'solid-js'
 import { twMerge } from 'tailwind-merge'
 
 const ChapterMenu = (props: { setRef: Setter<HTMLUListElement>; class?: string }) => (
@@ -34,45 +34,39 @@ const ChapterMenu = (props: { setRef: Setter<HTMLUListElement>; class?: string }
     </ul>
 )
 
-const ShadowChapterMenu = (props: { setRect: Setter<DOMRect> }) => {
-    const [menu, setMenu] = createSignal(null as unknown as HTMLDivElement)
-
-    createEffect(() => {
-        if (menu()) {
-            props.setRect(menu().getBoundingClientRect())
-        }
-    })
-
-    return <ChapterMenu setRef={setMenu} class="invisible" />
+const ShadowChapterMenu = (props: { setMenu: Setter<HTMLUListElement> }) => {
+    return <ChapterMenu setRef={props.setMenu} class="invisible" />
 }
 
-const VisibleChapterMenu = (props: { setStyle: Setter<CSSStyleDeclaration> }) => {
-    const [menu, setMenu] = createSignal(null as unknown as HTMLDivElement)
-
-    createEffect(() => {
-        if (menu()) {
-            props.setStyle(menu().style)
-        }
-    })
-
-    return <ChapterMenu setRef={setMenu} />
+const VisibleChapterMenu = (props: { setMenu: Setter<HTMLUListElement> }) => {
+    return <ChapterMenu setRef={props.setMenu} />
 }
 
 export const ChapterPicker = ({ value }: { value: string }) => {
-    const [menuRect, setMenuRect] = createSignal(null as unknown as DOMRect)
-    const [style, setStyle] = createSignal(null as unknown as CSSStyleDeclaration)
+    const [shadowMenu, setShadowMenu] = createSignal(null as unknown as HTMLUListElement)
 
-    // const [menuPosition, setMenuPosition] = createSignal({ top: 0, left: 0 })
+    const [visibleMenu, setVisibleMenu] = createSignal(null as unknown as HTMLUListElement)
+
+    const setMenuPosition = () => {
+        if (shadowMenu() && visibleMenu()) {
+            console.log(shadowMenu())
+            visibleMenu().style.position = 'fixed'
+            visibleMenu().style.marginTop = '0px'
+            visibleMenu().style.top = `${shadowMenu().getBoundingClientRect().top}px`
+            visibleMenu().style.left = `${shadowMenu().getBoundingClientRect().left}px`
+            visibleMenu().style.width = `${shadowMenu().getBoundingClientRect().width}px`
+        }
+    }
+
+    onMount(() => {
+        window.onresize = () => {
+            console.log('resize')
+            setMenuPosition()
+        }
+    })
 
     createEffect(() => {
-        if (menuRect() && style()) {
-            console.log(menuRect())
-            style().position = 'fixed'
-            style().marginTop = '0px'
-            style().top = `${menuRect().top}px`
-            style().left = `${menuRect().left}px`
-            style().width = `${menuRect().width}px`
-        }
+        setMenuPosition()
     })
 
     return (
@@ -101,9 +95,9 @@ export const ChapterPicker = ({ value }: { value: string }) => {
                         />
                     </svg>
                 </button>
-                <ShadowChapterMenu setRect={setMenuRect} />
+                <ShadowChapterMenu setMenu={setShadowMenu} />
                 <Portal>
-                    <VisibleChapterMenu setStyle={setStyle} />
+                    <VisibleChapterMenu setMenu={setVisibleMenu} />
                 </Portal>
             </div>
         </div>
