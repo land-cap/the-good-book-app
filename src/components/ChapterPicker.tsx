@@ -21,7 +21,7 @@ const ChapterMenu = (props: { setRef: Setter<HTMLUListElement>; class?: string }
             tabIndex="-1"
         >
             <span class="block truncate">Leslie Alexander</span>
-            <span class="absolute inset-y-0 right-0 flex items-center pr-2 text-primary-600">
+            <span class="absolute inset-y-0 right-0 flex items-center pr-2 text-primary-500">
                 <span
                     class="w-5 h-5 material-symbols-sharp text-[20px]"
                     style={{ 'font-variation-settings': "'FILL' 1, 'wght' 600, 'opsz' 20" }}
@@ -73,7 +73,7 @@ export const ChapterPicker = ({ value }: { value: string }) => {
                     value={value}
                     id="combobox"
                     type="text"
-                    class="w-full border-0 bg-offWhite dark:bg-gray-800 py-1.5 pl-3 pr-12 shadow-sm ring-2 ring-inset ring-black dark:ring-whiteOnDark focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm sm:leading-6"
+                    class="w-full border-0 bg-offWhite dark:bg-gray-800 py-1.5 pl-3 pr-12 shadow-sm ring-2 ring-inset ring-black dark:ring-whiteOnDark focus:ring-2 focus:ring-inset focus:ring-primary-500 sm:text-sm sm:leading-6"
                     role="combobox"
                     aria-controls="options"
                     aria-expanded="false"
