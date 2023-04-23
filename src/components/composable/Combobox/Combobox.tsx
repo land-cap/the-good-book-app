@@ -55,7 +55,7 @@ export const Combobox = () => {
             </div>
             <div
                 {...api().positionerProps}
-                class="z-10 max-h-60 w-full overflow-auto bg-white py-1 text-base ring-inset ring-1 ring-black dark:ring-whiteOnDark focus:outline-none sm:text-sm"
+                class="z-10 max-h-60 w-full overflow-auto bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 dark:ring-whiteOnDark focus:outline-none sm:text-sm"
             >
                 <Show when={options().length > 0}>
                     <ul {...api().contentProps}>
