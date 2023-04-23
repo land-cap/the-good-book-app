@@ -1,4 +1,3 @@
-import { ChapterPicker } from '~/components/ChapterPicker'
 import { createEffect, createMemo, createSignal, onMount } from 'solid-js'
 import { twMerge } from 'tailwind-merge'
 import { Combobox } from '~/components'
@@ -27,7 +26,6 @@ const InteractiveNavbar = () => {
                     <p class="text-md font-black">The Good Book</p>
                 </div>
                 <Combobox />
-                <ChapterPicker value={'Geneza 1'} />
             </div>
         </div>
     )

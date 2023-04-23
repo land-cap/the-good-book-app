@@ -1,11 +1,13 @@
 import * as combobox from '@zag-js/combobox'
 import { normalizeProps, useMachine } from '@zag-js/solid'
-import { createMemo, createSignal, createUniqueId, For, Show } from 'solid-js'
+import { createEffect, createMemo, createSignal, createUniqueId, For, Show } from 'solid-js'
+import { twMerge } from 'tailwind-merge'
 
 const comboboxData = [
-    { label: 'Zambia', code: 'ZA', disabled: false },
-    { label: 'Benin', code: 'BN', disabled: false },
-    //...
+    { label: 'Geneza', code: 'GZ', disabled: false },
+    { label: 'Exod', code: 'EX', disabled: false },
+    { label: 'Leviticul', code: 'LV', disabled: false },
+    { label: 'Judecători', code: 'JD', disabled: false },
 ]
 
 export const Combobox = () => {
@@ -25,6 +27,10 @@ export const Combobox = () => {
     )
 
     const api = createMemo(() => combobox.connect(state, send, normalizeProps))
+
+    createEffect(() => {
+        console.log(api().selectedValue)
+    })
 
     return (
         <div class={'w-full sm:w-48'}>
@@ -49,32 +55,65 @@ export const Combobox = () => {
             </div>
             <div
                 {...api().positionerProps}
-                class="max-h-60 w-full overflow-auto bg-white py-1 text-base ring-inset ring-1 ring-black dark:ring-whiteOnDark focus:outline-none sm:text-sm"
+                class="z-10 max-h-60 w-full overflow-auto bg-white py-1 text-base ring-inset ring-1 ring-black dark:ring-whiteOnDark focus:outline-none sm:text-sm"
             >
                 <Show when={options().length > 0}>
                     <ul {...api().contentProps}>
                         <For each={options()}>
-                            {(item, index) => (
-                                <li
-                                    {...api().getOptionProps({
+                            {(item, index) => {
+                                const options = {
+                                    label: item.label,
+                                    value: item.code,
+                                    index: index(),
+                                    disabled: item.disabled,
+                                }
+                                const optionState = createMemo(() =>
+                                    api().getOptionState({
                                         label: item.label,
                                         value: item.code,
                                         index: index(),
                                         disabled: item.disabled,
-                                    })}
-                                    class="relative cursor-default select-none py-2 pl-3 pr-9 text-gray-900"
-                                >
-                                    <span class="block truncate">{item.label}</span>
-                                    <span class="absolute inset-y-0 right-0 flex items-center pr-2 text-primary-500">
-                                        <span
-                                            class="w-5 h-5 material-symbols-sharp text-[20px]"
-                                            style={{ 'font-variation-settings': "'FILL' 1, 'wght' 600, 'opsz' 20" }}
-                                        >
-                                            check
-                                        </span>
-                                    </span>
-                                </li>
-                            )}
+                                    })
+                                )
+
+                                createEffect(() => {
+                                    console.log(optionState())
+                                })
+
+                                return (
+                                    <li
+                                        {...api().getOptionProps({
+                                            label: item.label,
+                                            value: item.code,
+                                            index: index(),
+                                            disabled: item.disabled,
+                                        })}
+                                        class={twMerge(
+                                            'relative cursor-default select-none py-2 pl-3 pr-9 text-gray-900',
+                                            optionState()?.focused && 'bg-primary-500 text-white'
+                                        )}
+                                    >
+                                        <span class="block truncate">{item.label}</span>
+                                        {api().selectedValue === item.code && (
+                                            <span
+                                                class={twMerge(
+                                                    'absolute inset-y-0 right-0 flex items-center pr-2 text-primary-500',
+                                                    optionState()?.focused && 'text-white'
+                                                )}
+                                            >
+                                                <span
+                                                    class="w-5 h-5 material-symbols-sharp text-[20px]"
+                                                    style={{
+                                                        'font-variation-settings': "'FILL' 1, 'wght' 600, 'opsz' 20",
+                                                    }}
+                                                >
+                                                    check
+                                                </span>
+                                            </span>
+                                        )}
+                                    </li>
+                                )
+                            }}
                         </For>
                     </ul>
                 </Show>
