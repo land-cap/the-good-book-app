@@ -49,7 +49,6 @@ export const ChapterPicker = ({ value }: { value: string }) => {
 
     const setMenuPosition = () => {
         if (shadowMenu() && visibleMenu()) {
-            console.log(shadowMenu())
             visibleMenu().style.position = 'fixed'
             visibleMenu().style.marginTop = '0px'
             visibleMenu().style.top = `${shadowMenu().getBoundingClientRect().top}px`
@@ -60,7 +59,6 @@ export const ChapterPicker = ({ value }: { value: string }) => {
 
     onMount(() => {
         window.onresize = () => {
-            console.log('resize')
             setMenuPosition()
         }
     })
