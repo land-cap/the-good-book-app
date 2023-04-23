@@ -8,7 +8,7 @@ const ChapterMenu = (props: { setRef: Setter<HTMLUListElement>; class?: string }
             props.setRef && props.setRef(el)
         }}
         class={twMerge(
-            'absolute z-10 mt-1 max-h-60 w-full overflow-auto bg-white py-1 text-base ring-inset ring-1 ring-black dark:ring-whiteOnDark focus:outline-none sm:text-sm',
+            'hidden absolute z-10 mt-1 max-h-60 w-full overflow-auto bg-white py-1 text-base ring-inset ring-1 ring-black dark:ring-whiteOnDark focus:outline-none sm:text-sm',
             props.class
         )}
         id="options"
@@ -80,7 +80,7 @@ export const ChapterPicker = ({ value }: { value: string }) => {
                 />
                 <button type="button" class="absolute inset-y-0 right-0 flex items-center px-2 focus:outline-none">
                     <span
-                        className="material-symbols-sharp text-[20px] h-5 w-5 text-black dark:text-whiteOnDark"
+                        class="material-symbols-sharp text-[20px] h-5 w-5 text-black dark:text-whiteOnDark"
                         style={{ 'font-variation-settings': "'FILL' 1, 'wght' 600, 'opsz' 20" }}
                     >
                         unfold_more
