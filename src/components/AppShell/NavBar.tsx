@@ -4,7 +4,7 @@ import { twMerge } from 'tailwind-merge'
 
 const [isScrolled, setIsScrolled] = createSignal(false)
 
-const transitionClass = 'transition-all ease-out duration-500'
+const transitionClass = 'transition-all ease-in duration-400 delay-50'
 
 const InteractiveNavbar = () => {
     const [height, setHeight] = createSignal(0)
@@ -51,7 +51,7 @@ const ScrolledNavbar = () => {
             class={twMerge(transitionClass, !isScrolled() && 'opacity-0')}
         >
             <div class={twMerge('flex place-content-center py-2')}>
-                <p class="font-black">Geneza 1</p>
+                <p class="text-sm text-gray-500 font-black">Geneza 1</p>
             </div>
         </div>
     )
@@ -70,11 +70,17 @@ export const NavBar = () => {
     return (
         <nav
             class={twMerge(
-                'z-10 sticky top-0 bg-offWhite dark:bg-gray-800 mx-auto w-full max-w-2xl px-6 lg:px-8 overflow-hidden',
+                'z-10 sticky top-0 bg-offWhite dark:bg-gray-800 mx-auto w-full max-w-3xl px-6 lg:px-8 overflow-hidden',
                 transitionClass
             )}
         >
-            <div class={twMerge('border-b border-black dark:border-b-whiteOnDark', transitionClass)}>
+            <div
+                class={twMerge(
+                    'border-b border-black dark:border-b-whiteOnDark',
+                    transitionClass,
+                    isScrolled() && 'border-gray-200'
+                )}
+            >
                 <InteractiveNavbar />
                 <ScrolledNavbar />
             </div>
