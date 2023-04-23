@@ -1,13 +1,13 @@
 import * as combobox from '@zag-js/combobox'
 import { normalizeProps, useMachine } from '@zag-js/solid'
-import { createEffect, createMemo, createSignal, createUniqueId, For, Show } from 'solid-js'
+import { createMemo, createSignal, createUniqueId, For, Show } from 'solid-js'
 import { twMerge } from 'tailwind-merge'
 
 const comboboxData = [
-    { label: 'Geneza', code: 'GZ', disabled: false },
-    { label: 'Exod', code: 'EX', disabled: false },
-    { label: 'Leviticul', code: 'LV', disabled: false },
-    { label: 'Judecători', code: 'JD', disabled: false },
+    { label: 'Geneza', disabled: false },
+    { label: 'Exod', disabled: false },
+    { label: 'Leviticul', disabled: false },
+    { label: 'Judecători', disabled: false },
 ]
 
 export const Combobox = () => {
@@ -27,10 +27,6 @@ export const Combobox = () => {
     )
 
     const api = createMemo(() => combobox.connect(state, send, normalizeProps))
-
-    createEffect(() => {
-        console.log(api().selectedValue)
-    })
 
     return (
         <div class={'w-full sm:w-48'}>
@@ -61,30 +57,20 @@ export const Combobox = () => {
                     <ul {...api().contentProps}>
                         <For each={options()}>
                             {(item, index) => {
-                                const options = {
-                                    label: item.label,
-                                    value: item.code,
-                                    index: index(),
-                                    disabled: item.disabled,
-                                }
                                 const optionState = createMemo(() =>
                                     api().getOptionState({
                                         label: item.label,
-                                        value: item.code,
+                                        value: item.label,
                                         index: index(),
                                         disabled: item.disabled,
                                     })
                                 )
 
-                                createEffect(() => {
-                                    console.log(optionState())
-                                })
-
                                 return (
                                     <li
                                         {...api().getOptionProps({
                                             label: item.label,
-                                            value: item.code,
+                                            value: item.label,
                                             index: index(),
                                             disabled: item.disabled,
                                         })}
@@ -94,7 +80,7 @@ export const Combobox = () => {
                                         )}
                                     >
                                         <span class="block truncate">{item.label}</span>
-                                        {api().selectedValue === item.code && (
+                                        {optionState().checked && (
                                             <span
                                                 class={twMerge(
                                                     'absolute inset-y-0 right-0 flex items-center pr-2 text-primary-500',
