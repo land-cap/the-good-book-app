@@ -22,13 +22,12 @@ const ChapterMenu = (props: { setRef: Setter<HTMLUListElement>; class?: string }
         >
             <span class="block truncate">Leslie Alexander</span>
             <span class="absolute inset-y-0 right-0 flex items-center pr-2 text-primary-600">
-                <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                    <path
-                        fill-rule="evenodd"
-                        d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-                        clip-rule="evenodd"
-                    />
-                </svg>
+                <span
+                    class="w-5 h-5 material-symbols-sharp text-[20px]"
+                    style={{ 'font-variation-settings': "'FILL' 1, 'wght' 600, 'opsz' 20" }}
+                >
+                    check
+                </span>
             </span>
         </li>
     </ul>
@@ -80,18 +79,12 @@ export const ChapterPicker = ({ value }: { value: string }) => {
                     aria-expanded="false"
                 />
                 <button type="button" class="absolute inset-y-0 right-0 flex items-center px-2 focus:outline-none">
-                    <svg
-                        class="h-5 w-5 text-black dark:text-whiteOnDark"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                        aria-hidden="true"
+                    <span
+                        className="material-symbols-sharp text-[20px] h-5 w-5 text-black dark:text-whiteOnDark"
+                        style={{ 'font-variation-settings': "'FILL' 1, 'wght' 600, 'opsz' 20" }}
                     >
-                        <path
-                            fill-rule="evenodd"
-                            d="M10 3a.75.75 0 01.55.24l3.25 3.5a.75.75 0 11-1.1 1.02L10 4.852 7.3 7.76a.75.75 0 01-1.1-1.02l3.25-3.5A.75.75 0 0110 3zm-3.76 9.2a.75.75 0 011.06.04l2.7 2.908 2.7-2.908a.75.75 0 111.1 1.02l-3.25 3.5a.75.75 0 01-1.1 0l-3.25-3.5a.75.75 0 01.04-1.06z"
-                            clip-rule="evenodd"
-                        />
-                    </svg>
+                        unfold_more
+                    </span>
                 </button>
                 <ShadowChapterMenu setMenu={setShadowMenu} />
                 <Portal>
