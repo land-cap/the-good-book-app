@@ -2,7 +2,7 @@ import { Dynamic, DynamicProps } from 'solid-js/web'
 import fontMetrics from '@capsizecss/metrics/dMSans'
 import { createStyleString } from '@capsizecss/core'
 import { Style } from '@solidjs/meta'
-import { createEffect, createSignal, ValidComponent } from 'solid-js'
+import { createEffect, createSignal, onMount, ValidComponent } from 'solid-js'
 import { twMerge } from 'tailwind-merge'
 
 const capsizeClass = 'capsize'
@@ -29,27 +29,37 @@ const classToStyles: Record<string, string> = {}
 
 const fontSizeRegex = new RegExp(`^text-(${Object.keys(fontSizeToCapHeight).join('|')})\$`)
 
-export const Capped = <T extends ValidComponent>(props: DynamicProps<T> & { capHeight?: number; lineGap?: number }) => {
+export const Capped = <T extends ValidComponent>(
+    props: DynamicProps<T> & {
+        capHeight?: number
+        lineGap?: number
+        dynamic?: boolean
+    }
+) => {
     const [className, setClassName] = createSignal('')
 
-    createEffect(() => console.log(props.capHeight))
-
-    const fontClass = (props.class as string)?.split(' ').find((cl) => cl.match(fontSizeRegex))
-
-    const classWithoutFontSize = (props.class as string)
-        ?.split(' ')
-        .filter((cl) => !cl.match(fontSizeRegex) && !cl.match(/^leading-/))
-        .join(' ')
-    const fontSize = fontClass?.replace('text-', '') as FontSize
-
-    createEffect(() => {
+    const setCapsizeClass = () => {
+        const fontClass = (props.class as string)?.split(' ').find((cl) => cl.match(fontSizeRegex))
+        const fontSize = fontClass?.replace('text-', '') as FontSize
         setClassName(`${capsizeClass}-${fontSize}-${props.capHeight}-${props.lineGap}`)
         classToStyles[className()] = createStyleString(className(), {
             capHeight: props.capHeight || fontSizeToCapHeight[fontSize].capHeight,
             lineGap: props.lineGap || fontSizeToCapHeight[fontSize].lineGap,
             fontMetrics,
         })
-    })
+    }
+
+    if (props.dynamic) {
+        onMount(() => setCapsizeClass())
+        createEffect(() => setCapsizeClass())
+    } else {
+        setCapsizeClass()
+    }
+
+    const classWithoutFontSize = (props.class as string)
+        ?.split(' ')
+        .filter((cl) => !cl.match(fontSizeRegex) && !cl.match(/^leading-/))
+        .join(' ')
 
     return (
         <>

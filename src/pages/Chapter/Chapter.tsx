@@ -1,5 +1,4 @@
 import { Capped } from '~/components/metaComponents/Capped'
-import { createEffect } from 'solid-js'
 import { useIsBreakpoint } from '~/hooks/useIsBreakpoint'
 
 const VerseNumber = ({ number }: { number: number }) => <sup class={'font-black text-gray-500'}>{number}</sup>
@@ -7,14 +6,13 @@ const VerseNumber = ({ number }: { number: number }) => <sup class={'font-black 
 export const Chapter = () => {
     const isDesktop = useIsBreakpoint('sm')
 
-    createEffect(() => console.log(isDesktop()))
-
     return (
         <div class={'flex flex-col gap-12 sm:gap-16 mt-12 sm:mt-16'}>
             <Capped component={'h1'} class="text-3xl font-black">
                 Geneza 1
             </Capped>
             <Capped
+                dynamic
                 component={'p'}
                 capHeight={isDesktop() ? 14 : 12}
                 lineGap={isDesktop() ? 36 : 30}
