@@ -89,7 +89,6 @@ export default function Root() {
                         </AppShell>
                     </ErrorBoundary>
                 </Suspense>
-                {/*<script src="scripts/splash.js" />*/}
                 <Scripts />
             </Body>
         </Html>

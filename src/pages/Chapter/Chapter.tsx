@@ -1,4 +1,3 @@
-import { Capped } from '~/components/metaComponents/Capped'
 import { useIsBreakpoint } from '~/hooks/useIsBreakpoint'
 
 const VerseNumber = ({ number }: { number: number }) => <sup class={'font-black text-gray-500'}>{number}</sup>
@@ -7,17 +6,9 @@ export const Chapter = () => {
     const isDesktop = useIsBreakpoint('sm')
 
     return (
-        <div class={'flex flex-col gap-12 sm:gap-16 mt-12 sm:mt-16'}>
-            <Capped component={'h1'} class="text-3xl font-black">
-                Geneza 1
-            </Capped>
-            <Capped
-                dynamic
-                component={'p'}
-                capHeight={isDesktop() ? 14 : 12}
-                lineGap={isDesktop() ? 36 : 30}
-                class="text-9xl leading-1"
-            >
+        <div class={'flex flex-col gap-12 mt-12'}>
+            <h1 class="text-3xl font-black">Geneza 1</h1>
+            <p class="text:md sm:text-lg leading-[2.25em] sm:leading-[2.5em]">
                 <VerseNumber number={1} /> La început, Dumnezeu a făcut cerurile și pământul. <VerseNumber number={2} />{' '}
                 Pământul era pustiu și gol; peste fața adâncului de ape era întuneric, și Duhul lui Dumnezeu Se mișca pe
                 deasupra apelor. <VerseNumber number={3} /> Dumnezeu a zis: „Să fie lumină!” Și a fost lumină.{' '}
@@ -45,7 +36,7 @@ export const Chapter = () => {
                 să lumineze pământul, <VerseNumber number={18} /> să stăpânească ziua și noaptea și să despartă lumina
                 de întuneric. Dumnezeu a văzut că lucrul acesta era bun. <VerseNumber number={19} /> Astfel, a fost o
                 seară și apoi a fost o dimineață: aceasta a fost ziua a patra.
-            </Capped>
+            </p>
         </div>
     )
 }
