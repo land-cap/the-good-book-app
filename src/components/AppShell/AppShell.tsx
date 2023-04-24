@@ -8,11 +8,11 @@ export const AppShell = ({ children }: { children: JSX.Element }) => (
     >
         <NavBar />
         <div class="flex-grow mx-auto w-full max-w-3xl px-6 lg:px-8">{children}</div>
-        <footer class="flex place-content-center my-20 sm:my-32 text-sm text-gray-500">
+        <footer class="flex place-content-center my-20 sm:my-32 text-xs text-gray-500">
             <p>
                 <span class="">&copy; landCap</span> |&#32;
-                <span class="inline-flex">
-                    made with {<Icon name={'favorite'} size={20} class="mx-1 text-red-500" />} in Moldova
+                <span class="inline-flex items-center">
+                    made with {<Icon name={'favorite'} inline class="mx-1 text-sm text-red-500" />} in Moldova
                 </span>
             </p>
         </footer>
