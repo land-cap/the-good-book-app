@@ -5,6 +5,8 @@ const VerseNumber = ({ number }: { number: number }) => <sup class={'font-black 
 
 const BodyCopy = withCapsize('p', 14, 36)
 
+const Heading = withCapsize('h1', 24, 20)
+
 export const Chapter = () => {
     const button = usePressable({
         context: {
@@ -21,8 +23,8 @@ export const Chapter = () => {
 
     // @ts-ignore
     return (
-        <div class={'flex flex-col gap-10 mt-10'}>
-            <h1 class="text-3xl font-black leading-tight">Geneza 1</h1>
+        <div class={'flex flex-col gap-12 sm:gap-16 mt-12 sm:mt-16'}>
+            <Heading class="text-3xl font-black leading-tight">Geneza 1</Heading>
             <BodyCopy>
                 <VerseNumber number={1} /> La început, Dumnezeu a făcut cerurile și pământul. <VerseNumber number={2} />{' '}
                 Pământul era pustiu și gol; peste fața adâncului de ape era întuneric, și Duhul lui Dumnezeu Se mișca pe
