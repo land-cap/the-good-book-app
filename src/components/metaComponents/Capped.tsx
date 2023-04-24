@@ -2,7 +2,7 @@ import { Dynamic, DynamicProps } from 'solid-js/web'
 import fontMetrics from '@capsizecss/metrics/dMSans'
 import { createStyleString } from '@capsizecss/core'
 import { Style } from '@solidjs/meta'
-import { ValidComponent } from 'solid-js'
+import { createSignal, ValidComponent } from 'solid-js'
 import { twMerge } from 'tailwind-merge'
 
 const capsizeClass = 'capsize'
@@ -25,7 +25,19 @@ const fontSizeToCapHeight: Record<string, { capHeight: number; lineGap: number }
 
 type FontSize = keyof typeof fontSizeToCapHeight
 
+const classToStyles: Record<string, string> = {}
+
 export const Capped = <T extends ValidComponent>(props: DynamicProps<T> & { capHeight?: number; lineGap?: number }) => {
+    const [className, setClassName] = createSignal('')
+    if (props.capHeight && props.lineGap) {
+        setClassName(`${capsizeClass}-${props.capHeight}-${props.lineGap}`)
+        classToStyles[className()] = createStyleString(className(), {
+            capHeight: props.capHeight,
+            lineGap: props.lineGap,
+            fontMetrics,
+        })
+    }
+
     const fontSizeRegex = new RegExp(`^text-(${Object.keys(fontSizeToCapHeight).join('|')})\$`)
     const fontClass = (props.class as string)?.split(' ').find((cl) => cl.match(fontSizeRegex))
     const classWithoutFontSize = (props.class as string)
@@ -33,14 +45,16 @@ export const Capped = <T extends ValidComponent>(props: DynamicProps<T> & { capH
         .filter((cl) => !cl.match(fontSizeRegex))
         .join(' ')
     const fontSize = fontClass?.replace('text-', '') as FontSize
-    const styleString = createStyleString(`${capsizeClass}-${fontSize}`, {
-        ...fontSizeToCapHeight[fontSize],
+    setClassName(`${capsizeClass}-${fontSize}`)
+    classToStyles[className()] = createStyleString(className(), {
+        capHeight: fontSizeToCapHeight[fontSize].capHeight,
+        lineGap: fontSizeToCapHeight[fontSize].lineGap,
         fontMetrics,
     })
 
     return (
         <>
-            <Style>{styleString}</Style>
+            <Style>{classToStyles[className()]}</Style>
             <Dynamic {...props} class={twMerge(classWithoutFontSize, `${capsizeClass}-${fontSize}`)} />
         </>
     )
