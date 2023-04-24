@@ -25,6 +25,9 @@ dependencies:
   '@zag-js/solid':
     specifier: ^0.5.0
     version: 0.5.0(solid-js@1.7.2)
+  flag-icons:
+    specifier: ^6.6.6
+    version: 6.6.6
   prettier:
     specifier: ^2.8.7
     version: 2.8.7
@@ -2970,6 +2973,10 @@ packages:
       locate-path: 6.0.0
       path-exists: 4.0.0
     dev: true
+
+  /flag-icons@6.6.6:
+    resolution: {integrity: sha512-4lHDKxldnQ7q617pf9Dx9nAetT+9zcMpUexbRrc9kjLw9KJgZ83zA5Dky3Vv7ZDzUjAiZ46x/cy5P0HnEnqA2A==}
+    dev: false
 
   /flat-cache@3.0.4:
     resolution: {integrity: sha512-dm9s5Pw7Jc0GvMYbshN6zchCA9RgQlzzEZX3vylR9IqFfS8XciblUXOKfW6SiuJ0e13eDYZoZV5wdrev7P3Nwg==}

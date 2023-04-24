@@ -2,6 +2,8 @@ import { JSX } from 'solid-js'
 import { NavBar } from '~/components/AppShell/NavBar'
 import { Icon } from '~/components/composable/Icon'
 
+import '/node_modules/flag-icons/css/flag-icons.min.css'
+
 export const AppShell = ({ children }: { children: JSX.Element }) => (
     <div class={'flex flex-col h-fit min-h-fit text-black bg-offWhite dark:text-whiteOnDark dark:bg-gray-800'}>
         <NavBar />
@@ -10,7 +12,8 @@ export const AppShell = ({ children }: { children: JSX.Element }) => (
             <p>
                 <span class="">&copy; landCap</span> |&#32;
                 <span class="inline-flex">
-                    made with {<Icon name={'favorite'} size={20} class="mx-1 text-red-500" />} in Moldova
+                    made with {<Icon name={'favorite'} size={20} class="mx-1 text-rose-500" />} in{' '}
+                    <span class="fi fi-ro mx-1"></span>
                 </span>
             </p>
         </footer>
