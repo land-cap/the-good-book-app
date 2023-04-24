@@ -12,52 +12,83 @@ export const Chapter = () => {
     // @ts-ignore
     return (
         <div class={'flex flex-col gap-12 sm:gap-16 mt-12 sm:mt-16'}>
-            <p class={'text-xs'}>
+            <p class={'text-2xl'}>
                 xsasd fasdfD
                 <br />
                 asdf asdf asdf asf
             </p>
-            <PWithCapsize class={'text-xs'}>
+            <PWithCapsize class={'text-2xl'}>
                 xsasd fasdfD
                 <br />
                 asdf asdf asdf asf
             </PWithCapsize>
-            <p class={'text-sm'}>
+            <p class={'text-3xl'}>
                 xsasd fasdfD
                 <br />
                 asdf asdf asdf asf
             </p>
-            <PWithCapsize class={'text-sm'}>
+            <PWithCapsize class={'text-3xl'}>
                 xsasd fasdfD
                 <br />
                 asdf asdf asdf asf
             </PWithCapsize>
-            <p class={'text-base'}>
+            <p class={'text-4xl'}>
                 xsasd fasdfD
                 <br />
                 asdf asdf asdf asf
             </p>
-            <PWithCapsize class={'text-base'}>
+            <PWithCapsize class={'text-4xl'}>
                 xsasd fasdfD
                 <br />
                 asdf asdf asdf asf
             </PWithCapsize>
-            <p class={'text-lg'}>
+            <p class={'text-5xl'}>
                 xsasd fasdfD
                 <br />
                 asdf asdf asdf asf
             </p>
-            <PWithCapsize class={'text-lg'}>
+            <PWithCapsize class={'text-5xl'}>
                 xsasd fasdfD
                 <br />
                 asdf asdf asdf asf
             </PWithCapsize>
-            <p class={'text-xl'}>
+            <p class={'text-6xl'}>
                 xsasd fasdfD
                 <br />
                 asdf asdf asdf asf
             </p>
-            <PWithCapsize class={'text-xl'}>
+            <PWithCapsize class={'text-6xl'}>
+                xsasd fasdfD
+                <br />
+                asdf asdf asdf asf
+            </PWithCapsize>
+            <p class={'text-7xl'}>
+                xsasd fasdfD
+                <br />
+                asdf asdf asdf asf
+            </p>
+            <PWithCapsize class={'text-7xl'}>
+                xsasd fasdfD
+                <br />
+                asdf asdf asdf asf
+            </PWithCapsize>
+            <p class={'text-8xl'}>
+                xsasd fasdfD
+                <br />
+                asdf asdf asdf asf
+            </p>
+            <PWithCapsize class={'text-8xl'}>
+                xsasd fa9dfD
+                <br />
+                asdf asdf asdf asf
+            </PWithCapsize>
+
+            <p class={'text-9xl'}>
+                xsasd fasdfD
+                <br />
+                asdf asdf asdf asf
+            </p>
+            <PWithCapsize class={'text-9xl'}>
                 xsasd fasdfD
                 <br />
                 asdf asdf asdf asf
