@@ -4,8 +4,7 @@ import fontMetrics from '@capsizecss/metrics/dMSans'
 import { createStyleString } from '@capsizecss/core'
 import { Style } from '@solidjs/meta'
 
-const className = 'capsize'
-let index = 0
+const capsizeClass = 'capsize'
 
 const fontSizeToCapHeight: Record<string, { capHeight: number; lineGap: number }> = {
     xs: { capHeight: 8, lineGap: 8 },
@@ -25,7 +24,6 @@ const fontSizeToCapHeight: Record<string, { capHeight: number; lineGap: number }
 
 export const withCapsize = <T extends ValidComponent>(component: T) => {
     return (props: Omit<DynamicProps<T>, 'component'>) => {
-        index = index + 1
         const fontSizeRegex = new RegExp(`^text-(${Object.keys(fontSizeToCapHeight).join('|')})\$`)
         const fontClass = (props.class as string)?.split(' ').find((cl) => cl.match(fontSizeRegex))
         const classWithoutFontSize = (props.class as string)
@@ -34,8 +32,7 @@ export const withCapsize = <T extends ValidComponent>(component: T) => {
             .join(' ')
         const fontSize = fontClass?.replace('text-', '') as keyof typeof fontSizeToCapHeight
         console.log(fontSize)
-        // const idClass = `${className}-${index}`
-        const styleString = createStyleString(`capsize-${fontSize}`, {
+        const styleString = createStyleString(`${capsizeClass}-${fontSize}`, {
             ...fontSizeToCapHeight[fontSize],
             fontMetrics,
         })
@@ -44,7 +41,11 @@ export const withCapsize = <T extends ValidComponent>(component: T) => {
         return (
             <>
                 <Style>{styleString}</Style>
-                <Dynamic component={component} {...props} class={`${classWithoutFontSize} capsize-${fontSize}`} />
+                <Dynamic
+                    component={component}
+                    {...props}
+                    class={`${classWithoutFontSize} ${capsizeClass}-${fontSize}`}
+                />
             </>
         )
     }
