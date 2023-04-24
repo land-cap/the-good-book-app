@@ -1,6 +1,12 @@
 lockfileVersion: '6.0'
 
 dependencies:
+  '@capsizecss/core':
+    specifier: ^3.1.0
+    version: 3.1.0
+  '@capsizecss/metrics':
+    specifier: ^1.1.1
+    version: 1.1.1
   '@polymorphic-factory/solid':
     specifier: ^0.3.1
     version: 0.3.1(solid-js@1.7.2)
@@ -22,6 +28,9 @@ dependencies:
   '@zag-js/solid':
     specifier: ^0.5.0
     version: 0.5.0(solid-js@1.7.2)
+  dMSans:
+    specifier: link:@capsizecss/metrics/dMSans
+    version: link:@capsizecss/metrics/dMSans
   prettier:
     specifier: ^2.8.7
     version: 2.8.7
@@ -1181,6 +1190,16 @@ packages:
       '@babel/helper-string-parser': 7.19.4
       '@babel/helper-validator-identifier': 7.19.1
       to-fast-properties: 2.0.0
+
+  /@capsizecss/core@3.1.0:
+    resolution: {integrity: sha512-MoHbXUMqJtYL+idLVSQY57OPRyPaUBGN0o1Im0JElmfRVV+X1i1i5QsQTuEJpJgYFwi4jsck7A+jt6X7XB0p8w==}
+    dependencies:
+      csstype: 3.1.2
+    dev: false
+
+  /@capsizecss/metrics@1.1.1:
+    resolution: {integrity: sha512-YFONV2KvBPYr3FCJTMCZ5rkTHbaVCqO37VYJo9HrrzU2aLcWk5JPQln64yMmKtWUj5Pwi1vIqeFqCoYQxd20gg==}
+    dev: false
 
   /@esbuild/android-arm64@0.16.17:
     resolution: {integrity: sha512-MIGl6p5sc3RDTLLkYL1MyL8BMRN4tLMRCn+yRJJmEDvYZ2M7tmAf80hx1kbNEUX2KJ50RRtxZ4JHLvCfuB6kBg==}

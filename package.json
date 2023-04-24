@@ -19,6 +19,8 @@
     "vite-plugin-solid": "^2.7.0"
   },
   "dependencies": {
+    "@capsizecss/core": "^3.1.0",
+    "@capsizecss/metrics": "^1.1.1",
     "@polymorphic-factory/solid": "^0.3.1",
     "@solidjs/meta": "^0.28.2",
     "@solidjs/router": "^0.8.2",
@@ -26,6 +28,7 @@
     "@zag-js/combobox": "^0.6.0",
     "@zag-js/pressable": "^0.6.0",
     "@zag-js/solid": "^0.5.0",
+    "dMSans": "link:@capsizecss/metrics/dMSans",
     "prettier": "^2.8.7",
     "solid-js": "^1.7.2",
     "solid-start": "^0.2.26",
