@@ -74,6 +74,10 @@ export default function Root() {
                     rel="stylesheet"
                 />
                 <link href="https://fonts.googleapis.com/css2?family=Bellefair&display=swap" rel="stylesheet" />
+                <link
+                    href="https://fonts.googleapis.com/css2?family=Cormorant+Upright:wght@300;400;500;600;700&display=swap"
+                    rel="stylesheet"
+                />
             </Head>
             <Body>
                 <Suspense>

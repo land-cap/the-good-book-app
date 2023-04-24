@@ -1,6 +1,9 @@
 lockfileVersion: '6.0'
 
 dependencies:
+  '@capsizecss/metrics':
+    specifier: ^1.1.1
+    version: 1.1.1
   '@polymorphic-factory/solid':
     specifier: ^0.3.1
     version: 0.3.1(solid-js@1.7.2)
@@ -37,6 +40,9 @@ dependencies:
   tailwind-merge:
     specifier: ^1.12.0
     version: 1.12.0
+  tailwindcss-capsize:
+    specifier: ^3.0.3
+    version: 3.0.3(tailwindcss@3.2.4)
   undici:
     specifier: ^5.15.1
     version: 5.15.1
@@ -1181,6 +1187,16 @@ packages:
       '@babel/helper-string-parser': 7.19.4
       '@babel/helper-validator-identifier': 7.19.1
       to-fast-properties: 2.0.0
+
+  /@capsizecss/core@3.1.0:
+    resolution: {integrity: sha512-MoHbXUMqJtYL+idLVSQY57OPRyPaUBGN0o1Im0JElmfRVV+X1i1i5QsQTuEJpJgYFwi4jsck7A+jt6X7XB0p8w==}
+    dependencies:
+      csstype: 3.1.2
+    dev: false
+
+  /@capsizecss/metrics@1.1.1:
+    resolution: {integrity: sha512-YFONV2KvBPYr3FCJTMCZ5rkTHbaVCqO37VYJo9HrrzU2aLcWk5JPQln64yMmKtWUj5Pwi1vIqeFqCoYQxd20gg==}
+    dev: false
 
   /@esbuild/android-arm64@0.16.17:
     resolution: {integrity: sha512-MIGl6p5sc3RDTLLkYL1MyL8BMRN4tLMRCn+yRJJmEDvYZ2M7tmAf80hx1kbNEUX2KJ50RRtxZ4JHLvCfuB6kBg==}
@@ -4356,6 +4372,16 @@ packages:
 
   /tailwind-merge@1.12.0:
     resolution: {integrity: sha512-Y17eDp7FtN1+JJ4OY0Bqv9OA41O+MS8c1Iyr3T6JFLnOgLg3EvcyMKZAnQ8AGyvB5Nxm3t9Xb5Mhe139m8QT/g==}
+    dev: false
+
+  /tailwindcss-capsize@3.0.3(tailwindcss@3.2.4):
+    resolution: {integrity: sha512-R3IgkZlso4YWxFlbrSzUWCCRLIs4qhDp5qbxNtcdI4N1siClIBD0zaj6u4KzbNTH9YtHce3Gq1teeiz/QHnnRw==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      tailwindcss: '>= 1.5'
+    dependencies:
+      '@capsizecss/core': 3.1.0
+      tailwindcss: 3.2.4(postcss@8.4.21)
     dev: false
 
   /tailwindcss@3.2.4(postcss@8.4.21):

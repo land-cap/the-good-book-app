@@ -2,6 +2,7 @@
 
 const colors = require('tailwindcss/colors')
 const defaultTheme = require('tailwindcss/defaultTheme')
+const fontMetrics = require('@capsizecss/metrics/dMSans')
 
 const monoColor = colors.slate
 
@@ -18,7 +19,14 @@ module.exports = {
                 whiteOnDark: monoColor[300],
             },
             fontFamily: {
-                sans: ['Be Vietnam Pro', 'MonoLisa', 'DM Mono', 'Schibsted Grotesk', 'Bellefair', 'Cormorant infant', 'Inknut Antiqua', 'Urbanist', 'Archivo Narrow', 'DM Sans', 'Karla', 'IBM Plex Sans', 'Work Sans', 'Inter', 'Plus Jakarta Sans', 'sans-serif'],
+                sans: ['DM Sans', 'DM Mono', 'Plus Jakarta Sans', 'Inknut Antiqua', 'Cormorant Upright', 'Be Vietnam Pro', 'MonoLisa', 'Schibsted Grotesk', 'Bellefair', 'Cormorant infant', 'Urbanist', 'Archivo Narrow', 'Karla', 'IBM Plex Sans', 'Work Sans', 'Inter', 'sans-serif'],
+            },
+            fontMetrics: {
+                sans: {
+                    capHeight: 48,
+                    lineGap: 24,
+                    fontMetrics
+                },
             },
             ringWidth: {
                 ...defaultTheme.ringWidth,
@@ -28,5 +36,6 @@ module.exports = {
     },
     plugins: [
         require('@tailwindcss/forms'),
+        require('tailwindcss-capsize')
     ],
 }
