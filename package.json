@@ -19,7 +19,6 @@
     "vite-plugin-solid": "^2.7.0"
   },
   "dependencies": {
-    "@capsizecss/metrics": "^1.1.1",
     "@polymorphic-factory/solid": "^0.3.1",
     "@solidjs/meta": "^0.28.2",
     "@solidjs/router": "^0.8.2",
@@ -32,7 +31,6 @@
     "solid-start": "^0.2.26",
     "solid-start-vercel": "^0.2.26",
     "tailwind-merge": "^1.12.0",
-    "tailwindcss-capsize": "^3.0.3",
     "undici": "^5.15.1"
   },
   "engines": {

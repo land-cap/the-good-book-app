@@ -18,8 +18,8 @@ export const Chapter = () => {
 
     return (
         <div class={'flex flex-col gap-10 mt-10'}>
-            <h1 class="text-3xl font-black leading-tight tracking-tight">Geneza 1</h1>
-            <p class={'text:md sm:text-lg leading-[2.25em] sm:leading-[2.5em] capsize'}>
+            <h1 class="text-3xl font-black leading-tight">Geneza 1</h1>
+            <p class={'text:md sm:text-lg leading-[2.25em] sm:leading-[2.5em]'}>
                 <VerseNumber number={1} /> La început, Dumnezeu a făcut cerurile și pământul. <VerseNumber number={2} />{' '}
                 Pământul era pustiu și gol; peste fața adâncului de ape era întuneric, și Duhul lui Dumnezeu Se mișca pe
                 deasupra apelor. <VerseNumber number={3} /> Dumnezeu a zis: „Să fie lumină!” Și a fost lumină.{' '}
