@@ -3,7 +3,6 @@ import { Suspense } from 'solid-js'
 import { Body, ErrorBoundary, FileRoutes, Head, Html, Meta, Routes, Scripts, Title } from 'solid-start'
 import './root.css'
 import { AppShell } from '~/components/AppShell/AppShell'
-import { capsizeStyleRule } from '~/config/capsize'
 
 export default function Root() {
     return (
@@ -12,7 +11,6 @@ export default function Root() {
                 <Title>The Good Book</Title>
                 <Meta charset="utf-8" />
                 <Meta name="viewport" content="width=device-width, initial-scale=1" />
-                <style type="text/css">${capsizeStyleRule}</style>
                 <link rel="preconnect" href="https://fonts.googleapis.com" />
                 <link rel="preconnect" href="https://fonts.gstatic.com" />
                 <link

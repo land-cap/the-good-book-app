@@ -1,4 +1,7 @@
 import { usePressable } from '~/components'
+import { capsizeStyles } from '~/config/capsize'
+import { css } from 'solid-styled-components'
+import { twMerge } from 'tailwind-merge'
 
 const VerseNumber = ({ number }: { number: number }) => <sup class={'font-black text-gray-500'}>{number}</sup>
 
@@ -16,10 +19,12 @@ export const Chapter = () => {
         size: 'xl',
     })
 
+    const textClass = css(capsizeStyles)
+
     return (
         <div class={'flex flex-col   gap-10 mt-10'}>
             <h1 class="text-3xl font-black leading-tight">Geneza 1</h1>
-            <p class={'text:md sm:text-lg leading-[2.25em] sm:leading-[2.5em] capsize'}>
+            <p class={twMerge('text:md sm:text-lg leading-[2.25em] sm:leading-[2.5em]', textClass)}>
                 <VerseNumber number={1} /> La început, Dumnezeu a făcut cerurile și pământul. <VerseNumber number={2} />{' '}
                 Pământul era pustiu și gol; peste fața adâncului de ape era întuneric, și Duhul lui Dumnezeu Se mișca pe
                 deasupra apelor. <VerseNumber number={3} /> Dumnezeu a zis: „Să fie lumină!” Și a fost lumină.{' '}
