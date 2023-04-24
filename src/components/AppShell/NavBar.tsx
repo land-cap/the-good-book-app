@@ -1,6 +1,7 @@
 import { createEffect, createMemo, createSignal, onMount } from 'solid-js'
 import { twMerge } from 'tailwind-merge'
 import { Combobox } from '~/components'
+import { ComboboxApi } from '~/components/composable/Combobox/Combobox'
 
 const [isScrolled, setIsScrolled] = createSignal(false)
 
@@ -10,6 +11,12 @@ const InteractiveNavbar = () => {
     const [height, setHeight] = createSignal(0)
 
     const defaultMaxHeight = createMemo(() => (height() ? `${height()}px` : 'unset'))
+
+    const [comboboxApi, setComboboxApi] = createSignal(null as unknown as ComboboxApi)
+
+    createEffect(() => {
+        console.log(comboboxApi())
+    })
 
     return (
         <div
@@ -33,6 +40,7 @@ const InteractiveNavbar = () => {
                         { label: 'Judecători', disabled: false },
                     ]}
                     defaultValue={'Geneza'}
+                    setApiRef={(ref) => setComboboxApi(ref)}
                 />
             </div>
         </div>

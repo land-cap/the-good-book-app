@@ -8,11 +8,14 @@ type ComboboxOption = {
     disabled: boolean
 }
 
+export type ComboboxApi = ReturnType<typeof combobox.connect>
+
 export type ComboboxProps = {
     context?: Partial<Parameters<typeof combobox.machine>[0]>
     options: ComboboxOption[]
     defaultValue?: string
     placeholder?: string
+    setApiRef?: (ref: ComboboxApi) => void
 }
 
 export const Combobox = (props: ComboboxProps) => {
@@ -35,6 +38,9 @@ export const Combobox = (props: ComboboxProps) => {
     const api = createMemo(() => combobox.connect(state, send, normalizeProps))
 
     onMount(() => {
+        if (props.setApiRef) {
+            props.setApiRef(api())
+        }
         if (props.defaultValue) {
             api().setValue(props.defaultValue)
         }
