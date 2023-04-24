@@ -1,13 +1,9 @@
 import { usePressable } from '~/components'
-import { capsizeStyles } from '~/config/capsize'
-import { styled } from 'solid-styled-components'
-import { twMerge } from 'tailwind-merge'
+import { withCapsize } from '~/components/metaComponents/withCapsize'
 
 const VerseNumber = ({ number }: { number: number }) => <sup class={'font-black text-gray-500'}>{number}</sup>
 
-const StyledTextCopy = styled('p')(capsizeStyles)
-
-console.log(capsizeStyles)
+const BodyCopy = withCapsize('p', 14, 36)
 
 export const Chapter = () => {
     const button = usePressable({
@@ -23,10 +19,11 @@ export const Chapter = () => {
         size: 'xl',
     })
 
+    // @ts-ignore
     return (
         <div class={'flex flex-col gap-10 mt-10'}>
             <h1 class="text-3xl font-black leading-tight">Geneza 1</h1>
-            <StyledTextCopy class={twMerge('')}>
+            <BodyCopy>
                 <VerseNumber number={1} /> La început, Dumnezeu a făcut cerurile și pământul. <VerseNumber number={2} />{' '}
                 Pământul era pustiu și gol; peste fața adâncului de ape era întuneric, și Duhul lui Dumnezeu Se mișca pe
                 deasupra apelor. <VerseNumber number={3} /> Dumnezeu a zis: „Să fie lumină!” Și a fost lumină.{' '}
@@ -54,7 +51,7 @@ export const Chapter = () => {
                 să lumineze pământul, <VerseNumber number={18} /> să stăpânească ziua și noaptea și să despartă lumina
                 de întuneric. Dumnezeu a văzut că lucrul acesta era bun. <VerseNumber number={19} /> Astfel, a fost o
                 seară și apoi a fost o dimineață: aceasta a fost ziua a patra.
-            </StyledTextCopy>
+            </BodyCopy>
         </div>
     )
 }

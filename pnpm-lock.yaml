@@ -52,6 +52,9 @@ dependencies:
   undici:
     specifier: ^5.15.1
     version: 5.15.1
+  uuid:
+    specifier: ^9.0.0
+    version: 9.0.0
 
 devDependencies:
   autoprefixer:
@@ -4586,6 +4589,11 @@ packages:
   /utils-merge@1.0.1:
     resolution: {integrity: sha512-pMZTvIkT1d+TFGvDOqodOclx0QWkkgi6Tdoa8gC8ffGAAqz9pzPTZWAybbsHHoED/ztMtkv/VoYTYyShUn81hA==}
     engines: {node: '>= 0.4.0'}
+
+  /uuid@9.0.0:
+    resolution: {integrity: sha512-MXcSTerfPa4uqyzStbRoTgt5XIe3x5+42+q1sDuy3R5MDk66URdLMOZe5aPX/SQd+kuYAh0FdP/pO28IkQyTeg==}
+    hasBin: true
+    dev: false
 
   /validate-html-nesting@1.2.1:
     resolution: {integrity: sha512-T1ab131NkP3BfXB7KUSgV7Rhu81R2id+L6NaJ7NypAAG5iV6gXnPpQE5RK1fvb+3JYsPTL+ihWna5sr5RN9gaQ==}
