@@ -1,15 +1,25 @@
 import { Capped } from '~/components/metaComponents/Capped'
+import { createEffect } from 'solid-js'
+import { useIsBreakpoint } from '~/hooks/useIsBreakpoint'
 
 const VerseNumber = ({ number }: { number: number }) => <sup class={'font-black text-gray-500'}>{number}</sup>
 
 export const Chapter = () => {
-    // @ts-ignore
+    const isDesktop = useIsBreakpoint('sm')
+
+    createEffect(() => console.log(isDesktop()))
+
     return (
         <div class={'flex flex-col gap-12 sm:gap-16 mt-12 sm:mt-16'}>
             <Capped component={'h1'} class="text-3xl font-black">
                 Geneza 1
             </Capped>
-            <Capped component={'p'} capHeight={14} lineGap={36} class="text-9xl leading-1">
+            <Capped
+                component={'p'}
+                capHeight={isDesktop() ? 14 : 12}
+                lineGap={isDesktop() ? 36 : 30}
+                class="text-9xl leading-1"
+            >
                 <VerseNumber number={1} /> La început, Dumnezeu a făcut cerurile și pământul. <VerseNumber number={2} />{' '}
                 Pământul era pustiu și gol; peste fața adâncului de ape era întuneric, și Duhul lui Dumnezeu Se mișca pe
                 deasupra apelor. <VerseNumber number={3} /> Dumnezeu a zis: „Să fie lumină!” Și a fost lumină.{' '}

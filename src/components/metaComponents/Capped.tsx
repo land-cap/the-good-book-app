@@ -2,7 +2,7 @@ import { Dynamic, DynamicProps } from 'solid-js/web'
 import fontMetrics from '@capsizecss/metrics/dMSans'
 import { createStyleString } from '@capsizecss/core'
 import { Style } from '@solidjs/meta'
-import { createSignal, ValidComponent } from 'solid-js'
+import { createEffect, createSignal, ValidComponent } from 'solid-js'
 import { twMerge } from 'tailwind-merge'
 
 const capsizeClass = 'capsize'
@@ -32,6 +32,8 @@ const fontSizeRegex = new RegExp(`^text-(${Object.keys(fontSizeToCapHeight).join
 export const Capped = <T extends ValidComponent>(props: DynamicProps<T> & { capHeight?: number; lineGap?: number }) => {
     const [className, setClassName] = createSignal('')
 
+    createEffect(() => console.log(props.capHeight))
+
     const fontClass = (props.class as string)?.split(' ').find((cl) => cl.match(fontSizeRegex))
 
     const classWithoutFontSize = (props.class as string)
@@ -40,12 +42,13 @@ export const Capped = <T extends ValidComponent>(props: DynamicProps<T> & { capH
         .join(' ')
     const fontSize = fontClass?.replace('text-', '') as FontSize
 
-    setClassName(`${capsizeClass}-${fontSize}-${props.capHeight}-${props.lineGap}`)
-
-    classToStyles[className()] = createStyleString(className(), {
-        capHeight: props.capHeight || fontSizeToCapHeight[fontSize].capHeight,
-        lineGap: props.lineGap || fontSizeToCapHeight[fontSize].lineGap,
-        fontMetrics,
+    createEffect(() => {
+        setClassName(`${capsizeClass}-${fontSize}-${props.capHeight}-${props.lineGap}`)
+        classToStyles[className()] = createStyleString(className(), {
+            capHeight: props.capHeight || fontSizeToCapHeight[fontSize].capHeight,
+            lineGap: props.lineGap || fontSizeToCapHeight[fontSize].lineGap,
+            fontMetrics,
+        })
     })
 
     return (
