@@ -17,7 +17,7 @@ export const Chapter = () => {
     })
 
     return (
-        <div class={'flex flex-col gap-10 py-10'}>
+        <div class={'flex flex-col gap-10 mt-10'}>
             <h1 class="text-3xl font-black leading-tight tracking-tight">Geneza 1</h1>
             <p class={'text:md sm:text-lg leading-[2.25em] sm:leading-[2.5em] capsize'}>
                 <VerseNumber number={1} /> La început, Dumnezeu a făcut cerurile și pământul. <VerseNumber number={2} />{' '}
