@@ -6,10 +6,10 @@ export const Chapter = () => {
     // @ts-ignore
     return (
         <div class={'flex flex-col gap-12 sm:gap-16 mt-12 sm:mt-16'}>
-            <Capped component={'h1'} class="text-3xl font-black leading-tight">
+            <Capped component={'h1'} class="text-3xl font-black">
                 Geneza 1
             </Capped>
-            <Capped component={'p'} class="text-base">
+            <Capped component={'p'} capHeight={14} lineGap={36} class="text-9xl leading-1">
                 <VerseNumber number={1} /> La început, Dumnezeu a făcut cerurile și pământul. <VerseNumber number={2} />{' '}
                 Pământul era pustiu și gol; peste fața adâncului de ape era întuneric, și Duhul lui Dumnezeu Se mișca pe
                 deasupra apelor. <VerseNumber number={3} /> Dumnezeu a zis: „Să fie lumină!” Și a fost lumină.{' '}

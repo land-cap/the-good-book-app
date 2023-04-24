@@ -27,35 +27,31 @@ type FontSize = keyof typeof fontSizeToCapHeight
 
 const classToStyles: Record<string, string> = {}
 
+const fontSizeRegex = new RegExp(`^text-(${Object.keys(fontSizeToCapHeight).join('|')})\$`)
+
 export const Capped = <T extends ValidComponent>(props: DynamicProps<T> & { capHeight?: number; lineGap?: number }) => {
     const [className, setClassName] = createSignal('')
-    if (props.capHeight && props.lineGap) {
-        setClassName(`${capsizeClass}-${props.capHeight}-${props.lineGap}`)
-        classToStyles[className()] = createStyleString(className(), {
-            capHeight: props.capHeight,
-            lineGap: props.lineGap,
-            fontMetrics,
-        })
-    }
 
-    const fontSizeRegex = new RegExp(`^text-(${Object.keys(fontSizeToCapHeight).join('|')})\$`)
     const fontClass = (props.class as string)?.split(' ').find((cl) => cl.match(fontSizeRegex))
+
     const classWithoutFontSize = (props.class as string)
         ?.split(' ')
-        .filter((cl) => !cl.match(fontSizeRegex))
+        .filter((cl) => !cl.match(fontSizeRegex) && !cl.match(/^leading-/))
         .join(' ')
     const fontSize = fontClass?.replace('text-', '') as FontSize
-    setClassName(`${capsizeClass}-${fontSize}`)
+
+    setClassName(`${capsizeClass}-${fontSize}-${props.capHeight}-${props.lineGap}`)
+
     classToStyles[className()] = createStyleString(className(), {
-        capHeight: fontSizeToCapHeight[fontSize].capHeight,
-        lineGap: fontSizeToCapHeight[fontSize].lineGap,
+        capHeight: props.capHeight || fontSizeToCapHeight[fontSize].capHeight,
+        lineGap: props.lineGap || fontSizeToCapHeight[fontSize].lineGap,
         fontMetrics,
     })
 
     return (
         <>
             <Style>{classToStyles[className()]}</Style>
-            <Dynamic {...props} class={twMerge(classWithoutFontSize, `${capsizeClass}-${fontSize}`)} />
+            <Dynamic {...props} class={twMerge(classWithoutFontSize, className())} />
         </>
     )
 }
