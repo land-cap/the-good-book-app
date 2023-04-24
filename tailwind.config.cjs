@@ -26,14 +26,14 @@ module.exports = {
         base: ["15.7143px", { lineHeight: "22px" }],
         lg: ["18.5714px", { lineHeight: "26px" }],
         xl: ["20px", { lineHeight: "28px" }],
-        "2xl": ["1.5rem", { lineHeight: "2rem" }],
-        "3xl": ["1.875rem", { lineHeight: "2.25rem" }],
-        "4xl": ["2.25rem", { lineHeight: "2.5rem" }],
-        "5xl": ["3rem", { lineHeight: "1" }],
-        "6xl": ["3.75rem", { lineHeight: "1" }],
-        "7xl": ["4.5rem", { lineHeight: "1" }],
-        "8xl": ["6rem", { lineHeight: "1" }],
-        "9xl": ["8rem", { lineHeight: "1" }]
+        "2xl": ["24.2857px", { lineHeight: "34px" }],
+        "3xl": ["30px", { lineHeight: "42px" }],
+        "4xl": ["37.1429px", { lineHeight: "52px" }],
+        "5xl": ["48.5714px", { lineHeight: "68px" }],
+        "6xl": ["60px", { lineHeight: "84px" }],
+        "7xl": ["48.5714px", { lineHeight: "75px" }],
+        "8xl": ["94.2857px", { lineHeight: "96px" }],
+        "9xl": ["127.1429px", { lineHeight: "132px" }]
       },
       ringWidth: {
         ...defaultTheme.ringWidth,

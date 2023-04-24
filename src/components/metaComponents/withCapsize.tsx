@@ -18,9 +18,9 @@ const fontSizeToCapHeight: Record<string, { capHeight: number; lineGap: number }
     '4xl': { capHeight: 26, lineGap: 26 },
     '5xl': { capHeight: 34, lineGap: 34 },
     '6xl': { capHeight: 42, lineGap: 42 },
-    '7xl': { capHeight: 50, lineGap: 50 },
-    '8xl': { capHeight: 66, lineGap: 66 },
-    '9xl': { capHeight: 89, lineGap: 89 },
+    '7xl': { capHeight: 50, lineGap: 25 },
+    '8xl': { capHeight: 66, lineGap: 30 },
+    '9xl': { capHeight: 89, lineGap: 43 },
 }
 
 export const withCapsize = <T extends ValidComponent>(component: T) => {
@@ -32,7 +32,7 @@ export const withCapsize = <T extends ValidComponent>(component: T) => {
             ?.split(' ')
             .filter((cl) => !cl.match(fontSizeRegex))
             .join(' ')
-        const fontSize = fontClass?.replace('text-', '')
+        const fontSize = fontClass?.replace('text-', '') as keyof typeof fontSizeToCapHeight
         console.log(fontSize)
         // const idClass = `${className}-${index}`
         const styleString = createStyleString(`capsize-${fontSize}`, {
