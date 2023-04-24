@@ -6,7 +6,7 @@ import { AppShell } from '~/components/AppShell/AppShell'
 
 export default function Root() {
     return (
-        <Html lang="en" class="dark">
+        <Html lang="en">
             <Head>
                 <Title>The Good Book</Title>
                 <Meta charset="utf-8" />

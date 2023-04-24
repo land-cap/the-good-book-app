@@ -18,7 +18,7 @@ module.exports = {
                 whiteOnDark: monoColor[300],
             },
             fontFamily: {
-                sans: ['MonoLisa', 'DM Mono', 'Be Vietnam Pro', 'Schibsted Grotesk', 'Bellefair', 'Cormorant infant', 'Inknut Antiqua', 'Urbanist', 'Archivo Narrow', 'DM Sans', 'Karla', 'IBM Plex Sans', 'Work Sans', 'Inter', 'Plus Jakarta Sans', 'sans-serif'],
+                sans: ['Be Vietnam Pro', 'MonoLisa', 'DM Mono', 'Schibsted Grotesk', 'Bellefair', 'Cormorant infant', 'Inknut Antiqua', 'Urbanist', 'Archivo Narrow', 'DM Sans', 'Karla', 'IBM Plex Sans', 'Work Sans', 'Inter', 'Plus Jakarta Sans', 'sans-serif'],
             },
             ringWidth: {
                 ...defaultTheme.ringWidth,

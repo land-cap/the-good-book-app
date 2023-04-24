@@ -4,7 +4,7 @@ import { Combobox } from '~/components'
 
 const [isScrolled, setIsScrolled] = createSignal(false)
 
-const transitionClass = 'transition-all ease-in duration-400 delay-50'
+const transitionClass = 'transition-all ease-in duration-400'
 
 const InteractiveNavbar = () => {
     const [height, setHeight] = createSignal(0)
