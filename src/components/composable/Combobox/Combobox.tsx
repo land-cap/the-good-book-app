@@ -53,7 +53,7 @@ export const Combobox = (props: ComboboxProps) => {
                 <div {...api().controlProps} class="relative">
                     <input
                         {...api().inputProps}
-                        class="w-full border-0 bg-offWhite dark:bg-gray-800 py-1.5 pl-3 pr-12 ring-2 ring-inset ring-black dark:ring-whiteOnDark focus:ring-2 focus:ring-inset focus:ring-primary-500 dark:focus:ring-primary-500 sm:text-sm sm:leading-6"
+                        class="w-full border-0 bg-offWhite dark:bg-gray-800 py-1.5 pl-3 pr-12 ring-2 ring-inset ring-black dark:ring-whiteOnDark focus:ring-2 focus:ring-inset focus:ring-accent-500 dark:focus:ring-accent-200 sm:text-sm sm:leading-6"
                         placeholder={props.placeholder}
                     />
                     <button
@@ -91,7 +91,7 @@ export const Combobox = (props: ComboboxProps) => {
                                         })}
                                         class={twMerge(
                                             'relative cursor-pointer select-none text-black py-2 pl-3 pr-9',
-                                            optionState()?.focused && 'bg-primary-500 text-white',
+                                            optionState()?.focused && 'bg-accent-500 text-white',
                                             optionState().checked && 'font-black'
                                         )}
                                     >

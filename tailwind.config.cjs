@@ -21,6 +21,7 @@ module.exports = {
       },
       colors: {
         primary: monoColor,
+        accent: colors.orange,
         gray: monoColor,
         black: monoColor[900],
         offWhite: monoColor[50],

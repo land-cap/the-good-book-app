@@ -14,7 +14,8 @@ export const AppShell = ({ children }: { children: JSX.Element }) => (
         <footer class="flex place-content-center my-16 sm:my-24">
             <Capped component={'p'} capHeight={8} class="text-gray-500">
                 <span class="inline-flex items-center">
-                    Made with {<Capped component={Icon} capHeight={10} name="favorite" inline class="mx-1" />} in
+                    Made with{' '}
+                    {<Capped component={Icon} capHeight={10} name="favorite" inline class="mx-1 text-accent-500" />} in
                     Moldova by
                 </span>{' '}
                 <a href={'https://github.com/dalandcap'} target={'_blank'} class="font-bold">
