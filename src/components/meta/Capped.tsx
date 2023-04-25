@@ -4,20 +4,25 @@ import { JSX, ValidComponent } from 'solid-js'
 
 const styledDynamic = styled(Dynamic as unknown as Parameters<typeof styled>[0]) as unknown as StylesFn<'div'>
 
-export type CappedComponent = <T extends ValidComponent>(props: DynamicProps<T> & { lineHeight: number }) => JSX.Element
+export type CappedComponent = <T extends ValidComponent>(
+    props: DynamicProps<T> & {
+        lineHeight?: number
+    }
+) => JSX.Element
 
-export const Capped = styledDynamic((props: { lineHeight: number; class?: string }) => {
+export const Capped = styledDynamic((props: { lineHeight?: number; class?: string }) => {
     if (props.class?.includes('leading')) throw new Error('Capped component cannot have leading class')
+    const lineHeight = props.lineHeight || 1.5
     return {
-        lineHeight: props.lineHeight,
+        lineHeight: lineHeight,
         '&:before': {
             content: `''`,
-            marginBottom: `${-props.lineHeight / 2 + 0.5 - 0.135}em`,
+            marginBottom: `${-lineHeight / 2 + 0.5 - 0.135}em`,
             display: 'table',
         },
         '&:after': {
             content: `''`,
-            marginTop: `${-props.lineHeight / 2 + 0.5 - 0.16}em`,
+            marginTop: `${-lineHeight / 2 + 0.5 - 0.16}em`,
             display: 'table',
         },
     }

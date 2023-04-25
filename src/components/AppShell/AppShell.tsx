@@ -1,24 +1,31 @@
 import { JSX } from 'solid-js'
 import { NavBar } from '~/components/AppShell/NavBar'
 import { Icon } from '~/components/composable/Icon'
+import { Capped } from '~/components/meta/Capped'
 
 export const AppShell = ({ children }: { children: JSX.Element }) => (
-    <div
-        class={
-            'text-base flex flex-col h-fit min-h-[100vh] text-black bg-offWhite dark:text-whiteOnDark dark:bg-gray-800'
-        }
-    >
-        <NavBar />
-        <div class="flex-grow mx-auto w-full max-w-3xl px-6 lg:px-8">{children}</div>
-        <footer class="flex place-content-center my-16 sm:my-24">
-            <p class="text-xs text-gray-500">
-                <span class="inline-flex items-center">
-                    Made with {<Icon name={'favorite'} inline class="mx-1 text-sm" />} in Moldova by
-                </span>{' '}
-                <a href={'https://github.com/dalandcap'} target={'_blank'} class="font-bold">
-                    &commat;landCap
-                </a>
-            </p>
-        </footer>
-    </div>
+    <>
+        <div
+            class="z-20 fixed top-0 left-0 w-full h-full bg-offWhite dark:bg-gray-900 animate-fade-in opacity-0 "
+            style={{ 'pointer-events': 'none' }}
+        />
+        <div
+            class={
+                'text-base flex flex-col h-fit min-h-[100vh] text-black bg-offWhite dark:text-whiteOnDark dark:bg-gray-800'
+            }
+        >
+            <NavBar />
+            <div class="flex-grow mx-auto w-full max-w-3xl px-6 lg:px-8">{children}</div>
+            <footer class="flex place-content-center my-16 sm:my-24">
+                <Capped component={'p'} class="text-xs text-gray-500">
+                    <span class="inline-flex items-center">
+                        Made with {<Icon name={'favorite'} inline class="mx-1 text-sm leading-[1]" />} in Moldova by
+                    </span>{' '}
+                    <a href={'https://github.com/dalandcap'} target={'_blank'} class="font-bold">
+                        &commat;landCap
+                    </a>
+                </Capped>
+            </footer>
+        </div>
+    </>
 )
