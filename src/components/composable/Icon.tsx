@@ -14,7 +14,7 @@ export const Icon = (props: { name: string; size?: IconSize; class?: string; inl
 
     return (
         <span
-            class={twMerge('material-symbols-sharp', !props.inline && sizeClass, props.class)}
+            class={twMerge('material-icon', !props.inline && sizeClass, props.class)}
             style={{
                 'font-variation-settings': `'FILL' 1, 'wght' 600, 'opsz' ${props.size || 20}`,
             }}

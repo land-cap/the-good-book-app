@@ -23,7 +23,7 @@ const ChapterMenu = (props: { setRef: Setter<HTMLUListElement>; class?: string }
             <span class="block truncate">Leslie Alexander</span>
             <span class="absolute inset-y-0 right-0 flex items-center pr-2 text-primary-500">
                 <span
-                    class="w-5 h-5 material-symbols-sharp text-[20px]"
+                    class="w-5 h-5 material-icon text-[20px]"
                     style={{ 'font-variation-settings': "'FILL' 1, 'wght' 600, 'opsz' 20" }}
                 >
                     check
@@ -80,7 +80,7 @@ export const ChapterPicker = ({ value }: { value: string }) => {
                 />
                 <button type="button" class="absolute inset-y-0 right-0 flex items-center px-2 focus:outline-none">
                     <span
-                        class="material-symbols-sharp text-[20px] h-5 w-5 text-black dark:text-whiteOnDark"
+                        class="material-icon text-[20px] h-5 w-5 text-black dark:text-whiteOnDark"
                         style={{ 'font-variation-settings': "'FILL' 1, 'wght' 600, 'opsz' 20" }}
                     >
                         unfold_more

@@ -108,7 +108,7 @@ export const Combobox = (props: ComboboxProps) => {
                                                 )}
                                             >
                                                 <span
-                                                    class="w-5 h-5 material-symbols-sharp text-[20px]"
+                                                    class="w-5 h-5 material-icon text-[20px]"
                                                     style={{
                                                         'font-variation-settings': "'FILL' 1, 'wght' 600, 'opsz' 20",
                                                     }}
