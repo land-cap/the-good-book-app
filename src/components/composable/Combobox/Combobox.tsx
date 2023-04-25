@@ -94,7 +94,7 @@ export const Combobox = (props: ComboboxProps) => {
                                             disabled: item.disabled,
                                         })}
                                         class={twMerge(
-                                            'relative cursor-default select-none py-2 pl-3 pr-9',
+                                            'relative cursor-pointer select-none text-black py-2 pl-3 pr-9',
                                             optionState()?.focused && 'bg-primary-500 text-white',
                                             optionState().checked && 'font-black'
                                         )}
@@ -103,7 +103,7 @@ export const Combobox = (props: ComboboxProps) => {
                                         {optionState().checked && (
                                             <span
                                                 class={twMerge(
-                                                    'absolute inset-y-0 right-0 flex items-center pr-2 text-primary-500',
+                                                    'absolute inset-y-0 right-0 flex items-center pr-2',
                                                     optionState()?.focused && 'text-white'
                                                 )}
                                             >

@@ -3,7 +3,7 @@
 const colors = require("tailwindcss/colors");
 const defaultTheme = require("tailwindcss/defaultTheme");
 
-const monoColor = colors.teal;
+const monoColor = colors.amber;
 
 module.exports = {
   content: ["./src/**/*.{html,js,jsx,ts,tsx}"],
