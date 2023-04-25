@@ -5,6 +5,8 @@ import { Route, Routes } from '@solidjs/router'
 import { AppShell } from '~/components'
 import { Link, Meta } from '@solidjs/meta'
 import colors from 'tailwindcss/colors'
+import { Test } from '~/pages/Test.page'
+import { NotFound } from '~/pages/NotFound.page'
 
 export const App = () => (
     <AppShell>
@@ -21,6 +23,8 @@ export const App = () => (
         />
         <Routes>
             <Route path={'/'} component={Chapter} />
+            <Route path={'/test'} component={Test} />
+            <Route path={'*'} component={NotFound} />
         </Routes>
     </AppShell>
 )

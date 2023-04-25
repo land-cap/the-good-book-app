@@ -1,1 +1,1 @@
-export * from './Chapter'
+export * from './Chapter.page'
