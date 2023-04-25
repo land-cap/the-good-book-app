@@ -6,12 +6,16 @@
     border-color: unset;
 }
 
-html, body {
-    min-height: 100vh;
+[type='text'], [type='email'], [type='url'], [type='password'], [type='number'], [type='date'], [type='datetime-local'], [type='month'], [type='search'], [type='tel'], [type='time'], [type='week'], [multiple], textarea, select {
     font-size: 14.2857px;
 }
 
-* {
+html, body {
+    min-height: 100vh;
+}
+
+html body {
+    font-size: 14.2857px;
     -webkit-font-smoothing: antialiased;
 }
 
