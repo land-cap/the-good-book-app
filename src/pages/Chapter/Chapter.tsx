@@ -1,4 +1,5 @@
 import { useIsBreakpoint } from '~/hooks/useIsBreakpoint'
+import { Capped } from '~/components/meta/Capped'
 
 const VerseNumber = ({ number }: { number: number }) => <sup class={'font-black text-gray-500'}>{number}</sup>
 
@@ -7,14 +8,17 @@ export const Chapter = () => {
 
     return (
         <div class={'flex flex-col gap-12 mt-12'}>
-            <h1 class="text-3xl font-black">Geneza 1</h1>
-            <p class="text:md sm:text-lg leading-[2.25em] sm:leading-[2.5em]">
-                <VerseNumber number={1} /> La început, Dumnezeu a făcut cerurile și pământul. <VerseNumber number={2} />{' '}
+            <h1 class='text-3xl font-black'>Geneza 1</h1>
+            <Capped component={'a'} href={'google.com'}>asdfasdf</Capped>
+            <p class='text:md sm:text-lg leading-[2.25em] sm:leading-[2.5em]'>
+                <VerseNumber number={1} /> La început, Dumnezeu a făcut cerurile și pământul. <VerseNumber
+                number={2} />{' '}
                 Pământul era pustiu și gol; peste fața adâncului de ape era întuneric, și Duhul lui Dumnezeu Se mișca pe
                 deasupra apelor. <VerseNumber number={3} /> Dumnezeu a zis: „Să fie lumină!” Și a fost lumină.{' '}
                 <VerseNumber number={4} /> Dumnezeu a văzut că lumina era bună și Dumnezeu a despărțit lumina de
                 întuneric. <VerseNumber number={5} /> Dumnezeu a numit lumina zi, iar întunericul l-a numit noapte.
-                Astfel, a fost o seară și apoi a fost o dimineață: aceasta a fost ziua întâi. <VerseNumber number={6} />{' '}
+                Astfel, a fost o seară și apoi a fost o dimineață: aceasta a fost ziua întâi. <VerseNumber
+                number={6} />{' '}
                 Dumnezeu a zis: „Să fie o întindere între ape și ea să despartă apele de ape.”{' '}
                 <VerseNumber number={7} /> Și Dumnezeu a făcut întinderea, și ea a despărțit apele care sunt dedesubtul
                 întinderii de apele care sunt deasupra întinderii. Și așa a fost.
