@@ -8,9 +8,16 @@ import colors from 'tailwindcss/colors'
 import { Test } from '~/pages/Test.page'
 import { NotFound } from '~/pages/NotFound.page'
 
+let lightColor = colors.stone[50]
+
+const darkColor = colors.stone[800]
+
+const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+
 export const App = () => (
     <AppShell>
-        <Meta content={colors.neutral[50]} name="theme-color" />
+        <Meta name="theme-color" content={isDarkMode ? darkColor : lightColor} />
+        <Meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
         <Link rel="preconnect" href="https://fonts.googleapis.com" />
         <Link rel="preconnect" href="https://fonts.gstatic.com" />
         <Link

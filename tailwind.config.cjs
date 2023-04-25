@@ -4,11 +4,11 @@ const colors = require("tailwindcss/colors");
 
 const defaultTheme = require("tailwindcss/defaultTheme");
 
-const monoColor = colors.neutral;
+const monoColor = colors.stone;
 
 module.exports = {
   content: ["./src/**/*.{html,js,jsx,ts,tsx}"],
-  darkMode: "class",
+  // darkMode: "class",
   theme: {
     extend: {
       animation: {
