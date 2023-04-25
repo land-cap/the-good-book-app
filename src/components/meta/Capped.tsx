@@ -1,29 +1,33 @@
 import { Dynamic, DynamicProps } from 'solid-js/web'
 import { styled, StylesFn } from 'solid-styled-components'
 import { JSX, ValidComponent } from 'solid-js'
+import fontMetrics from '@capsizecss/metrics/dMSans'
+import { createStyleObject } from '@capsizecss/core'
 
 const styledDynamic = styled(Dynamic as unknown as Parameters<typeof styled>[0]) as unknown as StylesFn<'div'>
 
 export type CappedComponent = <T extends ValidComponent>(
     props: DynamicProps<T> & {
-        lineHeight?: number
+        capHeight: number
+        lineGap?: number
     }
 ) => JSX.Element
 
-export const Capped = styledDynamic((props: { lineHeight?: number; class?: string }) => {
+const fixStyleObject = (rawStyles: ReturnType<typeof createStyleObject>) =>
+    Object.entries(rawStyles).reduce((acc, [key, value]) => {
+        const newKey = key == '::before' || key == '::after' ? `&${key}` : key
+        return {
+            ...acc,
+            [newKey]: value,
+        }
+    }, {} as ReturnType<typeof createStyleObject>)
+
+export const Capped = styledDynamic((props: { capHeight: number; lineGap?: number; class?: string }) => {
     if (props.class?.includes('leading')) throw new Error('Capped component cannot have leading class')
-    const lineHeight = props.lineHeight || 1.5
-    return {
-        lineHeight: lineHeight,
-        '&:before': {
-            content: `''`,
-            marginBottom: `${-lineHeight / 2 + 0.5 - 0.135}em`,
-            display: 'table',
-        },
-        '&:after': {
-            content: `''`,
-            marginTop: `${-lineHeight / 2 + 0.5 - 0.16}em`,
-            display: 'table',
-        },
-    }
+    const styles = createStyleObject({
+        capHeight: props.capHeight,
+        lineGap: props.lineGap || 1,
+        fontMetrics,
+    })
+    return fixStyleObject(styles)
 }) as unknown as CappedComponent

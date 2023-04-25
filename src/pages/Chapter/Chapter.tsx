@@ -8,10 +8,15 @@ export const Chapter = () => {
 
     return (
         <div class={'flex flex-col gap-12 mt-12'}>
-            <Capped component="h1" class="text-3xl font-black" lineHeight={1.5}>
+            <Capped component="h1" class="text-3xl font-black" capHeight={24} lineGap={1}>
                 Geneza 1
             </Capped>
-            <Capped component={'p'} class="text:md sm:text-lg" lineHeight={isDesktop() ? 2.25 : 2}>
+            <Capped
+                component={'p'}
+                class="text:md sm:text-lg"
+                capHeight={isDesktop() ? 14 : 12}
+                lineGap={isDesktop() ? 36 : 24}
+            >
                 <VerseNumber number={1} /> La început, Dumnezeu a făcut cerurile și pământul. <VerseNumber number={2} />{' '}
                 Pământul era pustiu și gol; peste fața adâncului de ape era întuneric, și Duhul lui Dumnezeu Se mișca pe
                 deasupra apelor. <VerseNumber number={3} /> Dumnezeu a zis: „Să fie lumină!” Și a fost lumină.{' '}
