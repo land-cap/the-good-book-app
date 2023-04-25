@@ -33,18 +33,18 @@ module.exports = {
       },
       fontSize: {
         xs: ["11.4286px", { lineHeight: "16px" }],
-        sm: ["14.2857px", { lineHeight: "20px" }],
-        base: ["15.7143px", { lineHeight: "22px" }],
-        lg: ["18.5714px", { lineHeight: "26px" }],
+        sm: ["12.8571px", { lineHeight: "18px" }],
+        base: ["14.2857px", { lineHeight: "20px" }],
+        lg: ["17.1429px", { lineHeight: "24px" }],
         xl: ["20px", { lineHeight: "28px" }],
-        "2xl": ["24.2857px", { lineHeight: "34px" }],
-        "3xl": ["30px", { lineHeight: "42px" }],
+        "2xl": ["25.7143px", { lineHeight: "36px" }],
+        "3xl": ["31.4286px", { lineHeight: "44px" }],
         "4xl": ["37.1429px", { lineHeight: "52px" }],
-        "5xl": ["48.5714px", { lineHeight: "68px" }],
-        "6xl": ["60px", { lineHeight: "84px" }],
-        "7xl": ["48.5714px", { lineHeight: "75px" }],
-        "8xl": ["94.2857px", { lineHeight: "96px" }],
-        "9xl": ["127.1429px", { lineHeight: "132px" }]
+        "5xl": ["45.7143px", { lineHeight: "64px" }],
+        "6xl": ["57.1429px", { lineHeight: "80px" }],
+        "7xl": ["80px", { lineHeight: "84px" }],
+        "8xl": ["97.1429px", { lineHeight: "102px" }],
+        "9xl": ["131.4286px", { lineHeight: "138px" }]
       },
       ringWidth: {
         ...defaultTheme.ringWidth,
