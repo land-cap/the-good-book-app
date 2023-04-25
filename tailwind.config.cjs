@@ -3,7 +3,7 @@
 const colors = require("tailwindcss/colors");
 const defaultTheme = require("tailwindcss/defaultTheme");
 
-const monoColor = colors.amber;
+const monoColor = colors.neutral;
 
 module.exports = {
   content: ["./src/**/*.{html,js,jsx,ts,tsx}"],
@@ -11,13 +11,12 @@ module.exports = {
   theme: {
     extend: {
       animation: {
-        "fade-in": "fade-in 1s ease-in 1"
+        "slide-top": "slide-top 200ms ease-out 1"
       },
       keyframes: {
-        "fade-in": {
-          "0%": { opacity: 1 },
-          // "25%": { opacity: 1 },
-          "100%": { opacity: 0 }
+        "slide-top": {
+          "0%": { transform: "translateY(-100%)" },
+          "100%": { transform: "translateY(0%)" }
         }
       },
       colors: {
@@ -28,7 +27,7 @@ module.exports = {
         whiteOnDark: monoColor[300]
       },
       fontFamily: {
-        sans: ["DM Sans", "DM Mono", "Plus Jakarta Sans", "Inknut Antiqua", "Cormorant Upright", "Be Vietnam Pro", "MonoLisa", "Schibsted Grotesk", "Bellefair", "Cormorant infant", "Urbanist", "Archivo Narrow", "Karla", "IBM Plex Sans", "Work Sans", "Inter", "sans-serif"]
+        sans: ["DM Sans"]
       },
       ringWidth: {
         ...defaultTheme.ringWidth,
