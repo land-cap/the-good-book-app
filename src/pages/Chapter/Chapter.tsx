@@ -8,17 +8,16 @@ export const Chapter = () => {
 
     return (
         <div class={'flex flex-col gap-12 mt-12'}>
-            <Capped component='h1' class='text-3xl font-black leading-[1]'>Geneza 1</Capped>
-            <p
-                class='text:md sm:text-lg leading-[2.25em] sm:leading-[2.5em]'>
-                <VerseNumber number={1} /> La început, Dumnezeu a făcut cerurile și pământul. <VerseNumber
-                number={2} />{' '}
+            <Capped component="h1" class="text-3xl font-black" lineHeight={1.5}>
+                Geneza 1
+            </Capped>
+            <Capped component={'p'} class="text:md sm:text-lg" lineHeight={isDesktop() ? 2.25 : 2}>
+                <VerseNumber number={1} /> La început, Dumnezeu a făcut cerurile și pământul. <VerseNumber number={2} />{' '}
                 Pământul era pustiu și gol; peste fața adâncului de ape era întuneric, și Duhul lui Dumnezeu Se mișca pe
                 deasupra apelor. <VerseNumber number={3} /> Dumnezeu a zis: „Să fie lumină!” Și a fost lumină.{' '}
                 <VerseNumber number={4} /> Dumnezeu a văzut că lumina era bună și Dumnezeu a despărțit lumina de
                 întuneric. <VerseNumber number={5} /> Dumnezeu a numit lumina zi, iar întunericul l-a numit noapte.
-                Astfel, a fost o seară și apoi a fost o dimineață: aceasta a fost ziua întâi. <VerseNumber
-                number={6} />{' '}
+                Astfel, a fost o seară și apoi a fost o dimineață: aceasta a fost ziua întâi. <VerseNumber number={6} />{' '}
                 Dumnezeu a zis: „Să fie o întindere între ape și ea să despartă apele de ape.”{' '}
                 <VerseNumber number={7} /> Și Dumnezeu a făcut întinderea, și ea a despărțit apele care sunt dedesubtul
                 întinderii de apele care sunt deasupra întinderii. Și așa a fost.
@@ -40,7 +39,7 @@ export const Chapter = () => {
                 să lumineze pământul, <VerseNumber number={18} /> să stăpânească ziua și noaptea și să despartă lumina
                 de întuneric. Dumnezeu a văzut că lucrul acesta era bun. <VerseNumber number={19} /> Astfel, a fost o
                 seară și apoi a fost o dimineață: aceasta a fost ziua a patra.
-            </p>
+            </Capped>
         </div>
     )
 }
