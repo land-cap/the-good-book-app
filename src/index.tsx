@@ -2,6 +2,7 @@
 import { render } from 'solid-js/web'
 import { App } from './App'
 import { Router } from '@solidjs/router'
+import { MetaProvider } from '@solidjs/meta'
 
 const root = document.getElementById('root')
 
@@ -13,9 +14,11 @@ const root = document.getElementById('root')
 
 render(
     () => (
-        <Router>
-            <App />
-        </Router>
+        <MetaProvider>
+            <Router>
+                <App />
+            </Router>
+        </MetaProvider>
     ),
     root!
 )
