@@ -2,6 +2,7 @@ import * as combobox from '@zag-js/combobox'
 import { normalizeProps, useMachine } from '@zag-js/solid'
 import { createMemo, createSignal, createUniqueId, For, onMount, Show } from 'solid-js'
 import { twMerge } from 'tailwind-merge'
+import { Icon } from '~/components/composable/Icon'
 
 type ComboboxOption = {
     label: string
@@ -59,12 +60,7 @@ export const Combobox = (props: ComboboxProps) => {
                         {...api().triggerProps}
                         class="absolute inset-y-0 right-0 flex items-center px-2 focus:outline-none"
                     >
-                        <span
-                            class="material-symbols-sharp text-[20px] h-5 w-5 text-black dark:text-whiteOnDark"
-                            style={{ 'font-variation-settings': "'FILL' 1, 'wght' 600, 'opsz' 20" }}
-                        >
-                            unfold_more
-                        </span>
+                        <Icon name={'unfold_more'} class="text-black dark:text-whiteOnDark" />
                     </button>
                 </div>
             </div>
@@ -107,14 +103,7 @@ export const Combobox = (props: ComboboxProps) => {
                                                     optionState()?.focused && 'text-white'
                                                 )}
                                             >
-                                                <span
-                                                    class="w-5 h-5 material-icon text-[20px]"
-                                                    style={{
-                                                        'font-variation-settings': "'FILL' 1, 'wght' 600, 'opsz' 20",
-                                                    }}
-                                                >
-                                                    check
-                                                </span>
+                                                <Icon name={'check'} />
                                             </span>
                                         )}
                                     </li>
