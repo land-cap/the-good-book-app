@@ -1,8 +1,8 @@
 // @refresh reload
-import { Route, Routes } from 'solid-start'
 import './root.css'
-import { AppShell } from '~/components'
 import { Chapter } from '~/pages'
+import { Route, Routes } from '@solidjs/router'
+import { AppShell } from '~/components'
 
 export const App = () => {
     return (
