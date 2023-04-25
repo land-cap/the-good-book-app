@@ -31,6 +31,21 @@ module.exports = {
       fontFamily: {
         sans: ["DM Sans"]
       },
+      fontSize: {
+        xs: ["11.4286px", { lineHeight: "16px" }],
+        sm: ["14.2857px", { lineHeight: "20px" }],
+        base: ["15.7143px", { lineHeight: "22px" }],
+        lg: ["18.5714px", { lineHeight: "26px" }],
+        xl: ["20px", { lineHeight: "28px" }],
+        "2xl": ["24.2857px", { lineHeight: "34px" }],
+        "3xl": ["30px", { lineHeight: "42px" }],
+        "4xl": ["37.1429px", { lineHeight: "52px" }],
+        "5xl": ["48.5714px", { lineHeight: "68px" }],
+        "6xl": ["60px", { lineHeight: "84px" }],
+        "7xl": ["48.5714px", { lineHeight: "75px" }],
+        "8xl": ["94.2857px", { lineHeight: "96px" }],
+        "9xl": ["127.1429px", { lineHeight: "132px" }]
+      },
       ringWidth: {
         ...defaultTheme.ringWidth,
         3: "3px"

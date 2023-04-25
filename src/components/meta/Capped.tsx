@@ -3,12 +3,13 @@ import { styled, StylesFn } from 'solid-styled-components'
 import { JSX, ValidComponent } from 'solid-js'
 import fontMetrics from '@capsizecss/metrics/dMSans'
 import { createStyleObject } from '@capsizecss/core'
+import { FontSize, fontSizeToCapHeight } from '~/config/fontSize'
 
 const styledDynamic = styled(Dynamic as unknown as Parameters<typeof styled>[0]) as unknown as StylesFn<'div'>
 
 export type CappedComponent = <T extends ValidComponent>(
     props: DynamicProps<T> & {
-        capHeight: number
+        fontSize?: FontSize | number
         lineGap?: number
     }
 ) => JSX.Element
@@ -22,12 +23,17 @@ const fixStyleObject = (rawStyles: ReturnType<typeof createStyleObject>) =>
         }
     }, {} as ReturnType<typeof createStyleObject>)
 
-export const Capped = styledDynamic((props: { capHeight: number; lineGap?: number; class?: string }) => {
+export const Capped = styledDynamic((props: { fontSize: FontSize | number; lineGap?: number; class?: string }) => {
     if (props.class?.includes('leading')) throw new Error('Capped component cannot have leading class')
+
     const styles = createStyleObject({
-        capHeight: props.capHeight,
-        lineGap: props.lineGap || 1,
+        capHeight:
+            typeof props.fontSize === 'number'
+                ? props.fontSize
+                : fontSizeToCapHeight[props.fontSize]?.capHeight || fontSizeToCapHeight.base.capHeight,
+        lineGap: props.lineGap || fontSizeToCapHeight[props.fontSize]?.lineGap || fontSizeToCapHeight.base.lineGap,
         fontMetrics,
     })
+
     return fixStyleObject(styles)
 }) as unknown as CappedComponent

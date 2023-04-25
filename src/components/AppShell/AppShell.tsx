@@ -11,11 +11,11 @@ export const AppShell = ({ children }: { children: JSX.Element }) => (
     >
         <NavBar />
         <div class="flex-grow mx-auto w-full max-w-3xl px-6 lg:px-8">{children}</div>
-        <footer class="flex place-content-center my-16 sm:my-24">
-            <Capped component={'p'} capHeight={8} class="text-gray-500">
+        <footer class="flex place-content-center my-24 sm:my-32">
+            <Capped component={'p'} fontSize={'xs'} class="text-gray-500">
                 <span class="inline-flex items-center">
                     Made with{' '}
-                    {<Capped component={Icon} capHeight={10} name="favorite" inline class="mx-1 text-accent-500" />} in
+                    {<Capped component={Icon} fontSize={'sm'} name="favorite" inline class="mx-1 text-accent-500" />} in
                     Moldova by
                 </span>{' '}
                 <a href={'https://github.com/dalandcap'} target={'_blank'} class="font-bold">

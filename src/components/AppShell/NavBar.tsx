@@ -2,6 +2,7 @@ import { createEffect, createSignal, onCleanup } from 'solid-js'
 import { twMerge } from 'tailwind-merge'
 import { Combobox } from '~/components'
 import { Portal } from 'solid-js/web'
+import { Capped } from '~/components/meta/Capped'
 
 const [isInteractiveNavbarVisible, setIsInteractiveNavbarVisible] = createSignal(true)
 
@@ -34,7 +35,9 @@ const InteractiveNavbar = () => {
             <div class={'border-b border-black dark:border-b-whiteOnDark'}>
                 <div class={'flex flex-col sm:flex-row gap-6 pt-6 pb-4 sm:py-0 sm:h-16 justify-between items-center'}>
                     <div class="flex flex-shrink-0 items-center">
-                        <p class="text-md font-black">The Good Book</p>
+                        <Capped component={'p'} class="font-black">
+                            The Good Book
+                        </Capped>
                     </div>
                     <Combobox
                         options={[
