@@ -32,6 +32,22 @@ module.exports = {
       ringWidth: {
         ...defaultTheme.ringWidth,
         3: "3px"
+      },
+      transitionDuration: {
+        emphasized: "500ms",
+        "emphasized-decelerate": "400ms",
+        "emphasized-accelerate": "300ms",
+        "standard": "200ms",
+        "standard-decelerate": "250ms",
+        "standard-accelerate": "200ms"
+      },
+      transitionTimingFunction: {
+        emphasized: "cubic-bezier(0.2, 0, 0, 1)",
+        "emphasized-decelerate": "cubic-bezier(0.05, 0.7, 0.1, 1)",
+        "emphasized-accelerate": "cubic-bezier(0.3, 0, 0.8, 0.15)",
+        standard: "cubic-bezier(0.2, 0, 0, 1)",
+        "standard-decelerate": "cubic-bezier(0.3, 0, 1, 1)",
+        "standard-accelerate": "cubic-bezier(0, 0, 0, 1)"
       }
     }
   },

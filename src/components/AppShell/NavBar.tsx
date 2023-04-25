@@ -5,7 +5,7 @@ import { Portal } from 'solid-js/web'
 
 const [isScrolled, setIsScrolled] = createSignal(false)
 
-const transitionClass = 'transition-none ease-in duration-400'
+const transitionClass = 'transition-transform'
 
 const InteractiveNavbar = () => {
     return (
@@ -34,11 +34,14 @@ const ScrolledNavbar = () => {
     return (
         <nav
             class={twMerge(
-                'z-10 fixed top-0 animate-slide-top bg-offWhite dark:bg-gray-800 mx-auto w-full px-6 lg:px-8',
-                transitionClass
+                'z-10 fixed top-0 left-1/2 -translate-x-1/2 max-w-3xl bg-offWhite dark:bg-gray-800 mx-auto w-full px-6 lg:px-8',
+                transitionClass,
+                isScrolled()
+                    ? 'translate-y-0 ease-emphasized-decelerate duration-emphasized-decelerate'
+                    : '-translate-y-full ease-emphasized-accelerate duration-emphasized-accelerate'
             )}
         >
-            <div class={twMerge('mx-auto max-w-3xl border-b border-gray-200 dark:border-b-gray-700', transitionClass)}>
+            <div class={twMerge('border-b border-gray-200 dark:border-b-gray-700', transitionClass)}>
                 <div class={twMerge('flex place-content-center py-2')}>
                     <p class="text-sm text-gray-500 font-black">Geneza 1</p>
                 </div>
@@ -59,11 +62,9 @@ export const NavBar = () => {
 
     return (
         <>
-            {isScrolled() && (
-                <Portal>
-                    <ScrolledNavbar />
-                </Portal>
-            )}
+            <Portal>
+                <ScrolledNavbar />
+            </Portal>
             <InteractiveNavbar />
         </>
     )
