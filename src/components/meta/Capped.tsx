@@ -1,12 +1,24 @@
-import { Dynamic, DynamicProps } from 'solid-js/web'
-import { ValidComponent } from 'solid-js'
+import { Dynamic } from 'solid-js/web'
 import { styled, StylesFn } from 'solid-styled-components'
 
 const styledDynamic = styled(Dynamic as unknown as Parameters<typeof styled>[0]) as unknown as StylesFn<'div'>
 
-export const Capped = <T extends ValidComponent, >(props: DynamicProps<T>) => {
-    const Component = styledDynamic({ 'background': 'yellow' }) as unknown as typeof Dynamic
-    return <Component {...props} />
-}
+export const Capped = styledDynamic((props: {
+    LineHeight?: number
+}) => {
+    return {
+        '&:before': {
+            content: `''`,
+            marginBottom: '-0.135em',
+            display: 'table',
+        },
+        '&:after': {
+            content: `''`,
+            marginTop: '-0.16em',
+            display: 'table',
+        },
+    }
+}) as unknown as typeof Dynamic
+
 
 

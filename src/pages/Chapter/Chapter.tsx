@@ -8,9 +8,9 @@ export const Chapter = () => {
 
     return (
         <div class={'flex flex-col gap-12 mt-12'}>
-            <h1 class='text-3xl font-black'>Geneza 1</h1>
-            <Capped component={'a'} href={'google.com'}>asdfasdf</Capped>
-            <p class='text:md sm:text-lg leading-[2.25em] sm:leading-[2.5em]'>
+            <Capped component='h1' class='text-3xl font-black leading-[1]'>Geneza 1</Capped>
+            <p
+                class='text:md sm:text-lg leading-[2.25em] sm:leading-[2.5em]'>
                 <VerseNumber number={1} /> La început, Dumnezeu a făcut cerurile și pământul. <VerseNumber
                 number={2} />{' '}
                 Pământul era pustiu și gol; peste fața adâncului de ape era întuneric, și Duhul lui Dumnezeu Se mișca pe
