@@ -1,7 +1,6 @@
 import * as combobox from '@zag-js/combobox'
 import { normalizeProps, useMachine } from '@zag-js/solid'
 import { createMemo, createSignal, createUniqueId, For, onMount, Show } from 'solid-js'
-import { twMerge } from 'tailwind-merge'
 import { Icon } from '~/components/composable/Icon'
 import {
     Container,
@@ -85,20 +84,22 @@ export const Combobox = (props: ComboboxProps) => {
 
                                 return (
                                     <Option
+                                        statefulClasses={{
+                                            [option_focused]: optionState()?.focused,
+                                            [option_checked]: optionState()?.checked,
+                                        }}
                                         {...api().getOptionProps({
                                             label: item.label,
                                             value: item.label,
                                             index: index(),
                                             disabled: item.disabled,
                                         })}
-                                        class={twMerge(
-                                            optionState()?.focused && option_focused,
-                                            optionState().checked && option_checked
-                                        )}
                                     >
                                         <OptionLabel class="block truncate">{item.label}</OptionLabel>
                                         {optionState().checked && (
-                                            <OptionIcon class={twMerge(optionState()?.focused && optionIcon_focused)}>
+                                            <OptionIcon
+                                                statefulClasses={{ [optionIcon_focused]: optionState()?.focused }}
+                                            >
                                                 <Icon name={'check'} />
                                             </OptionIcon>
                                         )}
