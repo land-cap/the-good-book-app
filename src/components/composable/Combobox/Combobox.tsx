@@ -3,6 +3,16 @@ import { normalizeProps, useMachine } from '@zag-js/solid'
 import { createMemo, createSignal, createUniqueId, For, onMount, Show } from 'solid-js'
 import { twMerge } from 'tailwind-merge'
 import { Icon } from '~/components/composable/Icon'
+import {
+    Container,
+    Input,
+    InputButton,
+    Option,
+    OptionContainer,
+    OptionIcon,
+    OptionLabel,
+} from '~/components/composable/Combobox/combobox.presentational'
+import { defaultComboboxStyles } from '~/components/composable/Combobox/combobox.styles'
 
 type ComboboxOption = {
     label: string
@@ -18,6 +28,8 @@ export type ComboboxProps = {
     placeholder?: string
     setApiRef?: (ref: ComboboxApi) => void
 }
+
+const { option_focused, option_checked, optionIcon_focused } = defaultComboboxStyles
 
 export const Combobox = (props: ComboboxProps) => {
     const [options, setOptions] = createSignal(props.options)
@@ -48,27 +60,16 @@ export const Combobox = (props: ComboboxProps) => {
     })
 
     return (
-        <div class={'w-full sm:w-48'}>
+        <Container>
             <div {...api().rootProps}>
-                <div {...api().controlProps} class="relative">
-                    <input
-                        autofocus={false}
-                        class="w-full border-0 dark:bg-gray-900 py-1.5 pl-3 pr-12 ring-2 ring-inset ring-black dark:ring-whiteOnDark focus:ring-2 focus:ring-inset focus:ring-accent-500 dark:focus:ring-accent-500 sm:text-sm sm:leading-6"
-                        placeholder={props.placeholder}
-                        {...api().inputProps}
-                    />
-                    <button
-                        {...api().triggerProps}
-                        class="absolute inset-y-0 right-0 flex items-center px-2 focus:outline-none"
-                    >
-                        <Icon name={'unfold_more'} class="text-black dark:text-whiteOnDark" />
-                    </button>
+                <div {...api().controlProps}>
+                    <Input placeholder={props.placeholder} {...api().inputProps} />
+                    <InputButton {...api().triggerProps}>
+                        <Icon name={'unfold_more'} />
+                    </InputButton>
                 </div>
             </div>
-            <div
-                {...api().positionerProps}
-                class="z-10 -mt-1 max-h-60 w-full overflow-auto bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
-            >
+            <OptionContainer {...api().positionerProps}>
                 <Show when={options().length > 0}>
                     <ul {...api().contentProps}>
                         <For each={options()}>
@@ -83,7 +84,7 @@ export const Combobox = (props: ComboboxProps) => {
                                 )
 
                                 return (
-                                    <li
+                                    <Option
                                         {...api().getOptionProps({
                                             label: item.label,
                                             value: item.label,
@@ -91,29 +92,23 @@ export const Combobox = (props: ComboboxProps) => {
                                             disabled: item.disabled,
                                         })}
                                         class={twMerge(
-                                            'relative cursor-pointer select-none text-black py-2 pl-3 pr-9',
-                                            optionState()?.focused && 'bg-accent-500 text-white',
-                                            optionState().checked && 'font-black'
+                                            optionState()?.focused && option_focused,
+                                            optionState().checked && option_checked
                                         )}
                                     >
-                                        <span class="block truncate">{item.label}</span>
+                                        <OptionLabel class="block truncate">{item.label}</OptionLabel>
                                         {optionState().checked && (
-                                            <span
-                                                class={twMerge(
-                                                    'absolute inset-y-0 right-0 flex items-center pr-2',
-                                                    optionState()?.focused && 'text-white'
-                                                )}
-                                            >
+                                            <OptionIcon class={twMerge(optionState()?.focused && optionIcon_focused)}>
                                                 <Icon name={'check'} />
-                                            </span>
+                                            </OptionIcon>
                                         )}
-                                    </li>
+                                    </Option>
                                 )
                             }}
                         </For>
                     </ul>
                 </Show>
-            </div>
-        </div>
+            </OptionContainer>
+        </Container>
     )
 }
