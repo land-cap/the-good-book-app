@@ -52,9 +52,10 @@ export const Combobox = (props: ComboboxProps) => {
             <div {...api().rootProps}>
                 <div {...api().controlProps} class="relative">
                     <input
-                        {...api().inputProps}
+                        autofocus={false}
                         class="w-full border-0 dark:bg-gray-900 py-1.5 pl-3 pr-12 ring-2 ring-inset ring-black dark:ring-whiteOnDark focus:ring-2 focus:ring-inset focus:ring-accent-500 dark:focus:ring-accent-500 sm:text-sm sm:leading-6"
                         placeholder={props.placeholder}
+                        {...api().inputProps}
                     />
                     <button
                         {...api().triggerProps}

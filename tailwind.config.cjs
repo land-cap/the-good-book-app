@@ -4,7 +4,7 @@ const colors = require("tailwindcss/colors");
 
 const defaultTheme = require("tailwindcss/defaultTheme");
 
-const monoColor = colors.stone;
+const monoColor = colors.slate;
 
 module.exports = {
   content: ["./src/**/*.{html,js,jsx,ts,tsx}"],
@@ -21,7 +21,7 @@ module.exports = {
         }
       },
       colors: {
-        primary: monoColor,
+        primary: colors.purple,
         accent: colors.orange,
         gray: monoColor,
         black: monoColor[900],
