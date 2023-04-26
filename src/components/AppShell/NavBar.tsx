@@ -3,6 +3,7 @@ import { twMerge } from 'tailwind-merge'
 import { Combobox } from '~/components'
 import { Portal } from 'solid-js/web'
 import { Capped } from '~/components/meta/Capped'
+import { A } from '@solidjs/router'
 
 const [isInteractiveNavbarVisible, setIsInteractiveNavbarVisible] = createSignal(true)
 
@@ -34,11 +35,11 @@ const InteractiveNavbar = () => {
         >
             <div class={'border-b border-black dark:border-b-whiteOnDark'}>
                 <div class={'flex flex-col sm:flex-row gap-6 pt-6 pb-4 sm:py-0 sm:h-16 justify-between items-center'}>
-                    <div class="flex flex-shrink-0 items-center">
+                    <A href="/" class="flex flex-shrink-0 items-center -my-4 py-4">
                         <Capped component={'p'} class="font-black">
                             The Good Book
                         </Capped>
-                    </div>
+                    </A>
                     <Combobox
                         options={[
                             { label: 'Geneza', disabled: false },

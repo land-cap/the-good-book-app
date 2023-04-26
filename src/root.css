@@ -7,7 +7,7 @@
 }
 
 [type='text'], [type='email'], [type='url'], [type='password'], [type='number'], [type='date'], [type='datetime-local'], [type='month'], [type='search'], [type='tel'], [type='time'], [type='week'], [multiple], textarea, select {
-    font-size: 14.2857px;
+    font-size: 15.7143px;
 }
 
 html, body {
@@ -15,7 +15,7 @@ html, body {
 }
 
 html body {
-    font-size: 14.2857px;
+    font-size: 15.7143px;
     -webkit-font-smoothing: antialiased;
 }
 

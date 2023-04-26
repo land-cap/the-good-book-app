@@ -6,16 +6,16 @@ export const Test = () => (
             This is paragraph
         </Capped>
         <Capped component={'p'} fontSize={'sm'}>
-            This is paragraph
+            This is a paragraph
         </Capped>
         <Capped component={'p'} fontSize={'base'}>
             This is a paragraph
         </Capped>
         <Capped component={'p'} fontSize={'lg'}>
-            This is paragraph
+            This is a paragraph
         </Capped>
         <Capped component={'p'} fontSize={'xl'}>
-            This is paragraph
+            This is a paragraph
         </Capped>
         <Capped component={'p'} fontSize={'2xl'}>
             This is a paragraph

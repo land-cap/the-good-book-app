@@ -8,12 +8,12 @@ export const Chapter = () => {
 
     return (
         <div class={'flex flex-col gap-12 mt-12'}>
-            <Capped component="h1" class="font-black tracking-tight" fontSize={'3xl'}>
+            <Capped component="h1" class="font-black tracking-tight" fontSize={'4xl'}>
                 Geneza 1
             </Capped>
             <Capped
                 component={'p'}
-                fontSize={isDesktop() ? 'lg' : 'base'}
+                fontSize={isDesktop() ? 'xl' : 'base'}
                 lineGap={isDesktop() ? 36 : 24}
                 class="dark:text-gray-400"
             >
