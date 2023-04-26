@@ -32,9 +32,9 @@ module.exports = {
         sans: ["DM Sans"]
       },
       fontSize: {
-        xs: ["11.4286px", { lineHeight: "16px" }],
-        sm: ["12.8571px", { lineHeight: "18px" }],
-        base: ["14.2857px", { lineHeight: "20px" }],
+        xs: ["12.8571px", { lineHeight: "18px" }],
+        sm: ["14.2857px", { lineHeight: "20px" }],
+        base: ["15.7143px", { lineHeight: "22px" }],
         lg: ["17.1429px", { lineHeight: "24px" }],
         xl: ["20px", { lineHeight: "28px" }],
         "2xl": ["25.7143px", { lineHeight: "36px" }],

@@ -1,7 +1,7 @@
 export const fontSizeToCapHeight: Record<string, { capHeight: number; lineGap: number }> = {
-    xs: { capHeight: 8, lineGap: 8 },
-    sm: { capHeight: 9, lineGap: 9 },
-    base: { capHeight: 10, lineGap: 10 },
+    xs: { capHeight: 9, lineGap: 9 },
+    sm: { capHeight: 10, lineGap: 10 },
+    base: { capHeight: 11, lineGap: 11 },
     lg: { capHeight: 12, lineGap: 12 },
     xl: { capHeight: 14, lineGap: 14 },
     '2xl': { capHeight: 18, lineGap: 18 },
