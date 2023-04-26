@@ -6,7 +6,7 @@ import { Capped } from '~/components/meta/Capped'
 export const AppShell = ({ children }: { children: JSX.Element }) => (
     <div
         class={
-            'text-base flex flex-col h-fit min-h-[100vh] text-black bg-offWhite dark:text-whiteOnDark dark:bg-gray-800'
+            'text-base flex flex-col h-fit min-h-[100vh] text-black bg-offWhite dark:text-whiteOnDark dark:bg-gray-900'
         }
     >
         <NavBar />

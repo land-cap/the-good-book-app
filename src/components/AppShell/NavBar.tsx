@@ -30,7 +30,7 @@ const InteractiveNavbar = () => {
     return (
         <nav
             ref={(el) => setInteractiveNavbar(el)}
-            class={twMerge('bg-offWhite dark:bg-gray-800 mx-auto w-full max-w-3xl px-6 lg:px-8')}
+            class={twMerge('bg-offWhite dark:bg-gray-900 mx-auto w-full max-w-3xl px-6 lg:px-8')}
         >
             <div class={'border-b border-black dark:border-b-whiteOnDark'}>
                 <div class={'flex flex-col sm:flex-row gap-6 pt-6 pb-4 sm:py-0 sm:h-16 justify-between items-center'}>
@@ -58,7 +58,7 @@ const ScrolledNavbar = () => {
     return (
         <nav
             class={twMerge(
-                'z-10 fixed top-0 left-1/2 -translate-x-1/2 max-w-3xl bg-offWhite dark:bg-gray-800 mx-auto w-full px-6 lg:px-8 transition-transform',
+                'z-10 fixed top-0 left-1/2 -translate-x-1/2 max-w-3xl bg-offWhite dark:bg-gray-900 mx-auto w-full px-6 lg:px-8 transition-transform',
                 !isInteractiveNavbarVisible()
                     ? 'translate-y-0 ease-emphasized-decelerate duration-emphasized-decelerate'
                     : '-translate-y-full ease-emphasized-accelerate duration-emphasized-accelerate'

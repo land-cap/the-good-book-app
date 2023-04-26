@@ -11,7 +11,12 @@ export const Chapter = () => {
             <Capped component="h1" class="font-black" fontSize={'3xl'}>
                 Geneza 1
             </Capped>
-            <Capped component={'p'} fontSize={isDesktop() ? 'lg' : 'base'} lineGap={isDesktop() ? 36 : 24}>
+            <Capped
+                component={'p'}
+                fontSize={isDesktop() ? 'lg' : 'base'}
+                lineGap={isDesktop() ? 36 : 24}
+                class="dark:text-gray-400"
+            >
                 <VerseNumber number={1} /> La început, Dumnezeu a făcut cerurile și pământul. <VerseNumber number={2} />{' '}
                 Pământul era pustiu și gol; peste fața adâncului de ape era întuneric, și Duhul lui Dumnezeu Se mișca pe
                 deasupra apelor. <VerseNumber number={3} /> Dumnezeu a zis: „Să fie lumină!” Și a fost lumină.{' '}
