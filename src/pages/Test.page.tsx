@@ -1,12 +1,14 @@
 import { Capped } from '~/cap-ui/meta/Capped'
 import { createSignal } from 'solid-js'
 import { CapUiLogo } from '~/cap-ui/CapUiLogo'
+import { Pressable } from '~/cap-ui/Pressable/Pressable'
 
 const [toggle, setToggle] = createSignal(true)
 
 export const Test = () => (
     <div class={'flex flex-col gap-8 place-content-center place-items-center my-16 sm:my-24'}>
         <CapUiLogo />
+        <Pressable>this is a button</Pressable>
         <Capped component={'p'} fontSize={'xs'}>
             This is paragraph
         </Capped>

@@ -1,4 +1,4 @@
-export const pressableClass = {
+export const pressableStyles = {
     base: 'inline-flex font-black',
     size: {
         xs: 'px-2 py-1 text-xs',
