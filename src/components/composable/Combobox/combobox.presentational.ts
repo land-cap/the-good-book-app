@@ -1,7 +1,7 @@
 import { withInitialClass } from '~/components/meta/withInitialClass'
-import { defaultComboboxStyles } from '~/components/composable/Combobox/combobox.styles'
+import { comboboxStyles } from '~/components/composable/Combobox/combobox.styles'
 
-const { container, input, inputButton, optionContainer, option, optionLabel, optionIcon } = defaultComboboxStyles
+const { container, input, inputButton, optionContainer, option, optionLabel, optionIcon } = comboboxStyles
 
 export const Container = withInitialClass(container, 'div')
 export const Input = withInitialClass(input, 'input')
