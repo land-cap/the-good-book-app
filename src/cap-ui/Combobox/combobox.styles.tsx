@@ -2,7 +2,7 @@ import { twMerge } from 'tailwind-merge'
 import { transitionQuick } from '~/cap-ui/transitions.styles'
 
 export const comboboxStyles = {
-    container: 'relative',
+    container: 'z-10 relative',
     input: twMerge(
         'w-full rounded-md border-0 bg-white dark:bg-gray-900 py-1.5 pl-3 pr-10 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-white/10 focus:ring-2 focus:ring-inset focus:ring-primary-600 dark:focus:ring-primary-500 sm:text-sm sm:leading-6',
         transitionQuick

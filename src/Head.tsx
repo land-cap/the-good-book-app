@@ -10,7 +10,7 @@ const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme
 export const Head = () => (
     <>
         <Meta name="theme-color" content={isDarkMode ? darkColor : lightColor} />
-        <Meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <Meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <Link rel="preconnect" href="https://fonts.googleapis.com" />
         <Link rel="preconnect" href="https://fonts.gstatic.com" />
         <Link

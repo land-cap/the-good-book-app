@@ -1,6 +1,6 @@
 import * as combobox from '@zag-js/combobox'
 import { normalizeProps, useMachine } from '@zag-js/solid'
-import { createMemo, createSignal, createUniqueId, For, onMount, Show } from 'solid-js'
+import { createEffect, createMemo, createSignal, createUniqueId, For, onMount, Show } from 'solid-js'
 import { Icon } from '~/components/composable/Icon'
 import {
     Container,
@@ -69,11 +69,19 @@ export const Combobox = ({
         }
     })
 
+    const inputProps = createMemo(() => {
+        // @ts-ignore
+        const { autoFocus, ...props } = api().inputProps
+        return props
+    })
+
+    createEffect(() => console.log(inputProps()))
+
     return (
         <Container class={stylesOverride?.container}>
             <div {...api().rootProps}>
                 <div {...api().controlProps}>
-                    <Input placeholder={placeholder} {...api().inputProps} class={twMerge(stylesOverride?.input)} />
+                    <Input {...inputProps()} placeholder={placeholder} class={twMerge(stylesOverride?.input)} />
                     <InputButton {...api().triggerProps} class={stylesOverride?.inputButton}>
                         <Icon name={'unfold_more'} />
                     </InputButton>
@@ -144,7 +152,6 @@ export const Combobox = ({
 }
 
 export const StyledCombobox = withCustomStyles(Combobox, {
-    container: 'z-10',
     input: 'rounded-none ring-2 ring-black dark:ring-whiteOnDark',
     optionContainer: 'rounded-none',
     inputButton: 'text-black dark:text-whiteOnDark hover:text-primary-600 dark:hover:text-primary-500',
