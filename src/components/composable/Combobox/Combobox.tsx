@@ -12,7 +12,7 @@ import {
     OptionLabel,
 } from '~/components/composable/Combobox/combobox.presentational'
 import { defaultComboboxStyles } from '~/components/composable/Combobox/combobox.styles'
-import { Presence } from '@motionone/solid'
+import { Motion, Presence } from '@motionone/solid'
 
 type ComboboxOption = {
     label: string
@@ -54,8 +54,8 @@ export const Combobox = (props: ComboboxProps) => {
         if (props.setApiRef) {
             props.setApiRef(api())
         }
-        if (props.defaultValue) {
-            api().setValue(props.defaultValue)
+        if (props.defaultValue && api()) {
+            api().setValue({ value: props.defaultValue, label: props.defaultValue })
         }
     })
 
@@ -70,53 +70,57 @@ export const Combobox = (props: ComboboxProps) => {
                 </div>
             </div>
             <Presence exitBeforeEnter>
-                <Show when={options().length > 0}>
-                    <OptionContainer
+                <Show when={api().isOpen}>
+                    <Motion.div
                         style={{ 'transform-origin': 'top' }}
-                        initial={{ opacity: 0, scale: 0.6 }}
+                        initial={{ opacity: 0, scale: 0.75 }}
                         animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.6 }}
-                        transition={{ duration: 0.3 }}
+                        exit={{ opacity: 0, scale: 0.75 }}
+                        transition={{ duration: 0.1 }}
                     >
-                        <ul>
-                            <For each={options()}>
-                                {(item, index) => {
-                                    const optionState = createMemo(() =>
-                                        api().getOptionState({
-                                            label: item.label,
-                                            value: item.label,
-                                            index: index(),
-                                            disabled: item.disabled,
-                                        })
-                                    )
-
-                                    return (
-                                        <Option
-                                            statefulClasses={{
-                                                [option_focused]: optionState()?.focused,
-                                                [option_checked]: optionState()?.checked,
-                                            }}
-                                            {...api().getOptionProps({
+                        <OptionContainer {...api().positionerProps}>
+                            <ul {...api().contentProps}>
+                                <For each={options()}>
+                                    {(item, index) => {
+                                        const optionState = createMemo(() =>
+                                            api().getOptionState({
                                                 label: item.label,
                                                 value: item.label,
                                                 index: index(),
                                                 disabled: item.disabled,
-                                            })}
-                                        >
-                                            <OptionLabel class="block truncate">{item.label}</OptionLabel>
-                                            {optionState().checked && (
-                                                <OptionIcon
-                                                    statefulClasses={{ [optionIcon_focused]: optionState()?.focused }}
-                                                >
-                                                    <Icon name={'check'} />
-                                                </OptionIcon>
-                                            )}
-                                        </Option>
-                                    )
-                                }}
-                            </For>
-                        </ul>
-                    </OptionContainer>
+                                            })
+                                        )
+
+                                        return (
+                                            <Option
+                                                statefulClasses={{
+                                                    [option_focused]: optionState()?.focused,
+                                                    [option_checked]: optionState()?.checked,
+                                                }}
+                                                {...api().getOptionProps({
+                                                    label: item.label,
+                                                    value: item.label,
+                                                    index: index(),
+                                                    disabled: item.disabled,
+                                                })}
+                                            >
+                                                <OptionLabel class="block truncate">{item.label}</OptionLabel>
+                                                {optionState().checked && (
+                                                    <OptionIcon
+                                                        statefulClasses={{
+                                                            [optionIcon_focused]: optionState()?.focused,
+                                                        }}
+                                                    >
+                                                        <Icon name={'check'} />
+                                                    </OptionIcon>
+                                                )}
+                                            </Option>
+                                        )
+                                    }}
+                                </For>
+                            </ul>
+                        </OptionContainer>
+                    </Motion.div>
                 </Show>
             </Presence>
         </Container>
