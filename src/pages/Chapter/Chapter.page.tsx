@@ -1,36 +1,16 @@
 import { useIsBreakpoint } from '~/hooks/useIsBreakpoint'
 import { Capped } from '~/components/meta/Capped'
-import { Motion, Presence } from '@motionone/solid'
-import { createSignal, Show } from 'solid-js'
 
 const VerseNumber = ({ number }: { number: number }) => <sup class={'font-black text-gray-500'}>{number}</sup>
 
 export const Chapter = () => {
     const isDesktop = useIsBreakpoint('sm')
 
-    const [toggle, setToggle] = createSignal(true)
-
     return (
         <div class={'flex flex-col gap-12 mt-12'}>
             <Capped component="h1" class="font-black tracking-tight" fontSize={'4xl'}>
                 Geneza 1
             </Capped>
-            <div class="container">
-                <Presence exitBeforeEnter>
-                    <Show when={toggle()}>
-                        <Motion.div
-                            style={{ 'transform-origin': 'center' }}
-                            initial={{ opacity: 0, scale: 0.6 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            exit={{ opacity: 0, scale: 0.6, x: -50 }}
-                            transition={{ duration: 0.3 }}
-                        >
-                            asdf; laskdjf ;aslkdfj ;alskdfj a;lskdj
-                        </Motion.div>
-                    </Show>
-                </Presence>
-                <button onClick={() => setToggle(!toggle())}>Toggle</button>
-            </div>
             <Capped
                 component={'p'}
                 fontSize={isDesktop() ? 'xl' : 'base'}
