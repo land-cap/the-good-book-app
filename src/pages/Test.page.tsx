@@ -9,6 +9,10 @@ export const Test = () => (
     <div class={'flex flex-col gap-8 place-content-center place-items-center my-16 sm:my-24'}>
         <CapUiLogo />
         <Pressable>this is a button</Pressable>
+        <Pressable variant="secondary">this is a button</Pressable>
+        <Pressable variant="soft">this is a button</Pressable>
+        <Pressable variant="black">this is a button</Pressable>
+        <Pressable variant="outline">this is a button</Pressable>
         <Capped component={'p'} fontSize={'xs'}>
             This is paragraph
         </Capped>
