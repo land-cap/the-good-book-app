@@ -1,9 +1,9 @@
 import { createEffect, createSignal, onCleanup } from 'solid-js'
 import { twMerge } from 'tailwind-merge'
-import { Combobox } from '~/components'
 import { Portal } from 'solid-js/web'
-import { Capped } from '~/components/meta/Capped'
+import { Capped } from '~/cap-ui/meta/Capped'
 import { A } from '@solidjs/router'
+import { StyledCombobox } from '~/cap-ui/Combobox/Combobox'
 
 const [isInteractiveNavbarVisible, setIsInteractiveNavbarVisible] = createSignal(true)
 
@@ -17,17 +17,17 @@ const intersectionObserver = new IntersectionObserver(
     { threshold: 0 }
 )
 
-createEffect(() => {
-    if (interactiveNavbarEl()) {
-        intersectionObserver.observe(interactiveNavbarEl())
-    }
-})
-
-onCleanup(() => {
-    intersectionObserver.unobserve(interactiveNavbarEl())
-})
-
 const InteractiveNavbar = () => {
+    createEffect(() => {
+        if (interactiveNavbarEl()) {
+            intersectionObserver.observe(interactiveNavbarEl())
+        }
+    })
+
+    onCleanup(() => {
+        intersectionObserver.unobserve(interactiveNavbarEl())
+    })
+
     return (
         <nav
             ref={(el) => setInteractiveNavbar(el)}
@@ -40,12 +40,44 @@ const InteractiveNavbar = () => {
                             The Good Book
                         </Capped>
                     </A>
-                    <Combobox
+                    <StyledCombobox
                         options={[
                             { label: 'Geneza', disabled: false },
                             { label: 'Exod', disabled: false },
                             { label: 'Leviticul', disabled: false },
                             { label: 'Judecători', disabled: false },
+                            { label: 'Geneza1', disabled: false },
+                            { label: 'Exod1', disabled: false },
+                            { label: 'Leviticul1', disabled: false },
+                            { label: 'Judecători1', disabled: false },
+                            { label: 'Geneza2', disabled: false },
+                            { label: 'Exod2', disabled: false },
+                            { label: 'Leviticul2', disabled: false },
+                            { label: 'Judecători2', disabled: false },
+                            { label: 'Geneza3', disabled: false },
+                            { label: 'Exod3', disabled: false },
+                            { label: 'Leviticul3', disabled: false },
+                            { label: 'Judecători3', disabled: false },
+                            { label: 'Geneza4', disabled: false },
+                            { label: 'Exod4', disabled: false },
+                            { label: 'Leviticul4', disabled: false },
+                            { label: 'Judecători4', disabled: false },
+                            { label: 'Geneza5', disabled: false },
+                            { label: 'Exod5', disabled: false },
+                            { label: 'Leviticul5', disabled: false },
+                            { label: 'Judecători5', disabled: false },
+                            { label: 'Geneza6', disabled: false },
+                            { label: 'Exod6', disabled: false },
+                            { label: 'Leviticul6', disabled: false },
+                            { label: 'Judecători6', disabled: false },
+                            { label: 'Geneza7', disabled: false },
+                            { label: 'Exod7', disabled: false },
+                            { label: 'Leviticul7', disabled: false },
+                            { label: 'Judecători7', disabled: false },
+                            { label: 'Geneza8', disabled: false },
+                            { label: 'Exod8', disabled: false },
+                            { label: 'Leviticul8', disabled: false },
+                            { label: 'Judecători8', disabled: false },
                         ]}
                         defaultValue={'Geneza'}
                     />

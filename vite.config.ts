@@ -1,9 +1,15 @@
 import { defineConfig } from 'vite'
-import solidPlugin from 'vite-plugin-solid'
+import solid from 'vite-plugin-solid'
 import * as path from 'path'
+import devtools from 'solid-devtools/vite'
 
 export default defineConfig({
-    plugins: [solidPlugin()],
+    plugins: [
+        devtools({
+            autoname: true,
+        }),
+        solid(),
+    ],
     server: {
         port: 4000,
     },

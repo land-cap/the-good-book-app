@@ -4,11 +4,10 @@ const colors = require("tailwindcss/colors");
 
 const defaultTheme = require("tailwindcss/defaultTheme");
 
-const monoColor = colors.slate;
+const monoColor = colors.neutral;
 
 module.exports = {
   content: ["./src/**/*.{html,js,jsx,ts,tsx}"],
-  // darkMode: "class",
   theme: {
     extend: {
       animation: {
@@ -21,8 +20,8 @@ module.exports = {
         }
       },
       colors: {
-        primary: colors.purple,
-        accent: colors.orange,
+        primary: colors.teal,
+        accent: colors.teal,
         gray: monoColor,
         black: monoColor[900],
         offWhite: monoColor[50],
@@ -51,6 +50,7 @@ module.exports = {
         3: "3px"
       },
       transitionDuration: {
+        quick: "100ms",
         emphasized: "500ms",
         "emphasized-decelerate": "400ms",
         "emphasized-accelerate": "300ms",
