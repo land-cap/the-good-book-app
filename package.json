@@ -23,6 +23,7 @@
   "dependencies": {
     "@capsizecss/core": "^3.1.0",
     "@capsizecss/metrics": "^1.1.1",
+    "@motionone/solid": "^10.16.0",
     "@polymorphic-factory/solid": "^0.3.1",
     "@solidjs/meta": "^0.28.2",
     "@solidjs/router": "^0.8.2",
@@ -31,6 +32,7 @@
     "@zag-js/pressable": "^0.6.0",
     "@zag-js/solid": "^0.5.0",
     "prettier": "^2.8.7",
+    "solid-devtools": "^0.26.0",
     "solid-js": "^1.7.2",
     "solid-styled-components": "^0.28.5",
     "tailwind-merge": "^1.12.0",
