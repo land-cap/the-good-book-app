@@ -66,7 +66,11 @@ export const Combobox = (props: ComboboxProps) => {
         <Container class={props.stylesOverride?.container}>
             <div {...api().rootProps}>
                 <div {...api().controlProps}>
-                    <Input placeholder={props.placeholder} {...api().inputProps} class={props.stylesOverride?.input} />
+                    <Input
+                        placeholder={props.placeholder}
+                        {...api().inputProps}
+                        class={twMerge(props.stylesOverride?.input)}
+                    />
                     <InputButton {...api().triggerProps} class={props.stylesOverride?.inputButton}>
                         <Icon name={'unfold_more'} />
                     </InputButton>
@@ -139,5 +143,5 @@ export const Combobox = (props: ComboboxProps) => {
 export const StyledCombobox = withCustomStyles(Combobox, {
     input: 'rounded-none ring-2 ring-black dark:ring-whiteOnDark',
     optionContainer: 'rounded-none',
-    inputButton: 'text-black dark:text-whiteOnDark',
+    inputButton: 'text-black dark:text-whiteOnDark hover:text-primary-600 dark:hover:text-primary-500',
 })
