@@ -10,10 +10,11 @@ import {
     OptionContainer,
     OptionIcon,
     OptionLabel,
-} from '~/components/composable/Combobox/combobox.presentational'
-import { comboboxStyles } from '~/components/composable/Combobox/combobox.styles'
+} from '~/cap-ui/Combobox/combobox.presentational'
+import { comboboxStyles } from '~/cap-ui/Combobox/combobox.styles'
 import { Motion, Presence } from '@motionone/solid'
 import { twMerge } from 'tailwind-merge'
+import { withCustomStyles } from '~/cap-ui'
 
 type ComboboxOption = {
     label: string
@@ -136,3 +137,9 @@ export const Combobox = (props: ComboboxProps) => {
         </Container>
     )
 }
+
+export const StyledCombobox = withCustomStyles(Combobox, {
+    input: 'rounded-none ring-2 ring-black',
+    optionContainer: 'rounded-none',
+    inputButton: 'text-black',
+})

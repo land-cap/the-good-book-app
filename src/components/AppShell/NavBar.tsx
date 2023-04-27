@@ -1,9 +1,9 @@
 import { createEffect, createSignal, onCleanup } from 'solid-js'
 import { twMerge } from 'tailwind-merge'
-import { Combobox } from '~/components'
 import { Portal } from 'solid-js/web'
-import { Capped } from '~/components/meta/Capped'
+import { Capped } from '~/cap-ui/meta/Capped'
 import { A } from '@solidjs/router'
+import { StyledCombobox } from '~/cap-ui/Combobox/Combobox'
 
 const [isInteractiveNavbarVisible, setIsInteractiveNavbarVisible] = createSignal(true)
 
@@ -40,7 +40,7 @@ const InteractiveNavbar = () => {
                             The Good Book
                         </Capped>
                     </A>
-                    <Combobox
+                    <StyledCombobox
                         options={[
                             { label: 'Geneza', disabled: false },
                             { label: 'Exod', disabled: false },
@@ -48,11 +48,6 @@ const InteractiveNavbar = () => {
                             { label: 'Judecători', disabled: false },
                         ]}
                         defaultValue={'Geneza'}
-                        stylesOverride={{
-                            input: 'rounded-none ring-2 ring-black',
-                            optionContainer: 'rounded-none',
-                            inputButton: 'text-black',
-                        }}
                     />
                 </div>
             </div>

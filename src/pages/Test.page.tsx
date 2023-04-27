@@ -1,4 +1,4 @@
-import { Capped } from '~/components/meta/Capped'
+import { Capped } from '~/cap-ui/meta/Capped'
 import { Motion, Presence } from '@motionone/solid'
 import { createSignal, Show } from 'solid-js'
 

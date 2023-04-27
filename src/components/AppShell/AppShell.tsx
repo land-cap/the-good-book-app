@@ -1,7 +1,7 @@
 import { JSX } from 'solid-js'
 import { NavBar } from '~/components/AppShell/NavBar'
 import { Icon } from '~/components/composable/Icon'
-import { Capped } from '~/components/meta/Capped'
+import { Capped } from '~/cap-ui/meta/Capped'
 
 export const AppShell = ({ children }: { children: JSX.Element }) => (
     <div class={'text-base flex flex-col h-fit min-h-[100vh] text-black dark:text-whiteOnDark dark:bg-gray-900'}>

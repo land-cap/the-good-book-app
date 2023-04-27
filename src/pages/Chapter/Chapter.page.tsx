@@ -1,5 +1,5 @@
 import { useIsBreakpoint } from '~/hooks/useIsBreakpoint'
-import { Capped } from '~/components/meta/Capped'
+import { Capped } from '~/cap-ui/meta/Capped'
 
 const VerseNumber = ({ number }: { number: number }) => <sup class={'font-black text-gray-500'}>{number}</sup>
 
