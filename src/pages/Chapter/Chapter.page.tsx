@@ -8,7 +8,7 @@ export const Chapter = () => {
 
     return (
         <div class={'flex flex-col gap-12 mt-12'}>
-            <Capped component="h1" class="font-black tracking-tight" fontSize={'4xl'}>
+            <Capped component="h1" class="font-black" fontSize={'4xl'}>
                 Geneza 1
             </Capped>
             <Capped
