@@ -29,7 +29,7 @@ module.exports = {
         whiteOnDark: monoColor[300]
       },
       fontFamily: {
-        sans: ["DM Sans"]
+        sans: ["Roboto Flex", "DM Sans"]
       },
       fontSize: {
         xs: ["12.8571px", { lineHeight: "18px" }],

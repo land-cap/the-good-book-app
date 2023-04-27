@@ -1,14 +1,14 @@
-import { Dynamic } from 'solid-js/web'
+import { Dynamic, DynamicProps } from 'solid-js/web'
 import { styled, StylesFn } from 'solid-styled-components'
-import { JSX } from 'solid-js'
-import fontMetrics from '@capsizecss/metrics/dMSans'
+import { JSX, ValidComponent } from 'solid-js'
+import fontMetrics from '@capsizecss/metrics/robotoFlex'
 import { createStyleObject } from '@capsizecss/core'
 import { FontSize, fontSizeToCapHeight } from '~/config/fontSize'
 
 const styledDynamic = styled(Dynamic as unknown as Parameters<typeof styled>[0]) as unknown as StylesFn<'div'>
 
-export type CappedComponent = <T>(
-    props: T & {
+export type CappedComponent = <T extends ValidComponent>(
+    props: DynamicProps<T> & {
         fontSize?: FontSize | number
         lineGap?: number
     }
