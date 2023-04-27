@@ -144,6 +144,7 @@ export const Combobox = ({
 }
 
 export const StyledCombobox = withCustomStyles(Combobox, {
+    container: 'z-10',
     input: 'rounded-none ring-2 ring-black dark:ring-whiteOnDark',
     optionContainer: 'rounded-none',
     inputButton: 'text-black dark:text-whiteOnDark hover:text-primary-600 dark:hover:text-primary-500',
