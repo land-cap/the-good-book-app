@@ -9,17 +9,27 @@ const sizeToClass: Record<number, string> = {
     48: 'w-5 h-5 text-[48px]',
 }
 
-export const Icon = (props: { name: string; size?: IconSize; class?: string; inline?: boolean }) => {
-    const sizeClass = props.size ? sizeToClass[props.size] : sizeToClass[20]
+export const Icon = ({
+    name,
+    size,
+    className,
+    inline,
+}: {
+    name: string
+    size?: IconSize
+    className?: string
+    inline?: boolean
+}) => {
+    const sizeClass = size ? sizeToClass[size] : sizeToClass[20]
 
     return (
         <span
-            class={twMerge('material-icon', !props.inline && sizeClass, props.class)}
+            class={twMerge('material-icon', !inline && sizeClass, className)}
             style={{
-                'font-variation-settings': `'FILL' 1, 'wght' 600, 'opsz' ${props.size || 20}`,
+                'font-variation-settings': `'FILL' 1, 'wght' 600, 'opsz' ${size || 20}`,
             }}
         >
-            {props.name}
+            {name}
         </span>
     )
 }

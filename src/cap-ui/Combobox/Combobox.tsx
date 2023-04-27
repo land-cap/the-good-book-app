@@ -34,7 +34,14 @@ export type ComboboxProps = {
 
 const { option_focused, option_checked, optionIcon_focused } = comboboxStyles
 
-export const Combobox = (props: ComboboxProps) => {
+export const Combobox = ({
+    context,
+    defaultValue,
+    placeholder,
+    stylesOverride,
+    setApiRef,
+    ...props
+}: ComboboxProps) => {
     const [options, setOptions] = createSignal(props.options)
 
     const [state, send] = useMachine(
@@ -47,31 +54,27 @@ export const Combobox = (props: ComboboxProps) => {
                 const filtered = props.options.filter((item) => item.label.toLowerCase().includes(value.toLowerCase()))
                 setOptions(filtered.length > 0 ? filtered : props.options)
             },
-            ...props.context,
+            ...context,
         })
     )
 
     const api = createMemo(() => combobox.connect(state, send, normalizeProps))
 
     onMount(() => {
-        if (props.setApiRef) {
-            props.setApiRef(api())
+        if (setApiRef) {
+            setApiRef(api())
         }
-        if (props.defaultValue && api()) {
-            api().setValue({ value: props.defaultValue, label: props.defaultValue })
+        if (defaultValue && api()) {
+            api().setValue({ value: defaultValue, label: defaultValue })
         }
     })
 
     return (
-        <Container class={props.stylesOverride?.container}>
+        <Container class={stylesOverride?.container}>
             <div {...api().rootProps}>
                 <div {...api().controlProps}>
-                    <Input
-                        placeholder={props.placeholder}
-                        {...api().inputProps}
-                        class={twMerge(props.stylesOverride?.input)}
-                    />
-                    <InputButton {...api().triggerProps} class={props.stylesOverride?.inputButton}>
+                    <Input placeholder={placeholder} {...api().inputProps} class={twMerge(stylesOverride?.input)} />
+                    <InputButton {...api().triggerProps} class={stylesOverride?.inputButton}>
                         <Icon name={'unfold_more'} />
                     </InputButton>
                 </div>
@@ -83,7 +86,7 @@ export const Combobox = (props: ComboboxProps) => {
                         animate={{ opacity: 1, scale: 1, transition: { duration: 0.1, easing: 'ease-out' } }}
                         exit={{ opacity: 0, scale: 0.75, transition: { duration: 0.1, easing: 'ease-in' } }}
                     >
-                        <OptionContainer {...api().positionerProps} class={props.stylesOverride?.optionContainer}>
+                        <OptionContainer {...api().positionerProps} class={stylesOverride?.optionContainer}>
                             <ul {...api().contentProps}>
                                 <For each={options()}>
                                     {(item, index) => {
@@ -105,22 +108,22 @@ export const Combobox = (props: ComboboxProps) => {
                                                     disabled: item.disabled,
                                                 })}
                                                 class={twMerge(
-                                                    props.stylesOverride?.option,
+                                                    stylesOverride?.option,
                                                     optionState()?.focused &&
-                                                        (props.stylesOverride?.option_focused || option_focused),
+                                                        (stylesOverride?.option_focused || option_focused),
                                                     optionState()?.checked &&
-                                                        (props.stylesOverride?.option_checked || option_checked)
+                                                        (stylesOverride?.option_checked || option_checked)
                                                 )}
                                             >
-                                                <OptionLabel class={props.stylesOverride?.optionLabel}>
+                                                <OptionLabel class={stylesOverride?.optionLabel}>
                                                     {item.label}
                                                 </OptionLabel>
                                                 {optionState().checked && (
                                                     <OptionIcon
                                                         class={twMerge(
-                                                            props.stylesOverride?.optionIcon,
+                                                            stylesOverride?.optionIcon,
                                                             optionState()?.focused &&
-                                                                (props.stylesOverride?.optionIcon_focused ||
+                                                                (stylesOverride?.optionIcon_focused ||
                                                                     optionIcon_focused)
                                                         )}
                                                     >

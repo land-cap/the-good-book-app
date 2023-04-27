@@ -1,7 +1,7 @@
 import { Capped } from '~/cap-ui/meta/Capped'
 import { createSignal } from 'solid-js'
 import { CapUiLogo } from '~/cap-ui/CapUiLogo'
-import { Pressable } from '~/cap-ui/Pressable/Pressable'
+import { Pressable } from '~/cap-ui'
 
 const [toggle, setToggle] = createSignal(true)
 

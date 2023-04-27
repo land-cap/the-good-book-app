@@ -17,7 +17,7 @@ export const AppShell = ({ children }: { children: JSX.Element }) => (
                             fontSize={'sm'}
                             name="favorite"
                             inline
-                            class="mx-1 text-accent-600 dark:text-accent-500"
+                            className="mx-1 text-accent-600 dark:text-accent-500"
                         />
                     }{' '}
                     in Moldova by
