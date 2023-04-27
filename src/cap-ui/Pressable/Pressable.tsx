@@ -1,14 +1,17 @@
 import { normalizeProps, useMachine } from '@zag-js/solid'
 import * as pressable from '@zag-js/pressable'
 import { Dynamic, DynamicProps } from 'solid-js/web'
-import { createMemo, createUniqueId, ValidComponent } from 'solid-js'
+import { createMemo, createUniqueId, onMount, ValidComponent } from 'solid-js'
 import { twMerge } from 'tailwind-merge'
 import { pressableStyles } from '~/cap-ui/Pressable/pressable.styles'
+
+export type PressableApi = ReturnType<typeof pressable.connect>
 
 export type PressableProps = {
     context?: Partial<Parameters<typeof pressable.machine>[0]>
     variant?: keyof typeof pressableStyles.variant
     size?: keyof typeof pressableStyles.size
+    setApiRef?: (ref: PressableApi) => void
 }
 
 export const Pressable = <T extends ValidComponent>({
@@ -36,5 +39,18 @@ export const Pressable = <T extends ValidComponent>({
 
     const api = createMemo(() => pressable.connect(state, send, normalizeProps))
 
-    return <Dynamic component={component || 'button'} {...props} class={twMerge(classList, props.class)} />
+    onMount(() => {
+        if (props.setApiRef) {
+            props.setApiRef(api())
+        }
+    })
+
+    return (
+        <Dynamic
+            component={component || 'button'}
+            {...api().pressableProps}
+            {...props}
+            class={twMerge(classList, props.class)}
+        />
+    )
 }
