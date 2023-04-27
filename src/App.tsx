@@ -1,4 +1,3 @@
-// @refresh reload
 import './root.css'
 import { Chapter } from '~/pages'
 import { Route, Routes } from '@solidjs/router'
