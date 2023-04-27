@@ -20,15 +20,15 @@ module.exports = {
         }
       },
       colors: {
-        primary: colors.amber,
-        accent: colors.amber,
+        primary: colors.teal,
+        accent: colors.teal,
         gray: monoColor,
         black: monoColor[900],
         offWhite: monoColor[50],
         whiteOnDark: monoColor[300]
       },
       fontFamily: {
-        sans: ["Fraunces", "Roboto Flex", "DM Sans"]
+        sans: ["DM Sans"]
       },
       fontSize: {
         xs: ["12.8571px", { lineHeight: "18px" }],

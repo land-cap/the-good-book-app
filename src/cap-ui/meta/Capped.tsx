@@ -1,7 +1,7 @@
 import { Dynamic, DynamicProps } from 'solid-js/web'
 import { styled, StylesFn } from 'solid-styled-components'
 import { JSX, ValidComponent } from 'solid-js'
-import fontMetrics from '@capsizecss/metrics/robotoFlex'
+import fontMetrics from '@capsizecss/metrics/dMMono'
 import { createStyleObject } from '@capsizecss/core'
 import { FontSize, fontSizeToCapHeight } from '~/config/fontSize'
 
