@@ -139,7 +139,7 @@ export const Combobox = (props: ComboboxProps) => {
 }
 
 export const StyledCombobox = withCustomStyles(Combobox, {
-    input: 'rounded-none ring-2 ring-black',
+    input: 'rounded-none ring-2 ring-black dark:ring-whiteOnDark',
     optionContainer: 'rounded-none',
-    inputButton: 'text-black',
+    inputButton: 'text-black dark:text-whiteOnDark',
 })
