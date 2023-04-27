@@ -36,6 +36,10 @@ export const App = () => (
             href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wdth,wght,GRAD,YTAS,YTFI,YTLC,YTUC@8..144,25,400,0,750,788,570,760;8..144,25,900,150,854,788,570,760&display=swap"
             rel="stylesheet"
         />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,350,100;9..144,900,100&display=swap"
+            rel="stylesheet"
+        />
         <Routes>
             <Route path={'/'} component={Chapter} />
             <Route path={'/test'} component={Test} />
