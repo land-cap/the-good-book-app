@@ -11,8 +11,16 @@ export const AppShell = ({ children }: { children: JSX.Element }) => (
             <Capped component={'p'} fontSize={'xs'} class="text-gray-500">
                 <span class="inline-flex items-center">
                     Made with{' '}
-                    {<Capped component={Icon} fontSize={'sm'} name="favorite" inline class="mx-1 text-accent-500" />} in
-                    Moldova by
+                    {
+                        <Capped
+                            component={Icon}
+                            fontSize={'sm'}
+                            name="favorite"
+                            inline
+                            class="mx-1 text-accent-600 dark:text-accent-500"
+                        />
+                    }{' '}
+                    in Moldova by
                 </span>{' '}
                 <a href={'https://github.com/dalandcap'} target={'_blank'} class="font-bold">
                     &commat;landCap
