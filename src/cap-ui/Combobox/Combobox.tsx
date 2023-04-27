@@ -75,11 +75,9 @@ export const Combobox = (props: ComboboxProps) => {
             <Presence exitBeforeEnter>
                 <Show when={api().isOpen}>
                     <Motion.div
-                        style={{ 'transform-origin': 'top' }}
                         initial={{ opacity: 0, scale: 0.75 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.75 }}
-                        transition={{ duration: 0.1 }}
+                        animate={{ opacity: 1, scale: 1, transition: { duration: 0.1, easing: 'ease-out' } }}
+                        exit={{ opacity: 0, scale: 0.75, transition: { duration: 0.1, easing: 'ease-in' } }}
                     >
                         <OptionContainer {...api().positionerProps} class={props.stylesOverride?.optionContainer}>
                             <ul {...api().contentProps}>
