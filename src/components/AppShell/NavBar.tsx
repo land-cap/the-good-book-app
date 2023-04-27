@@ -17,17 +17,17 @@ const intersectionObserver = new IntersectionObserver(
     { threshold: 0 }
 )
 
-createEffect(() => {
-    if (interactiveNavbarEl()) {
-        intersectionObserver.observe(interactiveNavbarEl())
-    }
-})
-
-onCleanup(() => {
-    intersectionObserver.unobserve(interactiveNavbarEl())
-})
-
 const InteractiveNavbar = () => {
+    createEffect(() => {
+        if (interactiveNavbarEl()) {
+            intersectionObserver.observe(interactiveNavbarEl())
+        }
+    })
+
+    onCleanup(() => {
+        intersectionObserver.unobserve(interactiveNavbarEl())
+    })
+
     return (
         <nav
             ref={(el) => setInteractiveNavbar(el)}
@@ -48,6 +48,11 @@ const InteractiveNavbar = () => {
                             { label: 'Judecători', disabled: false },
                         ]}
                         defaultValue={'Geneza'}
+                        stylesOverride={{
+                            input: 'rounded-none ring-2 ring-black',
+                            optionContainer: 'rounded-none',
+                            inputButton: 'text-black',
+                        }}
                     />
                 </div>
             </div>
