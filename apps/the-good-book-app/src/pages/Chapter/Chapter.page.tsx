@@ -1,5 +1,6 @@
 import { useIsBreakpoint } from '~/hooks/useIsBreakpoint'
-import { Capd } from '../../../../../packages/capd-ui/src/meta/Capd'
+// @ts-ignore
+import { Capd } from 'capd-ui'
 
 const VerseNumber = ({ number }: { number: number }) => (
   <sup class={'font-black text-gray-500'}>{number}</sup>

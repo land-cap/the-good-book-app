@@ -1,9 +1,7 @@
 import './root.css'
-import { Chapter } from '~/pages'
+import { Chapter, NotFound, Test } from '~/pages'
 import { Route, Routes } from '@solidjs/router'
 import { AppShell } from '~/components'
-import { Test } from '~/pages/Test.page'
-import { NotFound } from '~/pages/NotFound.page'
 import { Head } from '~/Head'
 
 export const App = () => (

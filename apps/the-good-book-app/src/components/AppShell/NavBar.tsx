@@ -1,9 +1,9 @@
 import { createEffect, createSignal, onCleanup } from 'solid-js'
 import { twMerge } from 'tailwind-merge'
 import { Portal } from 'solid-js/web'
-import { Capd } from '../../../../../packages/capd-ui/src/meta/Capd'
 import { A } from '@solidjs/router'
-import { StyledCombobox } from '../../../../../packages/capd-ui/src/Combobox/Combobox'
+// @ts-ignore
+import { Capd, StyledCombobox } from 'capd-ui'
 
 const [isInteractiveNavbarVisible, setIsInteractiveNavbarVisible] = createSignal(true)
 

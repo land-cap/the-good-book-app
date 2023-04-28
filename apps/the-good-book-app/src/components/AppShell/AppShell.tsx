@@ -1,7 +1,7 @@
 import { JSX } from 'solid-js'
 import { NavBar } from '~/components/AppShell/NavBar'
-import { Icon } from '../../../../../packages/capd-ui/src/Icon'
-import { Capd } from '../../../../../packages/capd-ui/src/meta/Capd'
+// @ts-ignore
+import { Capd, Icon } from 'capd-ui'
 
 export const AppShell = ({ children }: { children: JSX.Element }) => (
   <div
