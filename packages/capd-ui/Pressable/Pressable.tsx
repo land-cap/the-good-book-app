@@ -3,7 +3,7 @@ import * as pressable from '@zag-js/pressable'
 import { Dynamic, DynamicProps } from 'solid-js/web'
 import { createMemo, createUniqueId, onMount, ValidComponent } from 'solid-js'
 import { twMerge } from 'tailwind-merge'
-import { pressableStyles } from '~/cap-ui/Pressable/pressable.styles'
+import { pressableStyles } from './pressable.styles'
 
 export type PressableApi = ReturnType<typeof pressable.connect>
 

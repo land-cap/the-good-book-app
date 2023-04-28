@@ -1,7 +1,7 @@
 import * as combobox from '@zag-js/combobox'
 import { normalizeProps, useMachine } from '@zag-js/solid'
 import { createMemo, createSignal, createUniqueId, For, onMount, Show } from 'solid-js'
-import { Icon } from '~/components/composable/Icon'
+import { Icon } from '~/components/base/Icon'
 import {
   Container,
   Input,
@@ -10,11 +10,11 @@ import {
   OptionContainer,
   OptionIcon,
   OptionLabel,
-} from '~/cap-ui/Combobox/combobox.presentational'
-import { comboboxStyles } from '~/cap-ui/Combobox/combobox.styles'
+} from './combobox.presentational'
+import { comboboxStyles } from './combobox.styles'
 import { Motion, Presence } from '@motionone/solid'
 import { twMerge } from 'tailwind-merge'
-import { withCustomStyles } from '~/cap-ui'
+import { withCustomStyles } from '../index'
 
 type ComboboxOption = {
   label: string

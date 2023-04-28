@@ -1,5 +1,5 @@
-import { withInitialClass } from '~/cap-ui/meta/withInitialClass'
-import { comboboxStyles } from '~/cap-ui/Combobox/combobox.styles'
+import { withInitialClass } from '../meta/withInitialClass'
+import { comboboxStyles } from './combobox.styles'
 
 const { container, input, inputButton, optionContainer, option, optionLabel, optionIcon } =
   comboboxStyles

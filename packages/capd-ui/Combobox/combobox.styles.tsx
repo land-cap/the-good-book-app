@@ -1,5 +1,5 @@
 import { twMerge } from 'tailwind-merge'
-import { transitionQuick } from '~/cap-ui/transitions.styles'
+import { transitionQuick } from '../transitions.styles'
 
 export const comboboxStyles = {
   container: 'z-10 relative',
