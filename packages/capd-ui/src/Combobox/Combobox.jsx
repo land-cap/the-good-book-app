@@ -1,12 +1,12 @@
-import * as combobox from '@zag-js/combobox';
-import { normalizeProps, useMachine } from '@zag-js/solid';
-import { createMemo, createSignal, createUniqueId, For, onMount, Show } from 'solid-js';
-import { Icon } from '~/components/base/Icon';
-import { Container, Input, InputButton, Option, OptionContainer, OptionIcon, OptionLabel, } from './combobox.presentational';
-import { comboboxStyles } from './combobox.styles';
-import { Motion, Presence } from '@motionone/solid';
-import { twMerge } from 'tailwind-merge';
-import { withCustomStyles } from '../index';
+import * as combobox from "@zag-js/combobox";
+import { normalizeProps, useMachine } from "@zag-js/solid";
+import { createMemo, createSignal, createUniqueId, For, onMount, Show, } from "solid-js";
+import { Icon } from "~/Icon";
+import { Container, Input, InputButton, Option, OptionContainer, OptionIcon, OptionLabel, } from "./combobox.presentational";
+import { comboboxStyles } from "./combobox.styles";
+import { Motion, Presence } from "@motionone/solid";
+import { twMerge } from "tailwind-merge";
+import { withCustomStyles } from "~/meta";
 const { option_focused, option_checked, optionIcon_focused } = comboboxStyles;
 export const Combobox = ({ context, defaultValue, placeholder, stylesOverride, setApiRef, ...props }) => {
     const [options, setOptions] = createSignal(props.options);
@@ -35,13 +35,21 @@ export const Combobox = ({ context, defaultValue, placeholder, stylesOverride, s
         <div {...api().controlProps}>
           <Input {...api().inputProps} placeholder={placeholder} class={twMerge(stylesOverride?.input)}/>
           <InputButton {...api().triggerProps} class={stylesOverride?.inputButton}>
-            <Icon name={'unfold_more'}/>
+            <Icon name={"unfold_more"}/>
           </InputButton>
         </div>
       </div>
       <Presence exitBeforeEnter>
         <Show when={api().isOpen}>
-          <Motion.div initial={{ opacity: 0, scale: 0.75 }} animate={{ opacity: 1, scale: 1, transition: { duration: 0.1, easing: 'ease-out' } }} exit={{ opacity: 0, scale: 0.75, transition: { duration: 0.1, easing: 'ease-in' } }}>
+          <Motion.div initial={{ opacity: 0, scale: 0.75 }} animate={{
+            opacity: 1,
+            scale: 1,
+            transition: { duration: 0.1, easing: "ease-out" },
+        }} exit={{
+            opacity: 0,
+            scale: 0.75,
+            transition: { duration: 0.1, easing: "ease-in" },
+        }}>
             <OptionContainer {...api().positionerProps} class={stylesOverride?.optionContainer}>
               <ul {...api().contentProps}>
                 <For each={options()}>
@@ -60,10 +68,13 @@ export const Combobox = ({ context, defaultValue, placeholder, stylesOverride, s
             })} class={twMerge(stylesOverride?.option, optionState()?.focused &&
                     (stylesOverride?.option_focused || option_focused), optionState()?.checked &&
                     (stylesOverride?.option_checked || option_checked))}>
-                        <OptionLabel class={stylesOverride?.optionLabel}>{item.label}</OptionLabel>
+                        <OptionLabel class={stylesOverride?.optionLabel}>
+                          {item.label}
+                        </OptionLabel>
                         {optionState().checked && (<OptionIcon class={twMerge(stylesOverride?.optionIcon, optionState()?.focused &&
-                        (stylesOverride?.optionIcon_focused || optionIcon_focused))}>
-                            <Icon name={'check'}/>
+                        (stylesOverride?.optionIcon_focused ||
+                            optionIcon_focused))}>
+                            <Icon name={"check"}/>
                           </OptionIcon>)}
                       </Option>);
         }}
@@ -76,7 +87,7 @@ export const Combobox = ({ context, defaultValue, placeholder, stylesOverride, s
     </Container>);
 };
 export const StyledCombobox = withCustomStyles(Combobox, {
-    input: 'rounded-none ring-2 ring-black dark:ring-whiteOnDark',
-    optionContainer: 'rounded-none',
-    inputButton: 'text-black dark:text-whiteOnDark hover:text-primary-600 dark:hover:text-primary-500',
+    input: "rounded-none ring-2 ring-black dark:ring-whiteOnDark",
+    optionContainer: "rounded-none",
+    inputButton: "text-black dark:text-whiteOnDark hover:text-primary-600 dark:hover:text-primary-500",
 });

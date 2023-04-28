@@ -1,7 +1,7 @@
 import { Capd } from '../../../../packages/capd-ui/src/meta/Capd'
 import { createSignal } from 'solid-js'
 import { CapdUiLogo } from '../../../../packages/capd-ui/src/CapdUiLogo'
-import { Pressable } from '../../../../packages/capd-ui/src'
+import { Pressable } from '../../../../packages/capd-ui/src/main'
 
 const [toggle, setToggle] = createSignal(true)
 

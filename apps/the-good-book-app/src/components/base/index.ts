@@ -1,1 +1,1 @@
-export { Icon } from './Icon'
+export { Icon } from '../../../../../packages/capd-ui/src/Icon'
