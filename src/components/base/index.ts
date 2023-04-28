@@ -1,2 +1,1 @@
-export * from '../../cap-ui/Pressable'
-export * from '../../cap-ui/Combobox'
+export { Icon } from './Icon'

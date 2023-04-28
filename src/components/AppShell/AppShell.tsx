@@ -1,7 +1,7 @@
 import { JSX } from 'solid-js'
 import { NavBar } from '~/components/AppShell/NavBar'
-import { Icon } from '~/components/composable/Icon'
-import { Capped } from '~/cap-ui/meta/Capped'
+import { Icon } from '~/components/base/Icon'
+import { Capd } from '../../../packages/capd-ui/meta/Capd'
 
 export const AppShell = ({ children }: { children: JSX.Element }) => (
   <div
@@ -12,11 +12,11 @@ export const AppShell = ({ children }: { children: JSX.Element }) => (
     <NavBar />
     <div class="flex-grow mx-auto w-full max-w-3xl px-6 lg:px-8">{children}</div>
     <footer class="flex place-content-center my-24 sm:my-32">
-      <Capped component={'p'} fontSize={'xs'} class="text-gray-500">
+      <Capd component={'p'} fontSize={'xs'} class="text-gray-500">
         <span class="inline-flex items-center">
           Made with{' '}
           {
-            <Capped
+            <Capd
               component={Icon}
               fontSize={'sm'}
               name="favorite"
@@ -29,7 +29,7 @@ export const AppShell = ({ children }: { children: JSX.Element }) => (
         <a href={'https://github.com/dalandcap'} target={'_blank'} class="font-bold">
           &commat;landCap
         </a>
-      </Capped>
+      </Capd>
     </footer>
   </div>
 )

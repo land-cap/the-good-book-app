@@ -1,9 +1,9 @@
 import { createEffect, createSignal, onCleanup } from 'solid-js'
 import { twMerge } from 'tailwind-merge'
 import { Portal } from 'solid-js/web'
-import { Capped } from '~/cap-ui/meta/Capped'
+import { Capd } from '../../../packages/capd-ui/meta/Capd'
 import { A } from '@solidjs/router'
-import { StyledCombobox } from '~/cap-ui/Combobox/Combobox'
+import { StyledCombobox } from '../../../packages/capd-ui/Combobox/Combobox'
 
 const [isInteractiveNavbarVisible, setIsInteractiveNavbarVisible] = createSignal(true)
 
@@ -40,9 +40,9 @@ const InteractiveNavbar = () => {
           }
         >
           <A href="/" class="flex flex-shrink-0 items-center -my-4 py-4">
-            <Capped component={'p'} class="font-black">
+            <Capd component={'p'} class="font-black">
               The Good Book
-            </Capped>
+            </Capd>
           </A>
           <StyledCombobox
             options={[

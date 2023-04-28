@@ -1,2 +1,2 @@
-export * from './composable'
+export * from './base'
 export * from './AppShell'

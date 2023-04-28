@@ -1,5 +1,5 @@
 import { useIsBreakpoint } from '~/hooks/useIsBreakpoint'
-import { Capped } from '~/cap-ui/meta/Capped'
+import { Capd } from '../../../packages/capd-ui/meta/Capd'
 
 const VerseNumber = ({ number }: { number: number }) => (
   <sup class={'font-black text-gray-500'}>{number}</sup>
@@ -10,10 +10,10 @@ export const Chapter = () => {
 
   return (
     <div class={'flex flex-col gap-12 mt-12'}>
-      <Capped component="h1" class="font-black tracking-tight" fontSize={'4xl'}>
+      <Capd component="h1" class="font-black tracking-tight" fontSize={'4xl'}>
         Geneza 1
-      </Capped>
-      <Capped
+      </Capd>
+      <Capd
         component={'p'}
         fontSize={isDesktop() ? 'xl' : 'base'}
         lineGap={isDesktop() ? 36 : 24}
@@ -49,7 +49,7 @@ export const Chapter = () => {
         pământul, <VerseNumber number={18} /> să stăpânească ziua și noaptea și să despartă lumina
         de întuneric. Dumnezeu a văzut că lucrul acesta era bun. <VerseNumber number={19} /> Astfel,
         a fost o seară și apoi a fost o dimineață: aceasta a fost ziua a patra.
-      </Capped>
+      </Capd>
     </div>
   )
 }

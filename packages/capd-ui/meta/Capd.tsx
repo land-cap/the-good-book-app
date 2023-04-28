@@ -25,7 +25,7 @@ const fixStyleObject = (rawStyles: ReturnType<typeof createStyleObject>) =>
     }
   }, {} as ReturnType<typeof createStyleObject>)
 
-export const Capped = styledDynamic(
+export const Capd = styledDynamic(
   ({
     fontSize,
     lineGap,
@@ -35,8 +35,7 @@ export const Capped = styledDynamic(
     lineGap?: number
     className?: string
   }) => {
-    if (className?.includes('leading'))
-      throw new Error('Capped component cannot have leading class')
+    if (className?.includes('leading')) throw new Error('Capd component cannot have leading class')
 
     const styles = createStyleObject({
       capHeight:
