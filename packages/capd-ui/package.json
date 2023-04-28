@@ -1,11 +1,33 @@
 {
   "name": "capd-ui",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "A composable Solid.js UI library with capsize text",
-  "main": "index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/main.es.js",
+      "require": "./dist/main.cjs.js"
+    }
+  },
+  "main": "./dist/main.cjs.js",
+  "module": "./dist/main.es.js",
+  "typings": "./dist/main.d.ts",
+  "files": [
+    "dist"
+  ],
   "type": "module",
   "scripts": {
-    "build": "vite build"
+    "build": "tsc && vite build",
+    "build:watch": "tsc && vite build --watch",
+    "dev": "vite"
+  },
+  "devDependencies": {
+    "@rollup/plugin-typescript": "^8.2.1",
+    "@types/node": "^17.0.35",
+    "prettier": "2.6.2",
+    "rollup-plugin-typescript-paths": "^1.3.0",
+    "tslib": "^2.4.0",
+    "typescript": "^4.7.2",
+    "vite": "^2.9.9"
   },
   "author": "land-cap",
   "license": "ISC",
