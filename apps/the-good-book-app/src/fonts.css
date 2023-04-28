@@ -1,0 +1,42 @@
+@import 'https://fonts.googleapis.com/icon?family=Material+Icons';
+@import 'https://fonts.googleapis.com/icon?family=Material+Icons+Outlined';
+
+@font-face {
+    font-family: MonoLisa;
+    font-weight: 300;
+    font-style: normal;
+    src: url('../../../public/fonts/MonoLisa/woff/MonoLisa-Light.woff') format('woff'),
+    url('../../../public/fonts/MonoLisa/woff2/MonoLisa-Light.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: MonoLisa;
+    font-weight: 400;
+    font-style: normal;
+    src: url('../../../public/fonts/MonoLisa/woff/MonoLisa-Regular.woff') format('woff'),
+    url('../../../public/fonts/MonoLisa/woff2/MonoLisa-Regular.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: MonoLisa;
+    font-weight: 500;
+    font-style: normal;
+    src: url('../../../public/fonts/MonoLisa/woff/MonoLisa-Medium.woff') format('woff'),
+    url('../../../public/fonts/MonoLisa/woff2/MonoLisa-Medium.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: MonoLisa;
+    font-weight: 600;
+    font-style: normal;
+    src: url('../../../public/fonts/MonoLisa/woff/MonoLisa-Bold.woff') format('woff'),
+    url('../../../public/fonts/MonoLisa/woff2/MonoLisa-Bold.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: MonoLisa;
+    font-weight: 900;
+    font-style: normal;
+    src: url('../../../public/fonts/MonoLisa/woff/MonoLisa-Black.woff') format('woff'),
+    url('../../../public/fonts/MonoLisa/woff2/MonoLisa-Black.woff2') format('woff2');
+}

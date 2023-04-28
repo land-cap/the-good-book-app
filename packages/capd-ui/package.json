@@ -1,0 +1,15 @@
+{
+  "name": "capd-ui",
+  "version": "1.0.0",
+  "description": "A composable Solid.js UI library with capsize text",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "build": "vite build"
+  },
+  "author": "land-cap",
+  "license": "ISC",
+  "engines": {
+    "node": ">=16"
+  }
+}
