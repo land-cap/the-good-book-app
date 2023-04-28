@@ -7,12 +7,12 @@ import { NotFound } from '~/pages/NotFound.page'
 import { Head } from '~/Head'
 
 export const App = () => (
-    <AppShell>
-        <Head />
-        <Routes>
-            <Route path={'/'} component={Chapter} />
-            <Route path={'/test'} component={Test} />
-            <Route path={'*'} component={NotFound} />
-        </Routes>
-    </AppShell>
+  <AppShell>
+    <Head />
+    <Routes>
+      <Route path={'/'} component={Chapter} />
+      <Route path={'/test'} component={Test} />
+      <Route path={'*'} component={NotFound} />
+    </Routes>
+  </AppShell>
 )
