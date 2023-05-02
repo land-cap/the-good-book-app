@@ -1,12 +1,12 @@
 @font-face {
     font-family: "monolisa-custom";
-    src: url("src/assets/fonts/monolisa-custom/woff2/monolisa-normal.woff2") format("woff2");
+    src: url("fonts/monolisa-custom/woff2/monolisa-normal.woff2") format("woff2");
     font-style: normal;
 }
 
 @font-face {
     font-family: "monolisa-custom";
-    src: url("src/assets/fonts/monolisa-custom/woff2/monolisa-italic.woff2") format("woff2");
+    src: url("fonts/monolisa-custom/woff2/monolisa-italic.woff2") format("woff2");
     font-style: italic;
 }
 
