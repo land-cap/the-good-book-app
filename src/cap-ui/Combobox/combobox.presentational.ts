@@ -1,8 +1,8 @@
-import { withInitialClass } from '~/cap-ui/meta/withInitialClass'
-import { comboboxStyles } from '~/cap-ui/Combobox/combobox.styles'
+import {withInitialClass} from '../meta/withInitialClass'
+import {comboboxStyles} from './combobox.styles'
 
-const { container, input, inputButton, optionContainer, option, optionLabel, optionIcon } =
-  comboboxStyles
+const {container, input, inputButton, optionContainer, option, optionLabel, optionIcon} =
+    comboboxStyles
 
 export const Container = withInitialClass(container, 'div')
 export const Input = withInitialClass(input, 'input')
