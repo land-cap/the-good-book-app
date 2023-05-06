@@ -7,68 +7,69 @@ const defaultTheme = require("tailwindcss/defaultTheme");
 const monoColor = colors.neutral;
 
 module.exports = {
-  content: ["./src/**/*.{html,js,jsx,ts,tsx}"],
-  theme: {
-    extend: {
-      animation: {
-        "slide-top": "slide-top 200ms ease-out 1"
-      },
-      keyframes: {
-        "slide-top": {
-          "0%": { transform: "translateY(-100%)" },
-          "100%": { transform: "translateY(0%)" }
+    content: ["./src/**/*.{html,js,jsx,ts,tsx}"],
+    theme: {
+        extend: {
+            animation: {
+                "slide-top": "slide-top 200ms ease-out 1"
+            },
+            keyframes: {
+                "slide-top": {
+                    "0%": {transform: "translateY(-100%)"},
+                    "100%": {transform: "translateY(0%)"}
+                }
+            },
+            colors: {
+                primary: colors.teal,
+                accent: colors.teal,
+                gray: monoColor,
+                black: monoColor[900],
+                offWhite: monoColor[50],
+                whiteOnDark: monoColor[300]
+            },
+            fontFamily: {
+                sans: ["monolisa-custom", "DM Sans"],
+                serif: ['monolisa-custom', 'Fraunces', "Sorts Mill Goudy"],
+            },
+            fontSize: {
+                xs: ["12.8571px", {lineHeight: "18px"}],
+                sm: ["14.2857px", {lineHeight: "20px"}],
+                base: ["15.7143px", {lineHeight: "22px"}],
+                lg: ["17.1429px", {lineHeight: "24px"}],
+                xl: ["20px", {lineHeight: "28px"}],
+                "2xl": ["25.7143px", {lineHeight: "36px"}],
+                "3xl": ["31.4286px", {lineHeight: "44px"}],
+                "4xl": ["37.1429px", {lineHeight: "52px"}],
+                "5xl": ["45.7143px", {lineHeight: "64px"}],
+                "6xl": ["57.1429px", {lineHeight: "80px"}],
+                "7xl": ["80px", {lineHeight: "84px"}],
+                "8xl": ["97.1429px", {lineHeight: "102px"}],
+                "9xl": ["131.4286px", {lineHeight: "138px"}]
+            },
+            ringWidth: {
+                ...defaultTheme.ringWidth,
+                3: "3px"
+            },
+            transitionDuration: {
+                quick: "100ms",
+                emphasized: "500ms",
+                "emphasized-decelerate": "400ms",
+                "emphasized-accelerate": "300ms",
+                "standard": "200ms",
+                "standard-decelerate": "250ms",
+                "standard-accelerate": "200ms"
+            },
+            transitionTimingFunction: {
+                emphasized: "cubic-bezier(0.2, 0, 0, 1)",
+                "emphasized-decelerate": "cubic-bezier(0.05, 0.7, 0.1, 1)",
+                "emphasized-accelerate": "cubic-bezier(0.3, 0, 0.8, 0.15)",
+                standard: "cubic-bezier(0.2, 0, 0, 1)",
+                "standard-decelerate": "cubic-bezier(0.3, 0, 1, 1)",
+                "standard-accelerate": "cubic-bezier(0, 0, 0, 1)"
+            }
         }
-      },
-      colors: {
-        primary: colors.teal,
-        accent: colors.teal,
-        gray: monoColor,
-        black: monoColor[900],
-        offWhite: monoColor[50],
-        whiteOnDark: monoColor[300]
-      },
-      fontFamily: {
-        sans: ["DM Sans"]
-      },
-      fontSize: {
-        xs: ["12.8571px", { lineHeight: "18px" }],
-        sm: ["14.2857px", { lineHeight: "20px" }],
-        base: ["15.7143px", { lineHeight: "22px" }],
-        lg: ["17.1429px", { lineHeight: "24px" }],
-        xl: ["20px", { lineHeight: "28px" }],
-        "2xl": ["25.7143px", { lineHeight: "36px" }],
-        "3xl": ["31.4286px", { lineHeight: "44px" }],
-        "4xl": ["37.1429px", { lineHeight: "52px" }],
-        "5xl": ["45.7143px", { lineHeight: "64px" }],
-        "6xl": ["57.1429px", { lineHeight: "80px" }],
-        "7xl": ["80px", { lineHeight: "84px" }],
-        "8xl": ["97.1429px", { lineHeight: "102px" }],
-        "9xl": ["131.4286px", { lineHeight: "138px" }]
-      },
-      ringWidth: {
-        ...defaultTheme.ringWidth,
-        3: "3px"
-      },
-      transitionDuration: {
-        quick: "100ms",
-        emphasized: "500ms",
-        "emphasized-decelerate": "400ms",
-        "emphasized-accelerate": "300ms",
-        "standard": "200ms",
-        "standard-decelerate": "250ms",
-        "standard-accelerate": "200ms"
-      },
-      transitionTimingFunction: {
-        emphasized: "cubic-bezier(0.2, 0, 0, 1)",
-        "emphasized-decelerate": "cubic-bezier(0.05, 0.7, 0.1, 1)",
-        "emphasized-accelerate": "cubic-bezier(0.3, 0, 0.8, 0.15)",
-        standard: "cubic-bezier(0.2, 0, 0, 1)",
-        "standard-decelerate": "cubic-bezier(0.3, 0, 1, 1)",
-        "standard-accelerate": "cubic-bezier(0, 0, 0, 1)"
-      }
-    }
-  },
-  plugins: [
-    require("@tailwindcss/forms")
-  ]
+    },
+    plugins: [
+        require("@tailwindcss/forms")
+    ]
 };

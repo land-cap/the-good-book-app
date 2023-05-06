@@ -23,10 +23,12 @@
   "dependencies": {
     "@capsizecss/core": "^3.1.0",
     "@capsizecss/metrics": "^1.1.1",
+    "@capsizecss/unpack": "^0.1.0",
     "@motionone/solid": "^10.16.0",
     "@polymorphic-factory/solid": "^0.3.1",
     "@solidjs/meta": "^0.28.2",
     "@solidjs/router": "^0.8.2",
+    "@supabase/supabase-js": "^2.21.0",
     "@tailwindcss/forms": "^0.5.3",
     "@zag-js/combobox": "^0.6.0",
     "@zag-js/pressable": "^0.6.0",
