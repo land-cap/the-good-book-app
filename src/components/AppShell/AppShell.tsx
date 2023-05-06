@@ -6,7 +6,7 @@ import { Capped } from '~/cap-ui/meta/Capped'
 export const AppShell = ({ children }: { children: JSX.Element }) => (
 	<div
 		class={
-			'text-base subpixel-antialiased flex flex-col h-fit min-h-[100vh] text-black dark:text-whiteOnDark dark:bg-gray-900'
+			'text-base flex flex-col h-fit min-h-[100vh] text-black dark:text-whiteOnDark dark:bg-gray-900'
 		}
 	>
 		<NavBar />
