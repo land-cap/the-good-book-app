@@ -29,7 +29,7 @@ module.exports = {
             },
             fontFamily: {
                 sans: ["monolisa-custom", "DM Sans"],
-                serif: ['Fraunces', "Sorts Mill Goudy"],
+                serif: ['monolisa-custom', 'Fraunces', "Sorts Mill Goudy"],
             },
             fontSize: {
                 xs: ["12.8571px", {lineHeight: "18px"}],

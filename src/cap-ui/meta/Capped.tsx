@@ -26,6 +26,18 @@ const fixStyleObject = (rawStyles: ReturnType<typeof createStyleObject>) =>
 		}
 	}, {} as ReturnType<typeof createStyleObject>)
 
+console.log(frauncesMetrics)
+
+const monolisaMetrics = {
+	...dmMonoMetrics,
+	familyName: 'MonoLisa',
+	capHeight: 700,
+	ascent: 1060,
+	descent: -320,
+	unitsPerEm: 1000,
+	xHeight: 550,
+}
+
 export const Capped = styledDynamic(
 	({
 		fontSize,
@@ -48,7 +60,7 @@ export const Capped = styledDynamic(
 					: fontSizeToCapHeight[fontSize]?.capHeight || fontSizeToCapHeight.base.capHeight,
 			lineGap:
 				lineGap || fontSizeToCapHeight[fontSize]?.lineGap || fontSizeToCapHeight.base.lineGap,
-			fontMetrics: serif ? frauncesMetrics : dmMonoMetrics,
+			fontMetrics: serif ? monolisaMetrics : monolisaMetrics,
 		})
 
 		return fixStyleObject(styles)

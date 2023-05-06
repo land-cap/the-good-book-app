@@ -52,8 +52,8 @@ export const Chapter = () => {
 			{chapterTitle() ? <ChapterTitle>{chapterTitle()}</ChapterTitle> : null}
 			<Capped
 				component={'p'}
-				fontSize={isDesktop() ? 'xl' : 'base'}
-				lineGap={isDesktop() ? 36 : 24}
+				fontSize={isDesktop() ? 'lg' : 'base'}
+				lineGap={isDesktop() ? 32 : 22}
 				class="dark:text-gray-400 font-serif"
 			>
 				<For each={chapterData()}>
