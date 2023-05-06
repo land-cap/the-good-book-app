@@ -19,11 +19,11 @@ createEffect(() => {
 type Verse = { verseNumber: number; content: string }
 
 const VerseNumber = ({ number }: { number: number }) => (
-	<sup class={'font-black text-gray-500 font-sans not-italic'}>{number}</sup>
+	<sup class={'font-bold text-gray-500 font-sans not-italic'}>{number}</sup>
 )
 
 const ChapterTitle = ({ children }: { children: any }) => (
-	<Capped component="h1" class="font-black tracking-tight font-serif" fontSize={'4xl'}>
+	<Capped component="h1" class="font-bold tracking-tight font-serif" fontSize={'4xl'}>
 		{children}
 	</Capped>
 )
