@@ -48,7 +48,7 @@ export const Chapter = () => {
 	createEffect(() => console.log(chapterData()))
 
 	return (
-		<div class={'flex flex-col gap-12 mt-12'}>
+		<div class={'flex flex-col gap-16 mt-16'}>
 			{chapterTitle() ? <ChapterTitle>{chapterTitle()}</ChapterTitle> : null}
 			<Capped
 				component={'p'}
