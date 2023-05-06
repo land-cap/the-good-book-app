@@ -1,8 +1,8 @@
 import { Dynamic, DynamicProps } from 'solid-js/web'
 import { styled, StylesFn } from 'solid-styled-components'
 import { JSX, ValidComponent } from 'solid-js'
-import dmMonoMetrics from '@capsizecss/metrics/dMMono'
-import frauncesMetrics from '@capsizecss/metrics/fraunces'
+import dmSansMetrics from '@capsizecss/metrics/dMSans'
+// import frauncesMetrics from '@capsizecss/metrics/fraunces'
 import { createStyleObject } from '@capsizecss/core'
 import { FontSize, fontSizeToCapHeight } from '~/config/fontSize'
 
@@ -26,10 +26,8 @@ const fixStyleObject = (rawStyles: ReturnType<typeof createStyleObject>) =>
 		}
 	}, {} as ReturnType<typeof createStyleObject>)
 
-console.log(frauncesMetrics)
-
 const monolisaMetrics = {
-	...dmMonoMetrics,
+	...dmSansMetrics,
 	familyName: 'MonoLisa',
 	capHeight: 700,
 	ascent: 1060,
@@ -60,7 +58,7 @@ export const Capped = styledDynamic(
 					: fontSizeToCapHeight[fontSize]?.capHeight || fontSizeToCapHeight.base.capHeight,
 			lineGap:
 				lineGap || fontSizeToCapHeight[fontSize]?.lineGap || fontSizeToCapHeight.base.lineGap,
-			fontMetrics: serif ? monolisaMetrics : monolisaMetrics,
+			fontMetrics: serif ? dmSansMetrics : dmSansMetrics,
 		})
 
 		return fixStyleObject(styles)

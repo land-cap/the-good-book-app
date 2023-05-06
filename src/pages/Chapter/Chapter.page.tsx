@@ -62,10 +62,10 @@ export const Chapter = () => {
 							return <For each={content as Verse[]}>{(verse) => <Verse verse={verse} />}</For>
 						} else if (type === 'quote') {
 							return (
-								<span class="italic">
+								<>
 									<br />
 									<For each={content as Verse[]}>{(verse) => <Verse verse={verse} />}</For>
-								</span>
+								</>
 							)
 						}
 					}}
