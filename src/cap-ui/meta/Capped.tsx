@@ -2,7 +2,6 @@ import { Dynamic, DynamicProps } from 'solid-js/web'
 import { styled, StylesFn } from 'solid-styled-components'
 import { JSX, ValidComponent } from 'solid-js'
 import dmSansMetrics from '@capsizecss/metrics/dMSans'
-// import frauncesMetrics from '@capsizecss/metrics/fraunces'
 import { createStyleObject } from '@capsizecss/core'
 import { FontSize, fontSizeToCapHeight } from '~/config/fontSize'
 

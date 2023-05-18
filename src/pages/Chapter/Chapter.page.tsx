@@ -1,5 +1,4 @@
 import { useIsBreakpoint } from '~/hooks/useIsBreakpoint'
-import { Capped } from '~/cap-ui/meta/Capped'
 import { useParams } from '@solidjs/router'
 import { createEffect, createSignal, For } from 'solid-js'
 import { getChapter } from '~/bibleDataApi/bibleDataApi'
@@ -28,13 +27,14 @@ export const Chapter = () => {
 	createEffect(() => console.log(chapterData()))
 
 	return (
-		<div class={'flex flex-col gap-14 mt-14'}>
-			<Capped
-				component={'p'}
-				fontSize={isDesktop() ? 'lg' : 'base'}
-				lineGap={isDesktop() ? 32 : 24}
-				class="dark:text-gray-400 font-serif"
-			>
+		<div class={'flex flex-col'}>
+			{/*<Capped*/}
+			{/*	component={'p'}*/}
+			{/*	fontSize={isDesktop() ? 'lg' : 'base'}*/}
+			{/*	lineGap={isDesktop() ? 32 : 24}*/}
+			{/*	class="dark:text-gray-400 font-serif"*/}
+			{/*>*/}
+			<div>
 				<For each={chapterData()}>
 					{(contentItem) => {
 						const Component = contentTypeToComponent[contentItem.type]
@@ -42,7 +42,8 @@ export const Chapter = () => {
 						return <Component contentItem={contentItem} />
 					}}
 				</For>
-			</Capped>
+			</div>
+			{/*</Capped>*/}
 		</div>
 	)
 }
