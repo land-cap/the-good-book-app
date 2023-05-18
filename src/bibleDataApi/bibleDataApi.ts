@@ -1,5 +1,5 @@
 import { db } from '~/bibleDataApi/db'
-import { Chapter } from '~/model/chapter'
+import { TChapter } from '~/model/TChapter'
 
 export const getChapter = async (bookId: number, chapter: number) => {
 	const { data } = await db
@@ -7,5 +7,5 @@ export const getChapter = async (bookId: number, chapter: number) => {
 		.select()
 		.eq('book_id', bookId)
 		.eq('chapter', chapter)
-	return data?.[0]?.content as Chapter
+	return data?.[0]?.content as TChapter
 }

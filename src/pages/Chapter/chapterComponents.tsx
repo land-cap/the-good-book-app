@@ -1,20 +1,23 @@
 import { For } from 'solid-js'
 import { Capped } from '~/cap-ui'
 import {
-	Body as BodyType,
-	Quote as QuoteType,
-	Verse as VerseType,
+	CONTENT_TYPE,
+	TBody,
+	TChapterTitle,
+	TQuote,
+	TSectionTitle,
+	TVerse,
 	VERSE_CONTENT_TYPE,
 } from '~/model'
 import { useIsBreakpoint } from '~/hooks/useIsBreakpoint'
 
-export const ChapterTitle = ({ content }: { content: string }) => (
+export const ChapterTitle = ({ contentItem: { content } }: { contentItem: TChapterTitle }) => (
 	<Capped component="h1" class="font-bold tracking-tighter font-serif" fontSize={'4xl'}>
 		{content}
 	</Capped>
 )
 
-export const SectionTitle = ({ content }: { content: string }) => (
+export const SectionTitle = ({ contentItem: { content } }: { contentItem: TSectionTitle }) => (
 	<Capped component={'h2'} fontSize={'2xl'} class="font-bold tracking-tight my-8">
 		{content}
 	</Capped>
@@ -27,7 +30,7 @@ export const JesusWords = ({ content }: { content: string }) => (
 	<span class="text-red-600">{content}</span>
 )
 
-export const Body = ({ body: { content } }: { body: BodyType }) => {
+export const Body = ({ contentItem: { content } }: { contentItem: TBody }) => {
 	const isDesktop = useIsBreakpoint('sm')
 
 	return (
@@ -41,7 +44,7 @@ export const Body = ({ body: { content } }: { body: BodyType }) => {
 	)
 }
 
-export const Verse = ({ verse: { verseNumber, content } }: { verse: VerseType }) => (
+export const Verse = ({ verse: { verseNumber, content } }: { verse: TVerse }) => (
 	<>
 		{' '}
 		<VerseNumber number={verseNumber} />{' '}
@@ -55,7 +58,7 @@ export const Verse = ({ verse: { verseNumber, content } }: { verse: VerseType })
 	</>
 )
 
-export const Quote = ({ quote: { verseNumber, content } }: { quote: QuoteType }) => {
+export const Quote = ({ contentItem: { verseNumber, content } }: { contentItem: TQuote }) => {
 	const isDesktop = useIsBreakpoint('sm')
 
 	return (
@@ -64,4 +67,11 @@ export const Quote = ({ quote: { verseNumber, content } }: { quote: QuoteType })
 			{content}
 		</Capped>
 	)
+}
+
+export const contentTypeToComponent = {
+	[CONTENT_TYPE.ChapterTitle]: ChapterTitle,
+	[CONTENT_TYPE.SectionTitle]: SectionTitle,
+	[CONTENT_TYPE.Body]: Body,
+	[CONTENT_TYPE.Quote]: Quote,
 }

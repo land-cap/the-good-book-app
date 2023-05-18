@@ -10,25 +10,28 @@ export enum VERSE_CONTENT_TYPE {
 	JesusWords = 'jesusWords',
 }
 
-export type Verse = {
+export type TChapterTitle = {
+	type: CONTENT_TYPE.ChapterTitle
+	content: string
+}
+
+export type TSectionTitle = {
+	type: CONTENT_TYPE.SectionTitle
+	content: string
+}
+
+export type TVerse = {
 	type: CONTENT_TYPE.Body
 	verseNumber: number
 	content: { type: VERSE_CONTENT_TYPE.Text | VERSE_CONTENT_TYPE.JesusWords; content: string }[]
 }
 
-export type Body = { type: CONTENT_TYPE.Body; content: Verse[] }
+export type TBody = { type: CONTENT_TYPE.Body; content: TVerse[] }
 
-export type Quote = {
+export type TQuote = {
 	type: CONTENT_TYPE.Quote
 	verseNumber?: number
 	content: string
 }
 
-export type Chapter = (
-	| {
-			type: CONTENT_TYPE.ChapterTitle | CONTENT_TYPE.SectionTitle
-			content: string
-	  }
-	| Body
-	| Quote
-)[]
+export type TChapter = (TChapterTitle | TSectionTitle | TBody | TQuote)[]

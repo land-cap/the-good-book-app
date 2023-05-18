@@ -3,8 +3,8 @@ import { Capped } from '~/cap-ui/meta/Capped'
 import { useParams } from '@solidjs/router'
 import { createEffect, createSignal, For } from 'solid-js'
 import { getChapter } from '~/bibleDataApi/bibleDataApi'
-import { Chapter as ChapterType } from '~/model'
-import { Verse } from '~/pages/Chapter/chapterComponents'
+import { TChapter as ChapterType } from '~/model'
+import { contentTypeToComponent } from '~/pages/Chapter/chapterComponents'
 
 const [bookId, setBookId] = createSignal<number | null>(null)
 const [chapter, setChapter] = createSignal<number | null>(null)
@@ -36,35 +36,10 @@ export const Chapter = () => {
 				class="dark:text-gray-400 font-serif"
 			>
 				<For each={chapterData()}>
-					{({ type, content }) => {
-						if (type === 'verse') {
-							return (
-								<Capped
-									component={'span'}
-									fontSize={isDesktop() ? 'lg' : 'base'}
-									lineGap={isDesktop() ? 32 : 24}
-								>
-									<For each={content as Verse[]}>{(verse) => <Verse verse={verse} />}</For>
-								</Capped>
-							)
-						} else if (type === 'quote') {
-							return (
-								<Capped
-									component={'span'}
-									fontSize={isDesktop() ? 'lg' : 'base'}
-									lineGap={isDesktop() ? 32 : 24}
-								>
-									<br />
-									<For each={content as Verse[]}>{(verse) => <Verse verse={verse} />}</For>
-								</Capped>
-							)
-						} else if (type === 'sectionTitle') {
-							return (
-								<Capped component={'h2'} fontSize={'2xl'} class="font-bold tracking-tight my-8">
-									{content}
-								</Capped>
-							)
-						}
+					{(contentItem) => {
+						const Component = contentTypeToComponent[contentItem.type]
+						// @ts-ignore
+						return <Component contentItem={contentItem} />
 					}}
 				</For>
 			</Capped>
