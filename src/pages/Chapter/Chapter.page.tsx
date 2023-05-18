@@ -1,38 +1,19 @@
 import { useIsBreakpoint } from '~/hooks/useIsBreakpoint'
 import { Capped } from '~/cap-ui/meta/Capped'
 import { useParams } from '@solidjs/router'
-import { createEffect, createMemo, createSignal, For } from 'solid-js'
+import { createEffect, createSignal, For } from 'solid-js'
 import { getChapter } from '~/bibleDataApi/bibleDataApi'
+import { Chapter as ChapterType } from '~/model'
+import { Verse } from '~/pages/Chapter/chapterComponents'
 
 const [bookId, setBookId] = createSignal<number | null>(null)
 const [chapter, setChapter] = createSignal<number | null>(null)
-const [chapterData, setChapterData] = createSignal([])
-// @ts-ignore
-const chapterTitle = createMemo(() => chapterData()[0]?.content)
+const [chapterData, setChapterData] = createSignal<ChapterType>([])
 
 createEffect(() => {
 	if (bookId() && chapter())
 		getChapter(bookId() as number, chapter() as number).then(setChapterData)
 })
-
-type Verse = { verseNumber: number; content: string }
-
-const VerseNumber = ({ number }: { number: number }) => (
-	<sup class={'font-bold text-gray-500 font-sans not-italic'}>{number}</sup>
-)
-
-const ChapterTitle = ({ children }: { children: any }) => (
-	<Capped component="h1" class="font-bold tracking-tighter font-serif" fontSize={'4xl'}>
-		{children}
-	</Capped>
-)
-
-const Verse = ({ verse: { verseNumber, content } }: { verse: Verse }) => (
-	<>
-		{' '}
-		<VerseNumber number={verseNumber} /> {content}
-	</>
-)
 
 export const Chapter = () => {
 	const isDesktop = useIsBreakpoint('sm')
@@ -48,7 +29,6 @@ export const Chapter = () => {
 
 	return (
 		<div class={'flex flex-col gap-14 mt-14'}>
-			{chapterTitle() ? <ChapterTitle>{chapterTitle()}</ChapterTitle> : null}
 			<Capped
 				component={'p'}
 				fontSize={isDesktop() ? 'lg' : 'base'}

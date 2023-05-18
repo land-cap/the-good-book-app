@@ -1,7 +1,7 @@
 export enum CONTENT_TYPE {
 	ChapterTitle = 'chapterTitle',
 	SectionTitle = 'sectionTitle',
-	Verse = 'verse',
+	Body = 'body',
 	Quote = 'quote',
 }
 
@@ -11,10 +11,12 @@ export enum VERSE_CONTENT_TYPE {
 }
 
 export type Verse = {
-	type: CONTENT_TYPE.Verse
+	type: CONTENT_TYPE.Body
 	verseNumber: number
 	content: { type: VERSE_CONTENT_TYPE.Text | VERSE_CONTENT_TYPE.JesusWords; content: string }[]
 }
+
+export type Body = { type: CONTENT_TYPE.Body; content: Verse[] }
 
 export type Quote = {
 	type: CONTENT_TYPE.Quote
@@ -27,6 +29,6 @@ export type Chapter = (
 			type: CONTENT_TYPE.ChapterTitle | CONTENT_TYPE.SectionTitle
 			content: string
 	  }
-	| Verse
+	| Body
 	| Quote
 )[]
