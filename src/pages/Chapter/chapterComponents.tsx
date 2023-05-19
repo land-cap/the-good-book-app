@@ -11,17 +11,22 @@ import {
 } from '~/model'
 import { useIsBreakpoint } from '~/hooks/useIsBreakpoint'
 
-export const ChapterTitle = ({ contentItem: { content } }: { contentItem: TChapterTitle }) => (
-	<Capped component="h1" class="font-bold tracking-tighter font-serif my-12 sm:my-16" fontSize={'3xl'}>
-		{content}
-	</Capped>
-)
+export const ChapterTitle = ({ contentItem: { content } }: { contentItem: TChapterTitle }) => {
+	const isDesktop = useIsBreakpoint('sm')
 
-export const SectionTitle = ({ contentItem: { content } }: { contentItem: TSectionTitle }) => (
-	<Capped component={'h2'} fontSize={'xl'} class="font-bold tracking-tight my-8 sm:my-12">
+	return (
+	<Capped component="h1" fontSize={isDesktop ? '4xl' : '3xl'} class="font-bold tracking-tighter font-serif my-12 sm:my-16">
 		{content}
 	</Capped>
-)
+)}
+
+export const SectionTitle = ({ contentItem: { content } }: { contentItem: TSectionTitle }) => {
+	const isDesktop = useIsBreakpoint('sm')
+
+	return <Capped component={'h2'} fontSize={isDesktop ? '2xl' : 'xl'} class="font-bold tracking-tight my-8 sm:my-12">
+		{content}
+	</Capped>
+}
 export const VerseNumber = ({ number }: { number: number }) => (
 	<sup class={'font-bold text-gray-500 font-sans not-italic'}>{number}</sup>
 )
