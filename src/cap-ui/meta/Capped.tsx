@@ -2,7 +2,7 @@ import { Dynamic, DynamicProps } from 'solid-js/web'
 import { styled, StylesFn } from 'solid-styled-components'
 import { JSX, ValidComponent } from 'solid-js'
 import dmSansMetrics from '@capsizecss/metrics/dMSans'
-import dmSerifTextMetrics from '@capsizecss/metrics/dMSansSerifText'
+import dmSerifTextMetrics from '@capsizecss/metrics/dMSerifText'
 import { createStyleObject } from '@capsizecss/core'
 import { FontSize, fontSizeToCapHeight } from '~/config/fontSize'
 
