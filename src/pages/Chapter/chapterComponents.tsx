@@ -15,17 +15,28 @@ export const ChapterTitle = ({ contentItem: { content } }: { contentItem: TChapt
 	const isDesktop = useIsBreakpoint('sm')
 
 	return (
-	<Capped component="h1" fontSize={isDesktop ? '4xl' : '3xl'} class="font-bold tracking-tighter font-serif my-12 sm:my-16">
-		{content}
-	</Capped>
-)}
+		<Capped
+			component="h1"
+			fontSize={isDesktop() ? '4xl' : '3xl'}
+			class="font-bold tracking-tighter my-12 sm:my-16"
+		>
+			{content}
+		</Capped>
+	)
+}
 
 export const SectionTitle = ({ contentItem: { content } }: { contentItem: TSectionTitle }) => {
 	const isDesktop = useIsBreakpoint('sm')
 
-	return <Capped component={'h2'} fontSize={isDesktop ? '2xl' : 'xl'} class="font-bold tracking-tight my-8 sm:my-12">
-		{content}
-	</Capped>
+	return (
+		<Capped
+			component={'h2'}
+			fontSize={isDesktop() ? '2xl' : 'xl'}
+			class="font-bold tracking-tight my-8 sm:my-12"
+		>
+			{content}
+		</Capped>
+	)
 }
 export const VerseNumber = ({ number }: { number: number }) => (
 	<sup class={'font-bold text-gray-500 font-sans not-italic'}>{number}</sup>
@@ -72,9 +83,13 @@ export const Quote = ({ contentItem: { verseNumber, content } }: { contentItem: 
 			fontSize={isDesktop() ? 'lg' : 'base'}
 			lineGap={isDesktop() ? 32 : 24}
 			serif
-			class="my-6 md:my-8 serif"
+			class="my-6 md:my-8 font-serif italic"
 		>
-			{verseNumber ? <><VerseNumber number={verseNumber} />{' '}</> : null}
+			{verseNumber ? (
+				<>
+					<VerseNumber number={verseNumber} />{' '}
+				</>
+			) : null}
 			{content}
 		</Capped>
 	)

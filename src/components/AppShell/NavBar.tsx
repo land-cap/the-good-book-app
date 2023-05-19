@@ -104,7 +104,7 @@ const ScrolledNavbar = () => {
 			)}
 		>
 			<div class={'border-b border-gray-200 dark:border-b-gray-700'}>
-				<div class={twMerge('flex place-contentItem-center py-2')}>
+				<div class={twMerge('flex place-content-center py-2')}>
 					<p class="text-sm text-gray-500 font-bold">Geneza 1</p>
 				</div>
 			</div>
