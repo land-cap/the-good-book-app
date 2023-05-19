@@ -28,7 +28,7 @@ module.exports = {
                 whiteOnDark: monoColor[300]
             },
             fontFamily: {
-                sans: ["DM Sans"],
+                sans: ["DM Serif Text"],
                 serif: ['DM Sans', 'Fraunces', "Sorts Mill Goudy"],
             },
             fontSize: {

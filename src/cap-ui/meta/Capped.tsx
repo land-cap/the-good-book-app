@@ -2,6 +2,7 @@ import { Dynamic, DynamicProps } from 'solid-js/web'
 import { styled, StylesFn } from 'solid-styled-components'
 import { JSX, ValidComponent } from 'solid-js'
 import dmSansMetrics from '@capsizecss/metrics/dMSans'
+import dmSerifTextMetrics from '@capsizecss/metrics/dMSansSerifText'
 import { createStyleObject } from '@capsizecss/core'
 import { FontSize, fontSizeToCapHeight } from '~/config/fontSize'
 
@@ -57,7 +58,7 @@ export const Capped = styledDynamic(
 					: fontSizeToCapHeight[fontSize]?.capHeight || fontSizeToCapHeight.base.capHeight,
 			lineGap:
 				lineGap || fontSizeToCapHeight[fontSize]?.lineGap || fontSizeToCapHeight.base.lineGap,
-			fontMetrics: serif ? dmSansMetrics : dmSansMetrics,
+			fontMetrics: serif ? dmSerifTextMetrics : dmSansMetrics,
 		})
 
 		return fixStyleObject(styles)

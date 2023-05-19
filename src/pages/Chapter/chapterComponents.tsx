@@ -71,7 +71,8 @@ export const Quote = ({ contentItem: { verseNumber, content } }: { contentItem: 
 			component={'p'}
 			fontSize={isDesktop() ? 'lg' : 'base'}
 			lineGap={isDesktop() ? 32 : 24}
-			class="my-6 md:my-8"
+			serif
+			class="my-6 md:my-8 serif"
 		>
 			{verseNumber ? <><VerseNumber number={verseNumber} />{' '}</> : null}
 			{content}
