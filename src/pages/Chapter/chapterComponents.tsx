@@ -73,7 +73,7 @@ export const Quote = ({ contentItem: { verseNumber, content } }: { contentItem: 
 			lineGap={isDesktop() ? 32 : 24}
 			class="my-6 md:my-8"
 		>
-			{verseNumber ? <VerseNumber number={verseNumber} /> : null}
+			{verseNumber ? <><VerseNumber number={verseNumber} />{' '}</> : null}
 			{content}
 		</Capped>
 	)
