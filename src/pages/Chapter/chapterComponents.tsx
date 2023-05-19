@@ -12,13 +12,13 @@ import {
 import { useIsBreakpoint } from '~/hooks/useIsBreakpoint'
 
 export const ChapterTitle = ({ contentItem: { content } }: { contentItem: TChapterTitle }) => (
-	<Capped component="h1" class="font-bold tracking-tighter font-serif my-14 sm:my-16" fontSize={'4xl'}>
+	<Capped component="h1" class="font-bold tracking-tighter font-serif my-12 sm:my-16" fontSize={'3xl'}>
 		{content}
 	</Capped>
 )
 
 export const SectionTitle = ({ contentItem: { content } }: { contentItem: TSectionTitle }) => (
-	<Capped component={'h2'} fontSize={'2xl'} class="font-bold tracking-tight my-8 sm:my-10">
+	<Capped component={'h2'} fontSize={'xl'} class="font-bold tracking-tight my-8 sm:my-12">
 		{content}
 	</Capped>
 )
