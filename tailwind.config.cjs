@@ -28,8 +28,8 @@ module.exports = {
                 whiteOnDark: monoColor[300]
             },
             fontFamily: {
-                sans: ["DM Sans"],
-                serif: ['Poltawski Nowy', 'Fraunces', "Sorts Mill Goudy"],
+                sans: ['monolisa-custom', "DM Sans"],
+                serif: ['monolisa-custom', 'Poltawski Nowy', 'Fraunces', "Sorts Mill Goudy"],
             },
             fontSize: {
                 xs: ["11.4286px", {lineHeight: "16px"}],
