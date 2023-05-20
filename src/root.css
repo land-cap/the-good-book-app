@@ -19,7 +19,7 @@ html, body {
 
 html body {
     font-size: 15.7143px;
-    -webkit-font-smoothing: antialiased;
+    /*-webkit-font-smoothing: antialiased;*/
 }
 
 .material-icon {
