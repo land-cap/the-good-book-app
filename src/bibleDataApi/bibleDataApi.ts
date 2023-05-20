@@ -1,5 +1,12 @@
 import { db } from '~/bibleDataApi/db'
-import { TChapter } from '~/model/TChapter'
+import { TChapter } from '~/model/chapter'
+import { TBook } from '~/model'
+
+export const getBookList = async () => {
+	const { data } = await db.from('vdc-book').select()
+	const sortedData = data?.sort((a, b) => a.order - b.order)
+	return sortedData as TBook[]
+}
 
 export const getChapter = async (bookId: number, chapter: number) => {
 	const { data } = await db

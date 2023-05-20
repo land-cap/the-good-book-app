@@ -1,1 +1,2 @@
-export * from './TChapter'
+export * from './chapter'
+export * from './book'

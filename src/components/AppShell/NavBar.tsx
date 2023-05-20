@@ -1,9 +1,11 @@
-import { createEffect, createSignal, onCleanup } from 'solid-js'
+import { createEffect, createMemo, createSignal, onCleanup, onMount } from 'solid-js'
 import { twMerge } from 'tailwind-merge'
 import { Portal } from 'solid-js/web'
 import { Capped } from '~/cap-ui/meta/Capped'
 import { A } from '@solidjs/router'
 import { StyledCombobox } from '~/cap-ui/Combobox/Combobox'
+import { getBookList } from '~/bibleDataApi/bibleDataApi'
+import { TBook } from '~/model'
 
 const [isInteractiveNavbarVisible, setIsInteractiveNavbarVisible] = createSignal(true)
 
@@ -18,6 +20,19 @@ const intersectionObserver = new IntersectionObserver(
 )
 
 const InteractiveNavbar = () => {
+	const [bookList, setBookList] = createSignal([] as TBook[])
+
+	onMount(async () => {
+		const data = await getBookList()
+		setBookList(data)
+	})
+
+	const bookOptionList = createMemo(() =>
+		bookList().map(({ name }) => ({ label: name, disabled: false }))
+	)
+
+	createEffect(() => console.log(bookOptionList()))
+
 	createEffect(() => {
 		if (interactiveNavbarEl()) {
 			intersectionObserver.observe(interactiveNavbarEl())
@@ -45,47 +60,7 @@ const InteractiveNavbar = () => {
 						</Capped>
 					</A>
 					<div class="w-full sm:w-48">
-						<StyledCombobox
-							options={[
-								{ label: 'Geneza', disabled: false },
-								{ label: 'Exod', disabled: false },
-								{ label: 'Leviticul', disabled: false },
-								{ label: 'Judecători', disabled: false },
-								{ label: 'Geneza1', disabled: false },
-								{ label: 'Exod1', disabled: false },
-								{ label: 'Leviticul1', disabled: false },
-								{ label: 'Judecători1', disabled: false },
-								{ label: 'Geneza2', disabled: false },
-								{ label: 'Exod2', disabled: false },
-								{ label: 'Leviticul2', disabled: false },
-								{ label: 'Judecători2', disabled: false },
-								{ label: 'Geneza3', disabled: false },
-								{ label: 'Exod3', disabled: false },
-								{ label: 'Leviticul3', disabled: false },
-								{ label: 'Judecători3', disabled: false },
-								{ label: 'Geneza4', disabled: false },
-								{ label: 'Exod4', disabled: false },
-								{ label: 'Leviticul4', disabled: false },
-								{ label: 'Judecători4', disabled: false },
-								{ label: 'Geneza5', disabled: false },
-								{ label: 'Exod5', disabled: false },
-								{ label: 'Leviticul5', disabled: false },
-								{ label: 'Judecători5', disabled: false },
-								{ label: 'Geneza6', disabled: false },
-								{ label: 'Exod6', disabled: false },
-								{ label: 'Leviticul6', disabled: false },
-								{ label: 'Judecători6', disabled: false },
-								{ label: 'Geneza7', disabled: false },
-								{ label: 'Exod7', disabled: false },
-								{ label: 'Leviticul7', disabled: false },
-								{ label: 'Judecători7', disabled: false },
-								{ label: 'Geneza8', disabled: false },
-								{ label: 'Exod8', disabled: false },
-								{ label: 'Leviticul8', disabled: false },
-								{ label: 'Judecători8', disabled: false },
-							]}
-							defaultValue={'Geneza'}
-						/>
+						<StyledCombobox options={bookOptionList} defaultValue={'Geneza'} />
 					</div>
 				</div>
 			</div>
