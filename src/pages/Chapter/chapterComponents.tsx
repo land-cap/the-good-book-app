@@ -31,7 +31,7 @@ export const SectionTitle = ({ contentItem: { content } }: { contentItem: TSecti
 	)
 }
 export const VerseNumber = ({ number }: { number: number }) => (
-	<sup class={'font-bold text-gray-500 font-mono not-italic'}>{number}</sup>
+	<sup class={'font-bold text-gray-500 font-sans'}>{number}</sup>
 )
 
 export const JesusWords = ({ content }: { content: string }) => (
@@ -46,6 +46,7 @@ export const Body = ({ contentItem: { content } }: { contentItem: TBody }) => {
 			component={'span'}
 			fontSize={isDesktop() ? 'lg' : 'base'}
 			lineGap={isDesktop() ? 32 : 24}
+			class="tracking-wide"
 		>
 			<For each={content}>{(verse) => <Verse verse={verse} />}</For>
 		</Capped>
@@ -71,11 +72,12 @@ export const Quote = ({ contentItem: { verseNumber, content } }: { contentItem: 
 
 	return (
 		<Capped
-			component={'p'}
+			component={'q'}
 			fontSize={isDesktop() ? 'lg' : 'base'}
 			lineGap={isDesktop() ? 32 : 24}
+			// @ts-ignore
 			mono
-			class="my-6 md:my-8 font-mono"
+			class="block font-mono"
 		>
 			{verseNumber ? (
 				<>

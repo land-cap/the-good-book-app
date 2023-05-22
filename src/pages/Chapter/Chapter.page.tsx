@@ -4,6 +4,7 @@ import { createEffect, createSignal, For } from 'solid-js'
 import { getChapter } from '~/bibleDataApi/bibleDataApi'
 import { TChapter as ChapterType } from '~/model'
 import { contentTypeToComponent } from '~/pages/Chapter/chapterComponents'
+import styles from './chapter.module.css'
 
 const [bookId, setBookId] = createSignal<number | null>(null)
 const [chapter, setChapter] = createSignal<number | null>(null)
@@ -27,23 +28,14 @@ export const Chapter = () => {
 	createEffect(() => console.log(chapterData()))
 
 	return (
-		<div class={'flex flex-col'}>
-			{/*<Capped*/}
-			{/*	component={'p'}*/}
-			{/*	fontSize={isDesktop() ? 'lg' : 'base'}*/}
-			{/*	lineGap={isDesktop() ? 32 : 24}*/}
-			{/*	class="dark:text-gray-400 font-serif"*/}
-			{/*>*/}
-			<div>
-				<For each={chapterData()}>
-					{(contentItem) => {
-						const Component = contentTypeToComponent[contentItem.type]
-						// @ts-ignore
-						return <Component contentItem={contentItem} />
-					}}
-				</For>
-			</div>
-			{/*</Capped>*/}
-		</div>
+		<main class={styles.container}>
+			<For each={chapterData()}>
+				{(contentItem) => {
+					const Component = contentTypeToComponent[contentItem.type]
+					// @ts-ignore
+					return <Component contentItem={contentItem} />
+				}}
+			</For>
+		</main>
 	)
 }
