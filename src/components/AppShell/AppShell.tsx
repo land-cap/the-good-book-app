@@ -21,13 +21,13 @@ export const AppShell = ({ children }: { children: JSX.Element }) => (
 							fontSize={'sm'}
 							name="favorite"
 							inline
-							className="mx-1 text-red-500 dark:text-red-400"
+							className="mx-1 text-rose-500 dark:text-rose-400"
 						/>
 					}{' '}
 					in Moldova by
 				</span>{' '}
 				<a href={'https://github.com/dalandcap'} target={'_blank'} class="font-bold">
-					&commat;landCap
+					&commat;land-cap
 				</a>
 			</Capped>
 		</footer>

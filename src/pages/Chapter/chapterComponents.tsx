@@ -35,7 +35,7 @@ export const VerseNumber = ({ number }: { number: number }) => (
 )
 
 export const JesusWords = ({ content }: { content: string }) => (
-	<span class="text-red-600">{content}</span>
+	<span class="text-red-600 dark:text-red-400">{content}</span>
 )
 
 export const Body = ({ contentItem: { content } }: { contentItem: TBody }) => {

@@ -1,4 +1,3 @@
-import { useIsBreakpoint } from '~/hooks/useIsBreakpoint'
 import { useParams } from '@solidjs/router'
 import { createEffect, createSignal, For } from 'solid-js'
 import { getChapter } from '~/bibleDataApi/bibleDataApi'
@@ -16,8 +15,6 @@ createEffect(() => {
 })
 
 export const Chapter = () => {
-	const isDesktop = useIsBreakpoint('sm')
-
 	const { bookId, chapter } = useParams()
 
 	createEffect(() => {
