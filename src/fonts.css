@@ -2,11 +2,13 @@
     font-family: "monolisa-custom";
     src: url("/fonts/monolisa-custom/woff2/monolisa-normal-v1.woff2") format("woff2");
     font-style: normal;
+    font-variation-settings: "wght" 200;
 }
 
 @font-face {
     font-family: "monolisa-custom";
     src: url("/fonts/monolisa-custom/woff2/monolisa-italic-v1.woff2") format("woff2");
     font-style: italic;
+    font-variation-settings: "wght" 200;
 }
 

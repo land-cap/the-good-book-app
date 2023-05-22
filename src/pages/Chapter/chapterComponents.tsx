@@ -39,7 +39,7 @@ export const SectionTitle = ({ contentItem: { content } }: { contentItem: TSecti
 	)
 }
 export const VerseNumber = ({ number }: { number: number }) => (
-	<sup class={'font-bold text-gray-500 font-sans not-italic'}>{number}</sup>
+	<sup class={'font-bold text-gray-500 font-mono not-italic'}>{number}</sup>
 )
 
 export const JesusWords = ({ content }: { content: string }) => (
@@ -83,7 +83,7 @@ export const Quote = ({ contentItem: { verseNumber, content } }: { contentItem: 
 			fontSize={isDesktop() ? 'lg' : 'base'}
 			lineGap={isDesktop() ? 32 : 24}
 			serif
-			class="my-6 md:my-8 font-serif italic"
+			class="my-6 md:my-8 font-serif"
 		>
 			{verseNumber ? (
 				<>
