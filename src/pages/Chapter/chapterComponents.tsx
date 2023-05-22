@@ -15,11 +15,7 @@ export const ChapterTitle = ({ contentItem: { content } }: { contentItem: TChapt
 	const isDesktop = useIsBreakpoint('sm')
 
 	return (
-		<Capped
-			component="h1"
-			fontSize={isDesktop() ? '4xl' : '3xl'}
-			class="font-bold tracking-tighter my-12 sm:my-16"
-		>
+		<Capped component="h1" fontSize={isDesktop() ? '4xl' : '3xl'} class="font-bold my-12 sm:my-16">
 			{content}
 		</Capped>
 	)
@@ -29,11 +25,7 @@ export const SectionTitle = ({ contentItem: { content } }: { contentItem: TSecti
 	const isDesktop = useIsBreakpoint('sm')
 
 	return (
-		<Capped
-			component={'h2'}
-			fontSize={isDesktop() ? '2xl' : 'xl'}
-			class="font-bold tracking-tight my-8 sm:my-12"
-		>
+		<Capped component={'h2'} fontSize={isDesktop() ? '2xl' : 'xl'} class="font-bold my-8 sm:my-12">
 			{content}
 		</Capped>
 	)
@@ -82,8 +74,8 @@ export const Quote = ({ contentItem: { verseNumber, content } }: { contentItem: 
 			component={'p'}
 			fontSize={isDesktop() ? 'lg' : 'base'}
 			lineGap={isDesktop() ? 32 : 24}
-			serif
-			class="my-6 md:my-8 font-serif"
+			mono
+			class="my-6 md:my-8 font-mono"
 		>
 			{verseNumber ? (
 				<>

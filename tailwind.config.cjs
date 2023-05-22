@@ -20,8 +20,8 @@ module.exports = {
                 }
             },
             colors: {
-                primary: colors.teal,
-                accent: colors.teal,
+                primary: colors.amber,
+                accent: colors.amber,
                 gray: monoColor,
                 black: monoColor[900],
                 offWhite: monoColor[50],

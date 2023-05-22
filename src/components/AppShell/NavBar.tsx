@@ -48,7 +48,7 @@ const InteractiveNavbar = () => {
 			ref={(el) => setInteractiveNavbar(el)}
 			class={twMerge('dark:bg-gray-900 mx-auto w-full max-w-3xl px-6 lg:px-8')}
 		>
-			<div class={'border-b border-black dark:border-b-whiteOnDark'}>
+			<div class={'border-b border-gray-200 dark:border-gray-700'}>
 				<div
 					class={
 						'flex flex-col sm:flex-row gap-6 pt-6 pb-4 sm:py-0 sm:h-16 justify-between items-center'
@@ -78,7 +78,7 @@ const ScrolledNavbar = () => {
 					: '-translate-y-full ease-emphasized-accelerate duration-emphasized-accelerate'
 			)}
 		>
-			<div class={'border-b border-gray-200 dark:border-b-gray-700'}>
+			<div class={'border-b border-gray-200 dark:border-gray-700'}>
 				<div class={twMerge('flex place-content-center py-2')}>
 					<p class="text-sm text-gray-500 font-bold">Geneza 1</p>
 				</div>

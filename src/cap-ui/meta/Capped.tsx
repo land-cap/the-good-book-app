@@ -2,6 +2,7 @@ import { Dynamic, DynamicProps } from 'solid-js/web'
 import { styled, StylesFn } from 'solid-styled-components'
 import { JSX, ValidComponent } from 'solid-js'
 import dmSansMetrics from '@capsizecss/metrics/dMSans'
+import dmMonoMetrics from '@capsizecss/metrics/dMMono'
 import { createStyleObject } from '@capsizecss/core'
 import { FontSize, fontSizeToCapHeight } from '~/config/fontSize'
 
@@ -35,31 +36,22 @@ const monolisaMetrics = {
 	xHeight: 550,
 }
 
-export const Capped = styledDynamic(
-	({
-		fontSize,
-		lineGap,
-		className,
-		serif,
-	}: {
-		fontSize: FontSize | number
-		lineGap?: number
-		className?: string
-		serif?: boolean
-	}) => {
-		if (className?.includes('leading'))
-			throw new Error('Capped component cannot have leading class')
+export const Capped = styledDynamic<{
+	fontSize: FontSize | number
+	lineGap?: number
+	className?: string
+	mono?: boolean
+}>(({ fontSize, lineGap, className, mono }) => {
+	if (className?.includes('leading')) throw new Error('Capped component cannot have leading class')
 
-		const styles = createStyleObject({
-			capHeight:
-				typeof fontSize === 'number'
-					? fontSize
-					: fontSizeToCapHeight[fontSize]?.capHeight || fontSizeToCapHeight.base.capHeight,
-			lineGap:
-				lineGap || fontSizeToCapHeight[fontSize]?.lineGap || fontSizeToCapHeight.base.lineGap,
-			fontMetrics: serif ? monolisaMetrics : monolisaMetrics,
-		})
+	const styles = createStyleObject({
+		capHeight:
+			typeof fontSize === 'number'
+				? fontSize
+				: fontSizeToCapHeight[fontSize]?.capHeight || fontSizeToCapHeight.base.capHeight,
+		lineGap: lineGap || fontSizeToCapHeight[fontSize]?.lineGap || fontSizeToCapHeight.base.lineGap,
+		fontMetrics: mono ? dmMonoMetrics : dmSansMetrics,
+	})
 
-		return fixStyleObject(styles)
-	}
-) as unknown as CappedComponent
+	return fixStyleObject(styles)
+}) as unknown as CappedComponent

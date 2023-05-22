@@ -152,8 +152,7 @@ export const withCustomStyles =
 		<Dynamic component={Component} {...props} stylesOverride={stylesOverride} />
 
 export const StyledCombobox = withCustomStyles(Combobox, {
-	input: 'rounded-none ring-2 ring-black dark:ring-whiteOnDark',
+	input: 'rounded-none ring-2 shadow-none ring-gray-200 dark:ring-gray-700',
 	optionContainer: 'rounded-none',
-	inputButton:
-		'text-black dark:text-whiteOnDark hover:text-primary-600 dark:hover:text-primary-500',
+	inputButton: 'hover:text-primary-600 dark:hover:text-primary-500',
 })
