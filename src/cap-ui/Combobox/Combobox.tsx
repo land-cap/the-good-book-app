@@ -51,9 +51,10 @@ export const Combobox = ({
 				setOptions(props.options)
 			},
 			onInputChange({ value }) {
-				const filtered = props.options.filter((item) =>
-					item.label.toLowerCase().includes(value.toLowerCase())
-				)
+				const filtered =
+					props?.options?.filter((item) =>
+						item.label.toLowerCase().includes(value.toLowerCase())
+					) || []
 				setOptions(filtered.length > 0 ? filtered : props.options)
 			},
 			...context,
