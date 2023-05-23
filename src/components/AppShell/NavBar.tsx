@@ -60,6 +60,7 @@ const InteractiveNavbar = () => {
 						</Capped>
 					</A>
 					<div class="w-full sm:w-48">
+						{/*@ts-ignore*/}
 						<StyledCombobox options={bookOptionList} defaultValue={'Geneza'} />
 					</div>
 				</div>

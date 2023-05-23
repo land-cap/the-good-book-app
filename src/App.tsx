@@ -11,7 +11,7 @@ export const App = () => (
 		<Head />
 		<Routes>
 			<Route path={'/test'} component={Test} />
-			<Route path={'/:bookId/:chapter'} component={Chapter} />
+			<Route path={'/:bookCode/:chapter'} component={Chapter} />
 			<Route path={'*'} component={NotFound} />
 		</Routes>
 	</AppShell>
