@@ -26,7 +26,7 @@ export const AppShell = ({ children }: { children: JSX.Element }) => (
 					}{' '}
 					in Moldova by
 				</span>{' '}
-				<a href={'https://github.com/dalandcap'} target={'_blank'} class="font-bold">
+				<a href={'https://github.com/dalandcap'} target={'_blank'} class="font-bold font-mono">
 					&commat;land-cap
 				</a>
 			</Capped>

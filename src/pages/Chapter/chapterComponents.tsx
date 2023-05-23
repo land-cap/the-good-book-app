@@ -43,10 +43,10 @@ export const Body = ({ contentItem: { content } }: { contentItem: TBody }) => {
 
 	return (
 		<Capped
-			component={'span'}
+			component={'p'}
 			fontSize={isDesktop() ? 'lg' : 'base'}
 			lineGap={isDesktop() ? 32 : 24}
-			class="tracking-wide"
+			// class="tracking-wide"
 		>
 			<For each={content}>{(verse) => <Verse verse={verse} />}</For>
 		</Capped>

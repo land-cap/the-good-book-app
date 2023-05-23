@@ -1,7 +1,7 @@
-.container > q:not(:first-child) {
+.container > q:not(:first-child), .container > p:not(:first-child) {
     @apply mt-6 md:mt-8;
 }
 
-.container > q:not(:last-child) {
+.container > q:not(:last-child), .container > p:not(:last-child) {
     @apply mb-6 md:mb-8;
 }
