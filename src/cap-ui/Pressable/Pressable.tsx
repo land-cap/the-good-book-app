@@ -8,49 +8,45 @@ import { pressableStyles } from '~/cap-ui/Pressable/pressable.styles'
 export type PressableApi = ReturnType<typeof pressable.connect>
 
 export type PressableProps = {
-  context?: Partial<Parameters<typeof pressable.machine>[0]>
-  variant?: keyof typeof pressableStyles.variant
-  size?: keyof typeof pressableStyles.size
-  setApiRef?: (ref: PressableApi) => void
+	context?: Partial<Parameters<typeof pressable.machine>[0]>
+	variant?: keyof typeof pressableStyles.variant
+	size?: keyof typeof pressableStyles.size
+	setApiRef?: (ref: PressableApi) => void
 }
 
-export const Pressable = <T extends ValidComponent>({
-  context,
-  variant,
-  size,
-  component,
-  ...props
-}: Omit<DynamicProps<T>, 'component'> & {
-  component?: ValidComponent
-} & PressableProps) => {
-  const [state, send] = useMachine(
-    pressable.machine({
-      id: createUniqueId(),
-      preventFocusOnPress: true,
-      ...context,
-    })
-  )
+export const Pressable = <T extends ValidComponent>(
+	props: Omit<DynamicProps<T>, 'component'> & {
+		component?: ValidComponent
+	} & PressableProps
+) => {
+	const [state, send] = useMachine(
+		pressable.machine({
+			id: createUniqueId(),
+			preventFocusOnPress: true,
+			...props.context,
+		})
+	)
 
-  const classList = twMerge(
-    pressableStyles.base,
-    variant ? pressableStyles.variant[variant] : pressableStyles.variant.primary,
-    size ? pressableStyles.size[size] : pressableStyles.size.md
-  )
+	const classList = twMerge(
+		pressableStyles.base,
+		props.variant ? pressableStyles.variant[props.variant] : pressableStyles.variant.primary,
+		props.size ? pressableStyles.size[props.size] : pressableStyles.size.md
+	)
 
-  const api = createMemo(() => pressable.connect(state, send, normalizeProps))
+	const api = createMemo(() => pressable.connect(state, send, normalizeProps))
 
-  onMount(() => {
-    if (props.setApiRef) {
-      props.setApiRef(api())
-    }
-  })
+	onMount(() => {
+		if (props.setApiRef) {
+			props.setApiRef(api())
+		}
+	})
 
-  return (
-    <Dynamic
-      component={component || 'button'}
-      {...api().pressableProps}
-      {...props}
-      class={twMerge(classList, props.class)}
-    />
-  )
+	return (
+		<Dynamic
+			component={props.component || 'button'}
+			{...api().pressableProps}
+			{...props}
+			class={twMerge(classList, props.class)}
+		/>
+	)
 }

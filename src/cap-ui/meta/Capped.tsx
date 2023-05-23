@@ -41,16 +41,20 @@ export const Capped = styledDynamic<{
 	lineGap?: number
 	className?: string
 	mono?: boolean
-}>(({ fontSize, lineGap, className, mono }) => {
-	if (className?.includes('leading')) throw new Error('Capped component cannot have leading class')
+}>((props) => {
+	if (props.className?.includes('leading'))
+		throw new Error('Capped component cannot have leading class')
 
 	const styles = createStyleObject({
 		capHeight:
-			typeof fontSize === 'number'
-				? fontSize
-				: fontSizeToCapHeight[fontSize]?.capHeight || fontSizeToCapHeight.base.capHeight,
-		lineGap: lineGap || fontSizeToCapHeight[fontSize]?.lineGap || fontSizeToCapHeight.base.lineGap,
-		fontMetrics: mono ? dmMonoMetrics : dmSansMetrics,
+			typeof props.fontSize === 'number'
+				? props.fontSize
+				: fontSizeToCapHeight[props.fontSize]?.capHeight || fontSizeToCapHeight.base.capHeight,
+		lineGap:
+			props.lineGap ||
+			fontSizeToCapHeight[props.fontSize]?.lineGap ||
+			fontSizeToCapHeight.base.lineGap,
+		fontMetrics: props.mono ? dmMonoMetrics : dmSansMetrics,
 	})
 
 	return fixStyleObject(styles)

@@ -11,34 +11,34 @@ import {
 } from '~/model'
 import { useIsBreakpoint } from '~/hooks/useIsBreakpoint'
 
-export const ChapterTitle = ({ contentItem: { content } }: { contentItem: TChapterTitle }) => {
+export const ChapterTitle = (props: { contentItem: TChapterTitle }) => {
 	const isDesktop = useIsBreakpoint('sm')
 
 	return (
 		<Capped component="h1" fontSize={isDesktop() ? '4xl' : '3xl'} class="font-bold my-12 sm:my-16">
-			{content}
+			{props.contentItem.content}
 		</Capped>
 	)
 }
 
-export const SectionTitle = ({ contentItem: { content } }: { contentItem: TSectionTitle }) => {
+export const SectionTitle = (props: { contentItem: TSectionTitle }) => {
 	const isDesktop = useIsBreakpoint('sm')
 
 	return (
 		<Capped component={'h2'} fontSize={isDesktop() ? '2xl' : 'xl'} class="font-bold my-8 sm:my-12">
-			{content}
+			{props.contentItem.content}
 		</Capped>
 	)
 }
-export const VerseNumber = ({ number }: { number: number }) => (
-	<sup class={'font-bold text-gray-500 font-sans'}>{number}</sup>
+export const VerseNumber = (props: { number: number }) => (
+	<sup class={'font-bold text-gray-500 font-sans'}>{props.number}</sup>
 )
 
-export const JesusWords = ({ content }: { content: string }) => (
-	<span class="text-red-600 dark:text-red-400">{content}</span>
+export const JesusWords = (props: { content: string }) => (
+	<span class="text-red-600 dark:text-red-400">{props.content}</span>
 )
 
-export const Body = ({ contentItem: { content } }: { contentItem: TBody }) => {
+export const Body = (props: { contentItem: TBody }) => {
 	const isDesktop = useIsBreakpoint('sm')
 
 	return (
@@ -48,17 +48,17 @@ export const Body = ({ contentItem: { content } }: { contentItem: TBody }) => {
 			lineGap={isDesktop() ? 32 : 24}
 			// class="tracking-wide"
 		>
-			<For each={content}>{(verse) => <Verse verse={verse} />}</For>
+			<For each={props.contentItem.content}>{(verse) => <Verse verse={verse} />}</For>
 		</Capped>
 	)
 }
 
-export const Verse = ({ verse: { verseNumber, content } }: { verse: TVerse }) => (
+export const Verse = (props: { verse: TVerse }) => (
 	<>
 		{' '}
-		<VerseNumber number={verseNumber} />{' '}
+		<VerseNumber number={props.verse.verseNumber} />{' '}
 		{
-			<For each={content}>
+			<For each={props.verse.content}>
 				{({ type, content }) =>
 					type === VERSE_CONTENT_TYPE.Text ? content : <JesusWords content={content} />
 				}
@@ -67,7 +67,7 @@ export const Verse = ({ verse: { verseNumber, content } }: { verse: TVerse }) =>
 	</>
 )
 
-export const Quote = ({ contentItem: { verseNumber, content } }: { contentItem: TQuote }) => {
+export const Quote = (props: { contentItem: TQuote }) => {
 	const isDesktop = useIsBreakpoint('sm')
 
 	return (
@@ -79,12 +79,12 @@ export const Quote = ({ contentItem: { verseNumber, content } }: { contentItem: 
 			mono
 			class="block font-mono"
 		>
-			{verseNumber ? (
+			{props.contentItem.verseNumber ? (
 				<>
-					<VerseNumber number={verseNumber} />{' '}
+					<VerseNumber number={props.contentItem.verseNumber} />{' '}
 				</>
 			) : null}
-			{content}
+			{props.contentItem.content}
 		</Capped>
 	)
 }
