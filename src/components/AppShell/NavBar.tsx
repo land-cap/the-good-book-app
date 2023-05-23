@@ -22,16 +22,19 @@ const intersectionObserver = new IntersectionObserver(
 const InteractiveNavbar = () => {
 	const [bookList, setBookList] = createSignal([] as TBook[])
 
-	onMount(async () => {
-		const data = await getBookList()
-		setBookList(data)
+	onMount(() => {
+		getBookList().then(setBookList)
 	})
 
 	const bookOptionList = createMemo(() =>
 		bookList().map(({ name }) => ({ value: name, label: name, disabled: false }))
 	)
 
+	const initialOption = createMemo(() => bookOptionList()[0])
+
 	createEffect(() => console.log(bookOptionList()))
+
+	createEffect(() => console.log(initialOption()))
 
 	createEffect(() => {
 		if (interactiveNavbarEl()) {
@@ -60,7 +63,7 @@ const InteractiveNavbar = () => {
 						</Capped>
 					</A>
 					<div class="w-full sm:w-48">
-						<StyledCombobox options={bookOptionList()} defaultValue={bookOptionList()[0]} />
+						<StyledCombobox options={bookOptionList()} defaultValue={initialOption()} />
 					</div>
 				</div>
 			</div>

@@ -7,6 +7,7 @@ import {
 	createUniqueId,
 	For,
 	JSX,
+	on,
 	onMount,
 	Show,
 } from 'solid-js'
@@ -44,18 +45,16 @@ export type ComboboxProps = {
 
 const { option_focused, option_checked, optionIcon_focused } = comboboxStyles
 
-export const Combobox = ({
-	context,
-	defaultValue,
-	placeholder,
-	stylesOverride,
-	setApiRef,
-	...props
-}: ComboboxProps) => {
+export const Combobox = (props: ComboboxProps) => {
 	const [options, setOptions] = createSignal(props.options)
 
+	createEffect(() => console.log('options', options()))
+
 	createEffect(() => {
-		setOptions(props.options)
+		on(
+			() => props.options,
+			() => setOptions(props.options)
+		)
 	})
 
 	const [state, send] = useMachine(
@@ -71,34 +70,40 @@ export const Combobox = ({
 					) || []
 				setOptions(filtered.length > 0 ? filtered : props.options)
 			},
-			...context,
+			...props.context,
 		})
 	)
 
 	const api = createMemo(() => combobox.connect(state, send, normalizeProps))
 
-	createEffect(() => {
-		if (defaultValue && api()) {
-			api().setValue(defaultValue)
-		}
-	})
+	createEffect(
+		on(
+			() => props.defaultValue,
+			() => {
+				console.log('props.defaultValue updated', props.defaultValue)
+				if (props.defaultValue && api()) {
+					api().setValue(props.defaultValue)
+				}
+			}
+		)
+	)
 
 	onMount(() => {
-		if (setApiRef) {
-			setApiRef(api())
+		if (props.setApiRef) {
+			props.setApiRef(api())
 		}
 	})
 
 	return (
-		<Container class={stylesOverride?.container}>
+		<Container class={props.stylesOverride?.container}>
 			<div {...api().rootProps}>
 				<div {...api().controlProps}>
 					<Input
 						{...api().inputProps}
-						placeholder={placeholder}
-						class={twMerge(stylesOverride?.input)}
+						placeholder={props.placeholder}
+						class={twMerge(props.stylesOverride?.input)}
 					/>
-					<InputButton {...api().triggerProps} class={stylesOverride?.inputButton}>
+					<InputButton {...api().triggerProps} class={props.stylesOverride?.inputButton}>
 						<Icon name={'unfold_more'} />
 					</InputButton>
 				</div>
@@ -110,7 +115,10 @@ export const Combobox = ({
 						animate={{ opacity: 1, scale: 1, transition: { duration: 0.1, easing: 'ease-out' } }}
 						exit={{ opacity: 0, scale: 0.75, transition: { duration: 0.1, easing: 'ease-in' } }}
 					>
-						<OptionContainer {...api().positionerProps} class={stylesOverride?.optionContainer}>
+						<OptionContainer
+							{...api().positionerProps}
+							class={props.stylesOverride?.optionContainer}
+						>
 							<ul {...api().contentProps}>
 								<For each={options()}>
 									{(item, index) => {
@@ -132,20 +140,22 @@ export const Combobox = ({
 													disabled: item.disabled,
 												})}
 												class={twMerge(
-													stylesOverride?.option,
+													props.stylesOverride?.option,
 													optionState()?.focused &&
-														(stylesOverride?.option_focused || option_focused),
+														(props.stylesOverride?.option_focused || option_focused),
 													optionState()?.checked &&
-														(stylesOverride?.option_checked || option_checked)
+														(props.stylesOverride?.option_checked || option_checked)
 												)}
 											>
-												<OptionLabel class={stylesOverride?.optionLabel}>{item.label}</OptionLabel>
+												<OptionLabel class={props.stylesOverride?.optionLabel}>
+													{item.label}
+												</OptionLabel>
 												{optionState().checked && (
 													<OptionIcon
 														class={twMerge(
-															stylesOverride?.optionIcon,
+															props.stylesOverride?.optionIcon,
 															optionState()?.focused &&
-																(stylesOverride?.optionIcon_focused || optionIcon_focused)
+																(props.stylesOverride?.optionIcon_focused || optionIcon_focused)
 														)}
 													>
 														<Icon name={'check'} />
