@@ -28,7 +28,7 @@ const InteractiveNavbar = () => {
 	})
 
 	const bookOptionList = createMemo(() =>
-		bookList().map(({ name }) => ({ label: name, disabled: false }))
+		bookList().map(({ name }) => ({ value: name, label: name, disabled: false }))
 	)
 
 	createEffect(() => console.log(bookOptionList()))
@@ -60,8 +60,7 @@ const InteractiveNavbar = () => {
 						</Capped>
 					</A>
 					<div class="w-full sm:w-48">
-						{/*@ts-ignore*/}
-						<StyledCombobox options={bookOptionList} defaultValue={'Geneza'} />
+						<StyledCombobox options={bookOptionList()} defaultValue={bookOptionList()[0]} />
 					</div>
 				</div>
 			</div>

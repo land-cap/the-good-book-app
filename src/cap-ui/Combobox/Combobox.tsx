@@ -1,6 +1,15 @@
 import * as combobox from '@zag-js/combobox'
 import { normalizeProps, useMachine } from '@zag-js/solid'
-import { createMemo, createSignal, createUniqueId, For, JSX, onMount, Show } from 'solid-js'
+import {
+	createEffect,
+	createMemo,
+	createSignal,
+	createUniqueId,
+	For,
+	JSX,
+	onMount,
+	Show,
+} from 'solid-js'
 import { Icon } from '~/components/composable/Icon'
 import {
 	Container,
@@ -17,6 +26,7 @@ import { twMerge } from 'tailwind-merge'
 import { Dynamic } from 'solid-js/web'
 
 type ComboboxOption = {
+	value: string
 	label: string
 	disabled: boolean
 }
@@ -26,7 +36,7 @@ export type ComboboxApi = ReturnType<typeof combobox.connect>
 export type ComboboxProps = {
 	context?: Partial<Parameters<typeof combobox.machine>[0]>
 	options: ComboboxOption[]
-	defaultValue?: string
+	defaultValue?: ComboboxOption
 	placeholder?: string
 	setApiRef?: (ref: ComboboxApi) => void
 	stylesOverride?: Partial<typeof comboboxStyles>
@@ -43,6 +53,10 @@ export const Combobox = ({
 	...props
 }: ComboboxProps) => {
 	const [options, setOptions] = createSignal(props.options)
+
+	createEffect(() => {
+		setOptions(props.options)
+	})
 
 	const [state, send] = useMachine(
 		combobox.machine({
@@ -63,12 +77,15 @@ export const Combobox = ({
 
 	const api = createMemo(() => combobox.connect(state, send, normalizeProps))
 
+	createEffect(() => {
+		if (defaultValue && api()) {
+			api().setValue(defaultValue)
+		}
+	})
+
 	onMount(() => {
 		if (setApiRef) {
 			setApiRef(api())
-		}
-		if (defaultValue && api()) {
-			api().setValue({ value: defaultValue, label: defaultValue })
 		}
 	})
 
