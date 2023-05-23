@@ -3,3 +3,9 @@ export type TBook = {
 	order: number
 	name: string
 }
+
+export type TBookCode = {
+	id: number
+	code: string
+	book_id: number
+}
