@@ -1,5 +1,5 @@
 import { db } from '~/bibleDataApi/db'
-import { TChapter } from '~/model/chapter'
+import { TChapter } from '~/model/chapter.model'
 import { TBook, TBookCode } from '~/model'
 
 export const getBookList = async () => {

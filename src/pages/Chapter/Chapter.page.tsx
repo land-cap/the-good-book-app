@@ -1,15 +1,21 @@
 import { useParams } from '@solidjs/router'
-import { createEffect, createSignal, For } from 'solid-js'
+import { createEffect, createMemo, createSignal, For } from 'solid-js'
 import { getChapter } from '~/bibleDataApi/bibleDataApi'
-import { TChapter } from '~/model'
+import { CONTENT_TYPE, TChapter } from '~/model'
 import { contentTypeToComponent } from '~/pages/Chapter/chapterComponents'
 // @ts-ignore
 import styles from './chapter.module.css'
 import { bookCodeList } from '~/state/books.state'
 
 export const [bookCode, setBookCode] = createSignal<string | null>(null)
+
 const [chapter, setChapter] = createSignal<number | null>(null)
+
 const [chapterData, setChapterData] = createSignal<TChapter>([])
+
+export const chapterTitle = createMemo(
+	() => chapterData().find(({ type }) => type === CONTENT_TYPE.ChapterTitle)?.content as string
+)
 
 createEffect(async () => {
 	if (bookCode() && chapter()) {
@@ -28,8 +34,6 @@ export const Chapter = () => {
 		setBookCode(bookCode)
 		setChapter(parseInt(chapter))
 	})
-
-	createEffect(() => console.log(chapterData()))
 
 	return (
 		<main class={styles.container}>

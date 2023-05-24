@@ -1,2 +1,2 @@
-export * from './chapter'
-export * from './book'
+export * from './chapter.model'
+export * from './book.model'

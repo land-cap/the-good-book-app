@@ -7,7 +7,7 @@ import { StyledCombobox } from '~/cap-ui/Combobox/Combobox'
 import { getBookList } from '~/bibleDataApi/bibleDataApi'
 import { TBook } from '~/model'
 import { bookCodeList } from '~/state/books.state'
-import { bookCode } from '~/pages'
+import { bookCode, chapterTitle } from '~/pages'
 
 const [isInteractiveNavbarVisible, setIsInteractiveNavbarVisible] = createSignal(true)
 
@@ -88,7 +88,7 @@ const ScrolledNavbar = () => {
 		>
 			<div class={'border-b border-gray-200 dark:border-gray-700'}>
 				<div class={twMerge('flex place-content-center py-2')}>
-					<p class="text-sm text-gray-500 font-bold">Geneza 1</p>
+					<p class="text-sm text-gray-500 font-bold">{chapterTitle()}</p>
 				</div>
 			</div>
 		</nav>
