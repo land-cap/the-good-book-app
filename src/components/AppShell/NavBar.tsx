@@ -6,6 +6,8 @@ import { A } from '@solidjs/router'
 import { StyledCombobox } from '~/cap-ui/Combobox/Combobox'
 import { getBookList } from '~/bibleDataApi/bibleDataApi'
 import { TBook } from '~/model'
+import { bookCodeList } from '~/state/books.state'
+import { bookCode } from '~/pages'
 
 const [isInteractiveNavbarVisible, setIsInteractiveNavbarVisible] = createSignal(true)
 
@@ -27,10 +29,13 @@ const InteractiveNavbar = () => {
 	})
 
 	const bookOptionList = createMemo(() =>
-		bookList().map(({ name }) => ({ value: name, label: name, disabled: false }))
+		bookList().map((book) => ({ value: book, label: book.name, disabled: false }))
 	)
 
-	const initialOption = createMemo(() => bookOptionList()[0])
+	const initialOption = createMemo(() => {
+		const bookId = bookCodeList().find((book) => book.code === bookCode())?.id
+		return bookOptionList().find(({ value: { id } }) => id === bookId)
+	})
 
 	createEffect(() => console.log(bookOptionList()))
 

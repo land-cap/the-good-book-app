@@ -26,18 +26,18 @@ import { Motion, Presence } from '@motionone/solid'
 import { twMerge } from 'tailwind-merge'
 import { Dynamic } from 'solid-js/web'
 
-type ComboboxOption = {
-	value: string
+type ComboboxOption<T> = {
+	value: T
 	label: string
 	disabled: boolean
 }
 
 export type ComboboxApi = ReturnType<typeof combobox.connect>
 
-export type ComboboxProps = {
+export type ComboboxProps<T> = {
 	context?: Partial<Parameters<typeof combobox.machine>[0]>
-	options: ComboboxOption[]
-	defaultValue?: ComboboxOption
+	options: ComboboxOption<T>[]
+	defaultValue?: ComboboxOption<T>
 	placeholder?: string
 	setApiRef?: (ref: ComboboxApi) => void
 	stylesOverride?: Partial<typeof comboboxStyles>
@@ -45,7 +45,7 @@ export type ComboboxProps = {
 
 const { option_focused, option_checked, optionIcon_focused } = comboboxStyles
 
-export const Combobox = (props: ComboboxProps) => {
+export const Combobox = <T,>(props: ComboboxProps<T>) => {
 	const [options, setOptions] = createSignal(props.options)
 
 	createEffect(() => console.log('options', options()))
@@ -82,7 +82,7 @@ export const Combobox = (props: ComboboxProps) => {
 			() => {
 				console.log('props.defaultValue updated', props.defaultValue)
 				if (props.defaultValue && api()) {
-					api().setValue(props.defaultValue)
+					api().setValue({ value: props.defaultValue.label, label: props.defaultValue.label })
 				}
 			}
 		)

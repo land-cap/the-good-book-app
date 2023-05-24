@@ -7,7 +7,7 @@ import { contentTypeToComponent } from '~/pages/Chapter/chapterComponents'
 import styles from './chapter.module.css'
 import { bookCodeList } from '~/state/books.state'
 
-const [bookCode, setBookCode] = createSignal<string | null>(null)
+export const [bookCode, setBookCode] = createSignal<string | null>(null)
 const [chapter, setChapter] = createSignal<number | null>(null)
 const [chapterData, setChapterData] = createSignal<TChapter>([])
 
