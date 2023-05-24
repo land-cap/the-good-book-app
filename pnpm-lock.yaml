@@ -37,6 +37,9 @@ dependencies:
   '@zag-js/solid':
     specifier: ^0.9.2
     version: 0.9.2(solid-js@1.7.5)
+  klona:
+    specifier: ^2.0.6
+    version: 2.0.6
   motion:
     specifier: ^10.16.2
     version: 10.16.2

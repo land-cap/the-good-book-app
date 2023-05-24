@@ -48,8 +48,6 @@ const { option_focused, option_checked, optionIcon_focused } = comboboxStyles
 export const Combobox = <T,>(props: ComboboxProps<T>) => {
 	const [options, setOptions] = createSignal(props.options)
 
-	createEffect(() => console.log('options', options()))
-
 	createEffect(() => {
 		on(
 			() => props.options,
@@ -63,6 +61,7 @@ export const Combobox = <T,>(props: ComboboxProps<T>) => {
 			onOpen() {
 				setOptions(props.options)
 			},
+			// onSelect({ value }) {},
 			onInputChange({ value }) {
 				const filtered =
 					props?.options?.filter((item) =>
@@ -80,7 +79,6 @@ export const Combobox = <T,>(props: ComboboxProps<T>) => {
 		on(
 			() => props.defaultValue,
 			() => {
-				console.log('props.defaultValue updated', props.defaultValue)
 				if (props.defaultValue && api()) {
 					api().setValue({ value: props.defaultValue.label, label: props.defaultValue.label })
 				}

@@ -3,7 +3,7 @@ import { twMerge } from 'tailwind-merge'
 import { Portal } from 'solid-js/web'
 import { Capped } from '~/cap-ui/meta/Capped'
 import { A } from '@solidjs/router'
-import { StyledCombobox } from '~/cap-ui/Combobox/Combobox'
+import { ComboboxApi, StyledCombobox } from '~/cap-ui/Combobox/Combobox'
 import { getBookList } from '~/bibleDataApi/bibleDataApi'
 import { TBook } from '~/model'
 import { bookCodeList } from '~/state/books.state'
@@ -37,10 +37,6 @@ const InteractiveNavbar = () => {
 		return bookOptionList().find(({ value: { id } }) => id === bookId)
 	})
 
-	createEffect(() => console.log(bookOptionList()))
-
-	createEffect(() => console.log(initialOption()))
-
 	createEffect(() => {
 		if (interactiveNavbarEl()) {
 			intersectionObserver.observe(interactiveNavbarEl())
@@ -50,6 +46,8 @@ const InteractiveNavbar = () => {
 	onCleanup(() => {
 		intersectionObserver.unobserve(interactiveNavbarEl())
 	})
+
+	const [comboboxApi, setComboboxApi] = createSignal(null as unknown as ComboboxApi)
 
 	return (
 		<nav
@@ -68,7 +66,16 @@ const InteractiveNavbar = () => {
 						</Capped>
 					</A>
 					<div class="w-full sm:w-48">
-						<StyledCombobox options={bookOptionList()} defaultValue={initialOption()} />
+						<StyledCombobox
+							context={{
+								onSelect: ({ value }) => {
+									console.log(value)
+								},
+							}}
+							setApiRef={(ref) => setComboboxApi(ref)}
+							options={bookOptionList()}
+							defaultValue={initialOption()}
+						/>
 					</div>
 				</div>
 			</div>
