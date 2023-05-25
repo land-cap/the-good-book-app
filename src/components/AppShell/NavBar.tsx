@@ -1,12 +1,10 @@
-import { createEffect, createMemo, createSignal, onCleanup, onMount } from 'solid-js'
+import { createEffect, createMemo, createSignal, onCleanup } from 'solid-js'
 import { twMerge } from 'tailwind-merge'
 import { Portal } from 'solid-js/web'
 import { Capped } from '~/cap-ui/meta/Capped'
 import { A } from '@solidjs/router'
-import { ComboboxApi, StyledCombobox } from '~/cap-ui/Combobox/Combobox'
-import { getBookList } from '~/bibleDataApi/bibleDataApi'
-import { TBook } from '~/model'
-import { bookCodeList } from '~/state/books.state'
+import { StyledCombobox } from '~/cap-ui/Combobox/Combobox'
+import { bookList } from '~/state/books.state'
 import { bookCode, chapterTitle } from '~/pages'
 
 const [isInteractiveNavbarVisible, setIsInteractiveNavbarVisible] = createSignal(true)
@@ -22,18 +20,12 @@ const intersectionObserver = new IntersectionObserver(
 )
 
 const InteractiveNavbar = () => {
-	const [bookList, setBookList] = createSignal([] as TBook[])
-
-	onMount(() => {
-		getBookList().then(setBookList)
-	})
-
 	const bookOptionList = createMemo(() =>
 		bookList().map((book) => ({ value: book, label: book.name, disabled: false }))
 	)
 
 	const initialOption = createMemo(() => {
-		const bookId = bookCodeList().find((book) => book.code === bookCode())?.id
+		const bookId = bookList().find((book) => book.code === bookCode())?.id
 		return bookOptionList().find(({ value: { id } }) => id === bookId)
 	})
 
@@ -46,8 +38,6 @@ const InteractiveNavbar = () => {
 	onCleanup(() => {
 		intersectionObserver.unobserve(interactiveNavbarEl())
 	})
-
-	const [comboboxApi, setComboboxApi] = createSignal(null as unknown as ComboboxApi)
 
 	return (
 		<nav
@@ -72,7 +62,6 @@ const InteractiveNavbar = () => {
 									console.log(value)
 								},
 							}}
-							setApiRef={(ref) => setComboboxApi(ref)}
 							options={bookOptionList()}
 							defaultValue={initialOption()}
 						/>

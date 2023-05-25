@@ -1,11 +1,17 @@
 import { db } from '~/bibleDataApi/db'
 import { TChapter } from '~/model/chapter.model'
-import { TBook, TBookCode } from '~/model'
+import { TBook } from '~/model'
 
 export const getBookList = async () => {
-	const { data } = await db.from('vdc_book').select()
-	const sortedData = data?.sort((a, b) => a.order - b.order)
-	return sortedData as TBook[]
+	const { data: bookNameList } = await db.from('vdc_book_name').select()
+	const { data: bookList } = await db.from('book').select()
+	const sortedBookList = bookList
+		?.sort((a, b) => a.order - b.order)
+		.map((book) => ({
+			...book,
+			name: bookNameList?.find((bookName) => bookName.order === book.order)?.name,
+		}))
+	return sortedBookList as TBook[]
 }
 
 export const getChapter = async (bookId: number, chapter: number) => {
@@ -15,10 +21,4 @@ export const getChapter = async (bookId: number, chapter: number) => {
 		.eq('book_id', bookId)
 		.eq('chapter', chapter)
 	return data?.[0]?.content as TChapter
-}
-
-export const getBookCodeList = async () => {
-	const { data } = await db.from('book_code').select()
-	const sortedData = data?.sort((a, b) => a.book_id - b.book_id)
-	return sortedData as TBookCode[]
 }

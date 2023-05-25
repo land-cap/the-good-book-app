@@ -1,11 +1,11 @@
 import { createEffect, createSignal } from 'solid-js'
-import { TBookCode } from '~/model'
-import { getBookCodeList } from '~/bibleDataApi/bibleDataApi'
+import { getBookList } from '~/bibleDataApi/bibleDataApi'
+import { TBook } from '~/model'
 
-export const [bookCodeList, setBookCodeList] = createSignal<TBookCode[]>([])
+export const [bookList, setBookList] = createSignal<TBook[]>([])
 
 createEffect(() => {
-	getBookCodeList().then((data) => {
-		setBookCodeList(data)
+	getBookList().then((data) => {
+		setBookList(data)
 	})
 })
