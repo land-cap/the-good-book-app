@@ -39,6 +39,12 @@ const InteractiveNavbar = () => {
 		intersectionObserver.unobserve(interactiveNavbarEl())
 	})
 
+	const [selectedBookChapterCount, setSelectedBookChapterCount] = createSignal(
+		null as unknown as number
+	)
+
+	createEffect(() => console.log(selectedBookChapterCount()))
+
 	return (
 		<nav
 			ref={(el) => setInteractiveNavbar(el)}
@@ -59,7 +65,8 @@ const InteractiveNavbar = () => {
 						<StyledCombobox
 							context={{
 								onSelect: ({ value }) => {
-									console.log(value)
+									const chapterCount = bookList().find(({ name }) => name === value)?.chapter_count
+									if (chapterCount) setSelectedBookChapterCount(chapterCount)
 								},
 							}}
 							options={bookOptionList()}
