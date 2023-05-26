@@ -130,23 +130,18 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 											})
 										)
 
-										console.log(
-											api().getOptionProps({
-												label: item.label,
-												value: item.label,
-												index: index(),
-												disabled: item.disabled,
-											}).onClick
-										)
+										const { onClick, onPointerUp, ...optionProps } = api().getOptionProps({
+											label: item.label,
+											value: item.label,
+											index: index(),
+											disabled: item.disabled,
+										})
+
+										console.log(optionProps)
 
 										return (
 											<Option
-												{...api().getOptionProps({
-													label: item.label,
-													value: item.label,
-													index: index(),
-													disabled: item.disabled,
-												})}
+												{...optionProps}
 												class={twMerge(
 													props.stylesOverride?.option,
 													optionState()?.focused &&
