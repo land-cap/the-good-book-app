@@ -40,9 +40,17 @@ const InteractiveNavbar = () => {
 		intersectionObserver.unobserve(interactiveNavbarEl())
 	})
 
-	const [selectedBookChapterCount, setSelectedBookChapterCount] = createSignal(
+	const [selectedBookChapterCount, _setSelectedBookChapterCount] = createSignal(
 		null as unknown as number
 	)
+
+	const setSelectedBookChapterCount = (() => {
+		let calledOnce = false
+		return (chapterCount: number) => {
+			if (calledOnce) _setSelectedBookChapterCount(chapterCount)
+			calledOnce = true
+		}
+	})()
 
 	const chapterOptionList = createMemo(() =>
 		selectedBookChapterCount()
@@ -51,7 +59,7 @@ const InteractiveNavbar = () => {
 					label: chapter.toString(),
 					disabled: false,
 			  }))
-			: []
+			: null
 	)
 
 	createEffect(() => console.log(chapterOptionList()))
