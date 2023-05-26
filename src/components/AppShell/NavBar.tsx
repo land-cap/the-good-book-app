@@ -62,8 +62,6 @@ const InteractiveNavbar = () => {
 			: null
 	)
 
-	createEffect(() => console.log(chapterOptionList()))
-
 	return (
 		<nav
 			ref={(el) => setInteractiveNavbar(el)}
@@ -80,7 +78,7 @@ const InteractiveNavbar = () => {
 							The Good Book
 						</Capped>
 					</A>
-					<div class="w-full sm:w-48">
+					<div class="w-full sm:w-64">
 						<ChapterPicker
 							context={{
 								onSelect: ({ value }) => {

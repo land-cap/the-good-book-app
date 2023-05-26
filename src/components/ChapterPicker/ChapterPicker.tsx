@@ -26,6 +26,7 @@ import { Motion, Presence } from '@motionone/solid'
 import { twMerge } from 'tailwind-merge'
 import { Dynamic } from 'solid-js/web'
 import { TBook } from '~/model'
+import { ChapterOptions } from '~/components/ChapterPicker/ChapterOption'
 
 type ChapterPickerOption = {
 	value: TBook
@@ -93,6 +94,15 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 		}
 	})
 
+	const positionerProps = createMemo(() => {
+		const positionerProps = { ...api().positionerProps }
+		// @ts-ignore
+		delete positionerProps.style['min-width']
+		return positionerProps
+	})
+
+	createEffect(() => console.log(positionerProps))
+
 	return (
 		<Container class={props.stylesOverride?.container}>
 			<div {...api().rootProps}>
@@ -115,8 +125,8 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 						exit={{ opacity: 0, scale: 0.75, transition: { duration: 0.1, easing: 'ease-in' } }}
 					>
 						<OptionContainer
-							{...api().positionerProps}
-							class={props.stylesOverride?.optionContainer}
+							{...positionerProps}
+							class={twMerge(props.stylesOverride?.optionContainer)}
 						>
 							<ul {...api().contentProps}>
 								<For each={options()}>
@@ -137,34 +147,42 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 											disabled: item.disabled,
 										})
 
-										console.log(optionProps)
+										const [showChapters, setShowChapters] = createSignal(false)
+
+										const handleBookOptionClick = () => setShowChapters(true)
 
 										return (
-											<Option
-												{...optionProps}
-												class={twMerge(
-													props.stylesOverride?.option,
-													optionState()?.focused &&
-														(props.stylesOverride?.option_focused || option_focused),
-													optionState()?.checked &&
-														(props.stylesOverride?.option_checked || option_checked)
-												)}
-											>
-												<OptionLabel class={props.stylesOverride?.optionLabel}>
-													{item.label}
-												</OptionLabel>
-												{optionState().checked && (
-													<OptionIcon
-														class={twMerge(
-															props.stylesOverride?.optionIcon,
-															optionState()?.focused &&
-																(props.stylesOverride?.optionIcon_focused || optionIcon_focused)
-														)}
-													>
-														<Icon name={'check'} />
-													</OptionIcon>
-												)}
-											</Option>
+											<div>
+												<Option
+													{...optionProps}
+													onClick={handleBookOptionClick}
+													class={twMerge(
+														props.stylesOverride?.option,
+														optionState()?.focused &&
+															(props.stylesOverride?.option_focused || option_focused),
+														optionState()?.checked &&
+															(props.stylesOverride?.option_checked || option_checked)
+													)}
+												>
+													<OptionLabel class={props.stylesOverride?.optionLabel}>
+														{item.label}
+													</OptionLabel>
+													{optionState().checked && (
+														<OptionIcon
+															class={twMerge(
+																props.stylesOverride?.optionIcon,
+																optionState()?.focused &&
+																	(props.stylesOverride?.optionIcon_focused || optionIcon_focused)
+															)}
+														>
+															<Icon name={'check'} />
+														</OptionIcon>
+													)}
+												</Option>
+												{showChapters() ? (
+													<ChapterOptions chapterCount={item.value.chapter_count} />
+												) : null}
+											</div>
 										)
 									}}
 								</For>
