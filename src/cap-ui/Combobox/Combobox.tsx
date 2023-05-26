@@ -41,6 +41,7 @@ export type ComboboxProps<T> = {
 	placeholder?: string
 	setApiRef?: (ref: ComboboxApi) => void
 	stylesOverride?: Partial<typeof comboboxStyles>
+	listAsGrid?: boolean
 }
 
 const { option_focused, option_checked, optionIcon_focused } = comboboxStyles

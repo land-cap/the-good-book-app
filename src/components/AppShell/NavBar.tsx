@@ -6,6 +6,7 @@ import { A } from '@solidjs/router'
 import { StyledCombobox } from '~/cap-ui/Combobox/Combobox'
 import { bookList } from '~/state/books.state'
 import { bookCode, chapterTitle } from '~/pages'
+import { range } from 'ramda'
 
 const [isInteractiveNavbarVisible, setIsInteractiveNavbarVisible] = createSignal(true)
 
@@ -43,7 +44,17 @@ const InteractiveNavbar = () => {
 		null as unknown as number
 	)
 
-	createEffect(() => console.log(selectedBookChapterCount()))
+	const chapterOptionList = createMemo(() =>
+		selectedBookChapterCount()
+			? range(1, selectedBookChapterCount()).map((chapter) => ({
+					value: chapter,
+					label: chapter.toString(),
+					disabled: false,
+			  }))
+			: []
+	)
+
+	createEffect(() => console.log(chapterOptionList()))
 
 	return (
 		<nav
