@@ -26,7 +26,6 @@ import { Motion, Presence } from '@motionone/solid'
 import { twMerge } from 'tailwind-merge'
 import { Dynamic } from 'solid-js/web'
 import { TBook } from '~/model'
-import { ChapterOptions } from '~/components/ChapterPicker/ChapterOption'
 
 type ChapterPickerOption = {
 	value: TBook
@@ -49,6 +48,10 @@ const { option_focused, option_checked, optionIcon_focused } = comboboxStyles
 
 const ChapterPicker = (props: ChapterPickerProps) => {
 	const [options, setOptions] = createSignal(props.optionList)
+
+	const [selectedBook, setSelectedBook] = createSignal(null as unknown as TBook)
+
+	createEffect(() => console.log(selectedBook()))
 
 	createEffect(() => {
 		on(
@@ -147,9 +150,7 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 											disabled: item.disabled,
 										})
 
-										const [showChapters, setShowChapters] = createSignal(false)
-
-										const handleBookOptionClick = () => setShowChapters(true)
+										const handleBookOptionClick = () => setSelectedBook(item.value)
 
 										return (
 											<div>
@@ -179,9 +180,9 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 														</OptionIcon>
 													)}
 												</Option>
-												{showChapters() ? (
-													<ChapterOptions chapterCount={item.value.chapter_count} />
-												) : null}
+												{/*{showChapters() ? (*/}
+												{/*	<ChapterOptions chapterCount={item.value.chapter_count} />*/}
+												{/*) : null}*/}
 											</div>
 										)
 									}}
