@@ -26,6 +26,7 @@ import { Motion, Presence } from '@motionone/solid'
 import { twMerge } from 'tailwind-merge'
 import { Dynamic } from 'solid-js/web'
 import { TBook } from '~/model'
+import { ChapterOptions } from '~/components/ChapterPicker/ChapterOption'
 
 type ChapterPickerOption = {
 	value: TBook
@@ -49,16 +50,7 @@ const { option_focused, option_checked, optionIcon_focused } = comboboxStyles
 const ChapterPicker = (props: ChapterPickerProps) => {
 	const [options, setOptions] = createSignal(props.optionList)
 
-	const [selectedBook, setSelectedBook] = createSignal(null as unknown as TBook)
-
-	createEffect(() => console.log(selectedBook()))
-
-	createEffect(() => {
-		on(
-			() => props.optionList,
-			() => setOptions(props.optionList)
-		)
-	})
+	const [selectedBookId, setSelectedBookId] = createSignal(null as unknown as number)
 
 	const [state, send] = useMachine(
 		combobox.machine({
@@ -97,14 +89,21 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 		}
 	})
 
+	createEffect(() => console.log(selectedBookId()))
+
+	createEffect(() => {
+		on(
+			() => props.optionList,
+			() => setOptions(props.optionList)
+		)
+	})
+
 	const positionerProps = createMemo(() => {
 		const positionerProps = { ...api().positionerProps }
 		// @ts-ignore
 		delete positionerProps.style['min-width']
 		return positionerProps
 	})
-
-	createEffect(() => console.log(positionerProps))
 
 	return (
 		<Container class={props.stylesOverride?.container}>
@@ -150,7 +149,7 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 											disabled: item.disabled,
 										})
 
-										const handleBookOptionClick = () => setSelectedBook(item.value)
+										const handleBookOptionClick = () => setSelectedBookId(item.value.id)
 
 										return (
 											<div>
@@ -180,9 +179,9 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 														</OptionIcon>
 													)}
 												</Option>
-												{/*{showChapters() ? (*/}
-												{/*	<ChapterOptions chapterCount={item.value.chapter_count} />*/}
-												{/*) : null}*/}
+												{selectedBookId() === item.value.id ? (
+													<ChapterOptions chapterCount={item.value.chapter_count} />
+												) : null}
 											</div>
 										)
 									}}

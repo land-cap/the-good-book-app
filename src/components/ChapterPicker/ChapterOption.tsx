@@ -12,7 +12,7 @@ export const ChapterOptions = (props: { chapterCount: number }) => {
 }
 
 export const ChapterOption = (props: { value: number }) => (
-	<button class="grid aspect-square align-middle place-content-center bg-white font-bold">
+	<button class="grid aspect-square align-middle place-content-center bg-white text-black">
 		{props.value}
 	</button>
 )
