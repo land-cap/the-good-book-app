@@ -25,7 +25,7 @@ export const SectionTitle = (props: { contentItem: TSectionTitle }) => {
 	const isDesktop = useIsBreakpoint('sm')
 
 	return (
-		<Capped component={'h2'} fontSize={isDesktop() ? '2xl' : 'xl'} class="font-bold my-8 sm:my-12">
+		<Capped component={'h2'} fontSize={'xl'} class="font-bold my-8 md:my-10">
 			{props.contentItem.content}
 		</Capped>
 	)
@@ -46,7 +46,7 @@ export const Body = (props: { contentItem: TBody }) => {
 			component={'p'}
 			fontSize={isDesktop() ? 'lg' : 'base'}
 			lineGap={isDesktop() ? 32 : 24}
-			// class="tracking-wide"
+			class="tracking-wide"
 		>
 			<For each={props.contentItem.content}>{(verse) => <Verse verse={verse} />}</For>
 		</Capped>
