@@ -3,7 +3,7 @@ import { twMerge } from 'tailwind-merge'
 import { Portal } from 'solid-js/web'
 import { Capped } from '~/cap-ui/meta/Capped'
 import { A } from '@solidjs/router'
-import { StyledCombobox } from '~/cap-ui/Combobox/Combobox'
+import { ComboboxApi, StyledCombobox } from '~/cap-ui/Combobox/Combobox'
 import { bookList } from '~/state/books.state'
 import { bookCode, chapterTitle } from '~/pages'
 import { range } from 'ramda'
@@ -64,6 +64,8 @@ const InteractiveNavbar = () => {
 
 	createEffect(() => console.log(chapterOptionList()))
 
+	const [comboboxApi, setComboboxApi] = createSignal(null as unknown as ComboboxApi)
+
 	return (
 		<nav
 			ref={(el) => setInteractiveNavbar(el)}
@@ -82,6 +84,7 @@ const InteractiveNavbar = () => {
 					</A>
 					<div class="w-full sm:w-48">
 						<StyledCombobox
+							setApiRef={(ref) => setComboboxApi(ref)}
 							context={{
 								onSelect: ({ value }) => {
 									const chapterCount = bookList().find(({ name }) => name === value)?.chapter_count
