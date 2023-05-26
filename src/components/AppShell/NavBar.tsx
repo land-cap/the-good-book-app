@@ -88,7 +88,8 @@ const InteractiveNavbar = () => {
 									if (chapterCount) setSelectedBookChapterCount(chapterCount)
 								},
 							}}
-							options={bookOptionList()}
+							// @ts-ignore
+							options={chapterOptionList() || bookOptionList()}
 							defaultValue={initialOption()}
 						/>
 					</div>
