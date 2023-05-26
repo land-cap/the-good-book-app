@@ -38,7 +38,7 @@ export type ComboboxApi = ReturnType<typeof combobox.connect>
 export type ChapterPickerProps = {
 	context?: Partial<Parameters<typeof combobox.machine>[0]>
 	optionList: ChapterPickerOption[]
-	initialBook?: ChapterPickerOption
+	initialOption?: ChapterPickerOption
 	placeholder?: string
 	setApiRef?: (ref: ComboboxApi) => void
 	stylesOverride?: Partial<typeof comboboxStyles>
@@ -46,7 +46,7 @@ export type ChapterPickerProps = {
 
 const { option_focused, option_checked, optionIcon_focused } = comboboxStyles
 
-export const ChapterPicker = (props: ChapterPickerProps) => {
+const ChapterPicker = (props: ChapterPickerProps) => {
 	const [options, setOptions] = createSignal(props.optionList)
 
 	createEffect(() => {
@@ -78,10 +78,10 @@ export const ChapterPicker = (props: ChapterPickerProps) => {
 
 	createEffect(
 		on(
-			() => props.initialBook,
+			() => props.initialOption,
 			() => {
-				if (props.initialBook && api()) {
-					api().setValue({ value: props.initialBook.label, label: props.initialBook.label })
+				if (props.initialOption && api()) {
+					api().setValue({ value: props.initialOption.label, label: props.initialOption.label })
 				}
 			}
 		)
@@ -187,8 +187,9 @@ export const withCustomStyles =
 	(props: T) =>
 		<Dynamic component={Component} {...props} stylesOverride={stylesOverride} />
 
-export const StyledCombobox = withCustomStyles(ChapterPicker, {
+const StyledChapterPicker = withCustomStyles(ChapterPicker, {
 	input: 'rounded-none ring-2 shadow-none ring-gray-200 dark:ring-gray-700',
 	optionContainer: 'rounded-none',
 	inputButton: 'hover:text-primary-600 dark:hover:text-primary-500',
 })
+export { StyledChapterPicker as ChapterPicker }

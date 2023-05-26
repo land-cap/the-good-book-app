@@ -3,10 +3,10 @@ import { twMerge } from 'tailwind-merge'
 import { Portal } from 'solid-js/web'
 import { Capped } from '~/cap-ui/meta/Capped'
 import { A } from '@solidjs/router'
-import { ComboboxApi, StyledCombobox } from '~/cap-ui/Combobox/Combobox'
 import { bookList } from '~/state/books.state'
 import { bookCode, chapterTitle } from '~/pages'
 import { range } from 'ramda'
+import { ChapterPicker } from '~/components/ChapterPicker/ChapterPicker'
 
 const [isInteractiveNavbarVisible, setIsInteractiveNavbarVisible] = createSignal(true)
 
@@ -64,8 +64,6 @@ const InteractiveNavbar = () => {
 
 	createEffect(() => console.log(chapterOptionList()))
 
-	const [comboboxApi, setComboboxApi] = createSignal(null as unknown as ComboboxApi)
-
 	return (
 		<nav
 			ref={(el) => setInteractiveNavbar(el)}
@@ -83,17 +81,15 @@ const InteractiveNavbar = () => {
 						</Capped>
 					</A>
 					<div class="w-full sm:w-48">
-						<StyledCombobox
-							setApiRef={(ref) => setComboboxApi(ref)}
+						<ChapterPicker
 							context={{
 								onSelect: ({ value }) => {
 									const chapterCount = bookList().find(({ name }) => name === value)?.chapter_count
 									if (chapterCount) setSelectedBookChapterCount(chapterCount)
 								},
 							}}
-							// @ts-ignore
-							bookOptionList={chapterOptionList() || bookOptionList()}
-							initialBook={initialOption()}
+							optionList={bookOptionList()}
+							initialOption={initialOption()}
 						/>
 					</div>
 				</div>

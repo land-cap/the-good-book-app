@@ -1,2 +1,2 @@
-export { Combobox } from './Combobox'
-export { comboboxStyles } from './combobox.styles'
+export * from './Combobox'
+export * from './combobox.styles'

@@ -181,7 +181,7 @@ export const Combobox = <T,>(props: ComboboxProps<T>) => {
 	)
 }
 
-export const withCustomStyles =
+const withCustomStyles =
 	<S, T>(Component: (props: T) => JSX.Element, stylesOverride: S) =>
 	(props: T) =>
 		<Dynamic component={Component} {...props} stylesOverride={stylesOverride} />
