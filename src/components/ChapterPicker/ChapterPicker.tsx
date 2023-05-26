@@ -152,7 +152,7 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 										const handleBookOptionClick = () => setSelectedBookId(item.value.id)
 
 										return (
-											<div>
+											<>
 												<Option
 													{...optionProps}
 													onClick={handleBookOptionClick}
@@ -182,7 +182,7 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 												{selectedBookId() === item.value.id ? (
 													<ChapterOptions chapterCount={item.value.chapter_count} />
 												) : null}
-											</div>
+											</>
 										)
 									}}
 								</For>
