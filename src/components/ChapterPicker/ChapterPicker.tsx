@@ -25,19 +25,20 @@ import { comboboxStyles } from '~/cap-ui/Combobox/combobox.styles'
 import { Motion, Presence } from '@motionone/solid'
 import { twMerge } from 'tailwind-merge'
 import { Dynamic } from 'solid-js/web'
+import { TBook } from '~/model'
 
-type ComboboxOption<T> = {
-	value: T
+type ChapterPickerOption = {
+	value: TBook
 	label: string
 	disabled: boolean
 }
 
 export type ComboboxApi = ReturnType<typeof combobox.connect>
 
-export type ComboboxProps<T> = {
+export type ChapterPickerProps = {
 	context?: Partial<Parameters<typeof combobox.machine>[0]>
-	options: ComboboxOption<T>[]
-	defaultValue?: ComboboxOption<T>
+	optionList: ChapterPickerOption[]
+	initialBook?: ChapterPickerOption
 	placeholder?: string
 	setApiRef?: (ref: ComboboxApi) => void
 	stylesOverride?: Partial<typeof comboboxStyles>
@@ -45,13 +46,13 @@ export type ComboboxProps<T> = {
 
 const { option_focused, option_checked, optionIcon_focused } = comboboxStyles
 
-export const Combobox = <T,>(props: ComboboxProps<T>) => {
-	const [options, setOptions] = createSignal(props.options)
+export const ChapterPicker = (props: ChapterPickerProps) => {
+	const [options, setOptions] = createSignal(props.optionList)
 
 	createEffect(() => {
 		on(
-			() => props.options,
-			() => setOptions(props.options)
+			() => props.optionList,
+			() => setOptions(props.optionList)
 		)
 	})
 
@@ -59,15 +60,15 @@ export const Combobox = <T,>(props: ComboboxProps<T>) => {
 		combobox.machine({
 			id: createUniqueId(),
 			onOpen() {
-				setOptions(props.options)
+				setOptions(props.optionList)
 			},
 			// onSelect({ value }) {},
 			onInputChange({ value }) {
 				const filtered =
-					props?.options?.filter((item) =>
+					props?.optionList?.filter((item) =>
 						item.label.toLowerCase().includes(value.toLowerCase())
 					) || []
-				setOptions(filtered.length > 0 ? filtered : props.options)
+				setOptions(filtered.length > 0 ? filtered : props.optionList)
 			},
 			...props.context,
 		})
@@ -77,10 +78,10 @@ export const Combobox = <T,>(props: ComboboxProps<T>) => {
 
 	createEffect(
 		on(
-			() => props.defaultValue,
+			() => props.initialBook,
 			() => {
-				if (props.defaultValue && api()) {
-					api().setValue({ value: props.defaultValue.label, label: props.defaultValue.label })
+				if (props.initialBook && api()) {
+					api().setValue({ value: props.initialBook.label, label: props.initialBook.label })
 				}
 			}
 		)
@@ -186,7 +187,7 @@ export const withCustomStyles =
 	(props: T) =>
 		<Dynamic component={Component} {...props} stylesOverride={stylesOverride} />
 
-export const StyledCombobox = withCustomStyles(Combobox, {
+export const StyledCombobox = withCustomStyles(ChapterPicker, {
 	input: 'rounded-none ring-2 shadow-none ring-gray-200 dark:ring-gray-700',
 	optionContainer: 'rounded-none',
 	inputButton: 'hover:text-primary-600 dark:hover:text-primary-500',

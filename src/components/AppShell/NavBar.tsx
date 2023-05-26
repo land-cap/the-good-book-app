@@ -92,8 +92,8 @@ const InteractiveNavbar = () => {
 								},
 							}}
 							// @ts-ignore
-							options={chapterOptionList() || bookOptionList()}
-							defaultValue={initialOption()}
+							bookOptionList={chapterOptionList() || bookOptionList()}
+							initialBook={initialOption()}
 						/>
 					</div>
 				</div>
