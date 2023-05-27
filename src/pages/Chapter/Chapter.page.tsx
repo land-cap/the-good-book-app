@@ -1,5 +1,5 @@
 import { useParams } from '@solidjs/router'
-import { createEffect, createMemo, createSignal, For } from 'solid-js'
+import { createEffect, createMemo, createSignal, For, on } from 'solid-js'
 import { getChapter } from '~/bibleDataApi/bibleDataApi'
 import { CONTENT_TYPE, TChapter } from '~/model'
 import { contentTypeToComponent } from '~/pages/Chapter/chapterComponents'
@@ -30,10 +30,16 @@ createEffect(async () => {
 export const Chapter = () => {
 	const { bookCode, chapter } = useParams()
 
-	createEffect(() => {
-		setBookCode(bookCode)
-		setChapter(parseInt(chapter))
-	})
+	createEffect(
+		on(
+			() => bookCode,
+			() => {
+				// @ts-ignore
+				setBookCode(bookCode)
+				setChapter(parseInt(chapter))
+			}
+		)
+	)
 
 	return (
 		<main class={styles.container}>

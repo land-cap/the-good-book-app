@@ -104,8 +104,6 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 
 	const [isChaptersHovered, setIsChaptersHovered] = createSignal(false)
 
-	createEffect(() => console.log(isChaptersHovered()))
-
 	return (
 		<Container class={props.stylesOverride?.container}>
 			<div {...api().rootProps}>
@@ -149,8 +147,6 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 											index: index(),
 											disabled: item.disabled,
 										})
-
-										console.log(optionProps)
 
 										const handleBookOptionClick = () => setSelectedBookId(item.value.id)
 

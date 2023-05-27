@@ -42,12 +42,7 @@ export const Body = (props: { contentItem: TBody }) => {
 	const isDesktop = useIsBreakpoint('sm')
 
 	return (
-		<Capped
-			component={'p'}
-			fontSize={isDesktop() ? 'lg' : 'base'}
-			lineGap={isDesktop() ? 32 : 24}
-			class="tracking-wide"
-		>
+		<Capped component={'p'} fontSize={isDesktop() ? 'lg' : 'base'} lineGap={isDesktop() ? 32 : 24}>
 			<For each={props.contentItem.content}>{(verse) => <Verse verse={verse} />}</For>
 		</Capped>
 	)

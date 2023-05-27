@@ -129,15 +129,6 @@ export const Combobox = <T,>(props: ComboboxProps<T>) => {
 											})
 										)
 
-										console.log(
-											api().getOptionProps({
-												label: item.label,
-												value: item.label,
-												index: index(),
-												disabled: item.disabled,
-											}).onClick
-										)
-
 										return (
 											<Option
 												{...api().getOptionProps({

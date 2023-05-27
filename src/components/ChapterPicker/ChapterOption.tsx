@@ -18,11 +18,11 @@ export const ChapterOption = (props: { chapter: number; bookCode: string }) => {
 	const navigate = useNavigate()
 
 	return (
-		<button
-			onClick={() => navigate(`/${props.bookCode}/${props.chapter}`)}
+		<a
+			href={`/${props.bookCode}/${props.chapter}`}
 			class="grid aspect-square align-middle place-content-center bg-white hover:bg-accent-600 text-black hover:text-white"
 		>
 			{props.chapter}
-		</button>
+		</a>
 	)
 }
