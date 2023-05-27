@@ -28,8 +28,8 @@ module.exports = {
                 whiteOnDark: monoColor[300]
             },
             fontFamily: {
-                sans: ['IBM Plex Sans', 'DM Sans', 'monolisa-custom'],
-                serif: ['IBM Plex Mono', 'DM Mono', 'monolisa-custom', 'Poltawski Nowy', 'Fraunces', "Sorts Mill Goudy"],
+                sans: ['DM Sans', 'IBM Plex Sans', 'monolisa-custom'],
+                serif: ['DM Mono', 'IBM Plex Mono', 'monolisa-custom', 'Poltawski Nowy', 'Fraunces', "Sorts Mill Goudy"],
                 mono: ['IBM Plex Mono', 'DM Mono']
             },
             fontSize: {

@@ -25,7 +25,7 @@ export const SectionTitle = (props: { contentItem: TSectionTitle }) => {
 	const isDesktop = useIsBreakpoint('sm')
 
 	return (
-		<Capped component={'h2'} fontSize={isDesktop() ? '2xl' : 'xl'} class="font-bold my-8 md:my-10">
+		<Capped component={'h2'} fontSize={isDesktop() ? 16 : 'xl'} class="font-bold my-8 md:my-10">
 			{props.contentItem.content}
 		</Capped>
 	)
@@ -50,15 +50,15 @@ export const Body = (props: { contentItem: TBody }) => {
 
 export const Verse = (props: { verse: TVerse }) => (
 	<>
-		{' '}
-		<VerseNumber number={props.verse.verseNumber} />{' '}
+		<VerseNumber number={props.verse.verseNumber} />
+		&nbsp;
 		{
 			<For each={props.verse.content}>
 				{({ type, content }) =>
 					type === VERSE_CONTENT_TYPE.Text ? content : <JesusWords content={content} />
 				}
 			</For>
-		}
+		}{' '}
 	</>
 )
 
