@@ -61,7 +61,7 @@ export const Combobox = <T,>(props: ComboboxProps<T>) => {
 			onOpen() {
 				setOptions(props.options)
 			},
-			// onSelect({ value }) {},
+			// onSelect({ chapter }) {},
 			onInputChange({ value }) {
 				const filtered =
 					props?.options?.filter((item) =>

@@ -57,7 +57,7 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 			onOpen() {
 				setOptions(props.optionList)
 			},
-			// onSelect({ value }) {},
+			// onSelect({ chapter }) {},
 			onInputChange({ value }) {
 				const filtered =
 					props?.optionList?.filter((item) =>
@@ -150,6 +150,8 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 											disabled: item.disabled,
 										})
 
+										console.log(optionProps)
+
 										const handleBookOptionClick = () => setSelectedBookId(item.value.id)
 
 										return (
@@ -174,7 +176,10 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 														onMouseEnter={() => setIsChaptersHovered(true)}
 														onMouseLeave={() => setIsChaptersHovered(false)}
 													>
-														<ChapterOptions chapterCount={item.value.chapter_count} />
+														<ChapterOptions
+															chapterCount={item.value.chapter_count}
+															bookCode={item.value.code}
+														/>
 													</div>
 												) : null}
 											</>

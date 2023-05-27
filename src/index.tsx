@@ -13,12 +13,12 @@ const root = document.getElementById('root')
 // }
 
 render(
-  () => (
-    <MetaProvider>
-      <Router>
-        <App />
-      </Router>
-    </MetaProvider>
-  ),
-  root!
+	() => (
+		<Router>
+			<MetaProvider>
+				<App />
+			</MetaProvider>
+		</Router>
+	),
+	root!
 )
