@@ -9,7 +9,7 @@ import {
 	TVerse,
 	VERSE_CONTENT_TYPE,
 } from '~/model'
-import { useIsBreakpoint } from '~/hooks/useIsBreakpoint'
+import { useIsBreakpoint } from '~/hooks'
 
 export const ChapterTitle = (props: { contentItem: TChapterTitle }) => {
 	const isDesktop = useIsBreakpoint('sm')

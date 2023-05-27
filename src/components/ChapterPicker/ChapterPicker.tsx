@@ -18,7 +18,6 @@ import {
 	InputButton,
 	Option,
 	OptionContainer,
-	OptionIcon,
 	OptionLabel,
 } from '~/cap-ui/Combobox/combobox.presentational'
 import { comboboxStyles } from '~/cap-ui/Combobox/combobox.styles'
@@ -89,8 +88,6 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 		}
 	})
 
-	createEffect(() => console.log(selectedBookId()))
-
 	createEffect(() => {
 		on(
 			() => props.optionList,
@@ -104,6 +101,10 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 		delete positionerProps.style['min-width']
 		return positionerProps
 	})
+
+	const [isChaptersHovered, setIsChaptersHovered] = createSignal(false)
+
+	createEffect(() => console.log(isChaptersHovered()))
 
 	return (
 		<Container class={props.stylesOverride?.container}>
@@ -158,29 +159,23 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 													onClick={handleBookOptionClick}
 													class={twMerge(
 														props.stylesOverride?.option,
+														selectedBookId() === item.value.id && 'bg-accent-100',
 														optionState()?.focused &&
-															(props.stylesOverride?.option_focused || option_focused),
-														optionState()?.checked &&
-															(props.stylesOverride?.option_checked || option_checked)
+															!isChaptersHovered() &&
+															(props.stylesOverride?.option_focused || option_focused)
 													)}
 												>
 													<OptionLabel class={props.stylesOverride?.optionLabel}>
 														{item.label}
 													</OptionLabel>
-													{optionState().checked && (
-														<OptionIcon
-															class={twMerge(
-																props.stylesOverride?.optionIcon,
-																optionState()?.focused &&
-																	(props.stylesOverride?.optionIcon_focused || optionIcon_focused)
-															)}
-														>
-															<Icon name={'check'} />
-														</OptionIcon>
-													)}
 												</Option>
 												{selectedBookId() === item.value.id ? (
-													<ChapterOptions chapterCount={item.value.chapter_count} />
+													<div
+														onMouseEnter={() => setIsChaptersHovered(true)}
+														onMouseLeave={() => setIsChaptersHovered(false)}
+													>
+														<ChapterOptions chapterCount={item.value.chapter_count} />
+													</div>
 												) : null}
 											</>
 										)
