@@ -20,7 +20,7 @@ export const ChapterOption = (props: { chapter: number; bookCode: string }) => {
 	return (
 		<a
 			href={`/${props.bookCode}/${props.chapter}`}
-			class="grid aspect-square align-middle place-content-center bg-white hover:bg-accent-600 text-black hover:text-white font-bold"
+			class="grid aspect-square align-middle place-content-center bg-white hover:bg-primary-500 text-black hover:text-white text-base font-bold"
 		>
 			{props.chapter}
 		</a>
