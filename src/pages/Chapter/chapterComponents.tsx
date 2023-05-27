@@ -25,7 +25,7 @@ export const SectionTitle = (props: { contentItem: TSectionTitle }) => {
 	const isDesktop = useIsBreakpoint('sm')
 
 	return (
-		<Capped component={'h2'} fontSize={'xl'} class="font-bold my-8 md:my-10">
+		<Capped component={'h2'} fontSize={isDesktop() ? '2xl' : 'xl'} class="font-bold my-8 md:my-10">
 			{props.contentItem.content}
 		</Capped>
 	)
