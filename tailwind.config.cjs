@@ -30,7 +30,7 @@ module.exports = {
             fontFamily: {
                 sans: ['DM Sans', 'IBM Plex Sans', 'monolisa-custom'],
                 serif: ['DM Mono', 'IBM Plex Mono', 'monolisa-custom', 'Poltawski Nowy', 'Fraunces', "Sorts Mill Goudy"],
-                mono: ['IBM Plex Mono', 'DM Mono']
+                mono: ['DM Mono', 'IBM Plex Mono']
             },
             fontSize: {
                 xs: ["11.4286px", {lineHeight: "16px"}],
