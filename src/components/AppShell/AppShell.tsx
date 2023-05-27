@@ -21,7 +21,7 @@ export const AppShell = (props: { children: JSX.Element }) => (
 							fontSize={'sm'}
 							name="favorite"
 							inline
-							className="mx-1 text-rose-500 dark:text-rose-400"
+							className="mx-1"
 						/>
 					}{' '}
 					in Moldova by
