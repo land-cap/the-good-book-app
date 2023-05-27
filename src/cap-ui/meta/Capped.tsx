@@ -1,8 +1,8 @@
 import { Dynamic, DynamicProps } from 'solid-js/web'
 import { styled, StylesFn } from 'solid-styled-components'
 import { JSX, ValidComponent } from 'solid-js'
-import dmSansMetrics from '@capsizecss/metrics/dMSans'
-import dmMonoMetrics from '@capsizecss/metrics/dMMono'
+import dmSansMetrics from '@capsizecss/metrics/iBMPlexSans'
+import dmMonoMetrics from '@capsizecss/metrics/iBMPlexMono'
 import { createStyleObject } from '@capsizecss/core'
 import { FontSize, fontSizeToCapHeight } from '~/config/fontSize'
 
