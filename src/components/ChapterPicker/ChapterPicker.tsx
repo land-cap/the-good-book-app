@@ -157,7 +157,7 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 													onClick={handleBookOptionClick}
 													class={twMerge(
 														props.stylesOverride?.option,
-														selectedBookId() === item.value.id && 'bg-accent-100',
+														selectedBookId() === item.value.id && 'font-bold',
 														optionState()?.focused &&
 															!isChaptersHovered() &&
 															(props.stylesOverride?.option_focused || option_focused)
