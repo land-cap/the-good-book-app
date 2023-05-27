@@ -160,9 +160,7 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 														selectedBookId() === item.value.id && 'font-bold',
 														optionState()?.focused &&
 															!isChaptersHovered() &&
-															(props.stylesOverride?.option_focused || option_focused),
-														'border-b border-gray-200',
-														index() === 0 && 'border-t border-gray-200'
+															(props.stylesOverride?.option_focused || option_focused)
 													)}
 												>
 													<OptionLabel class={props.stylesOverride?.optionLabel}>
