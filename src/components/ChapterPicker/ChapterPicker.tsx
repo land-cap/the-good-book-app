@@ -160,10 +160,16 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 														selectedBookId() === item.value.id && 'font-bold',
 														optionState()?.focused &&
 															!isChaptersHovered() &&
-															(props.stylesOverride?.option_focused || option_focused)
+															(props.stylesOverride?.option_focused || option_focused),
+														selectedBookId() === item.value.id && 'bg-gray-100'
 													)}
 												>
-													<OptionLabel class={props.stylesOverride?.optionLabel}>
+													<OptionLabel
+														class={twMerge(
+															props.stylesOverride?.optionLabel,
+															selectedBookId() === item.value.id && 'text-black'
+														)}
+													>
 														{item.label}
 													</OptionLabel>
 												</Option>
