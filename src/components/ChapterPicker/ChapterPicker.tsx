@@ -1,112 +1,116 @@
-import { createSignal, For, JSX, Show } from 'solid-js'
+import { createMemo, createSignal, JSX } from 'solid-js'
 import { Icon } from '~/components/composable/Icon'
-import {
-	Container,
-	Input,
-	InputButton,
-	OptionContainer,
-	OptionLabel,
-} from '~/cap-ui/Combobox/combobox.presentational'
 import { comboboxStyles } from '~/cap-ui/Combobox/combobox.styles'
-import { Motion, Presence } from '@motionone/solid'
-import { twMerge } from 'tailwind-merge'
 import { Dynamic } from 'solid-js/web'
-import { TBook } from '~/model'
-import { ChapterOptions } from '~/components/ChapterPicker/ChapterOption'
-import { Capped } from '~/cap-ui'
+import { Combobox, createFilter } from '@kobalte/core'
+import { bookList } from '~/state/books.state'
+import { range } from 'ramda'
 
-type ChapterPickerOption = {
-	value: TBook
+type ChapterOption = {
+	value: number
 	label: string
 	disabled: boolean
 }
+type Book = {
+	label: string
+	options: ChapterOption[]
+}
 
 export type ChapterPickerProps = {
-	optionList: ChapterPickerOption[]
-	initialOption?: ChapterPickerOption
 	placeholder?: string
 	stylesOverride?: Partial<typeof comboboxStyles>
 }
 
+const bookOptionList = createMemo<Book[]>(() =>
+	bookList().map(({ name, chapter_count }) => {
+		const options = range(1, chapter_count + 1).map((chapter) => ({
+			value: chapter,
+			label: chapter.toString(),
+			disabled: false,
+		}))
+		return {
+			label: name,
+			options,
+		}
+	})
+)
+
 const { option, option_focused } = comboboxStyles
 
 const ChapterPicker = (props: ChapterPickerProps) => {
-	const [selectedBookId, setSelectedBookId] = createSignal<number | null>(null)
+	const filter = createFilter({ sensitivity: 'base' })
+	const [options, setOptions] = createSignal<Array<ChapterOption | Book>>(bookOptionList())
+	const onOpenChange = (isOpen: boolean, triggerMode?: Combobox.ComboboxTriggerMode) => {
+		// Show all options on ArrowDown/ArrowUp and button click.
+		if (isOpen && triggerMode === 'manual') {
+			setOptions(bookOptionList)
+		}
+	}
+	const onInputChange = (value: string) => {
+		setOptions(
+			bookOptionList()
+				.map((optionOrGroup) => {
+					// If it's a group, find matching options.
+					const matchingOptions = optionOrGroup['options']?.filter((option) =>
+						filter.contains(option.label, value)
+					)
+					// Return the group with only the matching options.
+					if (matchingOptions && matchingOptions.length > 0) {
+						return {
+							...optionOrGroup,
+							options: [...matchingOptions],
+						}
+					}
+					// It's not a group, return if it's a matching option.
+					if (filter.contains(optionOrGroup.label, value)) {
+						return optionOrGroup
+					}
+					return null
+				})
+				.filter(Boolean) as Array<ChapterOption | Book>
+		)
+	}
 
+	const [selectedBookId, setSelectedBookId] = createSignal<number | null>(null)
 	const [isChaptersHovered, setIsChaptersHovered] = createSignal(false)
 
 	return (
-		<Container class={props.stylesOverride?.container}>
-			<div>
-				<div>
-					<Input placeholder={props.placeholder} class={twMerge(props.stylesOverride?.input)} />
-					<InputButton class={props.stylesOverride?.inputButton}>
-						<Icon name={'unfold_more'} />
-					</InputButton>
-				</div>
-			</div>
-			<Presence exitBeforeEnter>
-				<Show when={isOpen}>
-					<Motion.div
-						initial={{ opacity: 0, scale: 0.75 }}
-						animate={{ opacity: 1, scale: 1, transition: { duration: 0.1, easing: 'ease-out' } }}
-						exit={{ opacity: 0, scale: 0.75, transition: { duration: 0.1, easing: 'ease-in' } }}
-					>
-						<OptionContainer class={twMerge(props.stylesOverride?.optionContainer, 'max-h-[50vh]')}>
-							<ul>
-								<For each={props.optionList}>
-									{(item, index) => {
-										const [optionEl, setOptionEl] = createSignal(null as unknown as HTMLElement)
-
-										const handleBookOptionClick = () => {
-											setSelectedBookId(selectedBookId() === item.value.id ? null : item.value.id)
-											optionEl().scrollIntoView({
-												behavior: 'smooth',
-												block: 'nearest',
-												inline: 'nearest',
-											})
-										}
-
-										return (
-											<div ref={setOptionEl}>
-												<Capped
-													component="li"
-													fontSize={'sm'}
-													onClick={handleBookOptionClick}
-													class={twMerge(
-														option,
-														props.stylesOverride?.option,
-														selectedBookId() === item.value.id && 'font-bold bg-primary-100',
-														focused &&
-															!isChaptersHovered() &&
-															(props.stylesOverride?.option_focused || option_focused)
-													)}
-												>
-													<OptionLabel class={twMerge(props.stylesOverride?.optionLabel)}>
-														{item.label}
-													</OptionLabel>
-												</Capped>
-												{selectedBookId() === item.value.id ? (
-													<div
-														onMouseEnter={() => setIsChaptersHovered(true)}
-														onMouseLeave={() => setIsChaptersHovered(false)}
-													>
-														<ChapterOptions
-															chapterCount={item.value.chapter_count}
-															bookCode={item.value.code}
-														/>
-													</div>
-												) : null}
-											</div>
-										)
-									}}
-								</For>
-							</ul>
-						</OptionContainer>
-					</Motion.div>
-				</Show>
-			</Presence>
-		</Container>
+		<Combobox.Root<ChapterOption, Book>
+			options={options()}
+			onInputChange={onInputChange}
+			onOpenChange={onOpenChange}
+			optionValue="value"
+			optionTextValue="label"
+			optionLabel="label"
+			optionDisabled="disabled"
+			optionGroupChildren="options"
+			placeholder="Search a food…"
+			itemComponent={(props) => (
+				<Combobox.Item item={props.item}>
+					<Combobox.ItemLabel>{props.item.rawValue.label}</Combobox.ItemLabel>
+					<Combobox.ItemIndicator>
+						<Icon name={'done'} />
+					</Combobox.ItemIndicator>
+				</Combobox.Item>
+			)}
+			sectionComponent={(props) => (
+				<Combobox.Section>{props.section.rawValue.label}</Combobox.Section>
+			)}
+		>
+			<Combobox.Control aria-label="Food">
+				<Combobox.Input />
+				<Combobox.Trigger>
+					<Combobox.Icon>
+						<Icon name={'sort'} />
+					</Combobox.Icon>
+				</Combobox.Trigger>
+			</Combobox.Control>
+			<Combobox.Portal>
+				<Combobox.Content>
+					<Combobox.Listbox />
+				</Combobox.Content>
+			</Combobox.Portal>
+		</Combobox.Root>
 	)
 }
 
