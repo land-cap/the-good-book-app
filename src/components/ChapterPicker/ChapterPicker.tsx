@@ -1,10 +1,11 @@
-import { createMemo, createSignal, JSX } from 'solid-js'
+import { createEffect, createMemo, createSignal, JSX } from 'solid-js'
 import { Icon } from '~/components/composable/Icon'
 import { comboboxStyles } from '~/cap-ui/Combobox/combobox.styles'
 import { Dynamic } from 'solid-js/web'
 import { Combobox, createFilter } from '@kobalte/core'
 import { bookList } from '~/state/books.state'
 import { range } from 'ramda'
+import { twMerge } from 'tailwind-merge'
 
 type ChapterOption = {
 	value: number
@@ -21,29 +22,41 @@ export type ChapterPickerProps = {
 	stylesOverride?: Partial<typeof comboboxStyles>
 }
 
-const bookOptionList = createMemo<Book[]>(() =>
-	bookList().map(({ name, chapter_count }) => {
-		const options = range(1, chapter_count + 1).map((chapter) => ({
-			value: chapter,
-			label: chapter.toString(),
-			disabled: false,
-		}))
-		return {
-			label: name,
-			options,
-		}
-	})
-)
-
-const { option, option_focused } = comboboxStyles
+const { option, optionContainer, option_focused } = comboboxStyles
 
 const ChapterPicker = (props: ChapterPickerProps) => {
 	const filter = createFilter({ sensitivity: 'base' })
+	const [selectedBookName, setSelectedBookName] = createSignal<string | null>(null)
+	const [isChaptersHovered, setIsChaptersHovered] = createSignal(false)
+
+	const bookOptionList = createMemo<Book[]>(() =>
+		bookList().map(({ name, chapter_count }) => {
+			const options =
+				name === selectedBookName()
+					? range(1, chapter_count + 1).map((chapter) => ({
+							value: chapter,
+							label: chapter.toString(),
+							disabled: false,
+					  }))
+					: []
+			return {
+				label: name,
+				options,
+			}
+		})
+	)
+
+	createEffect(() => {
+		console.log(bookOptionList())
+		setOptions(bookOptionList())
+	})
+
 	const [options, setOptions] = createSignal<Array<ChapterOption | Book>>(bookOptionList())
+
 	const onOpenChange = (isOpen: boolean, triggerMode?: Combobox.ComboboxTriggerMode) => {
 		// Show all options on ArrowDown/ArrowUp and button click.
 		if (isOpen && triggerMode === 'manual') {
-			setOptions(bookOptionList)
+			setOptions(bookOptionList())
 		}
 	}
 	const onInputChange = (value: string) => {
@@ -71,9 +84,6 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 		)
 	}
 
-	const [selectedBookId, setSelectedBookId] = createSignal<number | null>(null)
-	const [isChaptersHovered, setIsChaptersHovered] = createSignal(false)
-
 	return (
 		<Combobox.Root<ChapterOption, Book>
 			options={options()}
@@ -86,15 +96,26 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 			optionGroupChildren="options"
 			placeholder="Search a food…"
 			itemComponent={(props) => (
-				<Combobox.Item item={props.item}>
+				<Combobox.Item
+					item={props.item}
+					class="grid aspect-square align-middle place-content-center bg-white hover:bg-primary-500 text-black hover:text-white"
+				>
 					<Combobox.ItemLabel>{props.item.rawValue.label}</Combobox.ItemLabel>
-					<Combobox.ItemIndicator>
-						<Icon name={'done'} />
-					</Combobox.ItemIndicator>
 				</Combobox.Item>
 			)}
 			sectionComponent={(props) => (
-				<Combobox.Section>{props.section.rawValue.label}</Combobox.Section>
+				<Combobox.Section
+					onclick={() => {
+						setSelectedBookName(
+							selectedBookName() === props.section.rawValue.label
+								? null
+								: props.section.rawValue.label
+						)
+					}}
+					class={twMerge(option, 'col-span-5')}
+				>
+					{props.section.rawValue.label}
+				</Combobox.Section>
 			)}
 		>
 			<Combobox.Control aria-label="Food">
@@ -106,8 +127,8 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 				</Combobox.Trigger>
 			</Combobox.Control>
 			<Combobox.Portal>
-				<Combobox.Content>
-					<Combobox.Listbox />
+				<Combobox.Content class={optionContainer}>
+					<Combobox.Listbox class="grid grid-cols-5 gap-px bg-primary-100 border-y border-primary-100" />
 				</Combobox.Content>
 			</Combobox.Portal>
 		</Combobox.Root>
