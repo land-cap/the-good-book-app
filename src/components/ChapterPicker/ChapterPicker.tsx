@@ -1,16 +1,4 @@
-import * as combobox from '@zag-js/combobox'
-import { normalizeProps, useMachine } from '@zag-js/solid'
-import {
-	createEffect,
-	createMemo,
-	createSignal,
-	createUniqueId,
-	For,
-	JSX,
-	on,
-	onMount,
-	Show,
-} from 'solid-js'
+import { createSignal, For, JSX, Show } from 'solid-js'
 import { Icon } from '~/components/composable/Icon'
 import {
 	Container,
@@ -33,122 +21,41 @@ type ChapterPickerOption = {
 	disabled: boolean
 }
 
-export type ComboboxApi = ReturnType<typeof combobox.connect>
-
 export type ChapterPickerProps = {
-	context?: Partial<Parameters<typeof combobox.machine>[0]>
 	optionList: ChapterPickerOption[]
 	initialOption?: ChapterPickerOption
 	placeholder?: string
-	setApiRef?: (ref: ComboboxApi) => void
 	stylesOverride?: Partial<typeof comboboxStyles>
 }
 
 const { option, option_focused } = comboboxStyles
 
 const ChapterPicker = (props: ChapterPickerProps) => {
-	const [options, setOptions] = createSignal(props.optionList)
-
 	const [selectedBookId, setSelectedBookId] = createSignal<number | null>(null)
-
-	const [state, send] = useMachine(
-		combobox.machine({
-			id: createUniqueId(),
-			onOpen() {
-				setOptions(props.optionList)
-			},
-			// onSelect({ chapter }) {},
-			onInputChange({ value }) {
-				setSelectedBookId(null)
-				const filtered =
-					props?.optionList?.filter((item) =>
-						item.label.toLowerCase().includes(value.toLowerCase())
-					) || []
-				setOptions(filtered.length > 0 ? filtered : props.optionList)
-			},
-			...props.context,
-		})
-	)
-
-	const api = createMemo(() => combobox.connect(state, send, normalizeProps))
-
-	createEffect(
-		on(
-			() => props.initialOption,
-			() => {
-				if (props.initialOption && api()) {
-					api().setValue({ value: props.initialOption.label, label: props.initialOption.label })
-				}
-			}
-		)
-	)
-
-	onMount(() => {
-		if (props.setApiRef) {
-			props.setApiRef(api())
-		}
-	})
-
-	createEffect(() => {
-		on(
-			() => props.optionList,
-			() => setOptions(props.optionList)
-		)
-	})
-
-	const positionerProps = createMemo(() => {
-		const positionerProps = { ...api().positionerProps }
-		// @ts-ignore
-		delete positionerProps.style['min-width']
-		return positionerProps
-	})
 
 	const [isChaptersHovered, setIsChaptersHovered] = createSignal(false)
 
 	return (
 		<Container class={props.stylesOverride?.container}>
-			<div {...api().rootProps}>
-				<div {...api().controlProps}>
-					<Input
-						{...api().inputProps}
-						placeholder={props.placeholder}
-						class={twMerge(props.stylesOverride?.input)}
-					/>
-					<InputButton {...api().triggerProps} class={props.stylesOverride?.inputButton}>
+			<div>
+				<div>
+					<Input placeholder={props.placeholder} class={twMerge(props.stylesOverride?.input)} />
+					<InputButton class={props.stylesOverride?.inputButton}>
 						<Icon name={'unfold_more'} />
 					</InputButton>
 				</div>
 			</div>
 			<Presence exitBeforeEnter>
-				<Show when={api().isOpen}>
+				<Show when={isOpen}>
 					<Motion.div
 						initial={{ opacity: 0, scale: 0.75 }}
 						animate={{ opacity: 1, scale: 1, transition: { duration: 0.1, easing: 'ease-out' } }}
 						exit={{ opacity: 0, scale: 0.75, transition: { duration: 0.1, easing: 'ease-in' } }}
 					>
-						<OptionContainer
-							{...positionerProps}
-							class={twMerge(props.stylesOverride?.optionContainer, 'max-h-[50vh]')}
-						>
-							<ul {...api().contentProps}>
-								<For each={options()}>
+						<OptionContainer class={twMerge(props.stylesOverride?.optionContainer, 'max-h-[50vh]')}>
+							<ul>
+								<For each={props.optionList}>
 									{(item, index) => {
-										const optionState = createMemo(() =>
-											api().getOptionState({
-												label: item.label,
-												value: item.label,
-												index: index(),
-												disabled: item.disabled,
-											})
-										)
-
-										const { onClick, onPointerUp, ...optionProps } = api().getOptionProps({
-											label: item.label,
-											value: item.label,
-											index: index(),
-											disabled: item.disabled,
-										})
-
 										const [optionEl, setOptionEl] = createSignal(null as unknown as HTMLElement)
 
 										const handleBookOptionClick = () => {
@@ -165,13 +72,12 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 												<Capped
 													component="li"
 													fontSize={'sm'}
-													{...optionProps}
 													onClick={handleBookOptionClick}
 													class={twMerge(
 														option,
 														props.stylesOverride?.option,
 														selectedBookId() === item.value.id && 'font-bold bg-primary-100',
-														optionState()?.focused &&
+														focused &&
 															!isChaptersHovered() &&
 															(props.stylesOverride?.option_focused || option_focused)
 													)}
