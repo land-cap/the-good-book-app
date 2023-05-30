@@ -148,10 +148,19 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 											disabled: item.disabled,
 										})
 
-										const handleBookOptionClick = () => setSelectedBookId(item.value.id)
+										const [optionEl, setOptionEl] = createSignal(null as unknown as HTMLElement)
+
+										const handleBookOptionClick = () => {
+											setSelectedBookId(item.value.id)
+											optionEl().scrollIntoView({
+												behavior: 'smooth',
+												block: 'nearest',
+												inline: 'nearest',
+											})
+										}
 
 										return (
-											<>
+											<div ref={setOptionEl}>
 												<Option
 													{...optionProps}
 													onClick={handleBookOptionClick}
@@ -184,7 +193,7 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 														/>
 													</div>
 												) : null}
-											</>
+											</div>
 										)
 									}}
 								</For>
