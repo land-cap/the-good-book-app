@@ -16,7 +16,6 @@ import {
 	Container,
 	Input,
 	InputButton,
-	Option,
 	OptionContainer,
 	OptionLabel,
 } from '~/cap-ui/Combobox/combobox.presentational'
@@ -26,6 +25,7 @@ import { twMerge } from 'tailwind-merge'
 import { Dynamic } from 'solid-js/web'
 import { TBook } from '~/model'
 import { ChapterOptions } from '~/components/ChapterPicker/ChapterOption'
+import { Capped } from '~/cap-ui'
 
 type ChapterPickerOption = {
 	value: TBook
@@ -44,12 +44,12 @@ export type ChapterPickerProps = {
 	stylesOverride?: Partial<typeof comboboxStyles>
 }
 
-const { option_focused, option_checked, optionIcon_focused } = comboboxStyles
+const { option, option_focused } = comboboxStyles
 
 const ChapterPicker = (props: ChapterPickerProps) => {
 	const [options, setOptions] = createSignal(props.optionList)
 
-	const [selectedBookId, setSelectedBookId] = createSignal(null as unknown as number)
+	const [selectedBookId, setSelectedBookId] = createSignal<number | null>(null)
 
 	const [state, send] = useMachine(
 		combobox.machine({
@@ -59,6 +59,7 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 			},
 			// onSelect({ chapter }) {},
 			onInputChange({ value }) {
+				setSelectedBookId(null)
 				const filtered =
 					props?.optionList?.filter((item) =>
 						item.label.toLowerCase().includes(value.toLowerCase())
@@ -151,7 +152,7 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 										const [optionEl, setOptionEl] = createSignal(null as unknown as HTMLElement)
 
 										const handleBookOptionClick = () => {
-											setSelectedBookId(item.value.id)
+											setSelectedBookId(selectedBookId() === item.value.id ? null : item.value.id)
 											optionEl().scrollIntoView({
 												behavior: 'smooth',
 												block: 'nearest',
@@ -161,27 +162,24 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 
 										return (
 											<div ref={setOptionEl}>
-												<Option
+												<Capped
+													component="li"
+													fontSize={'sm'}
 													{...optionProps}
 													onClick={handleBookOptionClick}
 													class={twMerge(
+														option,
 														props.stylesOverride?.option,
-														selectedBookId() === item.value.id && 'font-bold',
+														selectedBookId() === item.value.id && 'font-bold bg-primary-100',
 														optionState()?.focused &&
 															!isChaptersHovered() &&
-															(props.stylesOverride?.option_focused || option_focused),
-														selectedBookId() === item.value.id && 'bg-primary-100'
+															(props.stylesOverride?.option_focused || option_focused)
 													)}
 												>
-													<OptionLabel
-														class={twMerge(
-															props.stylesOverride?.optionLabel,
-															selectedBookId() === item.value.id && 'text-black'
-														)}
-													>
+													<OptionLabel class={twMerge(props.stylesOverride?.optionLabel)}>
 														{item.label}
 													</OptionLabel>
-												</Option>
+												</Capped>
 												{selectedBookId() === item.value.id ? (
 													<div
 														onMouseEnter={() => setIsChaptersHovered(true)}
