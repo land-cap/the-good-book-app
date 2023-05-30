@@ -6,7 +6,7 @@ export const ChapterOptions = (props: { chapterCount: number; bookCode: string }
 	const chapterList = createMemo(() => range(1, props.chapterCount + 1).map((chapter) => chapter))
 
 	return (
-		<div class="grid grid-cols-5 gap-1 bg-gray-100 border-[0.75rem] border-t-0 border-gray-100">
+		<div class="grid grid-cols-5 gap-px bg-primary-100 border-b border-primary-100">
 			<For each={chapterList()}>
 				{(chapter) => <ChapterOption chapter={chapter} bookCode={props.bookCode} />}
 			</For>

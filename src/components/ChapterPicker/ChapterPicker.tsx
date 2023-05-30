@@ -170,7 +170,7 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 														optionState()?.focused &&
 															!isChaptersHovered() &&
 															(props.stylesOverride?.option_focused || option_focused),
-														selectedBookId() === item.value.id && 'bg-gray-100'
+														selectedBookId() === item.value.id && 'bg-primary-100'
 													)}
 												>
 													<OptionLabel
