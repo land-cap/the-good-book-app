@@ -79,7 +79,16 @@ const InteractiveNavbar = () => {
 						</Capped>
 					</A>
 					<div class="w-full sm:w-64">
-						<ChapterPicker />
+						<ChapterPicker
+							context={{
+								onSelect: ({ value }) => {
+									const chapterCount = bookList().find(({ name }) => name === value)?.chapter_count
+									if (chapterCount) setSelectedBookChapterCount(chapterCount)
+								},
+							}}
+							optionList={bookOptionList()}
+							initialOption={initialOption()}
+						/>
 					</div>
 				</div>
 			</div>
