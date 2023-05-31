@@ -57,7 +57,6 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 			onOpen() {
 				setOptions(props.optionList)
 			},
-			// onSelect({ chapter }) {},
 			onInputChange({ value }) {
 				setSelectedBookId(null)
 				const filtered =
@@ -160,6 +159,8 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 											})
 										}
 
+										const showChapters = createMemo(() => selectedBookId() === item.value.id)
+
 										return (
 											<div ref={setOptionEl}>
 												<Capped
@@ -170,7 +171,7 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 													class={twMerge(
 														option,
 														props.stylesOverride?.option,
-														selectedBookId() === item.value.id && 'font-bold bg-primary-100',
+														showChapters() && 'font-bold bg-primary-100',
 														optionState()?.focused &&
 															!isChaptersHovered() &&
 															(props.stylesOverride?.option_focused || option_focused)
@@ -180,17 +181,13 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 														{item.label}
 													</OptionLabel>
 												</Capped>
-												{selectedBookId() === item.value.id ? (
-													<div
-														onMouseEnter={() => setIsChaptersHovered(true)}
-														onMouseLeave={() => setIsChaptersHovered(false)}
-													>
-														<ChapterOptions
-															chapterCount={item.value.chapter_count}
-															bookCode={item.value.code}
-														/>
-													</div>
-												) : null}
+
+												<ChapterOptions
+													chapterCount={item.value.chapter_count}
+													bookCode={item.value.code}
+													onMouseEnter={() => setIsChaptersHovered(true)}
+													onMouseLeave={() => setIsChaptersHovered(false)}
+												/>
 											</div>
 										)
 									}}
