@@ -1,7 +1,9 @@
 import * as combobox from '@zag-js/combobox'
-import { createMemo, For, JSX } from 'solid-js'
+import { createMemo, createSignal, For, JSX } from 'solid-js'
 import { twMerge } from 'tailwind-merge'
-import { comboboxStyles } from '~/cap-ui'
+import { Capped, comboboxStyles } from '~/cap-ui'
+import { OptionLabel } from '~/cap-ui/Combobox/combobox.presentational'
+import { selectedBookLabel, setSelectedBookLabel } from '~/components/ChapterPicker/ChapterPicker'
 
 export type TChapterOption = {
 	value: number
@@ -14,33 +16,59 @@ export type TOptionGroup = {
 	options: TChapterOption[]
 }
 
-const { option_focused } = comboboxStyles
+const { option, option_focused } = comboboxStyles
 
-export const ChapterOptions = (props: {
+export const ChapterOptionGroup = (props: {
 	optionGroup: TOptionGroup
 	comboboxApi: ReturnType<typeof combobox.connect>
 	groupIndex: number
 	onMouseEnter: JSX.EventHandlerUnion<HTMLDivElement, MouseEvent>
 	onMouseLeave: JSX.EventHandlerUnion<HTMLDivElement, MouseEvent>
 }) => {
+	const [optionEl, setOptionEl] = createSignal(null as unknown as HTMLElement)
+
+	const handleBookOptionClick = () => {
+		setSelectedBookLabel(
+			selectedBookLabel() === props.optionGroup.label ? null : props.optionGroup.label
+		)
+		optionEl().scrollIntoView({
+			behavior: 'smooth',
+			block: 'nearest',
+			inline: 'nearest',
+		})
+	}
+
+	const showChapters = createMemo(() => selectedBookLabel() === props.optionGroup.label)
+
 	return (
-		<div
-			class="grid grid-cols-5 gap-px bg-primary-100 border-y border-primary-100"
-			onMouseEnter={props.onMouseEnter}
-			onMouseLeave={props.onMouseLeave}
-		>
-			<For each={props.optionGroup.options}>
-				{({ value }, index) => (
-					<ChapterOption
-						chapter={value}
-						bookCode={props.optionGroup.bookCode}
-						bookName={props.optionGroup.label}
-						comboboxApi={props.comboboxApi}
-						index={props.groupIndex + index()}
-					/>
-				)}
-			</For>
-		</div>
+		<>
+			<Capped
+				ref={setOptionEl}
+				component="li"
+				fontSize={'sm'}
+				onClick={handleBookOptionClick}
+				class={twMerge(option, showChapters() && 'font-bold bg-primary-100')}
+			>
+				<OptionLabel>{props.optionGroup.label}</OptionLabel>
+			</Capped>
+			<div
+				class="grid grid-cols-5 gap-px bg-primary-100 border-y border-primary-100"
+				onMouseEnter={props.onMouseEnter}
+				onMouseLeave={props.onMouseLeave}
+			>
+				<For each={props.optionGroup.options}>
+					{({ value }, index) => (
+						<ChapterOption
+							chapter={value}
+							bookCode={props.optionGroup.bookCode}
+							bookName={props.optionGroup.label}
+							comboboxApi={props.comboboxApi}
+							index={props.groupIndex + index()}
+						/>
+					)}
+				</For>
+			</div>
+		</>
 	)
 }
 
@@ -70,7 +98,7 @@ export const ChapterOption = (props: {
 				optionState()?.focused && option_focused
 			)}
 		>
-			<a href={`/${props.bookCode}/${props.chapter}`}>{props.chapter}</a>
+			{props.chapter}
 		</li>
 	)
 }

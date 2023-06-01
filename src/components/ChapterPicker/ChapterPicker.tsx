@@ -17,14 +17,12 @@ import {
 	Input,
 	InputButton,
 	OptionContainer,
-	OptionLabel,
 } from '~/cap-ui/Combobox/combobox.presentational'
 import { comboboxStyles } from '~/cap-ui/Combobox/combobox.styles'
 import { Motion, Presence } from '@motionone/solid'
 import { twMerge } from 'tailwind-merge'
 import { Dynamic } from 'solid-js/web'
-import { ChapterOptions, TOptionGroup } from '~/components/ChapterPicker/ChapterOption'
-import { Capped } from '~/cap-ui'
+import { ChapterOptionGroup, TOptionGroup } from '~/components/ChapterPicker/ChapterOption'
 import { range } from 'ramda'
 import { bookList } from '~/state/books.state'
 
@@ -36,6 +34,10 @@ export type ChapterPickerProps = {
 	setApiRef?: (ref: ComboboxApi) => void
 	stylesOverride?: Partial<typeof comboboxStyles>
 }
+
+const { option } = comboboxStyles
+
+export const [selectedBookLabel, setSelectedBookLabel] = createSignal<string | null>(null)
 
 const optionGroupList = createMemo<TOptionGroup[]>(() =>
 	bookList().map(({ name, chapter_count, code }) => {
@@ -52,12 +54,8 @@ const optionGroupList = createMemo<TOptionGroup[]>(() =>
 	})
 )
 
-const { option } = comboboxStyles
-
 const ChapterPicker = (props: ChapterPickerProps) => {
 	const [options, setOptions] = createSignal(optionGroupList())
-
-	const [selectedBookLabel, setSelectedBookLabel] = createSignal<string | null>(null)
 
 	const [state, send] = useMachine(
 		combobox.machine({
@@ -132,46 +130,14 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 							<ul {...api().contentProps}>
 								<For each={options()}>
 									{(optionGroup, groupIndex) => {
-										const [optionEl, setOptionEl] = createSignal(null as unknown as HTMLElement)
-
-										const handleBookOptionClick = () => {
-											setSelectedBookLabel(
-												selectedBookLabel() === optionGroup.label ? null : optionGroup.label
-											)
-											optionEl().scrollIntoView({
-												behavior: 'smooth',
-												block: 'nearest',
-												inline: 'nearest',
-											})
-										}
-
-										const showChapters = createMemo(() => selectedBookLabel() === optionGroup.label)
-
 										return (
-											<div ref={setOptionEl}>
-												<Capped
-													component="li"
-													fontSize={'sm'}
-													onClick={handleBookOptionClick}
-													class={twMerge(
-														option,
-														props.stylesOverride?.option,
-														showChapters() && 'font-bold bg-primary-100'
-													)}
-												>
-													<OptionLabel class={twMerge(props.stylesOverride?.optionLabel)}>
-														{optionGroup.label}
-													</OptionLabel>
-												</Capped>
-
-												<ChapterOptions
-													optionGroup={optionGroup}
-													comboboxApi={api()}
-													groupIndex={groupIndex()}
-													onMouseEnter={() => setIsChaptersHovered(true)}
-													onMouseLeave={() => setIsChaptersHovered(false)}
-												/>
-											</div>
+											<ChapterOptionGroup
+												optionGroup={optionGroup}
+												comboboxApi={api()}
+												groupIndex={groupIndex()}
+												onMouseEnter={() => setIsChaptersHovered(true)}
+												onMouseLeave={() => setIsChaptersHovered(false)}
+											/>
 										)
 									}}
 								</For>
