@@ -1,4 +1,5 @@
 import * as combobox from '@zag-js/combobox'
+import { Collapsible } from '@kobalte/core'
 import { createMemo, createSignal, For, JSX } from 'solid-js'
 import { twMerge } from 'tailwind-merge'
 import { Capped, comboboxStyles } from '~/cap-ui'
@@ -41,34 +42,39 @@ export const ChapterOptionGroup = (props: {
 	const showChapters = createMemo(() => selectedBookLabel() === props.optionGroup.label)
 
 	return (
-		<>
-			<Capped
-				ref={setOptionEl}
-				component="li"
-				fontSize={'sm'}
-				onClick={handleBookOptionClick}
-				class={twMerge(option, showChapters() && 'font-bold bg-primary-100')}
-			>
-				<OptionLabel>{props.optionGroup.label}</OptionLabel>
-			</Capped>
-			<div
-				class="grid grid-cols-5 gap-px bg-primary-100 border-y border-primary-100"
-				onMouseEnter={props.onMouseEnter}
-				onMouseLeave={props.onMouseLeave}
-			>
-				<For each={props.optionGroup.options}>
-					{({ value }, index) => (
-						<ChapterOption
-							chapter={value}
-							bookCode={props.optionGroup.bookCode}
-							bookName={props.optionGroup.label}
-							comboboxApi={props.comboboxApi}
-							index={props.groupIndex + index()}
-						/>
-					)}
-				</For>
-			</div>
-		</>
+		<Collapsible.Root>
+			<Collapsible.Trigger class="w-full text-left">
+				<Capped
+					ref={setOptionEl}
+					component="li"
+					fontSize={'sm'}
+					onClick={handleBookOptionClick}
+					class={twMerge(option, showChapters() && 'font-bold bg-primary-100')}
+				>
+					<OptionLabel>{props.optionGroup.label}</OptionLabel>
+				</Capped>
+				{/*<Icon name={'expand_more'} />*/}
+			</Collapsible.Trigger>
+			<Collapsible.Content>
+				<div
+					class="grid grid-cols-5 gap-px bg-primary-100 border-y border-primary-100"
+					onMouseEnter={props.onMouseEnter}
+					onMouseLeave={props.onMouseLeave}
+				>
+					<For each={props.optionGroup.options}>
+						{({ value }, index) => (
+							<ChapterOption
+								chapter={value}
+								bookCode={props.optionGroup.bookCode}
+								bookName={props.optionGroup.label}
+								comboboxApi={props.comboboxApi}
+								index={props.groupIndex + index()}
+							/>
+						)}
+					</For>
+				</div>
+			</Collapsible.Content>
+		</Collapsible.Root>
 	)
 }
 
