@@ -4,7 +4,7 @@
 }
 
 .collapsible__content[data-expanded] {
-    animation: slideDown 300ms ease-out;
+    animation: slideDown 300ms ease-in-out;
 }
 
 .collapsible__triggerIcon {
