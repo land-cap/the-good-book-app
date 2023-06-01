@@ -10,9 +10,9 @@ createEffect(() => {
 	})
 })
 
-export const [bookCode, setBookCode] = createSignal(null as unknown as string)
+export const [currBookCode, setCurrBookCode] = createSignal(null as unknown as string)
 
-export const [chapter, setChapter] = createSignal(null as unknown as number)
+export const [currChapter, setCurrChapter] = createSignal(null as unknown as number)
 
 export const [chapterData, setChapterData] = createSignal<TChapter>([])
 

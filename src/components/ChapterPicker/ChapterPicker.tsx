@@ -23,7 +23,13 @@ import { twMerge } from 'tailwind-merge'
 import { Dynamic } from 'solid-js/web'
 import { OptionGroup, TOptionGroup } from '~/components/ChapterPicker/OptionGroup'
 import { range } from 'ramda'
-import { bookCode, bookList, chapter, setBookCode, setChapter } from '~/state/books.state'
+import {
+	bookList,
+	currBookCode,
+	currChapter,
+	setCurrBookCode,
+	setCurrChapter,
+} from '~/state/books.state'
 import { useNavigate } from '@solidjs/router'
 import { Capped } from '~/cap-ui'
 
@@ -36,7 +42,7 @@ export type ChapterPickerProps = {
 	stylesOverride?: Partial<typeof comboboxStyles>
 }
 
-const { input } = comboboxStyles
+const { input, inputButton } = comboboxStyles
 
 export const [selectedBookLabel, setSelectedBookLabel] = createSignal<string | null>(null)
 
@@ -61,11 +67,13 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 	const [state, send] = useMachine(
 		combobox.machine({
 			id: createUniqueId(),
-			onOpen() {
+			onOpen: () => {
 				setOptions(optionGroupList())
 			},
-
-			onInputChange({ value }) {
+			onClose: () => {
+				setSelectedBookLabel(null)
+			},
+			onInputChange: ({ value }) => {
 				setSelectedBookLabel(null)
 				const filtered =
 					optionGroupList().filter((item) =>
@@ -86,8 +94,8 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 		if (newValue) {
 			const { bookCode, chapter } = JSON.parse(newValue) as { bookCode: string; chapter: number }
 			navigate(`/${bookCode}/${chapter}`)
-			setBookCode(bookCode)
-			setChapter(chapter)
+			setCurrBookCode(bookCode)
+			setCurrChapter(chapter)
 		}
 	})
 
@@ -102,12 +110,12 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 	})
 
 	createEffect(() => {
-		if (bookCode() && chapter() && api()) {
-			const bookName = bookList().find((book) => book.code === bookCode())?.name
+		if (currBookCode() && currChapter() && api()) {
+			const bookName = bookList().find((book) => book.code === currBookCode())?.name
 			if (bookName) {
 				api().setValue({
-					value: JSON.stringify({ bookCode: bookCode(), chapter: chapter() }),
-					label: `${bookName} ${chapter()}`,
+					value: JSON.stringify({ bookCode: currBookCode(), chapter: currChapter() }),
+					label: `${bookName} ${currChapter()}`,
 				})
 			}
 		}
@@ -135,11 +143,15 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 						<Capped component={'span'} fontSize={'base'}>
 							{api().inputValue}
 						</Capped>
-						<InputButton
-							class={twMerge(props.stylesOverride?.inputButton, 'static p-0 -my-2 sm:hidden')}
+						<div
+							class={twMerge(
+								inputButton,
+								props.stylesOverride?.inputButton,
+								'static p-0 -my-2 sm:hidden'
+							)}
 						>
 							<Icon name={'unfold_more'} />
-						</InputButton>
+						</div>
 					</button>
 
 					<Input
