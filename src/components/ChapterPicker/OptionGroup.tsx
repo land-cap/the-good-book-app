@@ -91,9 +91,10 @@ export const OptionGroup = (props: {
 			<Collapsible.Content ref={setCollapsibleContentEl} class={styles.collapsible__content}>
 				<div class="grid grid-cols-5 gap-px bg-primary-100 border-y border-primary-100">
 					<For each={props.optionGroup.options}>
-						{({ value }, index) => (
+						{({ value, label }, index) => (
 							<ChapterOption
 								chapter={value}
+								label={label}
 								bookCode={props.optionGroup.bookCode}
 								bookName={props.optionGroup.label}
 								comboboxApi={props.comboboxApi}

@@ -6,13 +6,14 @@ import { comboboxStyles } from '~/cap-ui'
 const { option_focused } = comboboxStyles
 export const ChapterOption = (props: {
 	chapter: number
+	label: string
 	bookCode: string
 	bookName: string
 	comboboxApi: ReturnType<typeof combobox.connect>
 	index: number
 }) => {
 	const optionIdentity = createMemo(() => ({
-		label: `${props.chapter}`,
+		label: props.label,
 		value: JSON.stringify({ bookCode: props.bookCode, chapter: props.chapter }),
 		index: props.index,
 		disabled: false,

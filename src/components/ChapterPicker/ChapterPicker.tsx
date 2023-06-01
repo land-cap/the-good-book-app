@@ -44,7 +44,7 @@ const optionGroupList = createMemo<TOptionGroup[]>(() =>
 	bookList().map(({ name, chapter_count, code }) => {
 		const options = range(1, chapter_count + 1).map((chapter) => ({
 			value: chapter,
-			label: chapter.toString(),
+			label: `${name} ${chapter}`,
 			disabled: false,
 		}))
 		return {
