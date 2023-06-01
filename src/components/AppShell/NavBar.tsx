@@ -1,11 +1,9 @@
-import { createEffect, createMemo, createSignal, onCleanup } from 'solid-js'
+import { createEffect, createSignal, onCleanup } from 'solid-js'
 import { twMerge } from 'tailwind-merge'
 import { Portal } from 'solid-js/web'
 import { Capped } from '~/cap-ui/meta/Capped'
 import { A } from '@solidjs/router'
-import { bookList } from '~/state/books.state'
-import { bookCode, chapterTitle } from '~/pages'
-import { range } from 'ramda'
+import { chapterTitle } from '~/state/books.state'
 import { ChapterPicker } from '~/components/ChapterPicker/ChapterPicker'
 
 const [isInteractiveNavbarVisible, setIsInteractiveNavbarVisible] = createSignal(true)
@@ -21,15 +19,6 @@ const intersectionObserver = new IntersectionObserver(
 )
 
 const InteractiveNavbar = () => {
-	const bookOptionList = createMemo(() =>
-		bookList().map((book) => ({ value: book, label: book.name, disabled: false }))
-	)
-
-	const initialOption = createMemo(() => {
-		const bookId = bookList().find((book) => book.code === bookCode())?.id
-		return bookOptionList().find(({ value: { id } }) => id === bookId)
-	})
-
 	createEffect(() => {
 		if (interactiveNavbarEl()) {
 			intersectionObserver.observe(interactiveNavbarEl())
@@ -39,28 +28,6 @@ const InteractiveNavbar = () => {
 	onCleanup(() => {
 		intersectionObserver.unobserve(interactiveNavbarEl())
 	})
-
-	const [selectedBookChapterCount, _setSelectedBookChapterCount] = createSignal(
-		null as unknown as number
-	)
-
-	const setSelectedBookChapterCount = (() => {
-		let calledOnce = false
-		return (chapterCount: number) => {
-			if (calledOnce) _setSelectedBookChapterCount(chapterCount)
-			calledOnce = true
-		}
-	})()
-
-	const chapterOptionList = createMemo(() =>
-		selectedBookChapterCount()
-			? range(1, selectedBookChapterCount()).map((chapter) => ({
-					value: chapter,
-					label: chapter.toString(),
-					disabled: false,
-			  }))
-			: null
-	)
 
 	return (
 		<nav
@@ -79,16 +46,7 @@ const InteractiveNavbar = () => {
 						</Capped>
 					</A>
 					<div class="w-full sm:w-64">
-						<ChapterPicker
-							context={{
-								onSelect: ({ value }) => {
-									const chapterCount = bookList().find(({ name }) => name === value)?.chapter_count
-									if (chapterCount) setSelectedBookChapterCount(chapterCount)
-								},
-							}}
-							optionList={bookOptionList()}
-							initialOption={initialOption()}
-						/>
+						<ChapterPicker />
 					</div>
 				</div>
 			</div>

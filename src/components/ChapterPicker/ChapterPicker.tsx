@@ -24,7 +24,7 @@ import { twMerge } from 'tailwind-merge'
 import { Dynamic } from 'solid-js/web'
 import { OptionGroup, TOptionGroup } from '~/components/ChapterPicker/OptionGroup'
 import { range } from 'ramda'
-import { bookList } from '~/state/books.state'
+import { bookList, setBookCode, setChapter } from '~/state/books.state'
 import { useNavigate } from '@solidjs/router'
 
 export type ComboboxApi = ReturnType<typeof combobox.connect>
@@ -86,6 +86,8 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 		if (newValue) {
 			const { bookCode, chapter } = JSON.parse(newValue) as { bookCode: string; chapter: number }
 			navigate(`/${bookCode}/${chapter}`)
+			setBookCode(bookCode)
+			setChapter(chapter)
 		}
 	})
 

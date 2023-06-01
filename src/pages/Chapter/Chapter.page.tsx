@@ -1,21 +1,18 @@
 import { useParams } from '@solidjs/router'
-import { createEffect, createMemo, createSignal, For, on } from 'solid-js'
+import { createEffect, For, on } from 'solid-js'
 import { getChapter } from '~/bibleDataApi/bibleDataApi'
-import { CONTENT_TYPE, TChapter } from '~/model'
 import { contentTypeToComponent } from '~/pages/Chapter/chapterComponents'
 // @ts-ignore
 import styles from './Chapter.module.css'
-import { bookList } from '~/state/books.state'
-
-export const [bookCode, setBookCode] = createSignal(null as unknown as string)
-
-const [chapter, setChapter] = createSignal(null as unknown as number)
-
-const [chapterData, setChapterData] = createSignal<TChapter>([])
-
-export const chapterTitle = createMemo(
-	() => chapterData().find(({ type }) => type === CONTENT_TYPE.ChapterTitle)?.content as string
-)
+import {
+	bookCode,
+	bookList,
+	chapter,
+	chapterData,
+	setBookCode,
+	setChapter,
+	setChapterData,
+} from '~/state/books.state'
 
 createEffect(async () => {
 	if (bookCode() && chapter()) {
