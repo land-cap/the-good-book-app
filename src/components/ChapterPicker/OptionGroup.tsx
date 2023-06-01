@@ -35,6 +35,16 @@ export const OptionGroup = (props: {
 		null as unknown as HTMLElement
 	)
 
+	const handleBookOptionClick = () => {
+		setSelectedBookLabel(
+			selectedBookLabel() === props.optionGroup.label ? null : props.optionGroup.label
+		)
+	}
+
+	const showChapters = createMemo(() => selectedBookLabel() === props.optionGroup.label)
+
+	const isDesktop = useIsBreakpoint('sm')
+
 	createEffect(() => {
 		if (collapsibleContentEl() && optionEl()) {
 			const scrollIntoView = (element: Element) => {
@@ -48,22 +58,17 @@ export const OptionGroup = (props: {
 			}
 			const observer = new ResizeObserver((entries) => {
 				entries.forEach(() => {
-					scrollIntoView(optionEl())
+					if (showChapters()) {
+						scrollIntoView(optionEl())
+					}
 				})
 			})
 			observer.observe(collapsibleContentEl())
+			return () => {
+				observer.disconnect()
+			}
 		}
 	})
-
-	const handleBookOptionClick = () => {
-		setSelectedBookLabel(
-			selectedBookLabel() === props.optionGroup.label ? null : props.optionGroup.label
-		)
-	}
-
-	const showChapters = createMemo(() => selectedBookLabel() === props.optionGroup.label)
-
-	const isDesktop = useIsBreakpoint('sm')
 
 	return (
 		<Collapsible.Root open={showChapters()} ref={setOptionEl}>

@@ -10,21 +10,13 @@ export const AppShell = (props: { children: JSX.Element }) => (
 		}
 	>
 		<NavBar />
-		<div class="flex-grow mx-auto w-full max-w-3xl px-6 lg:px-8">{props.children}</div>
-		<footer class="flex place-content-center my-24 sm:my-32">
+		<div class="flex-grow mx-auto w-full max-w-2xl px-6 lg:px-8">{props.children}</div>
+		<footer class="flex place-content-center my-20 sm:my-32">
 			<Capped component={'p'} fontSize={'xs'} class="text-gray-500">
 				<span class="inline-flex items-center">
 					Made with{' '}
-					{
-						<Capped
-							component={Icon}
-							fontSize={'lg'}
-							name="favorite"
-							inline
-							class="mx-1 text-base"
-						/>
-					}{' '}
-					in Moldova by
+					{<Capped component={Icon} fontSize={'sm'} name="favorite" inline class="mx-1" />} in
+					Moldova by
 				</span>{' '}
 				<a href={'https://github.com/land-cap'} target={'_blank'} class="font-bold">
 					&commat;land-cap

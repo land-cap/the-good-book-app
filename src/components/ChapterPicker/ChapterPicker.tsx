@@ -7,7 +7,6 @@ import {
 	createUniqueId,
 	For,
 	JSX,
-	on,
 	onMount,
 	Show,
 } from 'solid-js'
@@ -99,32 +98,20 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 	})
 
 	createEffect(() => {
-		on(
-			() => optionGroupList(),
-			() => setOptions(optionGroupList())
-		)
+		;() => setOptions(optionGroupList())
 	})
 
-	createEffect(
-		on(
-			() => {
-				bookCode()
-				chapter()
-				bookList()
-			},
-			() => {
-				if (bookCode() && chapter() && api()) {
-					const bookName = bookList().find((book) => book.code === bookCode())?.name
-					if (bookName) {
-						api().setValue({
-							value: JSON.stringify({ bookCode: bookCode(), chapter: chapter() }),
-							label: `${bookName} ${chapter()}`,
-						})
-					}
-				}
+	createEffect(() => {
+		if (bookCode() && chapter() && api()) {
+			const bookName = bookList().find((book) => book.code === bookCode())?.name
+			if (bookName) {
+				api().setValue({
+					value: JSON.stringify({ bookCode: bookCode(), chapter: chapter() }),
+					label: `${bookName} ${chapter()}`,
+				})
 			}
-		)
-	)
+		}
+	})
 
 	const positionerProps = createMemo(() => {
 		const positionerProps = { ...api().positionerProps }
