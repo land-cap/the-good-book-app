@@ -1,23 +1,30 @@
-import { range } from 'ramda'
-import { createMemo, For, JSX } from 'solid-js'
+import { For, JSX } from 'solid-js'
 import { useNavigate } from '@solidjs/router'
 
-export const ChapterOptions = (props: {
-	chapterCount: number
+export type TChapterOption = {
+	value: number
+	label: string
+	disabled: boolean
+}
+export type TOptionGroup = {
+	label: string
 	bookCode: string
+	options: TChapterOption[]
+}
+
+export const ChapterOptions = (props: {
+	optionGroup: TOptionGroup
 	onMouseEnter: JSX.EventHandlerUnion<HTMLDivElement, MouseEvent>
 	onMouseLeave: JSX.EventHandlerUnion<HTMLDivElement, MouseEvent>
 }) => {
-	const chapterList = createMemo(() => range(1, props.chapterCount + 1).map((chapter) => chapter))
-
 	return (
 		<div
 			class="grid grid-cols-5 gap-px bg-primary-100 border-y border-primary-100"
 			onMouseEnter={props.onMouseEnter}
 			onMouseLeave={props.onMouseLeave}
 		>
-			<For each={chapterList()}>
-				{(chapter) => <ChapterOption chapter={chapter} bookCode={props.bookCode} />}
+			<For each={props.optionGroup.options}>
+				{({ value }) => <ChapterOption chapter={value} bookCode={props.optionGroup.bookCode} />}
 			</For>
 		</div>
 	)
