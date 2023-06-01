@@ -3,8 +3,11 @@ import { Collapsible } from '@kobalte/core'
 import { createMemo, createSignal, For, JSX } from 'solid-js'
 import { twMerge } from 'tailwind-merge'
 import { Capped, comboboxStyles } from '~/cap-ui'
-import { OptionLabel } from '~/cap-ui/Combobox/combobox.presentational'
 import { selectedBookLabel, setSelectedBookLabel } from '~/components/ChapterPicker/ChapterPicker'
+// @ts-ignore
+import styles from './OptionGroup.module.css'
+import { Icon } from '~/components/composable/Icon'
+import { Option, OptionIcon } from '~/cap-ui/Combobox/combobox.presentational'
 
 export type TChapterOption = {
 	value: number
@@ -17,9 +20,9 @@ export type TOptionGroup = {
 	options: TChapterOption[]
 }
 
-const { option, option_focused } = comboboxStyles
+const { option, option_focused, optionIcon } = comboboxStyles
 
-export const ChapterOptionGroup = (props: {
+export const OptionGroup = (props: {
 	optionGroup: TOptionGroup
 	comboboxApi: ReturnType<typeof combobox.connect>
 	groupIndex: number
@@ -42,39 +45,58 @@ export const ChapterOptionGroup = (props: {
 	const showChapters = createMemo(() => selectedBookLabel() === props.optionGroup.label)
 
 	return (
-		<Collapsible.Root>
-			<Collapsible.Trigger class="w-full text-left">
-				<Capped
-					ref={setOptionEl}
-					component="li"
-					fontSize={'sm'}
-					onClick={handleBookOptionClick}
-					class={twMerge(option, showChapters() && 'font-bold bg-primary-100')}
-				>
-					<OptionLabel>{props.optionGroup.label}</OptionLabel>
-				</Capped>
-				{/*<Icon name={'expand_more'} />*/}
-			</Collapsible.Trigger>
-			<Collapsible.Content>
-				<div
-					class="grid grid-cols-5 gap-px bg-primary-100 border-y border-primary-100"
-					onMouseEnter={props.onMouseEnter}
-					onMouseLeave={props.onMouseLeave}
-				>
-					<For each={props.optionGroup.options}>
-						{({ value }, index) => (
-							<ChapterOption
-								chapter={value}
-								bookCode={props.optionGroup.bookCode}
-								bookName={props.optionGroup.label}
-								comboboxApi={props.comboboxApi}
-								index={props.groupIndex + index()}
-							/>
+		<div ref={setOptionEl}>
+			<Collapsible.Root>
+				<Collapsible.Trigger as="div" class="w-full text-left">
+					<Option
+						onClick={handleBookOptionClick}
+						class={twMerge(
+							option,
+							'flex justify-between',
+							showChapters() && 'font-bold bg-primary-100'
 						)}
-					</For>
-				</div>
-			</Collapsible.Content>
-		</Collapsible.Root>
+					>
+						<Capped component="div" fontSize={'sm'}>
+							{props.optionGroup.label}
+						</Capped>
+
+						<OptionIcon
+							class={twMerge(
+								optionIcon,
+								'text-gray-400',
+								showChapters() && 'text-black'
+								// optionState()?.focused &&
+								// (props.stylesOverride?.optionIcon_focused || optionIcon_focused)
+							)}
+						>
+							<Icon
+								name={'expand_more'}
+								className={twMerge(showChapters() && 'text-black rotate-180')}
+							/>
+						</OptionIcon>
+					</Option>
+				</Collapsible.Trigger>
+				<Collapsible.Content class={styles.collapsible__content}>
+					<div
+						class="grid grid-cols-5 gap-px bg-primary-100 border-y border-primary-100"
+						onMouseEnter={props.onMouseEnter}
+						onMouseLeave={props.onMouseLeave}
+					>
+						<For each={props.optionGroup.options}>
+							{({ value }, index) => (
+								<ChapterOption
+									chapter={value}
+									bookCode={props.optionGroup.bookCode}
+									bookName={props.optionGroup.label}
+									comboboxApi={props.comboboxApi}
+									index={props.groupIndex + index()}
+								/>
+							)}
+						</For>
+					</div>
+				</Collapsible.Content>
+			</Collapsible.Root>
+		</div>
 	)
 }
 
