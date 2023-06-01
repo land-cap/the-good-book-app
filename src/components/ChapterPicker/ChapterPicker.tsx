@@ -17,54 +17,61 @@ import {
 	Input,
 	InputButton,
 	OptionContainer,
-	OptionLabel,
 } from '~/cap-ui/Combobox/combobox.presentational'
 import { comboboxStyles } from '~/cap-ui/Combobox/combobox.styles'
 import { Motion, Presence } from '@motionone/solid'
 import { twMerge } from 'tailwind-merge'
 import { Dynamic } from 'solid-js/web'
-import { TBook } from '~/model'
-import { ChapterOptions } from '~/components/ChapterPicker/ChapterOption'
-import { Capped } from '~/cap-ui'
-
-type ChapterPickerOption = {
-	value: TBook
-	label: string
-	disabled: boolean
-}
+import { OptionGroup, TOptionGroup } from '~/components/ChapterPicker/OptionGroup'
+import { range } from 'ramda'
+import { bookList } from '~/state/books.state'
+import { useNavigate } from '@solidjs/router'
 
 export type ComboboxApi = ReturnType<typeof combobox.connect>
 
 export type ChapterPickerProps = {
 	context?: Partial<Parameters<typeof combobox.machine>[0]>
-	optionList: ChapterPickerOption[]
-	initialOption?: ChapterPickerOption
 	placeholder?: string
 	setApiRef?: (ref: ComboboxApi) => void
 	stylesOverride?: Partial<typeof comboboxStyles>
 }
 
-const { option, option_focused } = comboboxStyles
+const { option } = comboboxStyles
+
+export const [selectedBookLabel, setSelectedBookLabel] = createSignal<string | null>(null)
+
+const optionGroupList = createMemo<TOptionGroup[]>(() =>
+	bookList().map(({ name, chapter_count, code }) => {
+		const options = range(1, chapter_count + 1).map((chapter) => ({
+			value: chapter,
+			label: chapter.toString(),
+			disabled: false,
+		}))
+		return {
+			label: name,
+			bookCode: code,
+			options,
+		}
+	})
+)
 
 const ChapterPicker = (props: ChapterPickerProps) => {
-	const [options, setOptions] = createSignal(props.optionList)
-
-	const [selectedBookId, setSelectedBookId] = createSignal<number | null>(null)
+	const [options, setOptions] = createSignal(optionGroupList())
 
 	const [state, send] = useMachine(
 		combobox.machine({
 			id: createUniqueId(),
 			onOpen() {
-				setOptions(props.optionList)
+				setOptions(optionGroupList())
 			},
-			// onSelect({ chapter }) {},
+
 			onInputChange({ value }) {
-				setSelectedBookId(null)
+				setSelectedBookLabel(null)
 				const filtered =
-					props?.optionList?.filter((item) =>
+					optionGroupList().filter((item) =>
 						item.label.toLowerCase().includes(value.toLowerCase())
 					) || []
-				setOptions(filtered.length > 0 ? filtered : props.optionList)
+				setOptions(filtered.length > 0 ? filtered : optionGroupList())
 			},
 			...props.context,
 		})
@@ -72,16 +79,15 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 
 	const api = createMemo(() => combobox.connect(state, send, normalizeProps))
 
-	createEffect(
-		on(
-			() => props.initialOption,
-			() => {
-				if (props.initialOption && api()) {
-					api().setValue({ value: props.initialOption.label, label: props.initialOption.label })
-				}
-			}
-		)
-	)
+	const navigate = useNavigate()
+
+	createEffect(() => {
+		const newValue = api().selectedValue
+		if (newValue) {
+			const { bookCode, chapter } = JSON.parse(newValue) as { bookCode: string; chapter: number }
+			navigate(`/${bookCode}/${chapter}`)
+		}
+	})
 
 	onMount(() => {
 		if (props.setApiRef) {
@@ -91,8 +97,8 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 
 	createEffect(() => {
 		on(
-			() => props.optionList,
-			() => setOptions(props.optionList)
+			() => optionGroupList(),
+			() => setOptions(optionGroupList())
 		)
 	})
 
@@ -102,8 +108,6 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 		delete positionerProps.style['min-width']
 		return positionerProps
 	})
-
-	const [isChaptersHovered, setIsChaptersHovered] = createSignal(false)
 
 	return (
 		<Container class={props.stylesOverride?.container}>
@@ -132,66 +136,13 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 						>
 							<ul {...api().contentProps}>
 								<For each={options()}>
-									{(item, index) => {
-										const optionState = createMemo(() =>
-											api().getOptionState({
-												label: item.label,
-												value: item.label,
-												index: index(),
-												disabled: item.disabled,
-											})
-										)
-
-										const { onClick, onPointerUp, ...optionProps } = api().getOptionProps({
-											label: item.label,
-											value: item.label,
-											index: index(),
-											disabled: item.disabled,
-										})
-
-										const [optionEl, setOptionEl] = createSignal(null as unknown as HTMLElement)
-
-										const handleBookOptionClick = () => {
-											setSelectedBookId(selectedBookId() === item.value.id ? null : item.value.id)
-											optionEl().scrollIntoView({
-												behavior: 'smooth',
-												block: 'nearest',
-												inline: 'nearest',
-											})
-										}
-
+									{(optionGroup, groupIndex) => {
 										return (
-											<div ref={setOptionEl}>
-												<Capped
-													component="li"
-													fontSize={'sm'}
-													{...optionProps}
-													onClick={handleBookOptionClick}
-													class={twMerge(
-														option,
-														props.stylesOverride?.option,
-														selectedBookId() === item.value.id && 'font-bold bg-primary-100',
-														optionState()?.focused &&
-															!isChaptersHovered() &&
-															(props.stylesOverride?.option_focused || option_focused)
-													)}
-												>
-													<OptionLabel class={twMerge(props.stylesOverride?.optionLabel)}>
-														{item.label}
-													</OptionLabel>
-												</Capped>
-												{selectedBookId() === item.value.id ? (
-													<div
-														onMouseEnter={() => setIsChaptersHovered(true)}
-														onMouseLeave={() => setIsChaptersHovered(false)}
-													>
-														<ChapterOptions
-															chapterCount={item.value.chapter_count}
-															bookCode={item.value.code}
-														/>
-													</div>
-												) : null}
-											</div>
+											<OptionGroup
+												optionGroup={optionGroup}
+												comboboxApi={api()}
+												groupIndex={groupIndex()}
+											/>
 										)
 									}}
 								</For>

@@ -1,28 +1,36 @@
-import { range } from 'ramda'
-import { createMemo, For } from 'solid-js'
-import { useNavigate } from '@solidjs/router'
+import * as combobox from '@zag-js/combobox'
+import { createMemo } from 'solid-js'
+import { twMerge } from 'tailwind-merge'
+import { comboboxStyles } from '~/cap-ui'
 
-export const ChapterOptions = (props: { chapterCount: number; bookCode: string }) => {
-	const chapterList = createMemo(() => range(1, props.chapterCount + 1).map((chapter) => chapter))
+const { option_focused } = comboboxStyles
+export const ChapterOption = (props: {
+	chapter: number
+	bookCode: string
+	bookName: string
+	comboboxApi: ReturnType<typeof combobox.connect>
+	index: number
+}) => {
+	const optionIdentity = createMemo(() => ({
+		label: `${props.chapter}`,
+		value: JSON.stringify({ bookCode: props.bookCode, chapter: props.chapter }),
+		index: props.index,
+		disabled: false,
+	}))
+
+	const optionState = createMemo(() => props.comboboxApi.getOptionState(optionIdentity()))
+
+	const optionProps = props.comboboxApi.getOptionProps(optionIdentity())
 
 	return (
-		<div class="grid grid-cols-5 gap-px bg-primary-100 border-y border-primary-100">
-			<For each={chapterList()}>
-				{(chapter) => <ChapterOption chapter={chapter} bookCode={props.bookCode} />}
-			</For>
-		</div>
-	)
-}
-
-export const ChapterOption = (props: { chapter: number; bookCode: string }) => {
-	const navigate = useNavigate()
-
-	return (
-		<a
-			href={`/${props.bookCode}/${props.chapter}`}
-			class="grid aspect-square align-middle place-content-center bg-white hover:bg-primary-500 text-black hover:text-white"
+		<li
+			{...optionProps}
+			class={twMerge(
+				'cursor-pointer grid aspect-square align-middle place-content-center bg-white text-black',
+				optionState()?.focused && option_focused
+			)}
 		>
 			{props.chapter}
-		</a>
+		</li>
 	)
 }

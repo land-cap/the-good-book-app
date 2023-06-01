@@ -4,7 +4,7 @@ import { getChapter } from '~/bibleDataApi/bibleDataApi'
 import { CONTENT_TYPE, TChapter } from '~/model'
 import { contentTypeToComponent } from '~/pages/Chapter/chapterComponents'
 // @ts-ignore
-import styles from './chapter.module.css'
+import styles from './Chapter.module.css'
 import { bookList } from '~/state/books.state'
 
 export const [bookCode, setBookCode] = createSignal(null as unknown as string)
