@@ -25,6 +25,7 @@ import { Dynamic } from 'solid-js/web'
 import { OptionGroup, TOptionGroup } from '~/components/ChapterPicker/OptionGroup'
 import { range } from 'ramda'
 import { bookList } from '~/state/books.state'
+import { useNavigate } from '@solidjs/router'
 
 export type ComboboxApi = ReturnType<typeof combobox.connect>
 
@@ -63,9 +64,7 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 			onOpen() {
 				setOptions(optionGroupList())
 			},
-			onSelect({ value }) {
-				console.log(value)
-			},
+
 			onInputChange({ value }) {
 				setSelectedBookLabel(null)
 				const filtered =
@@ -79,6 +78,16 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 	)
 
 	const api = createMemo(() => combobox.connect(state, send, normalizeProps))
+
+	const navigate = useNavigate()
+
+	createEffect(() => {
+		const newValue = api().selectedValue
+		if (newValue) {
+			const { bookCode, chapter } = JSON.parse(newValue) as { bookCode: string; chapter: number }
+			navigate(`/${bookCode}/${chapter}`)
+		}
+	})
 
 	onMount(() => {
 		if (props.setApiRef) {
@@ -99,8 +108,6 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 		delete positionerProps.style['min-width']
 		return positionerProps
 	})
-
-	const [isChaptersHovered, setIsChaptersHovered] = createSignal(false)
 
 	return (
 		<Container class={props.stylesOverride?.container}>
@@ -135,8 +142,6 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 												optionGroup={optionGroup}
 												comboboxApi={api()}
 												groupIndex={groupIndex()}
-												onMouseEnter={() => setIsChaptersHovered(true)}
-												onMouseLeave={() => setIsChaptersHovered(false)}
 											/>
 										)
 									}}
