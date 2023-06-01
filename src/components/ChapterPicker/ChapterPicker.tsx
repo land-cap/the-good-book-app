@@ -52,7 +52,7 @@ const bookOptionList = createMemo<TOptionGroup[]>(() =>
 	})
 )
 
-const { option, option_focused } = comboboxStyles
+const { option } = comboboxStyles
 
 const ChapterPicker = (props: ChapterPickerProps) => {
 	const [options, setOptions] = createSignal(bookOptionList())
@@ -128,7 +128,7 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 						>
 							<ul {...api().contentProps}>
 								<For each={options()}>
-									{(optionGroup, index) => {
+									{(optionGroup, groupIndex) => {
 										const [optionEl, setOptionEl] = createSignal(null as unknown as HTMLElement)
 
 										const handleBookOptionClick = () => {
@@ -163,6 +163,8 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 
 												<ChapterOptions
 													optionGroup={optionGroup}
+													comboboxApi={api()}
+													groupIndex={groupIndex()}
 													onMouseEnter={() => setIsChaptersHovered(true)}
 													onMouseLeave={() => setIsChaptersHovered(false)}
 												/>

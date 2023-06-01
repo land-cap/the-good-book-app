@@ -1,5 +1,7 @@
-import { For, JSX } from 'solid-js'
-import { useNavigate } from '@solidjs/router'
+import * as combobox from '@zag-js/combobox'
+import { createMemo, For, JSX } from 'solid-js'
+import { twMerge } from 'tailwind-merge'
+import { comboboxStyles } from '~/cap-ui'
 
 export type TChapterOption = {
 	value: number
@@ -12,8 +14,12 @@ export type TOptionGroup = {
 	options: TChapterOption[]
 }
 
+const { option_focused } = comboboxStyles
+
 export const ChapterOptions = (props: {
 	optionGroup: TOptionGroup
+	comboboxApi: ReturnType<typeof combobox.connect>
+	groupIndex: number
 	onMouseEnter: JSX.EventHandlerUnion<HTMLDivElement, MouseEvent>
 	onMouseLeave: JSX.EventHandlerUnion<HTMLDivElement, MouseEvent>
 }) => {
@@ -24,21 +30,47 @@ export const ChapterOptions = (props: {
 			onMouseLeave={props.onMouseLeave}
 		>
 			<For each={props.optionGroup.options}>
-				{({ value }) => <ChapterOption chapter={value} bookCode={props.optionGroup.bookCode} />}
+				{({ value }, index) => (
+					<ChapterOption
+						chapter={value}
+						bookCode={props.optionGroup.bookCode}
+						bookName={props.optionGroup.label}
+						comboboxApi={props.comboboxApi}
+						index={props.groupIndex + index()}
+					/>
+				)}
 			</For>
 		</div>
 	)
 }
 
-export const ChapterOption = (props: { chapter: number; bookCode: string }) => {
-	const navigate = useNavigate()
+export const ChapterOption = (props: {
+	chapter: number
+	bookCode: string
+	bookName: string
+	comboboxApi: ReturnType<typeof combobox.connect>
+	index: number
+}) => {
+	const optionIdentity = createMemo(() => ({
+		label: `${props.chapter}`,
+		value: `${props.bookCode} ${props.chapter}`,
+		index: props.index,
+		disabled: false,
+	}))
+
+	const optionState = createMemo(() => props.comboboxApi.getOptionState(optionIdentity()))
+
+	const optionProps = props.comboboxApi.getOptionProps(optionIdentity())
 
 	return (
-		<a
-			href={`/${props.bookCode}/${props.chapter}`}
-			class="grid aspect-square align-middle place-content-center bg-white hover:bg-primary-500 text-black hover:text-white"
+		<li
+			{...optionProps}
+			class={twMerge(
+				'cursor-pointer grid aspect-square align-middle place-content-center bg-white text-black',
+				optionState()?.focused && option_focused
+			)}
 		>
-			{props.chapter}
-		</a>
+			<a href={`/${props.bookCode}/${props.chapter}`}>{props.chapter}</a>
+		</li>
 	)
 }
