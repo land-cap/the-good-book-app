@@ -42,9 +42,6 @@ export const Capped = styledDynamic<{
 	class?: string
 	mono?: boolean
 }>((props) => {
-	if (props.class?.includes('leading'))
-		throw new Error('Capped component cannot have leading class')
-
 	const styles = createStyleObject({
 		capHeight:
 			typeof props.fontSize === 'number'

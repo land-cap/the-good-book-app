@@ -26,6 +26,7 @@ import { OptionGroup, TOptionGroup } from '~/components/ChapterPicker/OptionGrou
 import { range } from 'ramda'
 import { bookCode, bookList, chapter, setBookCode, setChapter } from '~/state/books.state'
 import { useNavigate } from '@solidjs/router'
+import { Capped } from '~/cap-ui'
 
 export type ComboboxApi = ReturnType<typeof combobox.connect>
 
@@ -35,6 +36,8 @@ export type ChapterPickerProps = {
 	setApiRef?: (ref: ComboboxApi) => void
 	stylesOverride?: Partial<typeof comboboxStyles>
 }
+
+const { input } = comboboxStyles
 
 export const [selectedBookLabel, setSelectedBookLabel] = createSignal<string | null>(null)
 
@@ -134,12 +137,33 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 		<Container class={props.stylesOverride?.container}>
 			<div {...api().rootProps}>
 				<div {...api().controlProps}>
+					<button
+						{...api().triggerProps}
+						class={twMerge(
+							input,
+							props.stylesOverride?.input,
+							'flex items-center justify-between p-4 sm:hidden'
+						)}
+					>
+						<Capped component={'span'} fontSize={'base'}>
+							{api().inputValue}
+						</Capped>
+						<InputButton
+							class={twMerge(props.stylesOverride?.inputButton, 'static p-0 -my-2 sm:hidden')}
+						>
+							<Icon name={'unfold_more'} />
+						</InputButton>
+					</button>
+
 					<Input
 						{...api().inputProps}
 						placeholder={props.placeholder}
-						class={twMerge(props.stylesOverride?.input)}
+						class={twMerge(props.stylesOverride?.input, 'hidden sm:block')}
 					/>
-					<InputButton {...api().triggerProps} class={props.stylesOverride?.inputButton}>
+					<InputButton
+						{...api().triggerProps}
+						class={twMerge(props.stylesOverride?.inputButton, 'hidden sm:flex')}
+					>
 						<Icon name={'unfold_more'} />
 					</InputButton>
 				</div>
@@ -153,7 +177,7 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 					>
 						<OptionContainer
 							{...positionerProps}
-							class={twMerge(props.stylesOverride?.optionContainer, 'max-h-[50vh]')}
+							class={twMerge(props.stylesOverride?.optionContainer, 'max-h-[75vh] sm:max-h-[50vh]')}
 						>
 							<ul {...api().contentProps}>
 								<For each={options()}>

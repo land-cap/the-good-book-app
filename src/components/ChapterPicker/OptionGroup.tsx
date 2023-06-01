@@ -9,6 +9,7 @@ import styles from './OptionGroup.module.css'
 import { Icon } from '~/components/composable/Icon'
 import { Option, OptionIcon } from '~/cap-ui/Combobox/combobox.presentational'
 import { ChapterOption } from '~/components/ChapterPicker/ChapterOption'
+import { useIsBreakpoint } from '~/hooks'
 
 export type TChapterOption = {
 	value: number
@@ -62,6 +63,8 @@ export const OptionGroup = (props: {
 
 	const showChapters = createMemo(() => selectedBookLabel() === props.optionGroup.label)
 
+	const isDesktop = useIsBreakpoint('sm')
+
 	return (
 		<Collapsible.Root open={showChapters()} ref={setOptionEl}>
 			<Collapsible.Trigger
@@ -72,11 +75,11 @@ export const OptionGroup = (props: {
 					onClick={handleBookOptionClick}
 					class={twMerge(
 						option,
-						'flex justify-between',
+						'flex justify-between p-4 sm:p-3',
 						showChapters() && 'font-bold bg-primary-100'
 					)}
 				>
-					<Capped component="div" fontSize={'sm'}>
+					<Capped component="div" fontSize={isDesktop() ? 'sm' : 'base'}>
 						{props.optionGroup.label}
 					</Capped>
 

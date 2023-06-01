@@ -27,7 +27,7 @@ export const ChapterOption = (props: {
 		<li
 			{...optionProps}
 			class={twMerge(
-				'cursor-pointer grid aspect-square align-middle place-content-center bg-white text-black',
+				'cursor-pointer grid aspect-square align-middle place-content-center bg-white text-black text-base sm:text-sm',
 				optionState()?.focused && option_focused
 			)}
 		>
