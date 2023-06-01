@@ -37,7 +37,7 @@ export type ChapterPickerProps = {
 	stylesOverride?: Partial<typeof comboboxStyles>
 }
 
-const bookOptionList = createMemo<TOptionGroup[]>(() =>
+const optionGroupList = createMemo<TOptionGroup[]>(() =>
 	bookList().map(({ name, chapter_count, code }) => {
 		const options = range(1, chapter_count + 1).map((chapter) => ({
 			value: chapter,
@@ -55,7 +55,7 @@ const bookOptionList = createMemo<TOptionGroup[]>(() =>
 const { option } = comboboxStyles
 
 const ChapterPicker = (props: ChapterPickerProps) => {
-	const [options, setOptions] = createSignal(bookOptionList())
+	const [options, setOptions] = createSignal(optionGroupList())
 
 	const [selectedBookLabel, setSelectedBookLabel] = createSignal<string | null>(null)
 
@@ -63,15 +63,18 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 		combobox.machine({
 			id: createUniqueId(),
 			onOpen() {
-				setOptions(bookOptionList())
+				setOptions(optionGroupList())
+			},
+			onSelect({ value }) {
+				console.log(value)
 			},
 			onInputChange({ value }) {
 				setSelectedBookLabel(null)
-				// const filtered =
-				// 	props?.optionList?.filter((item) =>
-				// 		item.label.toLowerCase().includes(value.toLowerCase())
-				// 	) || []
-				// setOptions(filtered.length > 0 ? filtered : props.optionList)
+				const filtered =
+					optionGroupList().filter((item) =>
+						item.label.toLowerCase().includes(value.toLowerCase())
+					) || []
+				setOptions(filtered.length > 0 ? filtered : optionGroupList())
 			},
 			...props.context,
 		})
@@ -87,8 +90,8 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 
 	createEffect(() => {
 		on(
-			() => bookOptionList(),
-			() => setOptions(bookOptionList())
+			() => optionGroupList(),
+			() => setOptions(optionGroupList())
 		)
 	})
 
