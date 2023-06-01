@@ -46,8 +46,11 @@ export const OptionGroup = (props: {
 
 	return (
 		<div ref={setOptionEl}>
-			<Collapsible.Root>
-				<Collapsible.Trigger as="div" class="w-full text-left">
+			<Collapsible.Root open={showChapters()}>
+				<Collapsible.Trigger
+					as="div"
+					class={twMerge('w-full text-left', styles.collapsible__trigger)}
+				>
 					<Option
 						onClick={handleBookOptionClick}
 						class={twMerge(
@@ -61,17 +64,11 @@ export const OptionGroup = (props: {
 						</Capped>
 
 						<OptionIcon
-							class={twMerge(
-								optionIcon,
-								'text-gray-400',
-								showChapters() && 'text-black'
-								// optionState()?.focused &&
-								// (props.stylesOverride?.optionIcon_focused || optionIcon_focused)
-							)}
+							class={twMerge(optionIcon, 'text-gray-400', showChapters() && 'text-black')}
 						>
 							<Icon
 								name={'expand_more'}
-								className={twMerge(showChapters() && 'text-black rotate-180')}
+								class={twMerge(styles.collapsible__triggerIcon, showChapters() && 'text-black')}
 							/>
 						</OptionIcon>
 					</Option>

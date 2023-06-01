@@ -39,10 +39,10 @@ const monolisaMetrics = {
 export const Capped = styledDynamic<{
 	fontSize: FontSize | number
 	lineGap?: number
-	className?: string
+	class?: string
 	mono?: boolean
 }>((props) => {
-	if (props.className?.includes('leading'))
+	if (props.class?.includes('leading'))
 		throw new Error('Capped component cannot have leading class')
 
 	const styles = createStyleObject({

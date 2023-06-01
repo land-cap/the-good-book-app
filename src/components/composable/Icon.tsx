@@ -12,14 +12,14 @@ const sizeToClass: Record<number, string> = {
 export const Icon = (props: {
 	name: string
 	size?: IconSize
-	className?: string
+	class?: string
 	inline?: boolean
 }) => {
 	const sizeClass = props.size ? sizeToClass[props.size] : sizeToClass[20]
 
 	return (
 		<span
-			class={twMerge('material-icon', !props.inline && sizeClass, props.className)}
+			class={twMerge('material-icon', !props.inline && sizeClass, props.class)}
 			style={{
 				'font-variation-settings': `'FILL' 1, 'wght' 600, 'opsz' ${props.size || 20}`,
 			}}

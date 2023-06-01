@@ -7,6 +7,14 @@
     animation: slideDown 300ms ease-out;
 }
 
+.collapsible__triggerIcon {
+    transition: transform 250ms;
+}
+
+.collapsible__trigger[data-expanded] .collapsible__triggerIcon {
+    transform: rotateZ(180deg);
+}
+
 @keyframes slideDown {
     from {
         height: 0;
