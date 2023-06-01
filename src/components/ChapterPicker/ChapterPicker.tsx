@@ -24,7 +24,7 @@ import { twMerge } from 'tailwind-merge'
 import { Dynamic } from 'solid-js/web'
 import { OptionGroup, TOptionGroup } from '~/components/ChapterPicker/OptionGroup'
 import { range } from 'ramda'
-import { bookList, setBookCode, setChapter } from '~/state/books.state'
+import { bookCode, bookList, chapter, setBookCode, setChapter } from '~/state/books.state'
 import { useNavigate } from '@solidjs/router'
 
 export type ComboboxApi = ReturnType<typeof combobox.connect>
@@ -35,8 +35,6 @@ export type ChapterPickerProps = {
 	setApiRef?: (ref: ComboboxApi) => void
 	stylesOverride?: Partial<typeof comboboxStyles>
 }
-
-const { option } = comboboxStyles
 
 export const [selectedBookLabel, setSelectedBookLabel] = createSignal<string | null>(null)
 
@@ -103,6 +101,27 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 			() => setOptions(optionGroupList())
 		)
 	})
+
+	createEffect(
+		on(
+			() => {
+				bookCode()
+				chapter()
+				bookList()
+			},
+			() => {
+				if (bookCode() && chapter() && api()) {
+					const bookName = bookList().find((book) => book.code === bookCode())?.name
+					if (bookName) {
+						api().setValue({
+							value: JSON.stringify({ bookCode: bookCode(), chapter: chapter() }),
+							label: `${bookName} ${chapter()}`,
+						})
+					}
+				}
+			}
+		)
+	)
 
 	const positionerProps = createMemo(() => {
 		const positionerProps = { ...api().positionerProps }
