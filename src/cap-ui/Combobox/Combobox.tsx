@@ -46,6 +46,7 @@ export type ComboboxProps<T> = {
 const { option_focused, option_checked, optionIcon_focused } = comboboxStyles
 
 export const Combobox = <T,>(props: ComboboxProps<T>) => {
+	// eslint-disable-next-line solid/reactivity
 	const [options, setOptions] = createSignal(props.options)
 
 	createEffect(() => {
@@ -69,6 +70,7 @@ export const Combobox = <T,>(props: ComboboxProps<T>) => {
 					) || []
 				setOptions(filtered.length > 0 ? filtered : props.options)
 			},
+			// eslint-disable-next-line solid/reactivity
 			...props.context,
 		})
 	)

@@ -23,14 +23,17 @@ export const Pressable = <T extends ValidComponent>(
 		pressable.machine({
 			id: createUniqueId(),
 			preventFocusOnPress: true,
+			// eslint-disable-next-line solid/reactivity
 			...props.context,
 		})
 	)
 
-	const classList = twMerge(
-		pressableStyles.base,
-		props.variant ? pressableStyles.variant[props.variant] : pressableStyles.variant.primary,
-		props.size ? pressableStyles.size[props.size] : pressableStyles.size.md
+	const classList = createMemo(() =>
+		twMerge(
+			pressableStyles.base,
+			props.variant ? pressableStyles.variant[props.variant] : pressableStyles.variant.primary,
+			props.size ? pressableStyles.size[props.size] : pressableStyles.size.md
+		)
 	)
 
 	const api = createMemo(() => pressable.connect(state, send, normalizeProps))
@@ -46,7 +49,7 @@ export const Pressable = <T extends ValidComponent>(
 			component={props.component || 'button'}
 			{...api().pressableProps}
 			{...props}
-			class={twMerge(classList, props.class)}
+			class={twMerge(classList(), props.class)}
 		/>
 	)
 }

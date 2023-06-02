@@ -1,4 +1,5 @@
 import { twMerge } from 'tailwind-merge'
+import { createMemo } from 'solid-js'
 
 type IconSize = 20 | 24 | 40 | 48
 
@@ -15,11 +16,11 @@ export const Icon = (props: {
 	class?: string
 	inline?: boolean
 }) => {
-	const sizeClass = props.size ? sizeToClass[props.size] : sizeToClass[20]
+	const sizeClass = createMemo(() => (props.size ? sizeToClass[props.size] : sizeToClass[20]))
 
 	return (
 		<span
-			class={twMerge('material-icon', !props.inline && sizeClass, props.class)}
+			class={twMerge('material-icon', !props.inline && sizeClass(), props.class)}
 			style={{
 				'font-variation-settings': `'FILL' 1, 'wght' 600, 'opsz' ${props.size || 20}`,
 			}}

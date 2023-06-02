@@ -21,7 +21,7 @@ export const ChapterOption = (props: {
 
 	const optionState = createMemo(() => props.comboboxApi.getOptionState(optionIdentity()))
 
-	const optionProps = props.comboboxApi.getOptionProps(optionIdentity())
+	const optionProps = createMemo(() => props.comboboxApi.getOptionProps(optionIdentity()))
 
 	return (
 		<li

@@ -1,7 +1,7 @@
 import { Link, Meta } from '@solidjs/meta'
 import colors from 'tailwindcss/colors'
 
-let lightColor = colors.white
+const lightColor = colors.white
 
 const darkColor = colors.neutral[900]
 

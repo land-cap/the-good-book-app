@@ -5,7 +5,8 @@
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview",
-    "upgrade-packages": "ncu -u && pnpm install"
+    "upgrade-packages": "ncu -u && pnpm install",
+    "lint": "pnpm eslint src --fix"
   },
   "type": "module",
   "devDependencies": {

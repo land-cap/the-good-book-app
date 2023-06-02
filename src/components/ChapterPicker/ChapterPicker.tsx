@@ -6,7 +6,6 @@ import {
 	createSignal,
 	createUniqueId,
 	For,
-	JSX,
 	onMount,
 	Show,
 } from 'solid-js'
@@ -20,7 +19,6 @@ import {
 import { comboboxStyles } from '~/cap-ui/Combobox/combobox.styles'
 import { Motion, Presence } from '@motionone/solid'
 import { twMerge } from 'tailwind-merge'
-import { Dynamic } from 'solid-js/web'
 import { OptionGroup, TOptionGroup } from '~/components/ChapterPicker/OptionGroup'
 import { range } from 'ramda'
 import {
@@ -31,7 +29,7 @@ import {
 	setCurrChapter,
 } from '~/state/books.state'
 import { useNavigate } from '@solidjs/router'
-import { Capped } from '~/cap-ui'
+import { Capped, withCustomStyles } from '~/cap-ui'
 
 export type ComboboxApi = ReturnType<typeof combobox.connect>
 
@@ -85,6 +83,7 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 					) || []
 				setOptions(filtered.length > 0 ? filtered : optionGroupList())
 			},
+			// eslint-disable-next-line solid/reactivity
 			...props.context,
 		})
 	)
@@ -199,14 +198,12 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 	)
 }
 
-export const withCustomStyles =
-	<S, T>(Component: (props: T) => JSX.Element, stylesOverride: S) =>
-	(props: T) =>
-		<Dynamic component={Component} {...props} stylesOverride={stylesOverride} />
+const StyledChapterPicker = createMemo(() =>
+	withCustomStyles(ChapterPicker, {
+		input: 'rounded-none ring-2 shadow-none ring-gray-200 dark:ring-gray-700',
+		optionContainer: 'rounded-none',
+		inputButton: 'hover:text-primary-600 dark:hover:text-primary-500',
+	})
+)
 
-const StyledChapterPicker = withCustomStyles(ChapterPicker, {
-	input: 'rounded-none ring-2 shadow-none ring-gray-200 dark:ring-gray-700',
-	optionContainer: 'rounded-none',
-	inputButton: 'hover:text-primary-600 dark:hover:text-primary-500',
-})
 export { StyledChapterPicker as ChapterPicker }

@@ -1,16 +1,20 @@
 {
   "parser": "@typescript-eslint/parser",
   "plugins": [
+    "@typescript-eslint",
     "solid",
     "prettier"
   ],
   "extends": [
     "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
     "plugin:solid/typescript"
   ],
   "rules": {
+    "curly": "error",
     "prefer-arrow-callback": "error",
     "arrow-body-style": "error",
-    "no-console": "error"
+    "no-console": "error",
+    "@typescript-eslint/ban-ts-comment": "warn"
   }
 }

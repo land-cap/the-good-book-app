@@ -26,16 +26,6 @@ const fixStyleObject = (rawStyles: ReturnType<typeof createStyleObject>) =>
 		}
 	}, {} as ReturnType<typeof createStyleObject>)
 
-const monolisaMetrics = {
-	...dmSansMetrics,
-	familyName: 'MonoLisa',
-	capHeight: 700,
-	ascent: 1060,
-	descent: -320,
-	unitsPerEm: 1000,
-	xHeight: 550,
-}
-
 export const Capped = styledDynamic<{
 	fontSize: FontSize | number
 	lineGap?: number

@@ -1,9 +1,6 @@
 import { Capped } from '~/cap-ui/meta/Capped'
-import { createSignal } from 'solid-js'
 import { CapUiLogo } from '~/cap-ui/CapUiLogo'
 import { Pressable } from '~/cap-ui'
-
-const [toggle, setToggle] = createSignal(true)
 
 export const Test = () => (
 	<div class={'flex flex-col gap-8 place-contentItem-center place-items-center my-16 sm:my-24'}>

@@ -54,8 +54,7 @@ const InteractiveNavbar = () => {
 	)
 }
 
-const ScrolledNavbar = () => {
-	return (
+const ScrolledNavbar = () => (
 		<nav
 			class={twMerge(
 				'z-10 fixed top-0 left-1/2 -translate-x-1/2 max-w-2xl bg-white dark:bg-gray-900 mx-auto w-full px-6 lg:px-8 transition-transform',
@@ -71,10 +70,8 @@ const ScrolledNavbar = () => {
 			</div>
 		</nav>
 	)
-}
 
-export const NavBar = () => {
-	return (
+export const NavBar = () => (
 		<>
 			<Portal>
 				<ScrolledNavbar />
@@ -82,4 +79,3 @@ export const NavBar = () => {
 			<InteractiveNavbar />
 		</>
 	)
-}

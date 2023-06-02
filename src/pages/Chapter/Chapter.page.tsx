@@ -14,12 +14,13 @@ import {
 	setCurrChapter,
 } from '~/state/books.state'
 
-createEffect(async () => {
+createEffect(() => {
 	if (currBookCode() && currChapter()) {
 		const bookId = bookList().find(({ code }) => code === currBookCode())?.id
 		if (bookId) {
-			const data = await getChapter(bookId, currChapter())
-			setChapterData(data)
+			getChapter(bookId, currChapter()).then((data) => {
+				setChapterData(data)
+			})
 		}
 	}
 })

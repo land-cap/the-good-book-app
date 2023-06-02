@@ -5,11 +5,7 @@ import { twMerge } from 'tailwind-merge'
 export const withInitialClass = <T extends ValidComponent>(
   defaultClasses: string,
   Component: T
-) => {
-  return (props: Omit<DynamicProps<T>, 'component'>) => {
-    return (
+) => (props: Omit<DynamicProps<T>, 'component'>) => (
       // @ts-ignore
       <Dynamic component={Component} {...props} class={twMerge(defaultClasses, props.class)} />
     )
-  }
-}
