@@ -1,4 +1,4 @@
-import { createMemo, createSignal, For, Show } from 'solid-js'
+import { createMemo, createSignal, For, onMount, Show } from 'solid-js'
 import { Motion, Presence } from '@motionone/solid'
 import { OptionContainer } from '~/cap-ui/Combobox/combobox.presentational'
 import { twMerge } from 'tailwind-merge'
@@ -14,17 +14,21 @@ type TChapterPickerMenuProps = {
 	stylesOverride?: Partial<typeof comboboxStyles>
 }
 
-const [resizeCount, setResizeCount] = createSignal(0)
-
-window.onresize = () => {
-	setResizeCount(resizeCount() + 1)
-}
-
 export const ChapterPickerMenu = (props: TChapterPickerMenuProps) => {
 	const isDesktop = useIsBreakpoint('sm')
 
-	const maxHeightvalue = createMemo(
-		() => `calc(${window.innerHeight}px - ${props.menuTopOffset}px - 10px - 24px)`
+	const [windowHeight, setWindowHeight] = createSignal(window.innerHeight)
+
+	onMount(() => {
+		const handleResize = () => {
+			setWindowHeight(window.innerHeight)
+		}
+		window.addEventListener('resize', handleResize)
+		return () => window.removeEventListener('resize', handleResize)
+	})
+
+	const maxHeightValue = createMemo(
+		() => `calc(${windowHeight()}px - ${props.menuTopOffset}px - 10px - 24px)`
 	)
 
 	return (
@@ -37,10 +41,9 @@ export const ChapterPickerMenu = (props: TChapterPickerMenuProps) => {
 				>
 					<OptionContainer
 						class={twMerge(props.stylesOverride?.optionContainer, 'sm:max-h-[50vh]')}
-						style={!isDesktop() ? { 'max-height': maxHeightvalue() } : undefined}
+						style={!isDesktop() ? { 'max-height': maxHeightValue() } : undefined}
 					>
 						<ul {...props.comboboxApi.contentProps}>
-							{resizeCount()}
 							<For each={props.options}>
 								{(optionGroup, groupIndex) => (
 									<OptionGroup
