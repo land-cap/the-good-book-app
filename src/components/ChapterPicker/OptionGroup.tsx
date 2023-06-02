@@ -10,7 +10,6 @@ import { Icon } from '~/components/composable/Icon'
 import { Option, OptionIcon } from '~/cap-ui/Combobox/combobox.presentational'
 import { ChapterOption } from '~/components/ChapterPicker/ChapterOption'
 import { useIsBreakpoint } from '~/hooks'
-import { currBookCode } from '~/state/books.state'
 
 export type TChapterOption = {
 	value: number
@@ -42,11 +41,7 @@ export const OptionGroup = (props: {
 		)
 	}
 
-	const showChapters = createMemo(
-		() =>
-			selectedBookLabel() === props.optionGroup.label ||
-			(currBookCode() === props.optionGroup.bookCode && selectedBookLabel() === null)
-	)
+	const showChapters = createMemo(() => selectedBookLabel() === props.optionGroup.label)
 
 	const isDesktop = useIsBreakpoint('sm')
 
@@ -56,8 +51,8 @@ export const OptionGroup = (props: {
 				element.scrollIntoView({
 					// @ts-ignore
 					behavior: 'instant',
-					block: 'center',
-					inline: 'center',
+					block: 'nearest',
+					inline: 'nearest',
 				})
 				return null
 			}

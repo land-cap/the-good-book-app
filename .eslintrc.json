@@ -10,6 +10,7 @@
   ],
   "rules": {
     "prefer-arrow-callback": "error",
-    "arrow-body-style": "error"
+    "arrow-body-style": "error",
+    "no-console": "error"
   }
 }

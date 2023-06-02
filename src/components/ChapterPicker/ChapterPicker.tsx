@@ -46,6 +46,13 @@ const { input, inputButton } = comboboxStyles
 
 export const [selectedBookLabel, setSelectedBookLabel] = createSignal<string | null>(null)
 
+createEffect(() => {
+	const currBookName = bookList()?.find(({ code }) => code === currBookCode())?.name
+	if (currBookName) {
+		setSelectedBookLabel(currBookName)
+	}
+})
+
 const optionGroupList = createMemo<TOptionGroup[]>(() =>
 	bookList().map(({ name, chapter_count, code }) => {
 		const options = range(1, chapter_count + 1).map((chapter) => ({
@@ -69,9 +76,6 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 			id: createUniqueId(),
 			onOpen: () => {
 				setOptions(optionGroupList())
-			},
-			onClose: () => {
-				setSelectedBookLabel(null)
 			},
 			onInputChange: ({ value }) => {
 				setSelectedBookLabel(null)
@@ -105,9 +109,7 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 		}
 	})
 
-	createEffect(() => {
-		;() => setOptions(optionGroupList())
-	})
+	createEffect(() => setOptions(optionGroupList()))
 
 	createEffect(() => {
 		if (currBookCode() && currChapter() && api()) {
@@ -180,15 +182,13 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 						>
 							<ul {...api().contentProps}>
 								<For each={options()}>
-									{(optionGroup, groupIndex) => {
-										return (
-											<OptionGroup
-												optionGroup={optionGroup}
-												comboboxApi={api()}
-												groupIndex={groupIndex()}
-											/>
-										)
-									}}
+									{(optionGroup, groupIndex) => (
+										<OptionGroup
+											optionGroup={optionGroup}
+											comboboxApi={api()}
+											groupIndex={groupIndex()}
+										/>
+									)}
 								</For>
 							</ul>
 						</OptionContainer>
