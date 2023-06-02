@@ -75,6 +75,7 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 			onOpen: () => {
 				setOptions(optionGroupList())
 			},
+
 			onInputChange: ({ value }) => {
 				const filtered =
 					optionGroupList().filter((item) =>
@@ -111,17 +112,15 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 
 	createEffect(() => setOptions(optionGroupList()))
 
-	const [isInitialValueSet, setIsInitialValueSet] = createSignal(false)
-
 	createEffect(() => {
-		if (currBookCode() && currChapter() && !isInitialValueSet()) {
+		if (!api().isOpen && currBookCode() && currChapter()) {
 			const bookName = bookList().find((book) => book.code === currBookCode())?.name
-			if (bookName && !api().inputValue) {
+			const label = `${bookName} ${currChapter()}`
+			if (label !== api().inputValue) {
 				api().setValue({
 					value: JSON.stringify({ bookCode: currBookCode(), chapter: currChapter() }),
-					label: `${bookName} ${currChapter()}`,
+					label,
 				})
-				setIsInitialValueSet(true)
 			}
 		}
 	})
@@ -164,6 +163,12 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 							// @ts-ignore
 							api().inputProps.onInput(e)
 							setSelectedBookLabel(null)
+						}}
+						onClick={(e) => {
+							// @ts-ignore
+							api().inputProps.onClick(e)
+							api().setInputValue('')
+							send('CLICK_BUTTON')
 						}}
 						placeholder={props.placeholder}
 						class={twMerge(props.stylesOverride?.input, 'hidden sm:block')}
