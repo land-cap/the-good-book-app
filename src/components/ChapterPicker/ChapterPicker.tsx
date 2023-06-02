@@ -1,25 +1,11 @@
 import * as combobox from '@zag-js/combobox'
 import { normalizeProps, useMachine } from '@zag-js/solid'
-import {
-	createEffect,
-	createMemo,
-	createSignal,
-	createUniqueId,
-	For,
-	onMount,
-	Show,
-} from 'solid-js'
+import { createEffect, createMemo, createSignal, createUniqueId, onMount } from 'solid-js'
 import { Icon } from '~/components/composable/Icon'
-import {
-	Container,
-	Input,
-	InputButton,
-	OptionContainer,
-} from '~/cap-ui/Combobox/combobox.presentational'
+import { Container, Input, InputButton } from '~/cap-ui/Combobox/combobox.presentational'
 import { comboboxStyles } from '~/cap-ui/Combobox/combobox.styles'
-import { Motion, Presence } from '@motionone/solid'
 import { twMerge } from 'tailwind-merge'
-import { OptionGroup, TOptionGroup } from '~/components/ChapterPicker/OptionGroup'
+import { TOptionGroup } from '~/components/ChapterPicker/OptionGroup'
 import { range } from 'ramda'
 import {
 	bookList,
@@ -30,6 +16,7 @@ import {
 } from '~/state/books.state'
 import { useNavigate } from '@solidjs/router'
 import { Capped, withCustomStyles } from '~/cap-ui'
+import { ChapterPickerMenu } from '~/components/ChapterPicker/ChapterPickerMenu'
 
 export type ComboboxApi = ReturnType<typeof combobox.connect>
 
@@ -126,15 +113,22 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 		}
 	})
 
-	const positionerProps = createMemo(() => {
-		const positionerProps = { ...api().positionerProps }
-		// @ts-ignore
-		delete positionerProps.style['min-width']
-		return positionerProps
+	const [containerEl, setContainerEl] = createSignal(null as unknown as HTMLDivElement)
+
+	const [menuTopOffset, setMenuTopOffset] = createSignal(0)
+
+	createEffect(() => {
+		if (containerEl()) {
+			setMenuTopOffset(containerEl().getBoundingClientRect().bottom)
+		}
+	})
+
+	createEffect(() => {
+		console.log(menuTopOffset())
 	})
 
 	return (
-		<Container class={props.stylesOverride?.container}>
+		<Container ref={setContainerEl} class={props.stylesOverride?.container}>
 			<div {...api().rootProps}>
 				<div {...api().controlProps}>
 					<button
@@ -184,36 +178,17 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 					</InputButton>
 				</div>
 			</div>
-			<Presence exitBeforeEnter>
-				<Show when={api().isOpen}>
-					<Motion.div
-						initial={{ opacity: 0, scale: 0.75 }}
-						animate={{ opacity: 1, scale: 1, transition: { duration: 0.1, easing: 'ease-out' } }}
-						exit={{ opacity: 0, scale: 0.75, transition: { duration: 0.1, easing: 'ease-in' } }}
-					>
-						<OptionContainer
-							{...positionerProps}
-							class={twMerge(props.stylesOverride?.optionContainer, 'max-h-[75vh] sm:max-h-[50vh]')}
-						>
-							<ul {...api().contentProps}>
-								<For each={options()}>
-									{(optionGroup, groupIndex) => (
-										<OptionGroup
-											optionGroup={optionGroup}
-											comboboxApi={api()}
-											groupIndex={groupIndex()}
-										/>
-									)}
-								</For>
-							</ul>
-						</OptionContainer>
-					</Motion.div>
-				</Show>
-			</Presence>
+			<ChapterPickerMenu
+				options={options()}
+				comboboxApi={api()}
+				menuTopOffset={menuTopOffset()}
+				stylesOverride={props.stylesOverride}
+			/>
 		</Container>
 	)
 }
 
+// eslint-disable-next-line solid/reactivity
 const StyledChapterPicker = createMemo(() =>
 	withCustomStyles(ChapterPicker, {
 		input: 'rounded-none ring-2 shadow-none ring-gray-200 dark:ring-gray-700',
