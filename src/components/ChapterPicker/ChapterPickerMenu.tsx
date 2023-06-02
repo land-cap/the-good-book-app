@@ -17,7 +17,9 @@ type TChapterPickerMenuProps = {
 export const ChapterPickerMenu = (props: TChapterPickerMenuProps) => {
 	const isDesktop = useIsBreakpoint('sm')
 
-	const maxHeightvalue = createMemo(() => `calc(100vh - ${props.menuTopOffset}px - 10px - 24px)`)
+	const maxHeightvalue = createMemo(
+		() => `calc(${window.innerHeight}px - ${props.menuTopOffset}px - 10px - 24px)`
+	)
 
 	return (
 		<Presence exitBeforeEnter>
