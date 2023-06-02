@@ -76,7 +76,7 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 				setOptions(optionGroupList())
 			},
 			onInputChange: ({ value }) => {
-				setSelectedBookLabel(null)
+				// setSelectedBookLabel(null)
 				const filtered =
 					optionGroupList().filter((item) =>
 						item.label.toLowerCase().includes(value.toLowerCase())
