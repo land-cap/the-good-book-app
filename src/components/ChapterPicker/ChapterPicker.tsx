@@ -221,6 +221,6 @@ const StyledChapterPicker = createMemo(() =>
 		inputButton: 'hover:text-primary-600 dark:hover:text-primary-500',
 		optionIcon: 'pr-2',
 	})
-)
+)()
 
 export { StyledChapterPicker as ChapterPicker }

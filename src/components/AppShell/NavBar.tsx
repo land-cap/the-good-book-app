@@ -2,7 +2,6 @@ import { createEffect, createSignal, onCleanup } from 'solid-js'
 import { twMerge } from 'tailwind-merge'
 import { Portal } from 'solid-js/web'
 import { Capped } from '~/cap-ui/meta/Capped'
-import { A } from '@solidjs/router'
 import { chapterTitle } from '~/state/books.state'
 import { ChapterPicker } from '~/components/ChapterPicker/ChapterPicker'
 
@@ -40,11 +39,9 @@ const InteractiveNavbar = () => {
 						'flex flex-col sm:flex-row gap-6 pt-6 pb-4 sm:py-0 sm:h-16 justify-between items-center'
 					}
 				>
-					<A href="/" class="flex flex-shrink-0 items-center -my-4 py-4">
-						<Capped component={'p'} class="font-bold">
-							The Good Book
-						</Capped>
-					</A>
+					<Capped component={'p'} class="font-bold">
+						The Good Book
+					</Capped>
 					<div class="w-full sm:w-64">
 						<ChapterPicker />
 					</div>
@@ -55,27 +52,27 @@ const InteractiveNavbar = () => {
 }
 
 const ScrolledNavbar = () => (
-		<nav
-			class={twMerge(
-				'z-10 fixed top-0 left-1/2 -translate-x-1/2 max-w-2xl bg-white dark:bg-gray-900 mx-auto w-full px-6 lg:px-8 transition-transform',
-				!isInteractiveNavbarVisible()
-					? 'translate-y-0 ease-emphasized-decelerate duration-emphasized-decelerate'
-					: '-translate-y-full ease-emphasized-accelerate duration-emphasized-accelerate'
-			)}
-		>
-			<div class={'border-b border-gray-200 dark:border-gray-700'}>
-				<div class={twMerge('flex place-content-center py-2')}>
-					<p class="text-sm text-gray-500 font-bold">{chapterTitle()}</p>
-				</div>
+	<nav
+		class={twMerge(
+			'z-10 fixed top-0 left-1/2 -translate-x-1/2 max-w-2xl bg-white dark:bg-gray-900 mx-auto w-full px-6 lg:px-8 transition-transform',
+			!isInteractiveNavbarVisible()
+				? 'translate-y-0 ease-emphasized-decelerate duration-emphasized-decelerate'
+				: '-translate-y-full ease-emphasized-accelerate duration-emphasized-accelerate'
+		)}
+	>
+		<div class={'border-b border-gray-200 dark:border-gray-700'}>
+			<div class={twMerge('flex place-content-center py-2')}>
+				<p class="text-sm text-gray-500 font-bold">{chapterTitle()}</p>
 			</div>
-		</nav>
-	)
+		</div>
+	</nav>
+)
 
 export const NavBar = () => (
-		<>
-			<Portal>
-				<ScrolledNavbar />
-			</Portal>
-			<InteractiveNavbar />
-		</>
-	)
+	<>
+		<Portal>
+			<ScrolledNavbar />
+		</Portal>
+		<InteractiveNavbar />
+	</>
+)
