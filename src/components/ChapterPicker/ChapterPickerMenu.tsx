@@ -40,7 +40,11 @@ export const ChapterPickerMenu = (props: TChapterPickerMenuProps) => {
 					exit={{ opacity: 0, scale: 0.75, transition: { duration: 0.1, easing: 'ease-in' } }}
 				>
 					<OptionContainer
-						class={twMerge(props.stylesOverride?.optionContainer, 'sm:max-h-[50vh]')}
+						class={twMerge(
+							props.stylesOverride?.optionContainer,
+							'sm:max-h-[50vh]',
+							!isDesktop() && 'transition-[max-height] duration-300 ease-in-out'
+						)}
 						style={!isDesktop() ? { 'max-height': maxHeightValue() } : undefined}
 					>
 						<ul {...props.comboboxApi.contentProps}>
