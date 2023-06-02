@@ -110,14 +110,17 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 
 	createEffect(() => setOptions(optionGroupList()))
 
+	const [isInitialValueSet, setIsInitialValueSet] = createSignal(false)
+
 	createEffect(() => {
-		if (currBookCode() && currChapter() && api()) {
+		if (currBookCode() && currChapter() && !isInitialValueSet()) {
 			const bookName = bookList().find((book) => book.code === currBookCode())?.name
-			if (bookName) {
+			if (bookName && !api().inputValue) {
 				api().setValue({
 					value: JSON.stringify({ bookCode: currBookCode(), chapter: currChapter() }),
 					label: `${bookName} ${currChapter()}`,
 				})
+				setIsInitialValueSet(true)
 			}
 		}
 	})
