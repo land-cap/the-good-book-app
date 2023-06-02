@@ -1,10 +1,11 @@
-import { createMemo, For, Show } from 'solid-js'
+import { For, Show } from 'solid-js'
 import { Motion, Presence } from '@motionone/solid'
 import { OptionContainer } from '~/cap-ui/Combobox/combobox.presentational'
 import { twMerge } from 'tailwind-merge'
 import { OptionGroup, TOptionGroup } from '~/components/ChapterPicker/OptionGroup'
 import * as combobox from '@zag-js/combobox'
 import { comboboxStyles } from '~/cap-ui'
+import { useIsBreakpoint } from '~/hooks'
 
 type TChapterPickerMenuProps = {
 	options: TOptionGroup[]
@@ -13,12 +14,7 @@ type TChapterPickerMenuProps = {
 }
 
 export const ChapterPickerMenu = (props: TChapterPickerMenuProps) => {
-	const positionerProps = createMemo(() => {
-		const positionerProps = { ...props.comboboxApi.positionerProps }
-		// @ts-ignore
-		delete positionerProps.style['min-width']
-		return positionerProps
-	})
+	const isDesktop = useIsBreakpoint('sm')
 
 	return (
 		<Presence exitBeforeEnter>
@@ -29,7 +25,6 @@ export const ChapterPickerMenu = (props: TChapterPickerMenuProps) => {
 					exit={{ opacity: 0, scale: 0.75, transition: { duration: 0.1, easing: 'ease-in' } }}
 				>
 					<OptionContainer
-						{...positionerProps}
 						class={twMerge(props.stylesOverride?.optionContainer, 'max-h-[75vh] sm:max-h-[50vh]')}
 					>
 						<ul {...props.comboboxApi.contentProps}>
