@@ -75,14 +75,15 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 			onOpen: () => {
 				setOptions(optionGroupList())
 			},
-
 			onInputChange: ({ value }) => {
 				const filtered =
 					optionGroupList().filter((item) =>
 						item.label.toLowerCase().includes(value.toLowerCase())
 					) || []
 				const newValue = filtered.length > 0 ? filtered : optionGroupList()
-
+				if (newValue.length === 1 && selectedBookLabel() !== newValue[0].label) {
+					setSelectedBookLabel(newValue[0].label)
+				}
 				setOptions(newValue)
 			},
 			// eslint-disable-next-line solid/reactivity
@@ -162,7 +163,9 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 						onInput={(e) => {
 							// @ts-ignore
 							api().inputProps.onInput(e)
-							setSelectedBookLabel(null)
+							if (options().length > 1) {
+								setSelectedBookLabel(null)
+							}
 						}}
 						onClick={(e) => {
 							// @ts-ignore
