@@ -1,4 +1,4 @@
-import { createMemo, For, Show } from 'solid-js'
+import { createMemo, createSignal, For, Show } from 'solid-js'
 import { Motion, Presence } from '@motionone/solid'
 import { OptionContainer } from '~/cap-ui/Combobox/combobox.presentational'
 import { twMerge } from 'tailwind-merge'
@@ -12,6 +12,12 @@ type TChapterPickerMenuProps = {
 	comboboxApi: ReturnType<typeof combobox.connect>
 	menuTopOffset: number
 	stylesOverride?: Partial<typeof comboboxStyles>
+}
+
+const [resizeCount, setResizeCount] = createSignal(0)
+
+window.onresize = () => {
+	setResizeCount(resizeCount() + 1)
 }
 
 export const ChapterPickerMenu = (props: TChapterPickerMenuProps) => {
@@ -34,6 +40,7 @@ export const ChapterPickerMenu = (props: TChapterPickerMenuProps) => {
 						style={!isDesktop() ? { 'max-height': maxHeightvalue() } : undefined}
 					>
 						<ul {...props.comboboxApi.contentProps}>
+							{resizeCount()}
 							<For each={props.options}>
 								{(optionGroup, groupIndex) => (
 									<OptionGroup
