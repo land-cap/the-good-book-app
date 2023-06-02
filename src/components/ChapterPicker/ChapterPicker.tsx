@@ -76,12 +76,13 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 				setOptions(optionGroupList())
 			},
 			onInputChange: ({ value }) => {
-				// setSelectedBookLabel(null)
 				const filtered =
 					optionGroupList().filter((item) =>
 						item.label.toLowerCase().includes(value.toLowerCase())
 					) || []
-				setOptions(filtered.length > 0 ? filtered : optionGroupList())
+				const newValue = filtered.length > 0 ? filtered : optionGroupList()
+
+				setOptions(newValue)
 			},
 			// eslint-disable-next-line solid/reactivity
 			...props.context,
@@ -157,9 +158,13 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 							<Icon name={'unfold_more'} />
 						</div>
 					</button>
-
 					<Input
 						{...api().inputProps}
+						onInput={(e) => {
+							// @ts-ignore
+							api().inputProps.onInput(e)
+							setSelectedBookLabel(null)
+						}}
 						placeholder={props.placeholder}
 						class={twMerge(props.stylesOverride?.input, 'hidden sm:block')}
 					/>
