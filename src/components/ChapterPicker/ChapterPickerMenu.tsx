@@ -1,4 +1,4 @@
-import { For, Show } from 'solid-js'
+import { createMemo, For, Show } from 'solid-js'
 import { Motion, Presence } from '@motionone/solid'
 import { OptionContainer } from '~/cap-ui/Combobox/combobox.presentational'
 import { twMerge } from 'tailwind-merge'
@@ -10,11 +10,14 @@ import { useIsBreakpoint } from '~/hooks'
 type TChapterPickerMenuProps = {
 	options: TOptionGroup[]
 	comboboxApi: ReturnType<typeof combobox.connect>
+	menuTopOffset: number
 	stylesOverride?: Partial<typeof comboboxStyles>
 }
 
 export const ChapterPickerMenu = (props: TChapterPickerMenuProps) => {
 	const isDesktop = useIsBreakpoint('sm')
+
+	const maxHeightvalue = createMemo(() => `calc(100vh - ${props.menuTopOffset}px - 10px - 24px)`)
 
 	return (
 		<Presence exitBeforeEnter>
@@ -25,7 +28,8 @@ export const ChapterPickerMenu = (props: TChapterPickerMenuProps) => {
 					exit={{ opacity: 0, scale: 0.75, transition: { duration: 0.1, easing: 'ease-in' } }}
 				>
 					<OptionContainer
-						class={twMerge(props.stylesOverride?.optionContainer, 'max-h-[75vh] sm:max-h-[50vh]')}
+						class={twMerge(props.stylesOverride?.optionContainer, 'sm:max-h-[50vh]')}
+						style={!isDesktop() ? { 'max-height': maxHeightvalue() } : undefined}
 					>
 						<ul {...props.comboboxApi.contentProps}>
 							<For each={props.options}>

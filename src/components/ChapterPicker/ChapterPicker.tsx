@@ -113,8 +113,22 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 		}
 	})
 
+	const [containerEl, setContainerEl] = createSignal(null as unknown as HTMLDivElement)
+
+	const [menuTopOffset, setMenuTopOffset] = createSignal(0)
+
+	createEffect(() => {
+		if (containerEl()) {
+			setMenuTopOffset(containerEl().getBoundingClientRect().bottom)
+		}
+	})
+
+	createEffect(() => {
+		console.log(menuTopOffset())
+	})
+
 	return (
-		<Container class={props.stylesOverride?.container}>
+		<Container ref={setContainerEl} class={props.stylesOverride?.container}>
 			<div {...api().rootProps}>
 				<div {...api().controlProps}>
 					<button
@@ -167,6 +181,7 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 			<ChapterPickerMenu
 				options={options()}
 				comboboxApi={api()}
+				menuTopOffset={menuTopOffset()}
 				stylesOverride={props.stylesOverride}
 			/>
 		</Container>
