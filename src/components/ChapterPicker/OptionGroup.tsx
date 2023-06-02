@@ -88,7 +88,9 @@ export const OptionGroup = (props: {
 						{props.optionGroup.label}
 					</Capped>
 
-					<OptionIcon class={twMerge(optionIcon, 'text-gray-400', showChapters() && 'text-black')}>
+					<OptionIcon
+						class={twMerge(optionIcon, 'text-gray-400 sm:pr-2', showChapters() && 'text-black')}
+					>
 						<Icon
 							name={'expand_more'}
 							class={twMerge(styles.collapsible__triggerIcon, showChapters() && 'text-black')}

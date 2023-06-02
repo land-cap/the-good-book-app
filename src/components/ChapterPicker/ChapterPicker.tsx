@@ -216,6 +216,7 @@ const StyledChapterPicker = createMemo(() =>
 		input: 'rounded-none ring-2 shadow-none ring-gray-200 dark:ring-gray-700',
 		optionContainer: 'rounded-none',
 		inputButton: 'hover:text-primary-600 dark:hover:text-primary-500',
+		optionIcon: 'pr-2',
 	})
 )
 
