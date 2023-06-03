@@ -9,6 +9,7 @@ import { TOptionGroup } from '~/components/ChapterPicker/OptionGroup'
 import { range } from 'ramda'
 import {
 	bookList,
+	chapterTitle,
 	currBookCode,
 	currChapter,
 	setCurrBookCode,
@@ -101,9 +102,8 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 	createEffect(() => setOptions(optionGroupList()))
 
 	createEffect(() => {
-		if (!api().isOpen && currBookCode() && currChapter()) {
-			const bookName = bookList().find((book) => book.code === currBookCode())?.name
-			const label = `${bookName} ${currChapter()}`
+		if (!api().isOpen && currBookCode() && currChapter() && chapterTitle()) {
+			const label = chapterTitle()
 			if (label !== api().inputValue) {
 				api().setValue({
 					value: JSON.stringify({ bookCode: currBookCode(), chapter: currChapter() }),
@@ -121,10 +121,6 @@ const ChapterPicker = (props: ChapterPickerProps) => {
 		if (containerEl()) {
 			setMenuTopOffset(containerEl().getBoundingClientRect().bottom)
 		}
-	})
-
-	createEffect(() => {
-		console.log(menuTopOffset())
 	})
 
 	return (
