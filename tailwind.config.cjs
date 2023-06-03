@@ -6,6 +6,25 @@ const defaultTheme = require("tailwindcss/defaultTheme");
 
 const monoColor = colors.neutral;
 
+const primaryColor = {
+    0: "#000000",
+    10: "#00006e",
+    20: "#0001ac",
+    25: "#0001cd",
+    30: "#0000ef",
+    35: "#1a21ff",
+    40: "#343dff",
+    50: "#5a64ff",
+    60: "#7c84ff",
+    70: "#9da3ff",
+    80: "#bec2ff",
+    90: "#e0e0ff",
+    95: "#f1efff",
+    98: "#fbf8ff",
+    99: "#fffbff",
+    100: "#ffffff",
+}
+
 module.exports = {
     content: ["./src/**/*.{html,js,jsx,ts,tsx}"],
     theme: {
@@ -20,12 +39,12 @@ module.exports = {
                 }
             },
             colors: {
-                primary: colors.blue,
-                accent: colors.blue,
+                primary: primaryColor,
+                accent: primaryColor,
                 gray: monoColor,
                 black: monoColor[900],
                 offWhite: monoColor[50],
-                whiteOnDark: monoColor[300]
+                whiteOnDark: monoColor[300],
             },
             fontFamily: {
                 sans: ['DM Sans', 'IBM Plex Sans', 'monolisa-custom'],

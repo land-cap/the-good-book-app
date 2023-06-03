@@ -81,25 +81,25 @@ export const OptionGroup = (props: {
 					class={twMerge(
 						option,
 						'flex justify-between p-4 sm:p-3',
-						showChapters() && 'font-bold bg-primary-100'
+						showChapters() && 'font-bold bg-primary-90 text-primary-10'
 					)}
 				>
 					<Capped component="div" fontSize={isDesktop() ? 'sm' : 'base'}>
 						{props.optionGroup.label}
 					</Capped>
-
 					<OptionIcon
-						class={twMerge(optionIcon, 'text-gray-400 sm:pr-2', showChapters() && 'text-black')}
+						class={twMerge(
+							optionIcon,
+							'text-gray-400 sm:pr-2',
+							showChapters() && 'text-primary-10'
+						)}
 					>
-						<Icon
-							name={'expand_more'}
-							class={twMerge(styles.collapsible__triggerIcon, showChapters() && 'text-black')}
-						/>
+						<Icon name={'expand_more'} class={twMerge(styles.collapsible__triggerIcon)} />
 					</OptionIcon>
 				</Option>
 			</Collapsible.Trigger>
 			<Collapsible.Content ref={setCollapsibleContentEl} class={styles.collapsible__content}>
-				<div class="grid grid-cols-5 gap-px bg-primary-100 border-y border-primary-100">
+				<div class="grid grid-cols-5 gap-px bg-primary-90 border-y border-primary-90">
 					<For each={props.optionGroup.options}>
 						{({ value, label }, index) => (
 							<ChapterOption

@@ -51,7 +51,7 @@ export const ChapterPickerMenu = (props: TChapterPickerMenuProps) => {
 					<OptionContainer
 						class={twMerge(
 							props.stylesOverride?.optionContainer,
-							'sm:max-h-[50vh]',
+							'sm:max-h-[60vh]',
 							!isDesktop() && 'transition-[max-height] duration-300 ease-in-out'
 						)}
 						style={!isDesktop() ? { 'max-height': maxHeightValue() } : undefined}
