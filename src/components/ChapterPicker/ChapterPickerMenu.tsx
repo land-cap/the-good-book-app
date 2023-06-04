@@ -43,7 +43,7 @@ export const ChapterPickerMenu = (props: TChapterPickerMenuProps) => {
 	// 	}
 	// })
 
-	const maxHeightValue = createMemo(() => `calc(${windowHeight()}px - 116px + 12px - 64px)`)
+	const maxHeightValue = createMemo(() => `calc(${windowHeight()}px - 116px + 12px - 72px)`)
 
 	return (
 		<Presence exitBeforeEnter>
