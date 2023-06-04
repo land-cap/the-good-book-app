@@ -32,18 +32,18 @@ export const ChapterPickerMenu = (props: TChapterPickerMenuProps) => {
 		return () => window.removeEventListener('resize', handleResize)
 	})
 
-	createEffect(() => {
-		if (document.body && props.comboboxApi.isOpen) {
-			document.body.style.overflow = 'hidden'
-		} else if (!props.comboboxApi.isOpen) {
-			document.body.style.overflow = 'unset'
-		}
-		return () => {
-			document.body.style.overflow = 'unset'
-		}
-	})
+	// createEffect(() => {
+	// 	if (document.body && props.comboboxApi.isOpen) {
+	// 		document.body.style.overflow = 'hidden'
+	// 	} else if (!props.comboboxApi.isOpen) {
+	// 		document.body.style.overflow = 'unset'
+	// 	}
+	// 	return () => {
+	// 		document.body.style.overflow = 'unset'
+	// 	}
+	// })
 
-	const maxHeightValue = createMemo(() => `calc(${windowHeight()}px - 104px - 24px)`)
+	const maxHeightValue = createMemo(() => `calc(${windowHeight()}px - 116px + 12px - 24px )`)
 
 	return (
 		<Presence exitBeforeEnter>
