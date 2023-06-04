@@ -19,10 +19,15 @@ export const ChapterPickerMenu = (props: TChapterPickerMenuProps) => {
 
 	const [windowHeight, setWindowHeight] = createSignal(window.innerHeight)
 
+	createEffect(() => {
+		console.log('windowHeight', windowHeight())
+	})
+
 	onMount(() => {
 		const handleResize = () => {
 			setWindowHeight(window.innerHeight)
 		}
+		handleResize()
 		window.addEventListener('resize', handleResize)
 		return () => window.removeEventListener('resize', handleResize)
 	})
@@ -38,9 +43,7 @@ export const ChapterPickerMenu = (props: TChapterPickerMenuProps) => {
 		}
 	})
 
-	const maxHeightValue = createMemo(
-		() => `calc(${windowHeight()}px - ${props.menuTopOffset}px - 10px - 24px)`
-	)
+	const maxHeightValue = createMemo(() => `calc(${windowHeight()}px - 104px - 24px)`)
 
 	return (
 		<Presence exitBeforeEnter>
