@@ -6,6 +6,7 @@ import { OptionGroup, TOptionGroup } from '~/components/ChapterPicker/OptionGrou
 import * as combobox from '@zag-js/combobox'
 import { comboboxStyles } from '~/cap-ui'
 import { useIsBreakpoint } from '~/hooks'
+import { navbarHeight } from '~/components/AppShell/NavBar'
 
 type TChapterPickerMenuProps = {
 	options: TOptionGroup[]
@@ -18,10 +19,6 @@ export const ChapterPickerMenu = (props: TChapterPickerMenuProps) => {
 	const isDesktop = useIsBreakpoint('sm')
 
 	const [windowHeight, setWindowHeight] = createSignal(window.innerHeight)
-
-	createEffect(() => {
-		console.log('windowHeight', windowHeight())
-	})
 
 	onMount(() => {
 		const handleResize = () => {
@@ -43,7 +40,12 @@ export const ChapterPickerMenu = (props: TChapterPickerMenuProps) => {
 		}
 	})
 
-	const maxHeightValue = createMemo(() => `calc(${windowHeight()}px - 74px + 12px - 80px)`)
+	const maxHeightValue = createMemo(
+		() =>
+			`calc(${windowHeight()}px - ${navbarHeight()}px - ${
+				isDesktop() ? '128px + 10px' : '80px + 12px'
+			})`
+	)
 
 	return (
 		<Presence exitBeforeEnter>
@@ -56,10 +58,9 @@ export const ChapterPickerMenu = (props: TChapterPickerMenuProps) => {
 					<OptionContainer
 						class={twMerge(
 							props.stylesOverride?.optionContainer,
-							'sm:max-h-[60vh]',
-							!isDesktop() && 'transition-[max-height] duration-300 ease-in-out'
+							'transition-[max-height] duration-300 ease-in-out'
 						)}
-						style={!isDesktop() ? { 'max-height': maxHeightValue() } : undefined}
+						style={{ 'max-height': maxHeightValue() }}
 					>
 						<ul {...props.comboboxApi.contentProps}>
 							<For each={props.options}>
