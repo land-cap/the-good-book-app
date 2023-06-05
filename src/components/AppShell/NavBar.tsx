@@ -10,11 +10,9 @@ export const Navbar = () => (
 	>
 		<div class={'border-b border-gray-200 dark:border-gray-700'}>
 			<div
-				class={
-					'flex flex-col sm:flex-row gap-6 pt-6 pb-4 sm:py-0 sm:h-16 justify-between items-center'
-				}
+				class={'flex flex-col sm:flex-row gap-6 py-4 sm:py-0 sm:h-16 justify-between items-center'}
 			>
-				<Capped component={'p'} class="font-bold">
+				<Capped component={'p'} class="hidden md:block font-bold">
 					The Good Book
 				</Capped>
 				<div class="w-full sm:w-64">
