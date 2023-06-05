@@ -1,4 +1,4 @@
-import { createMemo, createSignal, For, onMount, Show } from 'solid-js'
+import { createMemo, For, Show } from 'solid-js'
 import { Motion, Presence } from '@motionone/solid'
 import { OptionContainer } from '~/cap-ui/Combobox/combobox.presentational'
 import { twMerge } from 'tailwind-merge'
@@ -19,22 +19,11 @@ type TChapterPickerMenuProps = {
 export const ChapterPickerMenu = (props: TChapterPickerMenuProps) => {
 	const isDesktop = useIsBreakpoint('sm')
 
-	const [windowHeight, setWindowHeight] = createSignal(window.innerHeight)
-
-	onMount(() => {
-		const handleResize = () => {
-			setWindowHeight(window.innerHeight)
-		}
-		handleResize()
-		window.addEventListener('resize', handleResize)
-		return () => window.removeEventListener('resize', handleResize)
-	})
-
 	const mobileMenuBottomSpacing = createMemo(() => (isBrowserUi() ? '24px + 12px' : '80px + 12px'))
 
 	const maxHeightValue = createMemo(
 		() =>
-			`calc(${windowHeight()}px - ${navbarHeight()}px - ${
+			`calc(100dvh - ${navbarHeight()}px - ${
 				isDesktop() ? '128px + 10px' : mobileMenuBottomSpacing()
 			})`
 	)
