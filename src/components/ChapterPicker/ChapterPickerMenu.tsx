@@ -1,4 +1,4 @@
-import { createEffect, createMemo, createSignal, For, onMount, Show } from 'solid-js'
+import { createMemo, createSignal, For, onMount, Show } from 'solid-js'
 import { Motion, Presence } from '@motionone/solid'
 import { OptionContainer } from '~/cap-ui/Combobox/combobox.presentational'
 import { twMerge } from 'tailwind-merge'
@@ -27,17 +27,6 @@ export const ChapterPickerMenu = (props: TChapterPickerMenuProps) => {
 		handleResize()
 		window.addEventListener('resize', handleResize)
 		return () => window.removeEventListener('resize', handleResize)
-	})
-
-	createEffect(() => {
-		if (document.body && props.comboboxApi.isOpen) {
-			document.body.style.overflow = 'hidden'
-		} else if (!props.comboboxApi.isOpen) {
-			document.body.style.overflow = 'unset'
-		}
-		return () => {
-			document.body.style.overflow = 'unset'
-		}
 	})
 
 	const maxHeightValue = createMemo(

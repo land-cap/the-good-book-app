@@ -12,7 +12,7 @@ export const comboboxStyles = {
 		transitionQuick
 	),
 	optionContainer:
-		'absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm',
+		'absolute z-10 mt-1 max-h-60 w-full overflow-auto overscroll-contain rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm',
 	option: twMerge('relative cursor-pointer select-none py-3 pl-3 pr-9 text-gray-900'),
 	option_focused: 'bg-primary-40 text-white',
 	option_checked: 'font-semibold',
