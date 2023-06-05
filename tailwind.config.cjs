@@ -52,7 +52,7 @@ module.exports = {
                 mono: ['DM Mono', 'IBM Plex Mono']
             },
             fontSize: {
-                xs: ["11.4286px", {lineHeight: "16px"}],
+                xs: ["10", {lineHeight: "14px"}],
                 sm: ["12.8571px", {lineHeight: "18px"}],
                 base: ["14.2857px", {lineHeight: "20px"}],
                 lg: ["17.1429px", {lineHeight: "24px"}],
