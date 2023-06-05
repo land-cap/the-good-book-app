@@ -3,7 +3,7 @@
   "short_name": "Good Book",
   "start_url": "/JHN/1",
   "scope": "/",
-  "display": "fullscreen",
+  "display": "standalone",
   "background_color": "#fff",
   "theme_color": "#fff",
   "description": "Read the Bible like you should.",

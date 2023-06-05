@@ -7,6 +7,7 @@ import * as combobox from '@zag-js/combobox'
 import { comboboxStyles } from '~/cap-ui'
 import { useIsBreakpoint } from '~/hooks'
 import { navbarHeight } from '~/components/AppShell/NavBar'
+import { isBrowserUi } from '~/App'
 
 type TChapterPickerMenuProps = {
 	options: TOptionGroup[]
@@ -29,10 +30,12 @@ export const ChapterPickerMenu = (props: TChapterPickerMenuProps) => {
 		return () => window.removeEventListener('resize', handleResize)
 	})
 
+	const mobileMenuBottomSpacing = createMemo(() => (isBrowserUi() ? '24px + 12px' : '80px + 12px'))
+
 	const maxHeightValue = createMemo(
 		() =>
 			`calc(${windowHeight()}px - ${navbarHeight()}px - ${
-				isDesktop() ? '128px + 10px' : '80px + 12px'
+				isDesktop() ? '128px + 10px' : mobileMenuBottomSpacing()
 			})`
 	)
 
