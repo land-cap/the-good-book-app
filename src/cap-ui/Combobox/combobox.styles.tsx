@@ -8,7 +8,7 @@ export const comboboxStyles = {
 		transitionQuick
 	),
 	inputButton: twMerge(
-		'absolute inset-y-0 right-0 flex items-center rounded-r-md px-2 focus:outline-none text-gray-400 dark:text-gray-500 hover:text-primary-40',
+		'absolute inset-y-0 right-0 flex items-center rounded-r-md px-2 focus:outline-none text-gray-400 dark:text-gray-500',
 		transitionQuick
 	),
 	optionContainer:
