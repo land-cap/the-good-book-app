@@ -19,7 +19,6 @@ html, body {
 
 html body {
     font-size: 15.7143px;
-    /*-webkit-font-smoothing: antialiased;*/
 }
 
 .material-icon {
@@ -36,3 +35,4 @@ html body {
     -webkit-font-feature-settings: 'liga';
     -webkit-font-smoothing: antialiased;
 }
+
